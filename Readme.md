@@ -5,7 +5,7 @@
 * Un **utilisateur** est un visiteur qui a crée un compte et qui est connecté sur l'application. Il possède un nom, un pseudo, un e-mail et un mot de passe.
 * Un **chef de projet** est un utilisateur qui a crée un projet (ou un développeur auquel le chef de projet a assigné ce rôle). Il possède tous les droits sur ce projet.
 * Un **développeur** est un utilisateur auquel un chef de projet a affecté un projet.
-* Un **product owner** est un utilisateur sélectionner par le chef de projet pour renseigné les besoins du projet et pour décrire les notes permettant l'évolution du projet (lors des sprint reviews).
+* Un **product owner** est un utilisateur sélectionner par le chef de projet pour renseigné les besoins du projet et pour décrire les notes permettant l'évolution du projet (lors des sprints reviews).
 
 ## Description des termes
 
@@ -23,30 +23,24 @@
 
 | ID  	|   Description	                                                                                                                                                        |   Difficulté	|   Priorité	|  Planification |  Etat 	|
 |-------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------|---------------|----------------|----------|
-|   US1	|  En tant qu'utilisateur je peux créer un compte en renseignant un pseudo, un nom, un e-mail et un mot de passe  afin d'accéder aux fonctionnalités de l'application. 	|      1       |   MOYENNE	   	|   	         |	TODO	|
-|   US2	|  En tant qu'utilisateur je peux me connecter en accédant avec mon email et mon mot de passe  afin de voir mes projets actifs et leurs avancements.                	|   	2       |   MOYENNE	  	|                |	TODO	|
-|   US3	|  En tant qu'utilisateur, je souhaite pouvoir me déconnecter de l'application afin de quitter l'application.                                                        	|   	2       |   BASSE	   	|   	         |	TODO	|
-|   US4	|  En tant qu'utilisateur je peux créer un projet avec un titre, une durée, une description et un cahier des charges afin de  pouvoir gérer le projet. 	             |       2    	|   HAUTE	   	|   	         |	TODO	|	
-|   US5	|  En tant que chef de projet je peux ajouter des développeurs sur les projets que j'ai créer afin de pouvoir leur assigner des tâches. 	                       |       2     	|   HAUTE	   	|   	         |	TODO	|
-|   US6	|  En tant que chef de projet je peux assigner le rôle de chef de projet à un développeur afin d'être aider dans l'administration du projet. 	                 |       2     	|   MOYENNE	   	|   	         |	TODO	|	
-|   US7	|  En tant que chef de projet je peux supprimer des développeurs sur les projets que j'ai crée. 	                                                                    |       2    	|   HAUTE	   	|   	         |	TODO	|	
-|   US8	|  En tant que chef de projet je peux ajouter des user stories dans mon Backlog. 	                                                                                    |       3    	|   HAUTE	   	|                |	TODO	|
-|   US9	|  En tant que chef de projet je peux modifier des user stories dans mon Backlog. 	                                                                                    |       3    	|   HAUTE	   	|   	         |	TODO	|	
-|   US10	|  En tant que chef de projet je peux supprimer des user stories dans mon Backlog. 	                                                                                    |   	3       |   HAUTE	   	|   	         |	TODO	|
-|   US11  |  En tant que chef de projet je peux démarrer un Sprint afin de laisser les développeurs d'informer l'avancement de leurs tâches.                                                              	|   	3       |   HAUTE	   	|   	         |	TODO	|
-|   US12	|  En tant que chef de projet je peux renommer un Sprint. 	                                                                                                            |   	2       |   HAUTE	   	|   	         |	TODO	|
-|   US13	|  En tant que chef de projet je peux terminer un Sprint afin de mettre les tâches non terminé dans le sprint suivant. 	                                                |   	3       |   HAUTE	   	|   	         |	TODO	|	
-|   US14	|  En tant que chef de projet je peux ajouter une tâche à un sprint afin de les affecter aux différents développeurs.                   |       2      |   HAUTE	   	  |   	           |	TODO	|	
-|   US15	|  En tant que chef de projet je peux assigner une ou plusieurs tâche(s) à l'issue associée.   						                   |       2      |   HAUTE	   	  |   	           |	TODO	|	
-|   US16	|  En tant que chef de projet je peux attribuer une ou plusieurs tâches à des développeurs afin d'organiser le projet.                                                  |   	2       |   HAUTE	   	|   	         |	TODO	|	
-|   US17	|  En tant que chef de projet je peux modifier des tâches dans mon Sprint.                                                                                           	|       3     	|   HAUTE	   	|   	         |	TODO	|
-|   US18	|  En tant que chef de projet je peux supprimer des tâches dans mon Sprint. 	                                                                                        |       2    	|   HAUTE	   	|   	         |	TODO	|
-|   US19	|  En tant que développeur je peux assigner une tâche comme en cours, à tester, à documenter  ou faite.                                                                                         	|        2   	|   HAUTE	   	|   	         |	TODO	|
-|   US20	|  En tant que développeur je peux accéder à la liste des projets dont je fais parti afin de consulter les différents informations.  								    |     2      	|   HAUTE	   	|   	         |	TODO	|
-|   US21	|  En tant que développeur je peux consulter le backlog des projets auxquels je suis affecté.  								    |     2      	|   HAUTE	   	|   	         |	TODO	|
-|   US22	|  En tant que développeur je peux consulter les sprints des projets auxquels je suis affecté.  								    |     2      	|   HAUTE	   	|   	         |	TODO	|
-| US23 | 	   En tant que chef de projet, je peux associé des dépendances entre les tâches.                                                       | 2 | MOYENNE |   | TODO |
-| US24 | 	En tant que chef de projet, je peux visualiser les différentes dépendances entre les tâches afin d'être aider dans la planification. | 5 | MOYENNE |   | TODO |
-| US25 | En tant que développeur, je peux associer un build (sous la forme d'un lien) à un sprint.                                           | 1 | MOYENNE |   | TODO |
-| US26 | En tant que chef de projet, je peux ajouter un product owner sur les projets que j'ai créer.                                          | 1 | BASSE |   | TODO |
-| US27 | En tant que product owner, je peux ajouter des notes aux issues afin de faire évoluer les besoins du projet.                                          | 1 | BASSE |   | TODO |
+|   US1	|  En tant qu'utilisateur je souhaite pouvoir créer un compte en renseignant un pseudo, un nom, un e-mail et un mot de passe  afin d'accéder aux fonctionnalités de l'application. 	|      2       |   MOYENNE	   	|   	         |	TODO	|
+|   US2	|  En tant qu'utilisateur je souhaite pouvoir me connecter en accédant avec mon email et mon mot de passe  afin de voir mes projets actifs et leurs avancements.                	|   	2       |   MOYENNE	  	|                |	TODO	|
+|   US3	|  En tant qu'utilisateur, je souhaite pouvoir me déconnecter de l'application afin de quitter l'application.                                                        	|   	1       |   BASSE	   	|   	         |	TODO	|
+|   US4	|  En tant qu'utilisateur je souhaite pouvoir créer un projet avec un titre (comme identifiant unique), une durée, une description, une url du dépot de code et un cahier des charges afin de  pouvoir gérer ce projet. 	             |       2    	|   HAUTE	   	|   	Sprint 1         |	TODO	|	
+|   US5	|  En tant que chef de projet je souhaite pouvoir ajouter ou supprimer des développeurs, des chefs de projet ou des product owner sur les projets que j'ai créer afin de pouvoir gérer les utilisateurs ayant accès à mes projets. 	                       |       2     	|   HAUTE	   	|   	         |	TODO	|
+|   US6	|  En tant que chef de projet je souhaite pouvoir ajouter, modifier ou supprimer des user stories de mon Backlog. 	                                                                                    |       3    	|   HAUTE	   	|       Sprint 1         |	TODO	|
+|   US7  |  En tant que chef de projet je peux créer, modifier, supprimer un sprint en renseignant un nom, une date de début et une date de fin, afin de pouvoir y renseigner un ensemble d'issues.                                                            	|   	3       |   HAUTE	   	|   	 Sprint 1        |	TODO	|
+|   US8	|  En tant que chef de projet je souhaite pouvoir terminer un sprint afin de pouvoir mettre les tâches non terminées dans le sprint suivant. 	                                                |   	3       |   HAUTE	   	|   	         |	TODO	|	
+|   US9	|  En tant que chef de projet je souhaite pouvoir ajouter, supprimer une issue d'un sprint afin d'affecter leurs tâches associées aux différents développeurs.                   |       2      |   HAUTE	   	  |   	  Sprint 1         |	TODO	|	
+|   US10	|  En tant que chef de projet je souhaite pouvoir créer une ou plusieurs tâche(s) en renseignant une issue associée.   						                   |       2      |   HAUTE	   	  |   	           |	TODO	|	
+|   US11	|  En tant que chef de projet je souhaite pouvoir attribuer une ou plusieurs tâches à des développeurs afin d'organiser le projet.                                                  |   	2       |   HAUTE	   	|   	         |	TODO	|	
+|   US12	|  En tant que développeur je souhaite pouvoir assigner une tâche comme en cours, à tester, à documenter  ou faite.                                                                                         	|        2   	|   HAUTE	   	|   	         |	TODO	|
+|   US13	|  En tant que développeur je souhaite pouvoir accéder à la liste des projets dont je fais parti afin de consulter le backlog ou les tâches qui me sont assignées.  								    |     2      	|   HAUTE	   	|   	Sprint 1         |	TODO	|
+|   US14	|  En tant qu'utilisateur je souhaite pouvoir consulter le backlog et les sprints des projets auxquels je suis affecté.  								    |     2      	|   HAUTE	   	|   	         |	TODO	|
+| US15 | 	   En tant que chef de projet, je souhaite pouvoir associer des dépendances entre les tâches.                                                       | 2 | MOYENNE |   | TODO |
+| US16 | 	En tant que chef de projet, je souhaite pouvoir visualiser les différentes dépendances entre les tâches afin d'être aider dans la planification. | 5 | MOYENNE |   | TODO |
+| US17 | En tant que développeur, je peux associer un build (sous la forme d'un lien) à un sprint.                                           | 1 | MOYENNE |   | TODO |
+| US18 | En tant que product owner, je souhaite pouvoir ajouter des notes aux issues afin de faire évoluer les besoins du projet.                                          | 1 | BASSE |   | TODO |
+
+
+
