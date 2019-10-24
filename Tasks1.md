@@ -5,37 +5,37 @@
 
 | ID | US liée | Dépendances | Temps estimé | Etat | Affectation |
 |----|----|----|----|----|----|
-| 0.1 |* | x | x | x | x |
-| 0.2 |* | x | x | x | x |
-| 0.3 |* | x | x | x | x |
-| 0.4 |* | x | x | x | x |
-| 3.1 |x | x | x | x | x |
-| 3.2 |x | x | x | x | x |
-| 2 |* | x | x | x | x |
-| 4.1 |US4 | x | x | x | x |
-| 4.2 |US4 | x | x | x | x |
-| 6 |* | x | x | x | x |
-| 8.1 |US4 | x | x | x | x |
-| 8.2 |US4 | x | x | x | x |
-| 5.0 |US4 | x | x | x | x |
-| 5.1 |US4 | x | x | x | x |
-| 7.0 | x | x | x | x | x |
-| 7.1 |x | x | x | x | x |
-| 8.0 | x | x | x | x | x |
-| 8.1 | x | x | x | x | x |
-| 9.0 | x | x | x | x | x |
-| 9.1 |x | x | x | x | x |
-| 10.0 |x | x | x | x | x |
-| 10.1 |x | x | x | x | x |
-| 11.0 |x | x | x | x | x |
-| 11.1 |x | x | x | x | x |
-| 12.0 |x | x | x | x | x |
-| 12.1 |x | x | x | x | x |
-| 13.0 |x | x | x | x | x |
-| 13.1 |x | x | x | x | x |
-| 15.0 |x | x | x | x | x |
-| 15.1 |x | x | x | x | x |
-| 16 |x | x | x | x | x |
+| 0.1 |* | x | 0.5 | TODO | x |
+| 0.2 |* | x | 0.5 | TODO | x |
+| 0.3 |* | x | 0.5 | TODO | x |
+| 0.4 |* | x | 0.5 | TODO | x |
+| 3.1 |x | x | 0.5 | TODO | x |
+| 3.2 |x | x | 0.5 | TODO | x |
+| 2 |* | x | 0.5 | TODO | x |
+| 4.1 |US4 | x | 0.5 | TODO | x |
+| 4.2 |US4 | x | 0.5 | TODO | x |
+| 6 |* | x | 0.5 | TODO | x |
+| 8.1 |US4 | x | 0.5 | TODO | x |
+| 8.2 |US4 | x | 0.5 | TODO | x |
+| 5.0 |US4 | x | 0.5 | TODO | x |
+| 5.1 |US4 | x | 1 | TODO | x |
+| 7.0 | x | x | 1.5 | TODO | x |
+| 7.1 |x | x | 0.5 | TODO | x |
+| 8.0 | x | x | 0.5 | TODO | x |
+| 8.1 | x | x | 0.5 | TODO | x |
+| 9.0 | x | x | 0.5 | TODO | x |
+| 9.1 |x | x | 0.5 | TODO | x |
+| 10.0 |x | x | 0.5 | TODO | x |
+| 10.1 |x | x | 0.5 | TODO | x |
+| 11.0 |x | x | 0.5 | TODO | x |
+| 11.1 |x | x | 0.5 | TODO | x |
+| 12.0 |x | x | 0.5 | TODO | x |
+| 12.1 |x | x | 0.5 | TODO | x |
+| 13.0 |x | x | 1 | TODO | x |
+| 13.1 |x | x | x | TODO | x |
+| 15.0 |x | x | 0.5 | TODO | x |
+| 15.1 |x | x | 1 | TODO | x |
+| 16 |* | x | 1.5 | TODO | x |
 
 ---
 **Tâche 0.1** :   Definir le schéma/modéle de la base de données [BACK-END]: 
