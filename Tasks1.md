@@ -5,10 +5,10 @@
 
 | ID | US liée | Dépendances | Temps estimé | Etat | Affectation |
 |----|----|----|----|----|----|
-| 0.1 |* | 0.4 | 0.5 | TODO | Martinez |
-| 0.2 |* | - | 0.5 | TODO | Oumayma |
+| 0.1 |* | 0.4 | 0.5 | DONE | Martinez |
+| 0.2 |* | - | 0.5 | DONE | Oumayma |
 | 0.3 |* | 0.2 | 0.5 | TODO | Martinez |
-| 0.4 |* | - | 0.5 | TODO | Alfred |
+| 0.4 |* | - | 0.5 | DONE | Alfred |
 | 0.5 |* | - | 1.5 | TODO | Alfred |
 | 1 |* | 0.2 | 0.5 | TODO | Oumayma |
 | 2 |* | 0.2 | 0.5 | TODO | Oumayma |
