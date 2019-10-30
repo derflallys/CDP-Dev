@@ -32,7 +32,7 @@ const ProjectSchema = new mongoose.Schema({
 
 ProjectSchema.path('repositoryURL').validate(function(value) {
   // Match URLs that end with ".git"
-  const URL_REGEX = /^(https?:\/\/)([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*(\.git)\/?$/g
+  const URL_REGEX = /^(https?:\/\/)([\da-z.-]+)\.([a-z.]{2,6})([\w .-]*)*(\.git)\/?$/g
   return value.match(URL_REGEX)
 }, 'Given repository URL is not a valid URL.')
 
