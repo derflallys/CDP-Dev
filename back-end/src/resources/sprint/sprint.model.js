@@ -1,12 +1,6 @@
 const mongoose = require('mongoose')
 
 const SprintSchema = new mongoose.Schema({
-  _id: {
-    type: mongoose.Schema.Types.ObjectId,
-    index: true,
-    required: true,
-    auto: true
-  },
   projectId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'project',

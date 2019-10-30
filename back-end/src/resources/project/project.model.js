@@ -1,12 +1,6 @@
 const mongoose = require('mongoose')
 
 const ProjectSchema = new mongoose.Schema({
-  _id: {
-    type: mongoose.Schema.Types.ObjectId,
-    index: true,
-    required: true,
-    auto: true
-  },
   createdAt: {
     type: Date,
     default: Date.now,

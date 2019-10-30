@@ -1,16 +1,9 @@
 const mongoose = require('mongoose')
 
 const IssueSchema = new mongoose.Schema({
-  _id: {
-    type: mongoose.Schema.Types.ObjectId,
-    index: true,
-    required: true,
-    auto: true
-  },
   sprintId: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'sprint',
-    required: true
+    ref: 'sprint'
   },
   description: {
     type: String,
@@ -27,10 +20,8 @@ const IssueSchema = new mongoose.Schema({
     type: String,
     required: true,
     enum: ['HIGH', 'MEDIUM', 'LOW']
-  },
-  planification: {
-    type: Number
   }
-})
+}, { timestamps: true }
+    )
 
-module.exports = mongoose.model('Issue', IssueSchema)
+export const Issue = mongoose.model('Issue', IssueSchema)
