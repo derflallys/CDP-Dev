@@ -5,15 +5,21 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatToolbarModule, MatIconModule, MatButtonModule } from  '@angular/material';
-import { MatTableModule } from '@angular/material/table'; 
+import {
+  MatTableModule,
+  MatToolbarModule,
+  MatIconModule,
+  MatButtonModule
+} from '@angular/material';
 
 import { ProjectListComponent } from './components/project-list/project-list.component';
+import { AddIssueComponent } from './components/issue/add-issue/add-issue.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ProjectListComponent
+    ProjectListComponent,
+    AddIssueComponent
   ],
   imports: [
     BrowserModule,
