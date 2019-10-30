@@ -2,24 +2,23 @@
 
 ## Liste des Tâches et description
 
-
 | ID | US liée | Dépendances | Temps estimé | Etat | Affectation |
 |----|----|----|----|----|----|
 | 0.1 |* | 0.4 | 0.5 | DONE | Martinez |
 | 0.2 |* | - | 0.5 | DONE | Oumayma |
-| 0.3 |* | 0.2 | 0.5 | TODO | Martinez |
+| 0.3 |* | 0.2 | 0.5 | DOING | Martinez |
 | 0.4 |* | - | 0.5 | DONE | Alfred |
 | 0.5 |* | - | 1.5 | TODO | Alfred |
-| 1 |* | 0.2 | 0.5 | TODO | Oumayma |
-| 2 |* | 0.2 | 0.5 | TODO | Oumayma |
-| 3.1 |US14 | 1, 2 | 0.5 | TODO | x |
-| 3.2 |US14 | 0.1 | 0.5 | TODO | x |
-| 4.1 |US4 | 1, 2 | 0.5 | TODO | x |
-| 4.2 |US4 | 0.1 | 0.5 | TODO | x |
-| 5.1 |US4 | 1, 2 | 0.5 | TODO | x |
-| 5.2 |US4 | 0.1 | 0.5 | TODO | x |
-| 6.1 |US4 | 1, 2 | 0.5 | TODO | x |
-| 6.2 |US4 | 0.1 | 1 | TODO | x |
+| 1 |* | 0.2 | 0.5 | DONE | Oumayma |
+| 2 |* | 0.2 | 0.5 | DONE | Oumayma |
+| 3.1 |US14 | 1, 2 | 0.5 | TODO | Eudes |
+| 3.2 |US14 | 0.1 | 0.5 | TODO | Eudes |
+| 4.1 |US4 | 1, 2 | 0.5 | TODO | Eudes |
+| 4.2 |US4 | 0.1 | 0.5 | TODO | Eudes |
+| 5.1 |US4 | 1, 2 | 0.5 | TODO | Eudes |
+| 5.2 |US4 | 0.1 | 0.5 | TODO | Eudes |
+| 6.1 |US4 | 1, 2 | 0.5 | TODO | Eudes |
+| 6.2 |US4 | 0.1 | 1 | TODO | Eudes |
 | 7.1 | US15 | 8.2,9.2,10.2,11.2,12.2,13.2,5.2,6.2 | 1.5 | TODO | x |
 | 8.1 | US9 | 1, 2 | 0.5 | TODO | x |
 | 8.2 | US9 | 0.1 | 0.5 | TODO | x |
