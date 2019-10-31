@@ -14,12 +14,14 @@ import {
 
 import { ProjectListComponent } from './components/project-list/project-list.component';
 import { AddIssueComponent } from './components/issue/add-issue/add-issue.component';
+import { AddSprintComponent } from './components/sprint/add-sprint/add-sprint.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ProjectListComponent,
-    AddIssueComponent
+    AddIssueComponent,
+    AddSprintComponent
   ],
   imports: [
     BrowserModule,
