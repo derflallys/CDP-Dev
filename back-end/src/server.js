@@ -5,6 +5,7 @@ import config from './config'
 import cors from 'cors'
 import { connect } from './utils/db'
 import issueRouter from './resources/issue/issue.router'
+import projectRouter from './resources/project/project.router'
 
 export const app = express()
 
@@ -16,6 +17,7 @@ app.use(urlencoded({ extended: true }))
 app.use(morgan('dev'))
 
 app.use('/api/issue', issueRouter)
+app.use('/api/project', projectRouter)
 
 export const start = async () => {
   try {

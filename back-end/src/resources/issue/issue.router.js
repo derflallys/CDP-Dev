@@ -10,7 +10,7 @@ router
   .get(controllers.getMany)
   .post(controllers.createOne)
 
-// /api/item/:id
+// /api/issue/:id
 
 router
   .route('/:id')
