@@ -1,0 +1,12 @@
+main {
+  min-height:  calc(100vh - 300px);
+}
+
+footer {
+  background: #fff;
+  text-align: center;
+  border-top: 1px solid rgba(198, 198, 198, 0.6);
+  padding: 15px;
+  height: 100px;
+  margin-top: 130px;
+}
