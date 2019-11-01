@@ -12,7 +12,8 @@ import {
   MatButtonModule
 } from '@angular/material';
 
-import { ProjectListComponent } from './components/project-list/project-list.component';
+import { ProjectListComponent } from './components/project/project-list/project-list.component';
+import { AddProjectComponent } from './components/project/add-project/add-project.component';
 import { AddIssueComponent } from './components/issue/add-issue/add-issue.component';
 import { AddSprintComponent } from './components/sprint/add-sprint/add-sprint.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
@@ -33,10 +34,8 @@ import { UpdateIssueComponent } from './components/issue/update-issue/update-iss
     MatProgressSpinnerModule,
     MatFormFieldModule,
   ],
-  imports: [
-  ],
+  imports: [],
   declarations: []
-
 })
 export class MaterialModule {}
 @NgModule({
@@ -45,7 +44,8 @@ export class MaterialModule {}
     ProjectListComponent,
     AddIssueComponent,
     UpdateIssueComponent,
-    AddSprintComponent
+    AddSprintComponent,
+    AddProjectComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -55,7 +55,6 @@ export class MaterialModule {}
     FormsModule,
     MaterialModule,
     ReactiveFormsModule,
-
   ],
   providers: [],
   bootstrap: [AppComponent]
