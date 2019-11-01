@@ -1,7 +1,6 @@
 <div class="content">
   <h2 class="text-center">{{ title }}</h2>
-
-  <form (ngSubmit)="onSubmit()" [formGroup]="addProject">
+  <form (ngSubmit)="onSubmit()" [formGroup]="addProject" class="contentForm">
 
     <mat-form-field class="input-field">
       <input matInput placeholder="Titre" formControlName="title" type="text">

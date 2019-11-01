@@ -5,7 +5,7 @@ export class Project {
   url: string;
   refspecifying: string;
 
-  constructor( title: string, duration: string, description: string, url: string, refspecifying: string ) {
+  constructor(title: string, duration: string, description: string, url: string, refspecifying: string) {
     this.title = title;
     this.duration = duration ;
     this.description = description;

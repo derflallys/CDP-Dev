@@ -1,5 +1,4 @@
 export class Issue {
-
   _id: number;
   description: string;
   state: string;

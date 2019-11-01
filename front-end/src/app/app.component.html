@@ -1,24 +1,20 @@
-<mat-toolbar >
-
+<mat-toolbar>
   <mat-toolbar-row class="toolbar">
-    <h1><a title="Home" mat-button [routerLink]="'/'"> CDP - Gestion de projet </a></h1>
-
+    <h1><a title="Home" mat-button [routerLink]="'/'">CDP - Gestion de projet</a></h1>
     <div class="nav-menu">
       <a mat-button [routerLink]=""> Action X </a>
       <a mat-button [routerLink]=""> Action Y </a>
     </div>
-
     <a mat-button title="Logout" class="icon-menu">
       <mat-icon class="icon">input</mat-icon>
     </a>
   </mat-toolbar-row>
-
 </mat-toolbar>
 
 <main>
   <router-outlet></router-outlet>
 </main>
+
 <footer>
-  <p>
-    Projet universitaire - Université de Bordeaux</p>
+  <p>Projet universitaire - Université de Bordeaux</p>
 </footer>

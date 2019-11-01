@@ -3,9 +3,9 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { ProjectListComponent } from './components/project/project-list/project-list.component';
 import { AddProjectComponent } from './components/project/add-project/add-project.component';
-import {AddSprintComponent} from './components/sprint/add-sprint/add-sprint.component';
-import {AddIssueComponent} from './components/issue/add-issue/add-issue.component';
-import {UpdateIssueComponent} from './components/issue/update-issue/update-issue.component';
+import { AddSprintComponent } from './components/sprint/add-sprint/add-sprint.component';
+import { AddIssueComponent } from './components/issue/add-issue/add-issue.component';
+import { UpdateIssueComponent } from './components/issue/update-issue/update-issue.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'projects', pathMatch: 'full' },
