@@ -13,7 +13,7 @@ export class AddIssueComponent implements OnInit {
   addIssue: FormGroup;
 
   constructor(private formBuilder: FormBuilder,
-              private issueService:IssueService) { }
+              private issueService: IssueService) { }
   priorities = [
     'HIGH', 'MEDIUM', 'LOW'
   ];
@@ -41,7 +41,7 @@ export class AddIssueComponent implements OnInit {
     const priority = this.addIssue.controls.priority.value;
     const newIssue  = new Issue(null, description, state, priority, difficulty);
     console.log(newIssue);
-    this.issueService.addIssue(newIssue).subscribe(res =>{
+    this.issueService.addIssue(newIssue).subscribe(res => {
       console.log(res);
     });
   }
