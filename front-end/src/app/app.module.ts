@@ -21,6 +21,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatSelectModule} from '@angular/material/select';
 import {MatInputModule} from '@angular/material/input';
 import {HttpClientModule} from '@angular/common/http';
+import { UpdateIssueComponent } from './components/issue/update-issue/update-issue.component';
 @NgModule({
   exports: [
     MatSelectModule,
@@ -31,7 +32,10 @@ import {HttpClientModule} from '@angular/common/http';
     MatTableModule,
     MatProgressSpinnerModule,
     MatFormFieldModule,
-  ]
+  ],
+  imports: [
+  ],
+  declarations: []
 
 })
 export class MaterialModule {}
@@ -40,6 +44,7 @@ export class MaterialModule {}
     AppComponent,
     ProjectListComponent,
     AddIssueComponent,
+    UpdateIssueComponent,
     AddSprintComponent
   ],
   imports: [

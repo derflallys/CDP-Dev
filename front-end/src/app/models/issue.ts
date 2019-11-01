@@ -1,13 +1,13 @@
 export class Issue {
 
-  id: number;
+  _id: number;
   description: string;
   state: string;
   priority: string;
   difficulty: number;
 
   constructor(id: number= null, description: string, state: string, priority: string, difficulty: number) {
-    this.id = id;
+    this._id = id;
     this.description = description;
     this.state = state;
     this.priority = priority;
