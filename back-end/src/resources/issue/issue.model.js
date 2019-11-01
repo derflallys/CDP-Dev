@@ -17,10 +17,15 @@ const IssueSchema = new mongoose.Schema(
       enum: ['TODO', 'DOING', 'DONE'],
       default: 'TODO'
     },
+    difficulty: {
+      type: Number,
+      default: 1
+    },
     priority: {
       type: String,
       required: true,
-      enum: ['HIGH', 'MEDIUM', 'LOW']
+      enum: ['HIGH', 'MEDIUM', 'LOW'],
+      default: 'LOW'
     }
   },
   { timestamps: true }

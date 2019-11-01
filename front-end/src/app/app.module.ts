@@ -17,9 +17,24 @@ import { AddIssueComponent } from './components/issue/add-issue/add-issue.compon
 import { AddSprintComponent } from './components/sprint/add-sprint/add-sprint.component';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatFormFieldModule} from '@angular/material/form-field';
-import {ReactiveFormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatSelectModule} from '@angular/material/select';
+import {MatInputModule} from '@angular/material/input';
+import {HttpClientModule} from '@angular/common/http';
+@NgModule({
+  exports: [
+    MatSelectModule,
+    MatInputModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatButtonModule,
+    MatTableModule,
+    MatProgressSpinnerModule,
+    MatFormFieldModule,
+  ]
 
+})
+export class MaterialModule {}
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,17 +43,14 @@ import {MatSelectModule} from '@angular/material/select';
     AddSprintComponent
   ],
   imports: [
+    BrowserAnimationsModule,
     BrowserModule,
     AppRoutingModule,
-    BrowserAnimationsModule,
-    MatToolbarModule,
-    MatIconModule,
-    MatButtonModule,
-    MatTableModule,
-    MatProgressSpinnerModule,
-    MatFormFieldModule,
+    HttpClientModule,
+    FormsModule,
+    MaterialModule,
     ReactiveFormsModule,
-    MatSelectModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]

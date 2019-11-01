@@ -5,13 +5,12 @@ export class Issue {
   state: string;
   priority: string;
   difficulty: number;
-  planning: string;
-  constructor(id: number, description: string, state: string, priority: string, difficulty: number, planning: string) {
+
+  constructor(id: number= null, description: string, state: string, priority: string, difficulty: number) {
     this.id = id;
     this.description = description;
     this.state = state;
     this.priority = priority;
     this.difficulty = difficulty;
-    this.planning = planning;
   }
 }

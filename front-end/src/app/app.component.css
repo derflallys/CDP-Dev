@@ -1,7 +1,12 @@
 main {
   min-height:  calc(100vh - 300px);
 }
-
+mat-toolbar{
+  background-color: black;
+}
+.toolbar{
+  color: white;
+}
 footer {
   background: #fff;
   text-align: center;
