@@ -1,26 +1,31 @@
 <div class="content">
-  <h1 style="text-align: center">{{title}}</h1>
-
+  <h2 class="text-center">{{ title }}</h2>
   <form (ngSubmit)="onSubmit()" [formGroup]="addIssue" class="contentForm">
-    <mat-form-field class="input-field" >
-      <textarea matInput placeholder="Description Issue " formControlName="description"> </textarea>
-    </mat-form-field>
-    <mat-form-field class="input-field" >
-      <mat-label>Etat</mat-label>
-      <mat-select  value="TODO" formControlName="state" >
-        <mat-option *ngFor="let state of states" [value]="state">{{state}}</mat-option>
-      </mat-select>
-    </mat-form-field>
-    <mat-form-field class="input-field"  >
-      <mat-label>Priorité</mat-label>
-      <mat-select  value="LOW" formControlName="priority" >
-        <mat-option *ngFor="let priority of priorities"  value="{{priority}}" >{{priority}}</mat-option>
-      </mat-select>
-    </mat-form-field>
+
     <mat-form-field class="input-field">
-      <input matInput placeholder="Difficulté  "  formControlName="difficulty" type="number" [min]="1" >
+      <textarea matInput placeholder="Description Issue" formControlName="description" rows="4"></textarea>
     </mat-form-field>
-    <button mat-raised-button type="submit">Enregistrer l'issue</button>
+
+    <mat-form-field class="input-field">
+      <mat-label>Etat</mat-label>
+      <mat-select value="TODO" formControlName="state">
+        <mat-option *ngFor="let state of states" [value]="state">{{ state }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="input-field">
+      <mat-label>Priorité</mat-label>
+      <mat-select value="LOW" formControlName="priority">
+        <mat-option *ngFor="let priority of priorities" value="{{priority}}" >{{ priority }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="input-field">
+      <input matInput placeholder="Difficulté" formControlName="difficulty" type="number" [min]="1" >
+    </mat-form-field>
+
+    <button mat-raised-button type="submit">Enregister l'issue</button>
+
   </form>
 </div>
 

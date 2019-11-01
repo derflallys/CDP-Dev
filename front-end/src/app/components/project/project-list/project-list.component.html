@@ -1,7 +1,7 @@
 
 <div class="header">
     <h2>Projets</h2>
-    <a mat-raised-button color="primary">
+    <a [routerLink]="['/addproject']" mat-raised-button color="primary">
         <mat-icon>add</mat-icon> Nouveau project
     </a>
 </div>
@@ -9,8 +9,6 @@
 <div class="main-frame">
     <p>Liste des projets ({{ projects.length }})</p>
     <div *ngFor="let project of projects; index as projectId">
-        <h3>
-            <a [routerLink]="['/project', projectId]">{{ project.name }}</a>
-        </h3>
+        <a [routerLink]="['/project', projectId]">{{ project.title }}</a>
     </div>
 </div>
