@@ -1,16 +1,22 @@
 import { Component, OnInit } from '@angular/core';
+import { ProjectService } from '../../../services/project.service';
 
 @Component({
   selector: 'app-project-list',
   templateUrl: './project-list.component.html',
-  styleUrls: ['./project-list.component.css']
+  styleUrls: ['./project-list.component.css'],
+  providers: []
 })
 export class ProjectListComponent implements OnInit {
 
-  projects = [];
+  projects = []
 
-  constructor() { }
+  constructor(private projectService: ProjectService) { }
 
-  ngOnInit() { }
+  ngOnInit() { 
+    this.projectService.getProjects().subscribe(res => {
+      this.projects = res
+    });
+  }
 
 }

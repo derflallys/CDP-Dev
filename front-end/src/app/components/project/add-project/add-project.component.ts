@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-
 import { Project } from '../../../models/project';
 import { ProjectService } from '../../../services/project.service';
 
@@ -34,8 +33,8 @@ export class AddProjectComponent implements OnInit {
     const duration = this.addProject.controls.duration.value;
     const description = this.addProject.controls.description.value;
     const url = this.addProject.controls.url.value;
-    const refspecifying = "tmpNull"; // this.addProject.controls.refspecifying.value;
-    const newProject  = new Project(title, duration, description, url, refspecifying);
+    const refspecifying = this.addProject.controls.refspecifying.value;
+    const newProject = new Project(null, title, duration, description, url, refspecifying);
     console.log(newProject);
     this.projectService.addProject(newProject).subscribe(res => {
       console.log(res);

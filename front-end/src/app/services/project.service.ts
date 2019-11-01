@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment';
-import { Observable } from 'rxjs';
 import { Project } from '../models/project';
+import { Observable } from 'rxjs';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -14,11 +14,7 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class ProjectService {
-  private projectUrl = environment.BACK_END_URL + '/get/projects';
-  private addProjectUrl = environment.BACK_END_URL + '/add/project';
-  private deleteProjectUrl = environment.BACK_END_URL + '/delete/project';
-  private updateProjectUrl = environment.BACK_END_URL + '/update/project';
-  private getProjectUrl = environment.BACK_END_URL + '/get/project';
+  private projectUrl = environment.BACK_END_URL + '/project';
 
   constructor(private http: HttpClient) { }
 
@@ -27,18 +23,18 @@ export class ProjectService {
   }
 
   addProject(project: Project) {
-    return this.http.post<Response>(this.addProjectUrl, project, httpOptions);
+    return this.http.post(this.projectUrl, project, httpOptions);
   }
 
-  deleteProject(projectTitle: string) {
-    return this.http.delete<Response>(this.deleteProjectUrl + '/' + projectTitle);
+  deleteProject(projectId: number) {
+    return this.http.delete<Response>(this.projectUrl + '/' + projectId);
   }
 
-  getProject(projectTitle: string) {
-    return this.http.get<Project>(this.getProjectUrl + '/' + projectTitle);
+  getProject(projectId: number) {
+    return this.http.get<Project>(this.projectUrl + '/' + projectId);
   }
 
-  updateProject(project: Project, projectTitle: string) {
-    return this.http.put<Response>(this.updateProjectUrl + '/' + projectTitle, project, httpOptions);
+  updateProject(project: Project, id: number) {
+    return this.http.put<Response>(this.projectUrl + '/' + id, project, httpOptions);
   }
 }
