@@ -11,6 +11,8 @@ export class ProjectListComponent implements OnInit {
 
   projects = []
 
+  displayedColumns: string[] = ['createdAt', 'title', 'duration', 'repositoryURL', 'actions'];
+
   constructor(private projectService: ProjectService) { }
 
   ngOnInit() { 

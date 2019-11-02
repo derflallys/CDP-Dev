@@ -1,0 +1,12 @@
+table {
+    width: 100%;
+    text-align: center !important;
+}
+
+.mat-header-cell {
+    text-align: center;
+}
+
+.mat-row:not(.mat-header-cell):hover {
+    background: #CCC;
+}
