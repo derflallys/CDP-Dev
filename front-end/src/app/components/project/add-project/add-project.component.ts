@@ -11,20 +11,20 @@ import { ProjectService } from '../../../services/project.service';
 })
 export class AddProjectComponent implements OnInit {
 
-  addProject: FormGroup;
-  URL_REGEX = /^(https?:\/\/)([\da-z.-]+)\.([a-z.]{2,6})([\w .-]*)*(\.git)\/?$/g;
+  title = 'Créer un projet';
 
+  addProject: FormGroup;
+
+  URL_REGEX = /^(https?:\/\/)([\da-z.-]+)\.([a-z.]{2,6})\/?([\w .-]*)*(\.git)$/g;
 
   constructor(private formBuilder: FormBuilder, private projectService: ProjectService) { }
-
-  title = 'Créer un projet';
 
   ngOnInit() {
     this.addProject = this.formBuilder.group({
       title: ['', Validators.required],
       duration: [1, Validators.required],
       description: ['', Validators.required],
-      url: ['https://www.*.git', Validators.required],
+      url: ['https://www.url.tld/repo.git', Validators.required],
       refspecifying: ['', Validators.required]
     });
   }
