@@ -6,10 +6,12 @@ import { AddProjectComponent } from './components/project/add-project/add-projec
 import { AddSprintComponent } from './components/sprint/add-sprint/add-sprint.component';
 import { AddIssueComponent } from './components/issue/add-issue/add-issue.component';
 import { UpdateIssueComponent } from './components/issue/update-issue/update-issue.component';
+import { ProjectOverviewComponent } from './components/project/project-overview/project-overview.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'projects', pathMatch: 'full' },
   { path: 'projects', component: ProjectListComponent },
+  { path: 'project/:id', component: ProjectOverviewComponent },
   { path: 'addproject', component: AddProjectComponent },
   { path: 'addsprint', component: AddSprintComponent },
   { path: 'updateissue/:id', component: UpdateIssueComponent },

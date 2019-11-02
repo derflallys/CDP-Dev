@@ -23,6 +23,7 @@ import { AddProjectComponent } from './components/project/add-project/add-projec
 import { AddIssueComponent } from './components/issue/add-issue/add-issue.component';
 import { UpdateIssueComponent } from './components/issue/update-issue/update-issue.component';
 import { AddSprintComponent } from './components/sprint/add-sprint/add-sprint.component';
+import { ProjectOverviewComponent } from './components/project/project-overview/project-overview.component';
 
 @NgModule({
   exports: [
@@ -47,7 +48,8 @@ export class MaterialModule {}
     AddIssueComponent,
     UpdateIssueComponent,
     AddSprintComponent,
-    AddProjectComponent
+    AddProjectComponent,
+    ProjectOverviewComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -56,7 +58,7 @@ export class MaterialModule {}
     HttpClientModule,
     FormsModule,
     MaterialModule,
-    ReactiveFormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

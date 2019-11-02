@@ -31,7 +31,7 @@ export class ProjectService {
     return this.http.delete<Response>(this.projectUrl + '/' + projectId);
   }
 
-  getProject(projectId: number) {
+  getProject(projectId: string) {
     return this.http.get<Project>(this.projectUrl + '/' + projectId);
   }
 
