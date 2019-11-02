@@ -1,29 +1,27 @@
 
 <div class="content">
-    <h1>Ajout d'un nouveau Sprint </h1>
-  <form (ngSubmit)="onSubmit()" [formGroup]="addSprint">
+  <h2 class="text-center">{{ title }}</h2>
+  <form (ngSubmit)="onSubmit()" [formGroup]="addSprint" class="contentForm">
 
-    <div class="form-group">
-      <input type="text" class="form-control" id="numero" placeholder="Numéro">
-    </div>
+    <mat-form-field class="input-field">
+      <input matInput placeholder="1" formControlName="number">
+    </mat-form-field>
 
-    <div class="form-group">
-      <input type="text" class="form-control" id="titre" placeholder="Titre">
-    </div>
+    <mat-form-field class="input-field">
+      <input matInput placeholder="Sprint 1" formControlName="title">
+    </mat-form-field>
 
-    <div class="form-group">
-      <label for="dateD">Date de début</label>
-      <input type="date" class="form-control" id="dateD" placeholder="Date de début">
-    </div>
+    <mat-form-field class="input-field">
+      <input matInput type="date" placeholder="Date de début" formControlName="Sdate">
+    </mat-form-field>
 
-    <div class="form-group">
-      <label for="dateF">Date de fin</label>
-      <input type="date" class="form-control" id="dateF" placeholder="Date de fin">
-    </div>
+    <mat-form-field class="input-field">
+      <input matInput type="date" placeholder="Date de fin " formControlName="Edate">
+    </mat-form-field>
 
-    <div class="validation">
-      <button mat-raised-button color="warn" type="submit"> Enregistrer le sprint </button>
-    </div>
+
+    <button mat-raised-button type="submit">Enregister le sprint</button>
+
   </form>
 
   </div>
