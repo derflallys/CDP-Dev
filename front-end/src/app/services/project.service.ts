@@ -23,6 +23,7 @@ export class ProjectService {
   }
 
   addProject(project: Project) {
+    console.log(this.projectUrl)
     return this.http.post(this.projectUrl, project, httpOptions);
   }
 

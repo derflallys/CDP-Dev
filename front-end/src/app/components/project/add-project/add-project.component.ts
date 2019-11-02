@@ -12,6 +12,8 @@ import { ProjectService } from '../../../services/project.service';
 export class AddProjectComponent implements OnInit {
 
   addProject: FormGroup;
+  URL_REGEX = /^(https?:\/\/)([\da-z.-]+)\.([a-z.]{2,6})([\w .-]*)*(\.git)\/?$/g;
+
 
   constructor(private formBuilder: FormBuilder, private projectService: ProjectService) { }
 
@@ -22,7 +24,7 @@ export class AddProjectComponent implements OnInit {
       title: ['', Validators.required],
       duration: [1, Validators.required],
       description: ['', Validators.required],
-      url: ['', Validators.required],
+      url: ['https://www.*.git', Validators.required],
       refspecifying: ['', Validators.required]
     });
   }
@@ -30,7 +32,7 @@ export class AddProjectComponent implements OnInit {
   onSubmit() {
     if (this.addProject.invalid) { return; }
     const title = this.addProject.controls.title.value;
-    const duration = this.addProject.controls.duration.value;
+    const duration = Number(this.addProject.controls.duration.value);
     const description = this.addProject.controls.description.value;
     const url = this.addProject.controls.url.value;
     const refspecifying = this.addProject.controls.refspecifying.value;

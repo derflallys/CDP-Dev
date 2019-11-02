@@ -1,12 +1,12 @@
 export class Project {
   _id: number;
   title: string;
-  duration: string;
+  duration: number;
   description: string;
   url: string;
   refspecifying: string;
 
-  constructor(id: number = null, title: string, duration: string, description: string, url: string, refspecifying: string) {
+  constructor(id: number = null, title: string, duration: number, description: string, url: string, refspecifying: string) {
     this._id = id;
     this.title = title;
     this.duration = duration;
