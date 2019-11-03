@@ -6,6 +6,10 @@ const IssueSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: 'sprint'
     },
+    projectId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'project'
+    },
     description: {
       type: String,
       required: true,
