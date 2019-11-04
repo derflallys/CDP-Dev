@@ -8,6 +8,7 @@ import {IssueService} from '../../../services/issue.service';
 import {SprintService} from '../../../services/sprint.service';
 import {MatDialog, MatExpansionModule, MatPaginator, MatTableDataSource} from '@angular/material';
 import {AddIssueComponent} from '../../issue/add-issue/add-issue.component';
+import {UpdateIssueComponent} from '../../issue/update-issue/update-issue.component';
 
 @Component({
   selector: 'app-project-overview',
@@ -60,6 +61,18 @@ export class ProjectOverviewComponent implements OnInit {
       this.issueService.getIssueByProject(this.projectId).subscribe(issues => {
         this.issues = new MatTableDataSource(issues);
         this.issues.paginator = this.paginator;
+        this.paginator._changePageSize(this.paginator.pageSize);
+      });
+    });
+  }
+
+  updateIssue(idIssue) {
+    const diagoFormIssue = this.dialog.open(UpdateIssueComponent, {width: '800px', data: {issueId: idIssue} });
+    diagoFormIssue.afterClosed().subscribe(result => {
+      this.issueService.getIssueByProject(this.projectId).subscribe(issues => {
+        this.issues = new MatTableDataSource(issues);
+        this.issues.paginator = this.paginator;
+        this.paginator._changePageSize(this.paginator.pageSize);
       });
     });
   }

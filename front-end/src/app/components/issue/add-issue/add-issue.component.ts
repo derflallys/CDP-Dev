@@ -4,6 +4,7 @@ import { Issue } from '../../../models/issue';
 import { IssueService } from '../../../services/issue.service';
 import {Router} from '@angular/router';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
+import {UpdateIssueComponent} from '../update-issue/update-issue.component';
 
 @Component({
   selector: 'app-add-issue',
@@ -18,6 +19,7 @@ export class AddIssueComponent implements OnInit {
               private router: Router,
               private ngZone: NgZone,
               public dialogRef: MatDialogRef<AddIssueComponent>,
+              public dialogRefUpdate: MatDialogRef<UpdateIssueComponent>,
               @Inject(MAT_DIALOG_DATA) public data: {projectId: null},
               private issueService: IssueService) { }
   priorities = [
@@ -55,7 +57,8 @@ export class AddIssueComponent implements OnInit {
       this.issueService.updateIssue(updateIssue, this.issue._id).subscribe( res => {
         console.log(res);
         console.log('Update');
-        this.router.navigate(['project/' + this.issue.projectId]);
+        this.dialogRefUpdate.close();
+        this.ngZone.run(() => this.router.navigate(['project/' + this.issue.projectId]));
       },
         error => {
           console.log(error);
