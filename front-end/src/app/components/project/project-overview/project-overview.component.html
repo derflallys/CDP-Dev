@@ -54,7 +54,7 @@
                           <a (click)="updateIssue(element._id)" mat-mini-fab mat-raised-button color="primary">
                             <mat-icon>edit</mat-icon>
                           </a>
-                          <a [routerLink]="['/deleteissue', element._id]" mat-mini-fab mat-raised-button color="warn">
+                          <a (click)="deleteIssue(element._id,element.issueId)" mat-mini-fab mat-raised-button color="warn">
                             <mat-icon>delete</mat-icon>
                           </a>
                         </td>

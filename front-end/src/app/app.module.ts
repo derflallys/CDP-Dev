@@ -11,7 +11,7 @@ import {
   MatTableModule,
   MatToolbarModule,
   MatIconModule,
-  MatButtonModule, MatDatepickerModule, MatNativeDateModule, MatPaginatorModule, MatExpansionModule
+  MatButtonModule, MatDatepickerModule, MatNativeDateModule, MatPaginatorModule, MatExpansionModule, MatDialogModule
 } from '@angular/material';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -25,6 +25,7 @@ import { UpdateIssueComponent } from './components/issue/update-issue/update-iss
 import { AddSprintComponent } from './components/sprint/add-sprint/add-sprint.component';
 import { ProjectOverviewComponent } from './components/project/project-overview/project-overview.component';
 import { UpdateSprintComponent } from './components/sprint/update-sprint/update-sprint.component';
+import { DeleteDialogComponent } from './components/utils/delete-dialog/delete-dialog.component';
 
 @NgModule({
   exports: [
@@ -37,7 +38,9 @@ import { UpdateSprintComponent } from './components/sprint/update-sprint/update-
     MatNativeDateModule,
     MatProgressSpinnerModule,
     MatFormFieldModule,
-    MatDatepickerModule
+    MatDatepickerModule,
+    MatPaginatorModule,
+    MatExpansionModule
   ],
   imports: [],
   declarations: []
@@ -53,7 +56,8 @@ export class MaterialModule {}
     AddSprintComponent,
     AddProjectComponent,
     ProjectOverviewComponent,
-    UpdateSprintComponent
+    UpdateSprintComponent,
+    DeleteDialogComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -63,9 +67,9 @@ export class MaterialModule {}
     FormsModule,
     MaterialModule,
     ReactiveFormsModule,
-    MatPaginatorModule,
-    MatExpansionModule
+    MatDialogModule
   ],
+  entryComponents: [ DeleteDialogComponent ],
   providers: [],
   bootstrap: [AppComponent]
 })
