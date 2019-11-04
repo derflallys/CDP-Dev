@@ -11,7 +11,7 @@ import {
   MatTableModule,
   MatToolbarModule,
   MatIconModule,
-  MatButtonModule, MatDatepickerModule, MatNativeDateModule
+  MatButtonModule, MatDatepickerModule, MatNativeDateModule, MatPaginatorModule, MatExpansionModule
 } from '@angular/material';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -62,7 +62,9 @@ export class MaterialModule {}
     HttpClientModule,
     FormsModule,
     MaterialModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatPaginatorModule,
+    MatExpansionModule
   ],
   providers: [],
   bootstrap: [AppComponent]

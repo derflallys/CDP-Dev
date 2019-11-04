@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Issue } from '../../../models/issue';
 import { IssueService } from '../../../services/issue.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-add-issue',
@@ -13,6 +14,7 @@ export class AddIssueComponent implements OnInit {
   addIssue: FormGroup;
   issue: Issue;
   constructor(private formBuilder: FormBuilder,
+              private router: Router,
               private issueService: IssueService) { }
   priorities = [
     'HIGH', 'MEDIUM', 'LOW'
@@ -23,7 +25,7 @@ export class AddIssueComponent implements OnInit {
   @Input() issueId = null;
   title = 'Ajouter une issue';
   update = false;
-
+  @Input() projectId = null;
   ngOnInit() {
     this.addIssue =  this.formBuilder.group({
       description: ['En tant que', Validators.required],
@@ -45,10 +47,11 @@ export class AddIssueComponent implements OnInit {
     const difficulty = Number(this.addIssue.controls.difficulty.value);
     const priority = this.addIssue.controls.priority.value;
     if (this.update) {
-      const updateIssue = new Issue(this.issue._id, description, state, priority, difficulty);
+      const updateIssue = new Issue(this.issue.projectId, this.issue._id, description, state, priority, difficulty);
       this.issueService.updateIssue(updateIssue, this.issue._id).subscribe( res => {
         console.log(res);
         console.log('Update');
+        this.router.navigate(['project/' + this.issue.projectId]);
       },
         error => {
           console.log(error);
@@ -56,7 +59,7 @@ export class AddIssueComponent implements OnInit {
       );
     } else {
 
-      const newIssue = new Issue(null, description, state, priority, difficulty);
+      const newIssue = new Issue(this.projectId, null, description, state, priority, difficulty);
       console.log(newIssue);
       console.log('Add');
       this.issueService.addIssue(newIssue).subscribe(res => {

@@ -1,3 +1,5 @@
+import { counter } from '../sprint/sprint.model'
+
 const mongoose = require('mongoose')
 
 const IssueSchema = new mongoose.Schema(
@@ -15,6 +17,7 @@ const IssueSchema = new mongoose.Schema(
       required: true,
       maxlength: 750
     },
+    issueId: Number,
     state: {
       type: String,
       required: true,
@@ -34,5 +37,23 @@ const IssueSchema = new mongoose.Schema(
   },
   { timestamps: true }
 )
+
+async function getSeq(name) {
+  const req = await counter
+    .findOneAndUpdate({ _id: name }, { $inc: { seq: 1 } }, { new: true })
+    .lean()
+    .exec()
+  return req.seq
+}
+IssueSchema.pre('save', function(next) {
+  console.log('pre save ')
+  const st = this
+  const seq = getSeq('Issue')
+  // eslint-disable-next-line promise/catch-or-return,no-return-assign
+  seq.then(res => {
+    st.issueId = res
+    next()
+  })
+})
 
 export const Issue = mongoose.model('Issue', IssueSchema)

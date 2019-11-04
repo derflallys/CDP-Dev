@@ -1,0 +1,52 @@
+.main-frame{
+  width: 90%;
+}
+.filter{
+  width: 100%;
+  align-content: flex-start;
+  margin-left: 2%;
+}
+table {
+  width: 100%;
+  text-align: center !important;
+}
+.mat-header-cell {
+  text-align: center;
+}
+.button-add{
+  text-align: center;
+  width: 20%;
+  height: 10%;
+  margin-left: 2%;
+  align-content: flex-end;
+}
+.row{
+  display: flex;
+  flex-wrap: nowrap;
+}
+.mat-row:not(.mat-header-cell):hover {
+  background: #CCC;
+}
+.mat-column-Description {
+  width: 50% !important;
+  text-align: justify;
+  font-weight: bold;
+}
+
+
+.contain-project{
+  display: grid;
+  grid-template-columns: auto;
+  grid-template-rows: auto;
+  grid-gap: 10px;
+
+}
+.box{
+  border-radius: 5px;
+  padding: 20px;
+
+
+}
+.sprint{
+
+}

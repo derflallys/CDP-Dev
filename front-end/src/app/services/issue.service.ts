@@ -15,6 +15,7 @@ const httpOptions = {
 })
 export class IssueService {
   private issueUrl = environment.BACK_END_URL + '/issue';
+  private issueByProjectUrl = environment.BACK_END_URL + '/issue/byproject';
 
   constructor(private http: HttpClient) { }
 
@@ -34,7 +35,13 @@ export class IssueService {
     return this.http.get<Issue>(this.issueUrl + '/' + issueId);
   }
 
-  updateIssue(issue: Issue, id: number) {
+  getIssueByProject(projectId: number) {
+    return this.http.get<Issue[]>(this.issueByProjectUrl + '/' + projectId);
+  }
+
+
+
+  updateIssue(issue: Issue, id: string) {
     return this.http.put<Response>(this.issueUrl + '/' + id, issue, httpOptions);
   }
 }
