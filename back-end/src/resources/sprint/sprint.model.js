@@ -29,22 +29,21 @@ const SprintSchema = new mongoose.Schema({
     required: true
   }
 })
-export const Sprint = mongoose.model('Sprint', SprintSchema)
-
+async function getSeq(name) {
+  const req = await counter
+    .findOneAndUpdate({ _id: name }, { $inc: { seq: 1 } }, { new: true })
+    .lean()
+    .exec()
+  return req.seq
+}
 SprintSchema.pre('save', function(next) {
   console.log('pre save ')
   const st = this
-  console.log(st)
-  counter.findOneAndUpdate(
-    {
-      _id: 'Sprint',
-      update: { $inc: { seq: 1 } },
-      new: true
-    },
-    function(error, count) {
-      if (error) return next(error)
-      console.log(count.seq)
-      st.sprintId = count.seq
-    }
-  )
+  const seq = getSeq('Sprint')
+  // eslint-disable-next-line promise/catch-or-return,no-return-assign
+  seq.then(res => {
+    st.sprintId = res
+    next()
+  })
 })
+export const Sprint = mongoose.model('Sprint', SprintSchema)

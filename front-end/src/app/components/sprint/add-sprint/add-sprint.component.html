@@ -4,19 +4,15 @@
   <form (ngSubmit)="onSubmit()" [formGroup]="addSprint" class="contentForm">
 
     <mat-form-field class="input-field">
-      <input matInput placeholder="1" formControlName="number">
+      <input matInput placeholder="Titre " formControlName="title">
     </mat-form-field>
 
     <mat-form-field class="input-field">
-      <input matInput placeholder="Sprint 1" formControlName="title">
+      <input matInput type="date" placeholder="Date de début" formControlName="startDate">
     </mat-form-field>
 
     <mat-form-field class="input-field">
-      <input matInput type="date" placeholder="Date de début" formControlName="Sdate">
-    </mat-form-field>
-
-    <mat-form-field class="input-field">
-      <input matInput type="date" placeholder="Date de fin " formControlName="Edate">
+      <input matInput type="date" placeholder="Date de fin " formControlName="endDate">
     </mat-form-field>
 
 

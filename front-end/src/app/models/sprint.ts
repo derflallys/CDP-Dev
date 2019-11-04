@@ -1,11 +1,13 @@
 export class Sprint {
-  num: number;
+  sprintId: number;
   title: string;
+  projectId: string;
   startDate: string;
   endDate: string;
 
-  constructor(num: number, title: string, startDate: string, endDate: string) {
-    this.num = num;
+  constructor(sprintId: number, projectId: string, title: string, startDate: string, endDate: string) {
+    this.sprintId = sprintId;
+    this.projectId = projectId;
     this.title = title;
     this.startDate = startDate ;
     this.endDate = endDate;

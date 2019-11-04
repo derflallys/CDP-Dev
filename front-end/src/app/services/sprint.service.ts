@@ -15,11 +15,8 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class SprintService {
-  private sprintUrl = environment.BACK_END_URL + '/get/sprints';
-  private addSprintUrl = environment.BACK_END_URL + '/add/sprint';
-  private deleteSprintUrl = environment.BACK_END_URL + '/delete/sprint';
-  private updateSprintUrl = environment.BACK_END_URL + '/update/sprint';
-  private getSprintUrl = environment.BACK_END_URL + '/get/sprint';
+  private sprintUrl = environment.BACK_END_URL + '/sprint';
+
 
   constructor(private http: HttpClient) { }
 
@@ -28,18 +25,18 @@ export class SprintService {
   }
 
   addSprint(sprint: Sprint) {
-    return this.http.post<Response>(this.addSprintUrl, sprint, httpOptions);
+    return this.http.post<Response>(this.sprintUrl, sprint, httpOptions);
   }
 
   deleteSprint(sprintNum: number) {
-    return this.http.delete<Response>(this.deleteSprintUrl + '/' + sprintNum);
+    return this.http.delete<Response>(this.sprintUrl + '/' + sprintNum);
   }
 
   getSprint(sprintNum: number) {
-    return this.http.get<Sprint>(this.getSprintUrl + '/' + sprintNum);
+    return this.http.get<Sprint>(this.sprintUrl + '/' + sprintNum);
   }
 
   updateSprint(sprint: Sprint, sprintNum: number) {
-    return this.http.put<Response>(this.updateSprintUrl + '/' + sprintNum, sprint, httpOptions);
+    return this.http.put<Response>(this.sprintUrl + '/' + sprintNum, sprint, httpOptions);
   }
 }
