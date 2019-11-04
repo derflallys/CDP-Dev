@@ -6,7 +6,15 @@ import {Issue} from '../../../models/issue';
 import {Sprint} from '../../../models/sprint';
 import {IssueService} from '../../../services/issue.service';
 import {SprintService} from '../../../services/sprint.service';
-import {MatDialog, MatDialogConfig, MatExpansionModule, MatPaginator, MatTableDataSource} from '@angular/material';
+import {
+  MatDialog,
+  MatDialogConfig,
+  MatExpansionModule,
+  MatPaginator,
+  MatSnackBar,
+  MatSnackBarConfig,
+  MatTableDataSource
+} from '@angular/material';
 import {AddIssueComponent} from '../../issue/add-issue/add-issue.component';
 import {UpdateIssueComponent} from '../../issue/update-issue/update-issue.component';
 import {DeleteDialogComponent} from '../../utils/delete-dialog/delete-dialog.component';
@@ -24,14 +32,19 @@ export class ProjectOverviewComponent implements OnInit {
   sprints: Sprint[] = [];
   projectId;
   displayedColumns: string[] = ['ID', 'Description', 'Priorité', 'Etat', 'actions'];
+  configSnackBar = new MatSnackBarConfig();
 
   constructor(
     private projectService: ProjectService,
     private issueService: IssueService,
     private sprintService: SprintService,
     private route: ActivatedRoute,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    public snackBar: MatSnackBar
   ) {
+    this.configSnackBar.verticalPosition = 'bottom';
+    this.configSnackBar.horizontalPosition = 'center';
+    this.configSnackBar.duration = 5000;
   }
 
   ngOnInit() {
@@ -59,6 +72,7 @@ export class ProjectOverviewComponent implements OnInit {
   addIssue() {
     const diagoFormIssue = this.dialog.open(AddIssueComponent, {width: '800px', data: {projectId: this.projectId} });
     diagoFormIssue.afterClosed().subscribe(result => {
+      this.snackBar.open('✅ Ajout issue effectuée avec succès !', 'Fermer', this.configSnackBar);
       this.refreshIssuesBacklog();
     });
   }
@@ -66,6 +80,7 @@ export class ProjectOverviewComponent implements OnInit {
   updateIssue(idIssue) {
     const diagoFormIssue = this.dialog.open(UpdateIssueComponent, {width: '800px', data: {issueId: idIssue} });
     diagoFormIssue.afterClosed().subscribe(result => {
+      this.snackBar.open('✅ Modification effectuée avec succès !', 'Fermer', this.configSnackBar);
       this.refreshIssuesBacklog();
     });
   }
@@ -88,15 +103,17 @@ export class ProjectOverviewComponent implements OnInit {
       title: 'Suppression de l\'issue numéro "' + numberIssue + '"',
       content: 'Êtes-vous sûr de vouloir supprimer cette issue ? '
     };
-
+    this.snackBar.open('⌛ Suppression en cours...', 'Fermer', this.configSnackBar);
     const dialogRefDelete = this.dialog.open(DeleteDialogComponent, dialogConfig);
     dialogRefDelete.afterClosed().subscribe(result => {
       if (result === true) {
         this.issueService.deleteIssue(idIssue).subscribe(res => {
+          this.snackBar.open('✅ Suppression effectuée avec succès !', 'Fermer', this.configSnackBar);
           this.refreshIssuesBacklog();
         },
           error => {
             console.log(error);
+            this.snackBar.open('❌ Une erreur s\'est produite lors de la suppression !', 'Fermer', this.configSnackBar);
           }
         );
       }

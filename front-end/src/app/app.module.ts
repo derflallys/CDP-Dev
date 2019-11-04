@@ -11,7 +11,7 @@ import {
   MatTableModule,
   MatToolbarModule,
   MatIconModule,
-  MatButtonModule, MatDatepickerModule, MatNativeDateModule, MatPaginatorModule, MatExpansionModule, MatDialogModule
+  MatButtonModule, MatDatepickerModule, MatNativeDateModule, MatPaginatorModule, MatExpansionModule, MatDialogModule, MatSnackBarModule
 } from '@angular/material';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -40,7 +40,8 @@ import { DeleteDialogComponent } from './components/utils/delete-dialog/delete-d
     MatFormFieldModule,
     MatDatepickerModule,
     MatPaginatorModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatSnackBarModule
   ],
   imports: [],
   declarations: []
