@@ -1,8 +1,9 @@
-import { Component, Input, OnInit } from '@angular/core';
+import {Component, Inject, Input, NgZone, OnInit} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Issue } from '../../../models/issue';
 import { IssueService } from '../../../services/issue.service';
 import {Router} from '@angular/router';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 
 @Component({
   selector: 'app-add-issue',
@@ -15,6 +16,9 @@ export class AddIssueComponent implements OnInit {
   issue: Issue;
   constructor(private formBuilder: FormBuilder,
               private router: Router,
+              private ngZone: NgZone,
+              public dialogRef: MatDialogRef<AddIssueComponent>,
+              @Inject(MAT_DIALOG_DATA) public data: {projectId: null},
               private issueService: IssueService) { }
   priorities = [
     'HIGH', 'MEDIUM', 'LOW'
@@ -25,7 +29,7 @@ export class AddIssueComponent implements OnInit {
   @Input() issueId = null;
   title = 'Ajouter une issue';
   update = false;
-  @Input() projectId = null;
+  projectId = this.data.projectId;
   ngOnInit() {
     this.addIssue =  this.formBuilder.group({
       description: ['En tant que', Validators.required],
@@ -64,6 +68,8 @@ export class AddIssueComponent implements OnInit {
       console.log('Add');
       this.issueService.addIssue(newIssue).subscribe(res => {
         console.log(res);
+        this.dialogRef.close();
+        this.ngZone.run(() => this.router.navigate(['project/' + this.projectId]));
       });
     }
 

@@ -16,6 +16,7 @@ const httpOptions = {
 export class IssueService {
   private issueUrl = environment.BACK_END_URL + '/issue';
   private issueByProjectUrl = environment.BACK_END_URL + '/issue/byproject';
+  private issueBySprintUrl = environment.BACK_END_URL + '/issue/bysprint';
 
   constructor(private http: HttpClient) { }
 
@@ -37,6 +38,10 @@ export class IssueService {
 
   getIssueByProject(projectId: number) {
     return this.http.get<Issue[]>(this.issueByProjectUrl + '/' + projectId);
+  }
+
+  getIssueBySprint(sprintId: number) {
+    return this.http.get<Issue[]>(this.issueBySprintUrl + '/' + sprintId);
   }
 
 

@@ -21,4 +21,7 @@ router
 // /api/issue/byproject
 router.route('/byproject/:id').get(controllers.getByProject)
 
+// /api/issue/bysprint
+router.route('/bysprint/:id').get(controllers.getBySprint)
+
 export default router

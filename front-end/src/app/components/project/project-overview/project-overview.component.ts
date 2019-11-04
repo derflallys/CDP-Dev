@@ -6,7 +6,8 @@ import {Issue} from '../../../models/issue';
 import {Sprint} from '../../../models/sprint';
 import {IssueService} from '../../../services/issue.service';
 import {SprintService} from '../../../services/sprint.service';
-import {MatExpansionModule, MatPaginator, MatTableDataSource} from '@angular/material';
+import {MatDialog, MatExpansionModule, MatPaginator, MatTableDataSource} from '@angular/material';
+import {AddIssueComponent} from '../../issue/add-issue/add-issue.component';
 
 @Component({
   selector: 'app-project-overview',
@@ -26,7 +27,8 @@ export class ProjectOverviewComponent implements OnInit {
     private projectService: ProjectService,
     private issueService: IssueService,
     private sprintService: SprintService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    public dialog: MatDialog
   ) {
   }
 
@@ -53,6 +55,12 @@ export class ProjectOverviewComponent implements OnInit {
   }
 
   addIssue() {
-
+    const diagoFormIssue = this.dialog.open(AddIssueComponent, {width: '800px', data: {projectId: this.projectId} });
+    diagoFormIssue.afterClosed().subscribe(result => {
+      this.issueService.getIssueByProject(this.projectId).subscribe(issues => {
+        this.issues = new MatTableDataSource(issues);
+        this.issues.paginator = this.paginator;
+      });
+    });
   }
 }
