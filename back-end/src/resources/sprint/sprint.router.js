@@ -18,4 +18,7 @@ router
   .put(controllers.updateOne)
   .delete(controllers.removeOne)
 
+// /api/sprint/byproject
+router.route('/byproject/:id').get(controllers.getByProject)
+
 export default router
