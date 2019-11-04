@@ -8,12 +8,18 @@
     </mat-form-field>
 
     <mat-form-field class="input-field">
-      <input matInput type="date" placeholder="Date de début" formControlName="startDate">
+      <input matInput [matDatepicker]="picker1" placeholder="Date de début" formControlName="startDate">
+      <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+      <mat-datepicker #picker1></mat-datepicker>
     </mat-form-field>
 
     <mat-form-field class="input-field">
-      <input matInput type="date" placeholder="Date de fin " formControlName="endDate">
+      <input matInput [matDatepicker]="picker2" placeholder="Date de fin" formControlName="endDate">
+      <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+      <mat-datepicker #picker2></mat-datepicker>
     </mat-form-field>
+
+
 
 
     <button mat-raised-button type="submit">Enregister le sprint</button>

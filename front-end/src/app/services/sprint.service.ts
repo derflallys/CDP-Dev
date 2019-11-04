@@ -36,7 +36,7 @@ export class SprintService {
     return this.http.get<Sprint>(this.sprintUrl + '/' + sprintNum);
   }
 
-  updateSprint(sprint: Sprint, sprintNum: number) {
+  updateSprint(sprint: Sprint, sprintNum: string) {
     return this.http.put<Response>(this.sprintUrl + '/' + sprintNum, sprint, httpOptions);
   }
 }

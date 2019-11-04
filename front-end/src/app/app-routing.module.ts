@@ -7,6 +7,7 @@ import { AddSprintComponent } from './components/sprint/add-sprint/add-sprint.co
 import { AddIssueComponent } from './components/issue/add-issue/add-issue.component';
 import { UpdateIssueComponent } from './components/issue/update-issue/update-issue.component';
 import { ProjectOverviewComponent } from './components/project/project-overview/project-overview.component';
+import {UpdateSprintComponent} from './components/sprint/update-sprint/update-sprint.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'projects', pathMatch: 'full' },
@@ -15,6 +16,7 @@ const routes: Routes = [
   { path: 'addproject', component: AddProjectComponent },
   { path: 'addsprint', component: AddSprintComponent },
   { path: 'updateissue/:id', component: UpdateIssueComponent },
+  { path: 'updatesprint/:id', component: UpdateSprintComponent },
   { path: 'addissue', component: AddIssueComponent },
   { path: 'listProject', component: ProjectListComponent }
 ];

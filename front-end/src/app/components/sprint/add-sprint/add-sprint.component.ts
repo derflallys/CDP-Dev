@@ -16,7 +16,9 @@ export class AddSprintComponent implements OnInit {
   sprint: Sprint;
   title = 'Ajouter un sprint';
    projects: Project[] = [];
+   update = false;
   @Input() projectId = null;
+  @Input() sprintId = null;
 
   constructor(private formBuilder: FormBuilder, private sprintService: SprintService
   ,           private projectService: ProjectService) { }
@@ -25,14 +27,18 @@ export class AddSprintComponent implements OnInit {
     this.projectService.getProjects().subscribe(projects => this.getListProject(projects));
     this.addSprint = this.formBuilder.group({
       title: ['Sprint', Validators.required],
-      startDate: [new Date(), Validators.required],
-      endDate: [new Date(), Validators.required]
+      startDate: [new Date().toString, Validators.required],
+      endDate: [new Date().toString, Validators.required]
     });
+    if (this.sprintId) {
+      this.loadSprint();
+    }
   }
 
   getListProject(projets) {
     this.projects = projets;
   }
+  // TODO Mettre le format DD-MM-YYYY pour les dates voir solution back ou front
   onSubmit() {
     if (this.addSprint.invalid) { return; }
     const title = this.addSprint.controls.title.value;
@@ -41,10 +47,41 @@ export class AddSprintComponent implements OnInit {
     if (!this.projectId ) {
       this.projectId = '5dbf51c7cb6d97659ce04a2b';
     }
-    const newSprint = new Sprint(null, this.projectId , title, Sdate, Edate);
-    console.log(newSprint);
-    this.sprintService.addSprint(newSprint).subscribe(res => {
-      console.log(res);
-    });
+    if (this.update) {
+      const updateSprint = new Sprint(this.sprint._id, this.sprint.sprintId, this.sprint.projectId , title, Sdate, Edate);
+      this.sprintService.updateSprint(updateSprint, this.sprint._id).subscribe( res => {
+        console.log(res);
+        // TODO Ajouter notification
+        console.log('Update');
+      }
+        ,
+        error => {
+          console.log(error);
+        }
+      );
+    } else {
+      const newSprint = new Sprint(null, null, this.projectId , title, Sdate, Edate);
+      console.log(newSprint);
+      this.sprintService.addSprint(newSprint).subscribe(res => {
+        console.log(res);
+      });
+    }
+
+  }
+
+  private loadSprint() {
+    this.sprintService.getSprint(this.sprintId).subscribe(sprint => {
+      this.sprint = sprint;
+      this.title = 'Modifier le sprint';
+      this.addSprint = this.formBuilder.group({
+        title: [this.sprint.title, Validators.required],
+        startDate: [this.sprint.startDate, Validators.required],
+        endDate: [this.sprint.endDate, Validators.required]
+      });
+      this.update = true;
+    },
+      error => {
+      console.log(error);
+      });
   }
 }

@@ -11,7 +11,7 @@ import {
   MatTableModule,
   MatToolbarModule,
   MatIconModule,
-  MatButtonModule
+  MatButtonModule, MatDatepickerModule, MatNativeDateModule
 } from '@angular/material';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -24,6 +24,7 @@ import { AddIssueComponent } from './components/issue/add-issue/add-issue.compon
 import { UpdateIssueComponent } from './components/issue/update-issue/update-issue.component';
 import { AddSprintComponent } from './components/sprint/add-sprint/add-sprint.component';
 import { ProjectOverviewComponent } from './components/project/project-overview/project-overview.component';
+import { UpdateSprintComponent } from './components/sprint/update-sprint/update-sprint.component';
 
 @NgModule({
   exports: [
@@ -33,8 +34,10 @@ import { ProjectOverviewComponent } from './components/project/project-overview/
     MatIconModule,
     MatButtonModule,
     MatTableModule,
+    MatNativeDateModule,
     MatProgressSpinnerModule,
     MatFormFieldModule,
+    MatDatepickerModule
   ],
   imports: [],
   declarations: []
@@ -49,7 +52,8 @@ export class MaterialModule {}
     UpdateIssueComponent,
     AddSprintComponent,
     AddProjectComponent,
-    ProjectOverviewComponent
+    ProjectOverviewComponent,
+    UpdateSprintComponent
   ],
   imports: [
     BrowserAnimationsModule,
