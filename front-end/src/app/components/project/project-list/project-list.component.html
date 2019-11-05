@@ -1,7 +1,7 @@
 
 <div class="header">
-    <h2>Projets ({{ projects.length }})</h2>
-    <a [routerLink]="['/addproject']" mat-raised-button color="primary">
+    <h2>Projets ({{ nbProject }})</h2>
+    <a (click)="addProject()" mat-raised-button color="primary">
         <mat-icon>add</mat-icon> Nouveau project
     </a>
 </div>
@@ -34,10 +34,10 @@
         <ng-container matColumnDef="actions">
             <th mat-header-cell *matHeaderCellDef> Actions </th>
             <td mat-cell *matCellDef="let element">
-                <a [routerLink]="['/updateproject', element.id]" mat-mini-fab mat-raised-button color="primary">
+                <a (click)="updateProject(element._id)" mat-mini-fab mat-raised-button color="primary">
                     <mat-icon>edit</mat-icon>
                 </a>
-                <a [routerLink]="['/deleteproject', element.id]" mat-mini-fab mat-raised-button color="warn">
+                <a (click)="deleteProject(element._id, element.title)" mat-mini-fab mat-raised-button color="warn">
                     <mat-icon>delete</mat-icon>
                 </a>
             </td>

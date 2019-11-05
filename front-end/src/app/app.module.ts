@@ -11,7 +11,13 @@ import {
   MatTableModule,
   MatToolbarModule,
   MatIconModule,
-  MatButtonModule, MatDatepickerModule, MatNativeDateModule, MatPaginatorModule, MatExpansionModule, MatDialogModule, MatSnackBarModule
+  MatButtonModule,
+  MatDatepickerModule,
+  MatNativeDateModule,
+  MatPaginatorModule,
+  MatExpansionModule,
+  MatDialogModule,
+  MatSnackBarModule
 } from '@angular/material';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -26,6 +32,7 @@ import { AddSprintComponent } from './components/sprint/add-sprint/add-sprint.co
 import { ProjectOverviewComponent } from './components/project/project-overview/project-overview.component';
 import { UpdateSprintComponent } from './components/sprint/update-sprint/update-sprint.component';
 import { DeleteDialogComponent } from './components/utils/delete-dialog/delete-dialog.component';
+import { UpdateProjectComponent } from './components/project/update-project/update-project.component';
 
 @NgModule({
   exports: [
@@ -58,7 +65,8 @@ export class MaterialModule {}
     AddProjectComponent,
     ProjectOverviewComponent,
     UpdateSprintComponent,
-    DeleteDialogComponent
+    DeleteDialogComponent,
+    UpdateProjectComponent
   ],
   imports: [
     BrowserAnimationsModule,

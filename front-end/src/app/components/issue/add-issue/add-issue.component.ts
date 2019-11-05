@@ -1,10 +1,10 @@
-import {Component, Inject, Input, NgZone, OnInit} from '@angular/core';
+import { Component, Inject, Input, NgZone, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Issue } from '../../../models/issue';
 import { IssueService } from '../../../services/issue.service';
-import {Router} from '@angular/router';
-import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
-import {UpdateIssueComponent} from '../update-issue/update-issue.component';
+import { Router } from '@angular/router';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
+import { UpdateIssueComponent } from '../update-issue/update-issue.component';
 
 @Component({
   selector: 'app-add-issue',
@@ -15,13 +15,15 @@ import {UpdateIssueComponent} from '../update-issue/update-issue.component';
 export class AddIssueComponent implements OnInit {
   addIssue: FormGroup;
   issue: Issue;
-  constructor(private formBuilder: FormBuilder,
-              private router: Router,
-              private ngZone: NgZone,
-              public dialogRef: MatDialogRef<AddIssueComponent>,
-              public dialogRefUpdate: MatDialogRef<UpdateIssueComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: {projectId: null},
-              private issueService: IssueService) { }
+  constructor(
+    private formBuilder: FormBuilder,
+    private router: Router,
+    private ngZone: NgZone,
+    public dialogRef: MatDialogRef<AddIssueComponent>,
+    public dialogRefUpdate: MatDialogRef<UpdateIssueComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: {projectId: null},
+    private issueService: IssueService
+  ) { }
   priorities = [
     'HIGH', 'MEDIUM', 'LOW'
   ];
@@ -65,7 +67,6 @@ export class AddIssueComponent implements OnInit {
         }
       );
     } else {
-
       const newIssue = new Issue(this.projectId, null, description, state, priority, difficulty);
       console.log(newIssue);
       console.log('Add');
