@@ -1,6 +1,3 @@
-import { Issue } from '../resources/issue/issue.model'
-import { getIssuesByProject } from '../resources/issue/issue.controllers'
-
 export const getOne = model => async (req, res) => {
   try {
     const doc = await model

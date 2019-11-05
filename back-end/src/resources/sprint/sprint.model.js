@@ -1,10 +1,6 @@
+import { getSeq } from '../../utils/counter.model'
 const mongoose = require('mongoose')
 
-const CounterSchema = mongoose.Schema({
-  _id: { type: String, required: true },
-  seq: { type: Number, default: 0 }
-})
-export const counter = mongoose.model('counters', CounterSchema)
 
 const SprintSchema = new mongoose.Schema({
   projectId: {
@@ -29,13 +25,7 @@ const SprintSchema = new mongoose.Schema({
     required: true
   }
 })
-async function getSeq(name) {
-  const req = await counter
-    .findOneAndUpdate({ _id: name }, { $inc: { seq: 1 } }, { new: true })
-    .lean()
-    .exec()
-  return req.seq
-}
+
 SprintSchema.pre('save', function(next) {
   console.log('pre save ')
   const st = this

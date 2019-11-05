@@ -1,4 +1,4 @@
-import { counter } from '../sprint/sprint.model'
+import { getSeq } from '../../utils/counter.model'
 
 const mongoose = require('mongoose')
 
@@ -38,13 +38,6 @@ const IssueSchema = new mongoose.Schema(
   { timestamps: true }
 )
 
-async function getSeq(name) {
-  const req = await counter
-    .findOneAndUpdate({ _id: name }, { $inc: { seq: 1 } }, { new: true })
-    .lean()
-    .exec()
-  return req.seq
-}
 IssueSchema.pre('save', function(next) {
   console.log('pre save ')
   const st = this
