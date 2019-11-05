@@ -71,16 +71,22 @@ export class ProjectOverviewComponent implements OnInit {
   addIssue() {
     const diagoFormIssue = this.dialog.open(AddIssueComponent, {width: '800px', data: {projectId: this.projectId} });
     diagoFormIssue.afterClosed().subscribe(result => {
-      this.snackBar.open('✅ Ajout issue effectuée avec succès !', 'Fermer', this.configSnackBar);
-      this.refreshIssuesBacklog();
+      if ( result) {
+        this.snackBar.open('✅ Ajout issue effectuée avec succès !', 'Fermer', this.configSnackBar);
+        this.refreshIssuesBacklog();
+      }
+
     });
   }
 
   updateIssue(idIssue) {
     const diagoFormIssue = this.dialog.open(UpdateIssueComponent, {width: '800px', data: {issueId: idIssue} });
     diagoFormIssue.afterClosed().subscribe(result => {
-      this.snackBar.open('✅ Modification effectuée avec succès !', 'Fermer', this.configSnackBar);
-      this.refreshIssuesBacklog();
+      if (result) {
+        this.snackBar.open('✅ Modification effectuée avec succès !', 'Fermer', this.configSnackBar);
+        this.refreshIssuesBacklog();
+      }
+
     });
   }
 
