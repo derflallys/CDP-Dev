@@ -17,6 +17,7 @@ import {
 import { AddIssueComponent } from '../../issue/add-issue/add-issue.component';
 import { UpdateIssueComponent } from '../../issue/update-issue/update-issue.component';
 import { DeleteDialogComponent } from '../../utils/delete-dialog/delete-dialog.component';
+import {AddSprintComponent} from '../../sprint/add-sprint/add-sprint.component';
 
 @Component({
   selector: 'app-project-overview',
@@ -32,6 +33,7 @@ export class ProjectOverviewComponent implements OnInit {
   projectId;
   displayedColumns: string[] = ['ID', 'Description', 'Priorité', 'Etat', 'actions'];
   configSnackBar = new MatSnackBarConfig();
+  allIssues: Issue[] = [];
 
   constructor(
     private projectService: ProjectService,
@@ -53,9 +55,11 @@ export class ProjectOverviewComponent implements OnInit {
       this.title = this.project.title;
     });
     this.sprintService.getSprintByProject(this.projectId).subscribe( sprints => {
-      this.sprints = sprints;
+      this.sprints = sprints
+      console.log(this.sprints);
     });
     this.issueService.getIssueByProject(this.projectId).subscribe(issues => {
+      this.allIssues = issues;
       this.issues = new MatTableDataSource(issues);
       this.issues.paginator = this.paginator;
     });
@@ -79,6 +83,22 @@ export class ProjectOverviewComponent implements OnInit {
     });
   }
 
+  getIssuesBySprint(idSprint) {
+     return  this.allIssues.filter( issue => issue.sprintId === idSprint);
+  }
+
+
+
+  addsprint() {
+    const diagoFormSprint = this.dialog.open(AddSprintComponent, {width: '800px', data: {projectId: this.projectId} });
+    diagoFormSprint.afterClosed().subscribe(result => {
+      if ( result) {
+        this.snackBar.open('✅ Ajout sprint effectuée avec succès !', 'Fermer', this.configSnackBar);
+      }
+
+    });
+  }
+
   updateIssue(idIssue) {
     const diagoFormIssue = this.dialog.open(UpdateIssueComponent, {width: '800px', data: {issueId: idIssue} });
     diagoFormIssue.afterClosed().subscribe(result => {
@@ -97,6 +117,9 @@ export class ProjectOverviewComponent implements OnInit {
       this.paginator._changePageSize(this.paginator.pageSize);
     });
   }
+
+
+
 
   deleteIssue(idIssue, numberIssue) {
     const dialogConfig = new MatDialogConfig();
