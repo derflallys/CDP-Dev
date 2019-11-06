@@ -22,12 +22,11 @@ export class ProjectService {
     return this.http.get<Project[]>(this.projectUrl);
   }
 
-  addProject(project: Project) {
-    console.log(this.projectUrl)
-    return this.http.post(this.projectUrl, project, httpOptions);
+  addProject(project: Project): Observable<Project> {
+    return this.http.post<Project>(this.projectUrl, project, httpOptions);
   }
 
-  deleteProject(projectId: number) {
+  deleteProject(projectId: string) {
     return this.http.delete<Response>(this.projectUrl + '/' + projectId);
   }
 
@@ -35,7 +34,7 @@ export class ProjectService {
     return this.http.get<Project>(this.projectUrl + '/' + projectId);
   }
 
-  updateProject(project: Project, id: number) {
+  updateProject(project: Project, id: string) {
     return this.http.put<Response>(this.projectUrl + '/' + id, project, httpOptions);
   }
 }

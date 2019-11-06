@@ -5,7 +5,7 @@ import {
   MatDialogConfig,
   MatPaginator,
   MatSnackBar,
-  MatSnackBarConfig,
+  MatSnackBarConfig, MatSort,
   MatTableDataSource
 } from '@angular/material';
 import { Project } from '../../../models/project';
@@ -21,6 +21,7 @@ import { DeleteDialogComponent } from '../../utils/delete-dialog/delete-dialog.c
 })
 export class ProjectListComponent implements OnInit {
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
+  @ViewChild(MatSort, {static: true}) sort: MatSort;
   projects: MatTableDataSource<Project> = new MatTableDataSource<Project>();
 
   nbProject: Number
@@ -42,8 +43,10 @@ export class ProjectListComponent implements OnInit {
   ngOnInit() {
     this.projectService.getProjects().subscribe(res => {
       this.projects = new MatTableDataSource(res);
-      this.nbProject = res.length
+      this.nbProject = res.length;
       this.projects.paginator = this.paginator;
+      this.projects.sort = this.sort;
+
     });
   }
 
@@ -101,6 +104,7 @@ export class ProjectListComponent implements OnInit {
     this.projectService.getProjects().subscribe(projects => {
       this.projects = new MatTableDataSource(projects);
       this.projects.paginator = this.paginator;
+      this.projects.sort = this.sort;
       this.paginator._changePageSize(this.paginator.pageSize);
     });
   }

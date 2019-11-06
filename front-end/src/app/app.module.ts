@@ -17,7 +17,7 @@ import {
   MatPaginatorModule,
   MatExpansionModule,
   MatDialogModule,
-  MatSnackBarModule
+  MatSnackBarModule, MatSortModule
 } from '@angular/material';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -48,7 +48,8 @@ import { UpdateProjectComponent } from './components/project/update-project/upda
     MatDatepickerModule,
     MatPaginatorModule,
     MatExpansionModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatSortModule
   ],
   imports: [],
   declarations: []

@@ -4,6 +4,8 @@ import { Project } from '../../../models/project';
 import { ProjectService } from '../../../services/project.service';
 import { UpdateProjectComponent } from '../update-project/update-project.component';
 import { MatDialogRef } from '@angular/material';
+import {Sprint} from '../../../models/sprint';
+import {SprintService} from '../../../services/sprint.service';
 
 @Component({
   selector: 'app-add-project',
@@ -20,7 +22,7 @@ export class AddProjectComponent implements OnInit {
   project: Project;
 
   @Input() projectId = null;
-  
+
   update = false;
 
   URL_REGEX = /^(https?:\/\/)([\da-z.-]+)\.([a-z.]{2,6})\/?([\w .-]*)*(\.git)$/g;
@@ -29,7 +31,8 @@ export class AddProjectComponent implements OnInit {
     private formBuilder: FormBuilder,
     public dialogRef: MatDialogRef<AddProjectComponent>,
     public dialogRefUpdate: MatDialogRef<UpdateProjectComponent>,
-    private projectService: ProjectService
+    private projectService: ProjectService,
+    private sprintService: SprintService
   ) { }
 
   ngOnInit() {
@@ -66,12 +69,22 @@ export class AddProjectComponent implements OnInit {
     } else {
       const newProject = new Project(null, title, duration, description, url, refspecifying);
       console.log(newProject);
-      this.projectService.addProject(newProject).subscribe(res => {
-        console.log(res);
+      this.projectService.addProject(newProject).subscribe(project => {
+        this.projectService.getProjects().subscribe(projets => {
+          project  = projets[projets.length - 1];
+          const endDate = new Date();
+          console.log(new Date(project.createdAt));
+          endDate.setDate(new Date(project.createdAt).getDate() + 10);
+          const sprint0 = new Sprint(null, 0, project._id, 'Sprint 0', project.createdAt.toString(), endDate.toString());
+          this.sprintService.addSprint(sprint0).subscribe(sprint => {
+            console.log(sprint);
+          });
+        });
         this.dialogRef.close();
       });
     }
   }
+
 
   private loadProject() {
     this.projectService.getProject(this.projectId).subscribe(res => {
