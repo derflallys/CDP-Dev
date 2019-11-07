@@ -6,32 +6,32 @@
 |----|----|----|----|----|----|
 | 0.1 |* | 0.4 | 0.5 | DONE | Eudes |
 | 0.2 |* | - | 0.5 | DONE | Oumayma |
-| 0.3 |* | 0.2 | 0.5 | DOING | Eudes |
+| 0.3 |* | 0.2 | 0.5 | DONE | Eudes |
 | 0.4 |* | - | 0.5 | DONE | Alfred |
 | 0.5 |* | - | 1.5 | TODO | Alfred |
 | 1 |* | 0.2 | 0.5 | DONE | Oumayma |
 | 2 |* | 0.2 | 0.5 | DONE | Oumayma |
-| 3.1 |US14 | 1, 2 | 0.5 | TODO | Eudes |
-| 3.2 |US14 | 0.1 | 0.5 | TODO | Eudes |
-| 4.1 |US4 | 1, 2 | 0.5 | TODO | Eudes |
-| 4.2 |US4 | 0.1 | 0.5 | TODO | Eudes |
-| 5.1 |US4 | 1, 2 | 0.5 | TODO | Eudes |
-| 5.2 |US4 | 0.1 | 0.5 | TODO | Eudes |
-| 6.1 |US4 | 1, 2 | 0.5 | TODO | Eudes |
-| 6.2 |US4 | 0.1 | 1 | TODO | Eudes |
-| 7.1 | US15 | 8.2,9.2,10.2,11.2,12.2,13.2,5.2,6.2 | 1.5 | TODO | x |
-| 8.1 | US9 | 1, 2 | 0.5 | TODO | Alfred |
-| 8.2 | US9 | 0.1 | 0.5 | TODO | Alfred |
-| 9.1 | US9 | 1,2 | 0.5 | TODO | Alfred |
-| 9.2 |US9 | 0.1 | 0.5 | TODO | Alfred |
-| 10.1 |US9 | 1, 2 | 0.5 | TODO | Alfred |
-| 10.2 |US9 | 0.1 | 0.5 | TODO | Alfred |
-| 11.1 |US7 | 1, 2 | 0.5 | TODO | x |
-| 11.2 |US7 | 0.1 | 0.5 | TODO | x |
-| 12.1 |US7 | 1, 2 | 0.5 | TODO | x |
-| 12.2 |US7 | 0.1 | 0.5 | TODO | x |
-| 13.1 |US7 | 1, 2 | 0.5 | TODO | x |
-| 13.2 |US7 | 0.1 | 1 | TODO | x |
+| 3.1 |US14 | 1, 2 | 0.5 | DONE | Eudes |
+| 3.2 |US14 | 0.1 | 0.5 | DONE | Eudes |
+| 4.1 |US4 | 1, 2 | 0.5 | DONE | Eudes |
+| 4.2 |US4 | 0.1 | 0.5 | DONE | Eudes |
+| 5.1 |US4 | 1, 2 | 0.5 | DONE | Eudes |
+| 5.2 |US4 | 0.1 | 0.5 | DONE | Eudes |
+| 6.1 |US4 | 1, 2 | 0.5 | DONE | Eudes |
+| 6.2 |US4 | 0.1 | 1 | DONE | Eudes |
+| 7.1 | US15 | 8.2,9.2,10.2,11.2,12.2,13.2,5.2,6.2 | 1.5 | DONE | * |
+| 8.1 | US9 | 1, 2 | 0.5 | DONE | Alfred |
+| 8.2 | US9 | 0.1 | 0.5 | DONE | Alfred |
+| 9.1 | US9 | 1,2 | 0.5 | DONE | Alfred |
+| 9.2 |US9 | 0.1 | 0.5 | DONE | Alfred |
+| 10.1 |US9 | 1, 2 | 0.5 | DONE | Alfred |
+| 10.2 |US9 | 0.1 | 0.5 | DONE | Alfred |
+| 11.1 |US7 | 1, 2 | 0.5 | DONE | Oumayma |
+| 11.2 |US7 | 0.1 | 0.5 | DONE | Oumayma |
+| 12.1 |US7 | 1, 2 | 0.5 | DONE | Oumayma |
+| 12.2 |US7 | 0.1 | 0.5 | DONE | Oumayma |
+| 13.1 |US7 | 1, 2 | 0.5 | DONE | Oumayma |
+| 13.2 |US7 | 0.1 | 1 | DONE | Oumayma |
 
 ---
 

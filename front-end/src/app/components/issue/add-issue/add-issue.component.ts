@@ -16,19 +16,19 @@ export class AddIssueComponent implements OnInit {
 
   addIssue: FormGroup;
   issue: Issue;
+  error = false;
   close = true;
-
   @Input() issueId = null;
   title = 'Ajouter une issue';
   update = false;
   projectId = this.data.projectId;
-
   priorities = [
     'HIGH', 'MEDIUM', 'LOW'
   ];
   states = [
     'TODO', 'DOING', 'DONE'
   ];
+
 
   constructor(
     private formBuilder: FormBuilder,
@@ -65,10 +65,12 @@ export class AddIssueComponent implements OnInit {
       this.issueService.updateIssue(updateIssue, this.issue._id).subscribe( res => {
         console.log(res);
         console.log('Update');
-        this.dialogRefUpdate.close();
+        this.dialogRefUpdate.close(this.error);
         this.ngZone.run(() => this.router.navigate(['project/' + this.issue.projectId]));
       },
         error => {
+          this.error = true;
+          this.dialogRefUpdate.close(this.error);
           console.log(error);
         }
       );
@@ -78,9 +80,15 @@ export class AddIssueComponent implements OnInit {
       console.log('Add');
       this.issueService.addIssue(newIssue).subscribe(res => {
         console.log(res);
-        this.dialogRef.close();
+        this.dialogRef.close(this.error);
         this.ngZone.run(() => this.router.navigate(['project/' + this.projectId]));
-      });
+      }
+      ,
+        error => {
+          this.error = true;
+          this.dialogRef.close(this.error);
+          console.log(error);
+        });
     }
   }
 
@@ -101,5 +109,4 @@ export class AddIssueComponent implements OnInit {
       }
     );
   }
-
 }

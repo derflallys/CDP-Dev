@@ -82,20 +82,37 @@ export class ProjectOverviewComponent implements OnInit {
 
   addIssue() {
     const diagoFormIssue = this.dialog.open(AddIssueComponent, {width: '800px', data: {projectId: this.projectId} });
-    diagoFormIssue.afterClosed().subscribe(result => {
-      console.log(result);
-      this.snackBar.open('✅ Ajout issue effectuée avec succès !', 'Fermer', this.configSnackBar);
-      this.refreshIssuesBacklog();
+    diagoFormIssue.afterClosed().subscribe(error => {
+      console.log(error);
+      if ( error === false) {
+        this.snackBar.open('✅ Ajout issue effectuée avec succès !', 'Fermer', this.configSnackBar);
+        this.refreshIssuesBacklog();
+      } else {
+        if (error) {
+          this.snackBar.open('❌ Une erreur s\'est produite lors de l\'ajout !', 'Fermer', this.configSnackBar);
+        }
+
+      }
+
+
+
     });
   }
 
   updateIssue(idIssue) {
     const diagoFormIssue = this.dialog.open(UpdateIssueComponent, {width: '800px', data: {issueId: idIssue} });
-    diagoFormIssue.afterClosed().subscribe(result => {
-        console.log(result);
-        this.snackBar.open('✅ Modification effectuée avec succès !', 'Fermer', this.configSnackBar);
-        this.refreshIssuesBacklog();
-        this.refreshSprints();
+    diagoFormIssue.afterClosed().subscribe(error => {
+        console.log(error);
+        if (error === false) {
+          this.snackBar.open('✅ Modification effectuée avec succès !', 'Fermer', this.configSnackBar);
+          this.refreshIssuesBacklog();
+          this.refreshSprints();
+        } else {
+          if (error) {
+            this.snackBar.open('❌ Une erreur s\'est produite lors de la modification !', 'Fermer', this.configSnackBar);
+          }
+        }
+
     });
   }
 
@@ -110,9 +127,16 @@ export class ProjectOverviewComponent implements OnInit {
 
   addSprint() {
     const diagoFormSprint = this.dialog.open(AddSprintComponent, {width: '800px', data: {projectId: this.projectId} });
-    diagoFormSprint.afterClosed().subscribe(result => {
+    diagoFormSprint.afterClosed().subscribe(error => {
+      if (error === false) {
         this.snackBar.open('✅ Ajout sprint effectuée avec succès !', 'Fermer', this.configSnackBar);
         this.refreshSprints();
+      } else {
+        if (error) {
+          this.snackBar.open('❌ Une erreur s\'est produite lors de l\'ajout !', 'Fermer', this.configSnackBar);
+        }
+      }
+
     });
   }
 
@@ -170,9 +194,16 @@ export class ProjectOverviewComponent implements OnInit {
 
   updateSprint() {
     const diagoFormSprint = this.dialog.open(UpdateSprintComponent, {width: '800px', data: {idSprint: this.idSelectedSprint} });
-    diagoFormSprint.afterClosed().subscribe(() => {
-      this.snackBar.open('✅ Modification effectuée avec succès !', 'Fermer', this.configSnackBar);
-      this.refreshSprints();
+    diagoFormSprint.afterClosed().subscribe(error => {
+      if ( error === false) {
+        this.snackBar.open('✅ Modification effectuée avec succès !', 'Fermer', this.configSnackBar);
+        this.refreshSprints();
+      } else {
+        if (error) {
+          this.snackBar.open('❌ Une erreur s\'est produite lors de la modification !', 'Fermer', this.configSnackBar);
+        }
+      }
+
     });
   }
 

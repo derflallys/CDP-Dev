@@ -22,6 +22,7 @@ export class AddSprintComponent implements OnInit {
    update = false;
   @Input() sprintId = null;
   projectId = null;
+  error = false;
   states = [
     'To Start', 'In progress', 'Completed'
   ];
@@ -65,10 +66,12 @@ export class AddSprintComponent implements OnInit {
       this.sprintService.updateSprint(updateSprint, this.sprint._id).subscribe( res => {
         console.log(res);
         console.log('Update');
-        this.dialogRefUpdate.close();
+        this.dialogRefUpdate.close(this.error);
       }
         ,
         error => {
+          this.error = true;
+          this.dialogRefUpdate.close(this.error);
           console.log(error);
         }
       );
@@ -77,8 +80,14 @@ export class AddSprintComponent implements OnInit {
       console.log(newSprint);
       this.sprintService.addSprint(newSprint).subscribe(res => {
         console.log(res);
-        this.dialogRef.close();
-      });
+        this.dialogRef.close(this.error);
+      }
+        ,
+        error => {
+          this.error = true;
+          this.dialogRef.close(this.error);
+          console.log(error);
+        });
     }
 
   }
@@ -98,5 +107,9 @@ export class AddSprintComponent implements OnInit {
       error => {
       console.log(error);
       });
+  }
+
+  cancel() {
+    this.dialogRef.close(undefined);
   }
 }
