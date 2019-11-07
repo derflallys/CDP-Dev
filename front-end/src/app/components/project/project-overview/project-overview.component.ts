@@ -18,8 +18,7 @@ import { AddIssueComponent } from '../../issue/add-issue/add-issue.component';
 import { UpdateIssueComponent } from '../../issue/update-issue/update-issue.component';
 import { DeleteDialogComponent } from '../../utils/delete-dialog/delete-dialog.component';
 import {AddSprintComponent} from '../../sprint/add-sprint/add-sprint.component';
-import {CdkDragDrop, CdkDropList, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
-import clonedeep from 'lodash.clonedeep';
+
 import {UpdateSprintComponent} from '../../sprint/update-sprint/update-sprint.component';
 @Component({
   selector: 'app-project-overview',
@@ -83,11 +82,18 @@ export class ProjectOverviewComponent implements OnInit {
 
   addIssue() {
     const diagoFormIssue = this.dialog.open(AddIssueComponent, {width: '800px', data: {projectId: this.projectId} });
-    diagoFormIssue.afterClosed().subscribe(result => {
-      console.log(result);
+    diagoFormIssue.afterClosed().subscribe(error => {
+      console.log(error);
+      if ( error === false) {
+        this.snackBar.open('✅ Ajout issue effectuée avec succès !', 'Fermer', this.configSnackBar);
+        this.refreshIssuesBacklog();
+      } else {
+        if (error) {
+          this.snackBar.open('❌ Une erreur s\'est produite lors de l\'ajout !', 'Fermer', this.configSnackBar);
+        }
 
-      this.snackBar.open('✅ Ajout issue effectuée avec succès !', 'Fermer', this.configSnackBar);
-      this.refreshIssuesBacklog();
+      }
+
 
 
     });
@@ -95,11 +101,17 @@ export class ProjectOverviewComponent implements OnInit {
 
   updateIssue(idIssue) {
     const diagoFormIssue = this.dialog.open(UpdateIssueComponent, {width: '800px', data: {issueId: idIssue} });
-    diagoFormIssue.afterClosed().subscribe(result => {
-        console.log(result);
-        this.snackBar.open('✅ Modification effectuée avec succès !', 'Fermer', this.configSnackBar);
-        this.refreshIssuesBacklog();
-        this.refreshSprints();
+    diagoFormIssue.afterClosed().subscribe(error => {
+        console.log(error);
+        if (error === false) {
+          this.snackBar.open('✅ Modification effectuée avec succès !', 'Fermer', this.configSnackBar);
+          this.refreshIssuesBacklog();
+          this.refreshSprints();
+        } else {
+          if (error) {
+            this.snackBar.open('❌ Une erreur s\'est produite lors de la modification !', 'Fermer', this.configSnackBar);
+          }
+        }
 
     });
   }
