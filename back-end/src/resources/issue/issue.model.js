@@ -1,5 +1,4 @@
 import { getSeq } from '../../utils/counter.model'
-
 const mongoose = require('mongoose')
 
 const IssueSchema = new mongoose.Schema(
@@ -17,7 +16,9 @@ const IssueSchema = new mongoose.Schema(
       required: true,
       maxlength: 750
     },
-    issueId: Number,
+    issueId: {
+      type: Number
+    },
     state: {
       type: String,
       required: true,
@@ -42,8 +43,7 @@ IssueSchema.pre('save', function(next) {
   console.log('pre save ')
   const st = this
   const seq = getSeq('Issue')
-  // eslint-disable-next-line promise/catch-or-return,no-return-assign
-  seq.then(res => {
+  return seq.then(res => {
     st.issueId = res
     next()
   })

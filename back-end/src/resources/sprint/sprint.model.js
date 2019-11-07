@@ -1,7 +1,6 @@
 import { getSeq } from '../../utils/counter.model'
 const mongoose = require('mongoose')
 
-
 const SprintSchema = new mongoose.Schema({
   projectId: {
     type: mongoose.Schema.Types.ObjectId,
@@ -32,11 +31,10 @@ const SprintSchema = new mongoose.Schema({
 })
 
 SprintSchema.pre('save', function(next) {
-  console.log('pre save ')
+  console.log('pre save')
   const st = this
   const seq = getSeq('Sprint')
-  // eslint-disable-next-line promise/catch-or-return,no-return-assign
-  seq.then(res => {
+  return seq.then(res => {
     st.sprintId = res
     next()
   })
