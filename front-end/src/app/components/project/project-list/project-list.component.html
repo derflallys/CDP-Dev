@@ -1,16 +1,18 @@
 
 <div class="header">
-    <h2>Projets ({{ nbProject }})</h2>
-    <a (click)="addProject()" mat-raised-button color="primary">
-        <mat-icon>add</mat-icon> Nouveau project
-    </a>
+    <h2>
+      <span matBadge="{{ nbProject }}" matBadgeOverlap="false">Liste des Projets</span>
+    </h2>
 </div>
 
 <div class="main-frame">
-    <mat-form-field class="filter" >
-      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
-    </mat-form-field>
-    <table mat-table [dataSource]="projects"  matSort matSortStart="desc"  class="mat-elevation-z8">
+    <div class="row">
+      <mat-form-field class="filter" >
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+      </mat-form-field>
+      <button mat-raised-button class="button-add" color="primary" (click)="addProject()"><mat-icon>add</mat-icon> Ajouter un Projet </button>
+    </div>
+      <table mat-table [dataSource]="projects"  matSort matSortStart="desc"  class="mat-elevation-z8">
         <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         <ng-container matColumnDef="createdAt">

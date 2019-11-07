@@ -8,6 +8,13 @@
     </mat-form-field>
 
     <mat-form-field class="input-field">
+      <mat-label>Etat</mat-label>
+      <mat-select value="To Start" formControlName="state">
+        <mat-option *ngFor="let state of states" [value]="state">{{ state }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="input-field">
       <input matInput [matDatepicker]="picker1" placeholder="Date de début" formControlName="startDate">
       <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
       <mat-datepicker #picker1></mat-datepicker>

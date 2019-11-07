@@ -15,6 +15,7 @@ import { UpdateIssueComponent } from '../update-issue/update-issue.component';
 export class AddIssueComponent implements OnInit {
   addIssue: FormGroup;
   issue: Issue;
+  close = true;
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,

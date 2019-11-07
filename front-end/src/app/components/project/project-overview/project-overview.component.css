@@ -6,6 +6,27 @@
   align-content: flex-start;
   margin-left: 2%;
 }
+.sprints{
+  width: 32%;
+  align-content: flex-start;
+  justify-content: flex-start;
+}
+
+.mat-expansion-panel-header-title, .mat-expansion-panel-header-description {
+  flex-basis: 0;
+}
+
+.mat-expansion-panel-header-description {
+  justify-content: space-between;
+  align-items: center;
+}
+
+.selectSprint{
+  margin-left: 6%;
+  width: 30%;
+  align-content: center;
+  justify-content: center;
+}
 table {
   width: 100%;
   text-align: center !important;
@@ -13,12 +34,22 @@ table {
 .mat-header-cell {
   text-align: center;
 }
+
 .button-add{
   text-align: center;
   width: 20%;
   height: 10%;
   margin-left: 2%;
   align-content: flex-end;
+}
+
+.sprints-add{
+  align-content: flex-end;
+  justify-content: flex-end;
+  margin-left: 10%;
+}
+.button-sprint{
+  text-align: end;
 }
 .row{
   display: flex;
@@ -30,6 +61,22 @@ table {
 .mat-column-Description {
   width: 50% !important;
   text-align: justify;
+}
+
+.cdk-drag-preview {
+  box-sizing: border-box;
+  border-radius: 4px;
+  box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
+  0 8px 10px 1px rgba(0, 0, 0, 0.14),
+  0 3px 14px 2px rgba(0, 0, 0, 0.12);
+}
+
+.cdk-drag-placeholder {
+  opacity: 0;
+}
+
+.cdk-drag-animating {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
 }
 
 

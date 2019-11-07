@@ -2,8 +2,21 @@ table {
     width: 100%;
     text-align: center !important;
 }
+.button-add{
+  text-align: center;
+  width: 20%;
+  height: 10%;
+  margin-left: 2%;
+  align-content: flex-end;
+}
+.row{
+  display: flex;
+  flex-wrap: nowrap;
+}
 .filter{
   width: 100%;
+  align-content: flex-start;
+  margin-left: 2%;
 }
 .main-frame{
   width: 80% !important;

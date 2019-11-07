@@ -1,25 +1,48 @@
 
 <div class="header">
-    <h2>Projet : {{ title }}</h2>
+    <h2>Détail du Projet {{ title }}</h2>
 </div>
+<div class="main-frame row">
+  <h4 class="filter sprints">
+    <span matBadge="{{ sprints.length }}" matBadgeOverlap="false">Nombre de Sprint</span>
+  </h4>
+  <mat-form-field class="selectSprint">
+    <mat-label>Afficher un sprint</mat-label>
+    <mat-select [(value)]="idselectedSprint" (selectionChange)="getSprintSelected()">
+      <mat-option *ngFor="let sprint of sprints" value="{{sprint._id}}">{{sprint.title }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+  <button mat-raised-button class="button-add sprints-add"   color="primary" (click)="addSprint()"> Ajouter un Sprint </button>
+</div>
+
 
 <div class="main-frame">
     <div class="contain-project">
       <div class="box" >
-        <div class="box sprint"  *ngFor="let sprint of sprints"  >
+        <div class="box sprint" *ngIf="sprintSelected" >
           <mat-accordion>
             <mat-expansion-panel [expanded]="true">
               <mat-expansion-panel-header>
+                <button  mat-mini-fab matTooltip="Supprimer le Sprint"  color="warn">
+                  <mat-icon (click)="deleteSprint()">delete</mat-icon>
+                </button>
                 <mat-panel-title style="font-weight: bold">
-                 {{sprint.title}}
+                 {{sprintSelected.title}} {{sprintSelected.sprintId}}
                 </mat-panel-title>
 
                 <mat-panel-description>
-                  Liste des issues du {{sprint.title}}
+                  Liste des issues du {{sprintSelected.title}}
+                  <button  mat-mini-fab matTooltip="Editer le Sprint"  color="primary">
+                    <mat-icon (click)="updateSprint()">edit</mat-icon>
+                  </button>
+
+
+
                 </mat-panel-description>
               </mat-expansion-panel-header>
               <div class="main-frame">
-                <table mat-table [dataSource]="getIssuesBySprint(sprint._id)"  class="mat-elevation-z8 ">
+                <table mat-table [dataSource]="getIssuesBySprint(idselectedSprint)" class="mat-elevation-z8 " cdkDropList #table2 #list2="cdkDropList" [cdkDropListData]="getIssuesBySprint(idselectedSprint)"
+                       [cdkDropListConnectedTo]="[backlog]" (cdkDropListDropped)="drop($event)" id="table2">
                   <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
                   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
                   <ng-container matColumnDef="ID">
@@ -80,9 +103,11 @@
                 </div>
 
                 <div class="main-frame">
-                    <table mat-table [dataSource]="issues"  class="mat-elevation-z8 ">
+                    <table mat-table [dataSource]="issues"  class="mat-elevation-z8 "   cdkDropList #table1 #baclog="cdkDropList"
+                           [cdkDropListData]="issues" [cdkDropListConnectedTo]="[list2]"
+                           (cdkDropListDropped)="drop($event)" id="baclog">
                       <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
-                      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+                      <tr mat-row *matRowDef="let row; columns: displayedColumns;" cdkDrag></tr>
                       <ng-container matColumnDef="ID">
                         <th mat-header-cell *matHeaderCellDef> ID </th>
                         <td mat-cell *matCellDef="let element"> {{ element.issueId  }} </td>
@@ -104,10 +129,10 @@
                       <ng-container matColumnDef="actions">
                         <th mat-header-cell *matHeaderCellDef> Actions </th>
                         <td mat-cell *matCellDef="let element">
-                          <a (click)="updateIssue(element._id)" mat-mini-fab mat-raised-button color="primary">
+                          <a (click)="updateIssue(element._id)" matTooltip="Editer l'issue " mat-mini-fab mat-raised-button color="primary">
                             <mat-icon>edit</mat-icon>
                           </a>
-                          <a (click)="deleteIssue(element._id,element.issueId)" mat-mini-fab mat-raised-button color="warn">
+                          <a (click)="deleteIssue(element._id,element.issueId)" matTooltip="Supprimer l'issue "  mat-mini-fab mat-raised-button color="warn">
                             <mat-icon>delete</mat-icon>
                           </a>
                         </td>

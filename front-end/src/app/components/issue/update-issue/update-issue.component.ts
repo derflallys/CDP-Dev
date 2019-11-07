@@ -7,7 +7,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
   templateUrl: './update-issue.component.html',
   styleUrls: ['./update-issue.component.css']
 })
-export class UpdateIssueComponent implements OnInit {
+export class UpdateIssueComponent  {
 
   issueId = this.data.issueId;
 
@@ -16,10 +16,5 @@ export class UpdateIssueComponent implements OnInit {
     public dialogRef: MatDialogRef<UpdateIssueComponent>,
     @Inject(MAT_DIALOG_DATA) public data: {issueId: null}
   ) { }
-
-    ngOnInit() {
-      // this.issueId = this.route.snapshot.paramMap.get('id');
-      console.log(this.issueId);
-    }
 
 }

@@ -24,8 +24,8 @@
       <input matInput placeholder="Difficulté" formControlName="difficulty" type="number" [min]="1" >
     </mat-form-field>
 
-    <button mat-raised-button [mat-dialog-close]="true" color="primary" style="margin-right: 8px" type="submit">Enregister l'issue</button>
-    <button mat-raised-button mat-dialog-close color="warn">Annuler</button>
+    <button mat-raised-button  color="primary" style="margin-right: 8px" type="submit" [mat-dialog-close]="close">Enregister l'issue</button>
+    <button mat-raised-button  color="warn">Annuler</button>
 
   </form>
 </div>

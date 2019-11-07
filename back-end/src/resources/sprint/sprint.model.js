@@ -16,6 +16,11 @@ const SprintSchema = new mongoose.Schema({
     required: true,
     maxlength: 150
   },
+  state: {
+    type: String,
+    enum: ['To Start', 'In progress', 'Completed'],
+    default: 'To Start'
+  },
   startDate: {
     type: Date,
     required: true
