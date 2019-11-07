@@ -27,6 +27,8 @@
     "jsonwebtoken": "^8.4.0",
     "lodash": "^4.17.15",
     "mongoose": "^5.7.7",
+    "mongoose-auto-increment": "^5.0.1",
+    "mongoose-sequence": "^5.2.2",
     "morgan": "^1.9.1",
     "validator": "^10.9.0"
   },
