@@ -124,6 +124,7 @@ export class ProjectOverviewComponent implements OnInit {
 
   refreshIssuesBacklog() {
     this.issueService.getIssueByProject(this.projectId).subscribe(issues => {
+      this.allIssues = issues;
       this.issues = new MatTableDataSource(issues.filter( issue => issue.sprintId === null || issue.sprintId === undefined));
       this.issues.paginator = this.paginator;
       this.paginator._changePageSize(this.paginator.pageSize);
@@ -169,6 +170,7 @@ export class ProjectOverviewComponent implements OnInit {
         this.issueService.deleteIssue(idIssue).subscribe(res => {
           this.snackBar.open('✅ Suppression effectuée avec succès !', 'Fermer', this.configSnackBar);
           this.refreshIssuesBacklog();
+          this.refreshSprints();
         },
           error => {
             console.log(error);
@@ -218,7 +220,11 @@ export class ProjectOverviewComponent implements OnInit {
   moveIssueTo(idIssue, to) {
 
     this.snackBar.open('⌛ Déplacement de l\'issue  en cours...', 'Fermer', this.configSnackBar);
+    console.log(this.idselectedSprint);
+    console.log(idIssue);
+    console.log(this.allIssues);
     const issueSelect  =  this.allIssues.filter(issue => issue._id === idIssue)[0];
+    console.log(issueSelect);
     if (to === 'sprint') {
       issueSelect.sprintId = this.idselectedSprint ;
     }
