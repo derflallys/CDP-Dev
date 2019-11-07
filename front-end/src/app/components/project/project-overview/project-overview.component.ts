@@ -69,7 +69,7 @@ export class ProjectOverviewComponent implements OnInit {
     });
     this.issueService.getIssueByProject(this.projectId).subscribe(issues => {
       this.allIssues = issues;
-      this.issues = new MatTableDataSource(issues);
+      this.issues = new MatTableDataSource(issues.filter( issue => issue.sprintId === null || issue.sprintId === undefined));
       this.issues.paginator = this.paginator;
     });
   }
@@ -99,6 +99,7 @@ export class ProjectOverviewComponent implements OnInit {
         console.log(result);
         this.snackBar.open('✅ Modification effectuée avec succès !', 'Fermer', this.configSnackBar);
         this.refreshIssuesBacklog();
+        this.refreshSprints();
 
     });
   }
@@ -121,22 +122,9 @@ export class ProjectOverviewComponent implements OnInit {
     });
   }
 
-  drop(event: CdkDragDrop<string[]>) {
-    if (event.previousContainer === event.container) {
-      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
-    } else {
-      transferArrayItem(event.previousContainer.data,
-        event.container.data,
-        event.previousIndex,
-        event.currentIndex);
-    }
-    this.issues.data = clonedeep(this.issues.data);
-    // this.dataSource2.data = clonedeep(this.dataSource2.data);
-  }
-
   refreshIssuesBacklog() {
     this.issueService.getIssueByProject(this.projectId).subscribe(issues => {
-      this.issues = new MatTableDataSource(issues);
+      this.issues = new MatTableDataSource(issues.filter( issue => issue.sprintId === null || issue.sprintId === undefined));
       this.issues.paginator = this.paginator;
       this.paginator._changePageSize(this.paginator.pageSize);
     });
@@ -146,8 +134,14 @@ export class ProjectOverviewComponent implements OnInit {
     this.sprintService.getSprintByProject(this.projectId).subscribe( sprints => {
         this.sprints = sprints;
         if (this.sprints.length !== 0 ) {
-        this.idselectedSprint = this.sprints[0]._id;
-        this.sprintSelected = this.sprints[0];
+          const sprintGet = sprints.filter(sprint => sprint._id === this.idselectedSprint) ;
+          if (sprintGet.length === 0 ) {
+            this.idselectedSprint = this.sprints[0]._id;
+            this.sprintSelected = this.sprints[0];
+          } else {
+            this.sprintSelected = sprintGet[0];
+          }
+
       } else {
         this.idselectedSprint = null;
         this.sprintSelected = null;
@@ -220,4 +214,28 @@ export class ProjectOverviewComponent implements OnInit {
       }
     });
   }
+
+  moveIssueTo(idIssue, to) {
+
+    this.snackBar.open('⌛ Déplacement de l\'issue  en cours...', 'Fermer', this.configSnackBar);
+    const issueSelect  =  this.allIssues.filter(issue => issue._id === idIssue)[0];
+    if (to === 'sprint') {
+      issueSelect.sprintId = this.idselectedSprint ;
+    }
+    if ( to === 'backlog') {
+      issueSelect.sprintId = null;
+    }
+    this.issueService.updateIssue(issueSelect, idIssue).subscribe(issue => {
+       this.refreshSprints();
+       this.refreshIssuesBacklog();
+       this.snackBar.open('✅ Issue déplacée avec succès !', 'Fermer', this.configSnackBar);
+    },
+      error => {
+        this.snackBar.open('❌ Une erreur s\'est produite lors du deplacement !', 'Fermer', this.configSnackBar);
+
+      }
+    );
+  }
+
+
 }
