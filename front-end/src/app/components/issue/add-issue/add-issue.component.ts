@@ -39,7 +39,7 @@ export class AddIssueComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: {projectId: null},
     private issueService: IssueService
   ) { }
-  
+
   ngOnInit() {
     this.addIssue =  this.formBuilder.group({
       description: ['En tant que', Validators.required],
@@ -108,5 +108,9 @@ export class AddIssueComponent implements OnInit {
         console.log(error);
       }
     );
+  }
+
+  cancel() {
+    this.dialogRef.close(undefined);
   }
 }
