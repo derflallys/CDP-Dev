@@ -11,15 +11,15 @@ import {
   MatDialogConfig,
   MatPaginator,
   MatSnackBar,
-  MatSnackBarConfig, MatTable,
+  MatSnackBarConfig,
   MatTableDataSource
 } from '@angular/material';
 import { AddIssueComponent } from '../../issue/add-issue/add-issue.component';
 import { UpdateIssueComponent } from '../../issue/update-issue/update-issue.component';
 import { DeleteDialogComponent } from '../../utils/delete-dialog/delete-dialog.component';
-import {AddSprintComponent} from '../../sprint/add-sprint/add-sprint.component';
+import { AddSprintComponent } from '../../sprint/add-sprint/add-sprint.component';
+import { UpdateSprintComponent } from '../../sprint/update-sprint/update-sprint.component';
 
-import {UpdateSprintComponent} from '../../sprint/update-sprint/update-sprint.component';
 @Component({
   selector: 'app-project-overview',
   templateUrl: './project-overview.component.html',
@@ -29,14 +29,14 @@ export class ProjectOverviewComponent implements OnInit {
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
   title = '';
-  project: Project ;
-  issues: MatTableDataSource<Issue> ;
+  project: Project;
+  issues: MatTableDataSource<Issue>;
   sprints: Sprint[] = [];
   projectId;
-  displayedColumns: string[] = ['ID', 'Description', 'Priorité', 'Etat', 'actions'];
+  displayedColumns: string[] = ['ID', 'Description', 'Priorité', 'Etat', 'Actions'];
   configSnackBar = new MatSnackBarConfig();
   allIssues: Issue[] = [];
-  idselectedSprint ;
+  idSelectedSprint;
   sprintSelected: Sprint = null;
 
   constructor(
@@ -58,17 +58,17 @@ export class ProjectOverviewComponent implements OnInit {
       this.project = res;
       this.title = this.project.title;
     });
-    this.sprintService.getSprintByProject(this.projectId).subscribe( sprints => {
+    this.sprintService.getSprintByProject(this.projectId).subscribe(sprints => {
       this.sprints = sprints;
       if (this.sprints.length !== 0) {
-        this.idselectedSprint = this.sprints[0]._id;
+        this.idSelectedSprint = this.sprints[0]._id;
         this.sprintSelected = this.sprints[0];
       }
       console.log(this.sprints);
     });
     this.issueService.getIssueByProject(this.projectId).subscribe(issues => {
       this.allIssues = issues;
-      this.issues = new MatTableDataSource(issues.filter( issue => issue.sprintId === null || issue.sprintId === undefined));
+      this.issues = new MatTableDataSource(issues.filter(issue => issue.sprintId === null || issue.sprintId === undefined));
       this.issues.paginator = this.paginator;
     });
   }
@@ -115,22 +115,21 @@ export class ProjectOverviewComponent implements OnInit {
 
     });
   }
+
   getSprintSelected() {
     console.log('change');
-    this.sprintSelected =  this.sprints.filter( sprint => sprint._id === this.idselectedSprint)[0];
+    this.sprintSelected = this.sprints.filter(sprint => sprint._id === this.idSelectedSprint)[0];
   }
+
   getIssuesBySprint(idSprint) {
-    return  this.allIssues.filter( issue => issue.sprintId === idSprint);
+    return this.allIssues.filter( issue => issue.sprintId === idSprint);
   }
-
-
 
   addSprint() {
     const diagoFormSprint = this.dialog.open(AddSprintComponent, {width: '800px', data: {projectId: this.projectId} });
     diagoFormSprint.afterClosed().subscribe(result => {
         this.snackBar.open('✅ Ajout sprint effectuée avec succès !', 'Fermer', this.configSnackBar);
         this.refreshSprints();
-
     });
   }
 
@@ -146,32 +145,25 @@ export class ProjectOverviewComponent implements OnInit {
   refreshSprints() {
     this.sprintService.getSprintByProject(this.projectId).subscribe( sprints => {
         this.sprints = sprints;
-        if (this.sprints.length !== 0 ) {
-          const sprintGet = sprints.filter(sprint => sprint._id === this.idselectedSprint) ;
-          if (sprintGet.length === 0 ) {
-            this.idselectedSprint = this.sprints[0]._id;
+        if (this.sprints.length !== 0) {
+          const sprintGet = sprints.filter(sprint => sprint._id === this.idSelectedSprint) ;
+          if (sprintGet.length === 0) {
+            this.idSelectedSprint = this.sprints[0]._id;
             this.sprintSelected = this.sprints[0];
           } else {
             this.sprintSelected = sprintGet[0];
           }
-
       } else {
-        this.idselectedSprint = null;
+        this.idSelectedSprint = null;
         this.sprintSelected = null;
       }
-
     });
   }
 
-
-
-
   deleteIssue(idIssue, numberIssue) {
     const dialogConfig = new MatDialogConfig();
-
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
-
     dialogConfig.data = {
       title: 'Suppression de l\'issue numéro "' + numberIssue + '"',
       content: 'Êtes-vous sûr de vouloir supprimer cette issue ? '
@@ -194,29 +186,26 @@ export class ProjectOverviewComponent implements OnInit {
   }
 
   updateSprint() {
-    const diagoFormSprint = this.dialog.open(UpdateSprintComponent, {width: '800px', data: {idSprint: this.idselectedSprint} });
-    diagoFormSprint.afterClosed().subscribe(result => {
+    const diagoFormSprint = this.dialog.open(UpdateSprintComponent, {width: '800px', data: {idSprint: this.idSelectedSprint} });
+    diagoFormSprint.afterClosed().subscribe(() => {
       this.snackBar.open('✅ Modification effectuée avec succès !', 'Fermer', this.configSnackBar);
       this.refreshSprints();
-
     });
   }
 
   deleteSprint() {
     const dialogConfig = new MatDialogConfig();
-
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
-
     dialogConfig.data = {
       title: 'Suppression du sprint numéro "' + this.sprintSelected.sprintId + '"',
-      content: 'Êtes-vous sûr de vouloir supprimer ce sprint ? '
+      content: 'Êtes-vous sûr de vouloir supprimer ce sprint ?'
     };
     this.snackBar.open('⌛ Suppression en cours...', 'Fermer', this.configSnackBar);
     const dialogRefDelete = this.dialog.open(DeleteDialogComponent, dialogConfig);
     dialogRefDelete.afterClosed().subscribe(result => {
       if (result === true) {
-        this.sprintService.deleteSprint(this.idselectedSprint).subscribe(res => {
+        this.sprintService.deleteSprint(this.idSelectedSprint).subscribe(res => {
             this.snackBar.open('✅ Suppression effectuée avec succès !', 'Fermer', this.configSnackBar);
             this.refreshSprints();
           },
@@ -230,33 +219,29 @@ export class ProjectOverviewComponent implements OnInit {
   }
 
   moveIssueTo(idIssue, to) {
-
-    this.snackBar.open('⌛ Déplacement de l\'issue  en cours...', 'Fermer', this.configSnackBar);
-    console.log(this.idselectedSprint);
+    this.snackBar.open('⌛ Déplacement de l\'issue en cours...', 'Fermer', this.configSnackBar);
+    console.log(this.idSelectedSprint);
     console.log(idIssue);
     console.log(this.allIssues);
-    const issueSelect  =  this.allIssues.filter(issue => issue._id === idIssue)[0];
+    const issueSelect = this.allIssues.filter(issue => issue._id === idIssue)[0];
     console.log(issueSelect);
     if (to === 'sprint') {
-      issueSelect.sprintId = this.idselectedSprint ;
+      issueSelect.sprintId = this.idSelectedSprint ;
     }
-    if ( to === 'backlog') {
+    if (to === 'backlog') {
       issueSelect.sprintId = null;
     }
-    this.issueService.updateIssue(issueSelect, idIssue).subscribe(issue => {
+    this.issueService.updateIssue(issueSelect, idIssue).subscribe(() => {
        this.refreshSprints();
        this.refreshIssuesBacklog();
        this.snackBar.open('✅ Issue déplacée avec succès !', 'Fermer', this.configSnackBar);
     },
-      error => {
+      () => {
         this.snackBar.open('❌ Une erreur s\'est produite lors du deplacement !', 'Fermer', this.configSnackBar);
-
       }
     );
   }
 
+  startSprint() { }
 
-  startSprint() {
-
-  }
 }
