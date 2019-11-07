@@ -23,18 +23,23 @@
           <mat-accordion *ngIf="sprintSelected">
             <mat-expansion-panel [expanded]="true">
               <mat-expansion-panel-header>
+                <button  mat-mini-fab matTooltip="Editer le Sprint"  color="primary">
+                  <mat-icon (click)="updateSprint()">edit</mat-icon>
+                </button>
                 <button  mat-mini-fab matTooltip="Supprimer le Sprint"  color="warn">
                   <mat-icon (click)="deleteSprint()">delete</mat-icon>
                 </button>
+
                 <mat-panel-title style="font-weight: bold">
                  {{sprintSelected.title}} {{sprintSelected.sprintId}}
                 </mat-panel-title>
 
                 <mat-panel-description>
                   Liste des issues du {{sprintSelected.title}}
-                  <button  mat-mini-fab matTooltip="Editer le Sprint"  color="primary">
-                    <mat-icon (click)="updateSprint()">edit</mat-icon>
+                  <button  mat-mini-fab matTooltip="Demarrer le Sprint" color="basic"  style="color: #00600f">
+                    <mat-icon (click)="startSprint()">double_arrow</mat-icon>
                   </button>
+
 
 
 
