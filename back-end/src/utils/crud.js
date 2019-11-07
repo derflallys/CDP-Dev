@@ -80,6 +80,7 @@ export const removeOne = model => async (req, res) => {
     res.status(400).end()
   }
 }
+
 export const getByProject = model => async (req, res) => {
   try {
     const doc = await model
@@ -97,6 +98,7 @@ export const getByProject = model => async (req, res) => {
     res.status(400).end()
   }
 }
+
 // For ISSUE
 export const getBySprint = model => async (req, res) => {
   try {

@@ -40,7 +40,7 @@ function createProjectFixtures(amount = AMOUNT_PROJECTS) {
     let prId = faker.random.uuid()
     projectIds.push(prId)
     projects.push({
-      id: prId,
+      _id: prId,
       createdAt: faker.date.between(2010, 2019),
       title: faker.lorem.words(),
       description: faker.lorem.sentences(),
