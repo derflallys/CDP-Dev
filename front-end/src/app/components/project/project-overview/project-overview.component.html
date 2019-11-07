@@ -8,7 +8,7 @@
   </h4>
   <mat-form-field class="selectSprint">
     <mat-label>Afficher un sprint</mat-label>
-    <mat-select [(value)]="idselectedSprint" (selectionChange)="getSprintSelected()">
+    <mat-select [(value)]="idSelectedSprint" (selectionChange)="getSprintSelected()">
       <mat-option *ngFor="let sprint of sprints" value="{{sprint._id}}">{{ sprint.title }}</mat-option>
     </mat-select>
   </mat-form-field>
@@ -44,7 +44,7 @@
 
               </mat-expansion-panel-header>
               <div class="main-frame">
-                <table mat-table [dataSource]="getIssuesBySprint(idselectedSprint)" class="mat-elevation-z8">
+                <table mat-table [dataSource]="getIssuesBySprint(idSelectedSprint)" class="mat-elevation-z8">
                   <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
                   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
                   <ng-container matColumnDef="ID">
@@ -127,7 +127,7 @@
                   <th mat-header-cell *matHeaderCellDef> Etat </th>
                   <td mat-cell *matCellDef="let element">{{ element.state }} </td>
                 </ng-container>
-                <ng-container matColumnDef="actions">
+                <ng-container matColumnDef="Actions">
                   <th mat-header-cell *matHeaderCellDef> Actions </th>
                   <td mat-cell *matCellDef="let element">
                     <a (click)="updateIssue(element._id)" matTooltip="Editer l'issue" mat-mini-fab mat-raised-button color="primary">
@@ -136,7 +136,7 @@
                     <a (click)="deleteIssue(element._id,element.issueId)" matTooltip="Supprimer l'issue" mat-mini-fab mat-raised-button color="warn">
                       <mat-icon>delete</mat-icon>
                     </a>
-                    <a *ngIf="idselectedSprint" (click)="moveIssueTo(element._id,'sprint')" matTooltip="Placer dans le sprint selectionner" mat-mini-fab mat-raised-button color="basic">
+                    <a *ngIf="idSelectedSprint" (click)="moveIssueTo(element._id,'sprint')" matTooltip="Placer dans le sprint selectionner" mat-mini-fab mat-raised-button color="basic">
                       <mat-icon>vertical_align_top</mat-icon>
                     </a>
                   </td>
