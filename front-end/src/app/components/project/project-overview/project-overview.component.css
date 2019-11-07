@@ -11,6 +11,9 @@
   align-content: flex-start;
   justify-content: flex-start;
 }
+.mat-expansion-panel{
+  box-shadow: 10px 5px 5px #c7c7c7;
+}
 
 .mat-expansion-panel-header-title, .mat-expansion-panel-header-description {
   flex-basis: 0;

@@ -4,7 +4,7 @@
 </div>
 <div class="main-frame row">
   <h4 class="filter sprints">
-    <span matBadge="{{ sprints.length }}" matBadgeOverlap="false">Nombre de Sprint</span>
+    <span matBadge="{{ sprints.length }}" matBadgeOverlap="false">Nombre de Sprints</span>
   </h4>
   <mat-form-field class="selectSprint">
     <mat-label>Afficher un sprint</mat-label>
@@ -18,7 +18,6 @@
 
 <div class="main-frame">
     <div class="contain-project">
-      <div class="box" >
         <div class="box sprint" *ngIf="sprintSelected" >
           <mat-accordion>
             <mat-expansion-panel [expanded]="true">
@@ -41,8 +40,9 @@
                 </mat-panel-description>
               </mat-expansion-panel-header>
               <div class="main-frame">
-                <table mat-table [dataSource]="getIssuesBySprint(idselectedSprint)" class="mat-elevation-z8 " cdkDropList #table2 #list2="cdkDropList" [cdkDropListData]="getIssuesBySprint(idselectedSprint)"
-                       [cdkDropListConnectedTo]="[backlog]" (cdkDropListDropped)="drop($event)" id="table2">
+                <table mat-table [dataSource]="getIssuesBySprint(idselectedSprint)" class="mat-elevation-z8 "
+                       cdkDropList #table2 #sprintS="cdkDropList" [cdkDropListData]="getIssuesBySprint(idselectedSprint)"
+                       [cdkDropListConnectedTo]="[backlog]" (cdkDropListDropped)="drop($event)" >
                   <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
                   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
                   <ng-container matColumnDef="ID">
@@ -81,8 +81,6 @@
             </mat-expansion-panel>
           </mat-accordion>
         </div>
-      </div>
-
 
       <div class="box">
         <mat-accordion>
@@ -103,9 +101,9 @@
                 </div>
 
                 <div class="main-frame">
-                    <table mat-table [dataSource]="issues"  class="mat-elevation-z8 "   cdkDropList #table1 #baclog="cdkDropList"
-                           [cdkDropListData]="issues" [cdkDropListConnectedTo]="[list2]"
-                           (cdkDropListDropped)="drop($event)" id="baclog">
+                    <table mat-table [dataSource]="issues"  class="mat-elevation-z8 "   cdkDropList #table2 #backlog="cdkDropList"
+                           [cdkDropListData]="allIssues"
+                           [cdkDropListConnectedTo]="[sprintS]" (cdkDropListDropped)="drop($event)" >
                       <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
                       <tr mat-row *matRowDef="let row; columns: displayedColumns;" cdkDrag></tr>
                       <ng-container matColumnDef="ID">

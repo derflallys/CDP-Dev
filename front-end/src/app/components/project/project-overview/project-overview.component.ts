@@ -28,9 +28,7 @@ import {UpdateSprintComponent} from '../../sprint/update-sprint/update-sprint.co
 })
 export class ProjectOverviewComponent implements OnInit {
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
-  @ViewChild('table1') table1: MatTable<any>;
-  @ViewChild('table2') table2: MatTable<any>;
-  @ViewChild('baclog') backlog: CdkDropList;
+
   title = '';
   project: Project ;
   issues: MatTableDataSource<Issue> ;
