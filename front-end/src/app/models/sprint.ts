@@ -7,8 +7,7 @@ export class Sprint {
   startDate: string;
   endDate: string;
 
-  constructor(id: string, sprintId: number, projectId: string, title: string, startDate: string, endDate: string,
-              state: string = 'To Start') {
+  constructor(id: string, sprintId: number, projectId: string, title: string, startDate: string, endDate: string, state: string = 'To Start') {
     this._id = id;
     this.sprintId = sprintId;
     this.state = state;

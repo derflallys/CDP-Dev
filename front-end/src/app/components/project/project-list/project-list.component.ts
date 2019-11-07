@@ -22,12 +22,10 @@ import { DeleteDialogComponent } from '../../utils/delete-dialog/delete-dialog.c
 export class ProjectListComponent implements OnInit {
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
+
   projects: MatTableDataSource<Project> = new MatTableDataSource<Project>();
-
   nbProject: Number
-
   displayedColumns: string[] = ['createdAt', 'title', 'duration', 'repositoryURL', 'actions'];
-
   configSnackBar = new MatSnackBarConfig();
 
   constructor(
@@ -59,7 +57,7 @@ export class ProjectListComponent implements OnInit {
 
   addProject() {
     const diagoFormProject = this.dialog.open(AddProjectComponent, {width: '800px'});
-    diagoFormProject.afterClosed().subscribe(result => {
+    diagoFormProject.afterClosed().subscribe(() => {
       this.snackBar.open('✅ Ajout projet effectuée avec succès !', 'Fermer', this.configSnackBar);
       this.refreshProjects();
     });
@@ -67,7 +65,7 @@ export class ProjectListComponent implements OnInit {
 
   updateProject(projectId) {
     const diagoFormProject = this.dialog.open(UpdateProjectComponent, {width: '800px', data: {projectId: projectId} });
-    diagoFormProject.afterClosed().subscribe(result => {
+    diagoFormProject.afterClosed().subscribe(() => {
       this.snackBar.open('✅ Modification effectuée avec succès !', 'Fermer', this.configSnackBar);
       this.refreshProjects();
     });
@@ -87,7 +85,7 @@ export class ProjectListComponent implements OnInit {
     const dialogRefDelete = this.dialog.open(DeleteDialogComponent, dialogConfig);
     dialogRefDelete.afterClosed().subscribe(result => {
       if (result === true) {
-        this.projectService.deleteProject(projectId).subscribe(res => {
+        this.projectService.deleteProject(projectId).subscribe(() => {
           this.snackBar.open('✅ Suppression effectuée avec succès !', 'Fermer', this.configSnackBar);
           this.refreshProjects();
         },
@@ -106,6 +104,7 @@ export class ProjectListComponent implements OnInit {
       this.projects.paginator = this.paginator;
       this.projects.sort = this.sort;
       this.paginator._changePageSize(this.paginator.pageSize);
+      this.nbProject = projects.length;
     });
   }
 

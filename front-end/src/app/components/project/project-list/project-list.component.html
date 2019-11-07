@@ -12,7 +12,7 @@
       </mat-form-field>
       <button mat-raised-button class="button-add" color="primary" (click)="addProject()"><mat-icon>add</mat-icon> Ajouter un Projet </button>
     </div>
-      <table mat-table [dataSource]="projects"  matSort matSortStart="desc"  class="mat-elevation-z8">
+      <table mat-table [dataSource]="projects" matSort matSortStart="desc" class="mat-elevation-z8">
         <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
         <ng-container matColumnDef="createdAt">
@@ -31,7 +31,7 @@
         </ng-container>
         <ng-container matColumnDef="repositoryURL">
             <th mat-header-cell *matHeaderCellDef> URL (dépôt) </th>
-            <td mat-cell *matCellDef="let element"><a href="{{ element.repositoryURL }}">{{ element.repositoryURL }}</a>  </td>
+            <td mat-cell *matCellDef="let element"><a href="{{ element.repositoryURL }}">{{ element.repositoryURL }}</a></td>
         </ng-container>
         <ng-container matColumnDef="actions">
             <th mat-header-cell *matHeaderCellDef> Actions </th>

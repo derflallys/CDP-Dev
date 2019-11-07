@@ -18,7 +18,6 @@ export class SprintService {
   private sprintUrl = environment.BACK_END_URL + '/sprint';
   private sprintByProjectUrl = environment.BACK_END_URL + '/sprint/byproject';
 
-
   constructor(private http: HttpClient) { }
 
   getSprints(): Observable<Sprint[]> {
@@ -44,4 +43,5 @@ export class SprintService {
   updateSprint(sprint: Sprint, sprintNum: string) {
     return this.http.put<Response>(this.sprintUrl + '/' + sprintNum, sprint, httpOptions);
   }
+
 }

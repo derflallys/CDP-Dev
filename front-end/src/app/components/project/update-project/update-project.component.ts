@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 
 @Component({
@@ -6,7 +6,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
   templateUrl: './update-project.component.html',
   styleUrls: ['./update-project.component.css']
 })
-export class UpdateProjectComponent implements OnInit {
+export class UpdateProjectComponent {
 
   projectId = this.data.projectId;
 
@@ -15,7 +15,5 @@ export class UpdateProjectComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: { projectId: null },
     public dialogRefUpdate: MatDialogRef<UpdateProjectComponent>,
   ) { }
-
-  ngOnInit() { }
 
 }

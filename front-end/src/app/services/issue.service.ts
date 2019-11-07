@@ -44,9 +44,8 @@ export class IssueService {
     return this.http.get<Issue[]>(this.issueBySprintUrl + '/' + sprintId);
   }
 
-
-
   updateIssue(issue: Issue, id: string) {
     return this.http.put<Response>(this.issueUrl + '/' + id, issue, httpOptions);
   }
+
 }

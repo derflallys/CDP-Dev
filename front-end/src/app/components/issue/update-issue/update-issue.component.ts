@@ -1,5 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 
 @Component({
@@ -7,12 +6,11 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
   templateUrl: './update-issue.component.html',
   styleUrls: ['./update-issue.component.css']
 })
-export class UpdateIssueComponent  {
+export class UpdateIssueComponent {
 
   issueId = this.data.issueId;
 
   constructor(
-    private route: ActivatedRoute,
     public dialogRef: MatDialogRef<UpdateIssueComponent>,
     @Inject(MAT_DIALOG_DATA) public data: {issueId: null}
   ) { }

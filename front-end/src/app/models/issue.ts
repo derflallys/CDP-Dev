@@ -8,7 +8,7 @@ export class Issue {
   priority: string;
   difficulty: number;
 
-  constructor(projectId:string,id: string = null, description: string, state: string, priority: string, difficulty: number,sprintId :string = null) {
+  constructor(projectId: string, id: string = null, description: string, state: string, priority: string, difficulty: number, sprintId: string = null) {
     this._id = id;
     this.sprintId = sprintId;
     this.projectId = projectId;

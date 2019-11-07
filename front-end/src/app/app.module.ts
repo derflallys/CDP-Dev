@@ -17,7 +17,10 @@ import {
   MatPaginatorModule,
   MatExpansionModule,
   MatDialogModule,
-  MatSnackBarModule, MatSortModule, MatBadgeModule, MatTooltipModule
+  MatSnackBarModule,
+  MatSortModule,
+  MatBadgeModule,
+  MatTooltipModule
 } from '@angular/material';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -33,7 +36,7 @@ import { ProjectOverviewComponent } from './components/project/project-overview/
 import { UpdateSprintComponent } from './components/sprint/update-sprint/update-sprint.component';
 import { DeleteDialogComponent } from './components/utils/delete-dialog/delete-dialog.component';
 import { UpdateProjectComponent } from './components/project/update-project/update-project.component';
-import {DragDropModule} from '@angular/cdk/drag-drop';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 @NgModule({
   exports: [

@@ -4,8 +4,8 @@ import { Project } from '../../../models/project';
 import { ProjectService } from '../../../services/project.service';
 import { UpdateProjectComponent } from '../update-project/update-project.component';
 import { MatDialogRef } from '@angular/material';
-import {Sprint} from '../../../models/sprint';
-import {SprintService} from '../../../services/sprint.service';
+import { Sprint } from '../../../models/sprint';
+import { SprintService } from '../../../services/sprint.service';
 
 @Component({
   selector: 'app-add-project',
@@ -16,15 +16,10 @@ import {SprintService} from '../../../services/sprint.service';
 export class AddProjectComponent implements OnInit {
 
   title = 'Créer un projet';
-
   addProject: FormGroup;
-
   project: Project;
-
   @Input() projectId = null;
-
   update = false;
-
   URL_REGEX = /^(https?:\/\/)([\da-z.-]+)\.([a-z.]{2,6})\/?([\w .-]*)*(\.git)$/g;
 
   constructor(

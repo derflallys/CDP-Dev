@@ -13,9 +13,23 @@ import { UpdateIssueComponent } from '../update-issue/update-issue.component';
   providers: []
 })
 export class AddIssueComponent implements OnInit {
+
   addIssue: FormGroup;
   issue: Issue;
   close = true;
+
+  @Input() issueId = null;
+  title = 'Ajouter une issue';
+  update = false;
+  projectId = this.data.projectId;
+
+  priorities = [
+    'HIGH', 'MEDIUM', 'LOW'
+  ];
+  states = [
+    'TODO', 'DOING', 'DONE'
+  ];
+
   constructor(
     private formBuilder: FormBuilder,
     private router: Router,
@@ -25,16 +39,7 @@ export class AddIssueComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: {projectId: null},
     private issueService: IssueService
   ) { }
-  priorities = [
-    'HIGH', 'MEDIUM', 'LOW'
-  ];
-  states = [
-    'TODO', 'DOING', 'DONE'
-  ];
-  @Input() issueId = null;
-  title = 'Ajouter une issue';
-  update = false;
-  projectId = this.data.projectId;
+  
   ngOnInit() {
     this.addIssue =  this.formBuilder.group({
       description: ['En tant que', Validators.required],
@@ -56,7 +61,7 @@ export class AddIssueComponent implements OnInit {
     const difficulty = Number(this.addIssue.controls.difficulty.value);
     const priority = this.addIssue.controls.priority.value;
     if (this.update) {
-      const updateIssue = new Issue(this.issue.projectId, this.issue._id, description, state, priority, difficulty,this.issue.sprintId);
+      const updateIssue = new Issue(this.issue.projectId, this.issue._id, description, state, priority, difficulty, this.issue.sprintId);
       this.issueService.updateIssue(updateIssue, this.issue._id).subscribe( res => {
         console.log(res);
         console.log('Update');
@@ -77,7 +82,6 @@ export class AddIssueComponent implements OnInit {
         this.ngZone.run(() => this.router.navigate(['project/' + this.projectId]));
       });
     }
-
   }
 
   private loadIssue() {
@@ -97,4 +101,5 @@ export class AddIssueComponent implements OnInit {
       }
     );
   }
+
 }

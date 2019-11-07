@@ -37,4 +37,5 @@ export class ProjectService {
   updateProject(project: Project, id: string) {
     return this.http.put<Response>(this.projectUrl + '/' + id, project, httpOptions);
   }
+
 }
