@@ -27,10 +27,10 @@
     </mat-form-field>
 
 
-
-
-    <button mat-raised-button type="submit">Enregister le sprint</button>
-
   </form>
+  <mat-dialog-actions>
+    <button mat-raised-button  color="primary" style="margin-right: 8px" (click)="onSubmit()" >Enregister le sprint</button>
+    <button mat-raised-button  color="warn" (click)="cancel()">Annuler</button>
+  </mat-dialog-actions>
 
   </div>

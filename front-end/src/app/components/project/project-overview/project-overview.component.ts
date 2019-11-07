@@ -127,9 +127,16 @@ export class ProjectOverviewComponent implements OnInit {
 
   addSprint() {
     const diagoFormSprint = this.dialog.open(AddSprintComponent, {width: '800px', data: {projectId: this.projectId} });
-    diagoFormSprint.afterClosed().subscribe(result => {
+    diagoFormSprint.afterClosed().subscribe(error => {
+      if (error === false) {
         this.snackBar.open('✅ Ajout sprint effectuée avec succès !', 'Fermer', this.configSnackBar);
         this.refreshSprints();
+      } else {
+        if (error) {
+          this.snackBar.open('❌ Une erreur s\'est produite lors de l\'ajout !', 'Fermer', this.configSnackBar);
+        }
+      }
+
     });
   }
 
@@ -187,9 +194,16 @@ export class ProjectOverviewComponent implements OnInit {
 
   updateSprint() {
     const diagoFormSprint = this.dialog.open(UpdateSprintComponent, {width: '800px', data: {idSprint: this.idSelectedSprint} });
-    diagoFormSprint.afterClosed().subscribe(() => {
-      this.snackBar.open('✅ Modification effectuée avec succès !', 'Fermer', this.configSnackBar);
-      this.refreshSprints();
+    diagoFormSprint.afterClosed().subscribe(error => {
+      if ( error === false) {
+        this.snackBar.open('✅ Modification effectuée avec succès !', 'Fermer', this.configSnackBar);
+        this.refreshSprints();
+      } else {
+        if (error) {
+          this.snackBar.open('❌ Une erreur s\'est produite lors de la modification !', 'Fermer', this.configSnackBar);
+        }
+      }
+
     });
   }
 

@@ -56,7 +56,7 @@ export class AddIssueComponent implements OnInit {
     const difficulty = Number(this.addIssue.controls.difficulty.value);
     const priority = this.addIssue.controls.priority.value;
     if (this.update) {
-      const updateIssue = new Issue(this.issue.projectId, this.issue._id, description, state, priority, difficulty,this.issue.sprintId);
+      const updateIssue = new Issue(this.issue.projectId, this.issue._id, description, state, priority, difficulty, this.issue.sprintId);
       this.issueService.updateIssue(updateIssue, this.issue._id).subscribe( res => {
         console.log(res);
         console.log('Update');
