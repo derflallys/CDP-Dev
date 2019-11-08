@@ -84,18 +84,14 @@ export class ProjectOverviewComponent implements OnInit {
     const diagoFormIssue = this.dialog.open(AddIssueComponent, {width: '800px', data: {projectId: this.projectId} });
     diagoFormIssue.afterClosed().subscribe(error => {
       console.log(error);
-      if ( error === false) {
+      if (error === false) {
         this.snackBar.open('✅ Ajout issue effectuée avec succès !', 'Fermer', this.configSnackBar);
         this.refreshIssuesBacklog();
       } else {
         if (error) {
           this.snackBar.open('❌ Une erreur s\'est produite lors de l\'ajout !', 'Fermer', this.configSnackBar);
         }
-
       }
-
-
-
     });
   }
 
@@ -112,7 +108,6 @@ export class ProjectOverviewComponent implements OnInit {
             this.snackBar.open('❌ Une erreur s\'est produite lors de la modification !', 'Fermer', this.configSnackBar);
           }
         }
-
     });
   }
 
@@ -122,7 +117,7 @@ export class ProjectOverviewComponent implements OnInit {
   }
 
   getIssuesBySprint(idSprint) {
-    return this.allIssues.filter( issue => issue.sprintId === idSprint);
+    return this.allIssues.filter(issue => issue.sprintId === idSprint);
   }
 
   addSprint() {
@@ -136,21 +131,20 @@ export class ProjectOverviewComponent implements OnInit {
           this.snackBar.open('❌ Une erreur s\'est produite lors de l\'ajout !', 'Fermer', this.configSnackBar);
         }
       }
-
     });
   }
 
   refreshIssuesBacklog() {
     this.issueService.getIssueByProject(this.projectId).subscribe(issues => {
       this.allIssues = issues;
-      this.issues = new MatTableDataSource(issues.filter( issue => issue.sprintId === null || issue.sprintId === undefined));
+      this.issues = new MatTableDataSource(issues.filter(issue => issue.sprintId === null || issue.sprintId === undefined));
       this.issues.paginator = this.paginator;
       this.paginator._changePageSize(this.paginator.pageSize);
     });
   }
 
   refreshSprints() {
-    this.sprintService.getSprintByProject(this.projectId).subscribe( sprints => {
+    this.sprintService.getSprintByProject(this.projectId).subscribe(sprints => {
         this.sprints = sprints;
         if (this.sprints.length !== 0) {
           const sprintGet = sprints.filter(sprint => sprint._id === this.idSelectedSprint) ;
@@ -178,7 +172,7 @@ export class ProjectOverviewComponent implements OnInit {
     const dialogRefDelete = this.dialog.open(DeleteDialogComponent, dialogConfig);
     dialogRefDelete.afterClosed().subscribe(result => {
       if (result === true) {
-        this.issueService.deleteIssue(idIssue).subscribe(res => {
+        this.issueService.deleteIssue(idIssue).subscribe(() => {
           this.snackBar.open('✅ Suppression effectuée avec succès !', 'Fermer', this.configSnackBar);
           this.refreshIssuesBacklog();
           this.refreshSprints();
@@ -195,7 +189,7 @@ export class ProjectOverviewComponent implements OnInit {
   updateSprint() {
     const diagoFormSprint = this.dialog.open(UpdateSprintComponent, {width: '800px', data: {idSprint: this.idSelectedSprint} });
     diagoFormSprint.afterClosed().subscribe(error => {
-      if ( error === false) {
+      if (error === false) {
         this.snackBar.open('✅ Modification effectuée avec succès !', 'Fermer', this.configSnackBar);
         this.refreshSprints();
       } else {
@@ -203,7 +197,6 @@ export class ProjectOverviewComponent implements OnInit {
           this.snackBar.open('❌ Une erreur s\'est produite lors de la modification !', 'Fermer', this.configSnackBar);
         }
       }
-
     });
   }
 
@@ -219,7 +212,7 @@ export class ProjectOverviewComponent implements OnInit {
     const dialogRefDelete = this.dialog.open(DeleteDialogComponent, dialogConfig);
     dialogRefDelete.afterClosed().subscribe(result => {
       if (result === true) {
-        this.sprintService.deleteSprint(this.idSelectedSprint).subscribe(res => {
+        this.sprintService.deleteSprint(this.idSelectedSprint).subscribe(() => {
             this.snackBar.open('✅ Suppression effectuée avec succès !', 'Fermer', this.configSnackBar);
             this.refreshSprints();
           },
