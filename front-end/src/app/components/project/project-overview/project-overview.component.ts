@@ -147,7 +147,7 @@ export class ProjectOverviewComponent implements OnInit {
     this.sprintService.getSprintByProject(this.projectId).subscribe(sprints => {
         this.sprints = sprints;
         if (this.sprints.length !== 0) {
-          const sprintGet = sprints.filter(sprint => sprint._id === this.idSelectedSprint) ;
+          const sprintGet = sprints.filter(sprint => sprint._id === this.idSelectedSprint);
           if (sprintGet.length === 0) {
             this.idSelectedSprint = this.sprints[0]._id;
             this.sprintSelected = this.sprints[0];
@@ -233,7 +233,7 @@ export class ProjectOverviewComponent implements OnInit {
     const issueSelect = this.allIssues.filter(issue => issue._id === idIssue)[0];
     console.log(issueSelect);
     if (to === 'sprint') {
-      issueSelect.sprintId = this.idSelectedSprint ;
+      issueSelect.sprintId = this.idSelectedSprint;
     }
     if (to === 'backlog') {
       issueSelect.sprintId = null;

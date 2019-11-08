@@ -1,4 +1,4 @@
-import { Component, OnInit,Inject  } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material';
 
 @Component({
@@ -6,7 +6,7 @@ import { MAT_DIALOG_DATA } from '@angular/material';
   templateUrl: './delete-dialog.component.html',
   styleUrls: ['./delete-dialog.component.css']
 })
-export class DeleteDialogComponent implements OnInit {
+export class DeleteDialogComponent {
   modalTitle: string;
   modalContent: string;
   modalSubContent: string;
@@ -17,9 +17,6 @@ export class DeleteDialogComponent implements OnInit {
     this.modalContent = data.content;
     this.modalSubContent = data.content2;
     this.modalSubSubContent = data.content3;
-  }
-
-  ngOnInit() {
   }
 
 }
