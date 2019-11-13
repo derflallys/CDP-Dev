@@ -2,9 +2,9 @@
 
 | ID | US liée | Dépendances | Temps estimé | Etat | Affectation |
 |----|----|----|----|----|----|
-| 0.1 | US1, US2, US3, US4, US5, US7  | x | 0.5 | TODO | Oumayma |
+| 0.1 | US1, US2, US3, US4, US5, US7  | x | 0.5 | DONE | Oumayma |
 | 0.2 | x | x | 0.5 | TODO | Alfred |
-| 1 | US1 | 0.1 | 0.5 | TODO |  |
+| 1 | US1 | 0.1 | 0.5 | TODO | Oumayma |
 | 2 | US2 | 0.1 | 0.5 | TODO |  |
 | 3 | US3 | 0.1 | 0.5 | TODO |  |
 | 4.0 | US13 | 0.1 | 0.5 | TODO |  |
@@ -39,8 +39,8 @@
 **Tâche 0.1** : Définir le schéma/modéle de la base de données [BACK-END].  
 **DoD** :
 
-> * `User` contenant les propriétés `(_id, username, mail, password)`
-> * `Tâche` contenant les propriétés `( _id, user_story_FK, description, durée, etat)`
+> * `User` contenant les propriétés `(_id, username, e-mail, password)`
+> * `Tâche` contenant les propriétés `( _id, issues, dod,  state, startDate, endDate, ToTest, ToDoc)`
 
 **Tâche 0.2** Creer le fichier `docker-compose.yaml`.  
 **DoD** :
@@ -65,6 +65,7 @@
 > Dans le fichier `authentication.js` (répertoire `util`), la méthode `checkAuthentication` vérifiera les informations envoyés par le client et si celles-ci sont valide, renverra au client un token (JWT).
 
 **Tâche 3** : Déconnexion de l'application
+**DoD** :
 > Tâche 3.1 : [FRONT-END]
 > Les utilisateurs connectés pourront se déconnecter de l'application en cliquant sur le bouton "Logout" présent en haut a droite du menu de navigation. Une fois déconnecter, ils seront rediriger vers la page de connexion.
 >
@@ -72,7 +73,7 @@
 > Après réception de l'information de déconnexion du client, la méthode `disconnect` présente dans le fichier `authentication.js` (répertoire `util`) détruira le token associé à l'utilisateur.
 
 **Tâche 4** Changer l'etat d'une tâche
-> **DoD** :
+ **DoD** :
 > Les developpeurs pourront modifier l'etat d'une tâche avec une liste deroulante qui contient les valeurs (Doing, Todo, Done).
 > Tâche 4.0** : [FRONT-END]
 >Les developpeurs pourront modifier l'etat d'une tâche avec une liste deroulante qui contient les valeurs (Doing, Todo, Done) et des buttons de choix pour dire s'ils sont tester ou documenter en cliquant sur le bouton de modification présent sur la page `detail-project`. En cliquant sur ce bouton, le même formulaire que celui de l'ajout d'un sprint apparraitra, cette fonction de modification permet de modifier les informations d'un sprint en pré-remplissant le formulaire avec les informations existantes.
