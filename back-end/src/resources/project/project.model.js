@@ -1,11 +1,27 @@
 const mongoose = require('mongoose')
 
+var UserRoleSchema = new mongoose.Schema({
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'user',
+    required: true
+  },
+  role: {
+    type: String,
+    required: true,
+    enum: ['DEV', 'PO']
+  }
+})
+
 const ProjectSchema = new mongoose.Schema(
   {
     createdAt: {
       type: Date,
       default: Date.now,
       immutable: true
+    },
+    users: {
+      type: [UserRoleSchema]
     },
     title: {
       type: String,
