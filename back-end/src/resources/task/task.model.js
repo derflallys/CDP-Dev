@@ -24,8 +24,14 @@ const TaskSchema = new mongoose.Schema(
       enum: ['TODO', 'DOING', 'DONE'],
       default: 'TODO'
     },
-    toTest: { type: Boolean, default: false },
-    toDoc: { type: Boolean, default: false },
+    toTest: {
+      type: Boolean,
+      default: false
+    },
+    toDoc: {
+      type: Boolean,
+      default: false
+    },
     startDate: {
       type: Date,
       required: true
