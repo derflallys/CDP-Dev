@@ -3,6 +3,8 @@ const mongoose = require('mongoose')
 
 const UserSchema = new mongoose.Schema(
   {
+    projects: [{ type: mongoose.Schema.Types.ObjectId, ref: 'project' }],
+    tasks: [{ type: mongoose.Schema.Types.ObjectId, ref: 'task' }],
     issueId: {
       type: Number
     },
