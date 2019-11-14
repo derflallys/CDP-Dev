@@ -9,6 +9,7 @@ import { UpdateIssueComponent } from './components/issue/update-issue/update-iss
 import { ProjectOverviewComponent } from './components/project/project-overview/project-overview.component';
 import { UpdateSprintComponent } from './components/sprint/update-sprint/update-sprint.component';
 import { UpdateProjectComponent } from './components/project/update-project/update-project.component';
+import { SignupComponent } from './components/user/signup/signup.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'projects', pathMatch: 'full' },
@@ -20,6 +21,7 @@ const routes: Routes = [
   { path: 'updateissue/:id', component: UpdateIssueComponent },
   { path: 'updatesprint/:id', component: UpdateSprintComponent },
   { path: 'addissue', component: AddIssueComponent },
+  { path: 'signup', component: SignupComponent },
 ];
 
 @NgModule({
