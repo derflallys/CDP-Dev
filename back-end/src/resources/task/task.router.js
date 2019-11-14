@@ -19,6 +19,6 @@ router
   .delete(controllers.removeOne)
 
 // /api/issue/byissue
-router.route('/byissue/:id').get(controllers.getByIssuet)
+router.route('/byissue/:id').get(controllers.getByIssue)
 
 export default router

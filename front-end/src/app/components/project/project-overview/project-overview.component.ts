@@ -4,6 +4,8 @@ import { ProjectService } from '../../../services/project.service';
 import { Project } from '../../../models/project';
 import { Issue } from '../../../models/issue';
 import { Sprint } from '../../../models/sprint';
+import { Task } from '../../../models/task';
+
 import { IssueService } from '../../../services/issue.service';
 import { SprintService } from '../../../services/sprint.service';
 import {
@@ -32,8 +34,10 @@ export class ProjectOverviewComponent implements OnInit {
   project: Project;
   issues: MatTableDataSource<Issue>;
   sprints: Sprint[] = [];
+  tasks: Task[] = [];
   projectId;
   displayedColumns: string[] = ['ID', 'Description', 'Priorité', 'Etat', 'Actions'];
+  displayedColumnsTask: string[] = ['ID', 'Description', 'Développeur', 'US liées', 'Actions']
   configSnackBar = new MatSnackBarConfig();
   allIssues: Issue[] = [];
   idSelectedSprint;
