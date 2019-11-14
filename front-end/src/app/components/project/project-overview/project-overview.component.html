@@ -15,7 +15,6 @@
   <button mat-raised-button class="button-add sprints-add" color="primary" (click)="addSprint()"> Ajouter un Sprint </button>
 </div>
 
-
 <div class="main-frame">
     <div class="contain-project">
         <div class="box sprint">
@@ -23,26 +22,22 @@
           <mat-accordion *ngIf="sprintSelected">
             <mat-expansion-panel [expanded]="true">
               <mat-expansion-panel-header>
-
+                <mat-panel-title class="font-weight-bold">
+                  {{sprintSelected.title}} {{sprintSelected.sprintId}}
+                </mat-panel-title>
+                <mat-panel-description>Backlog {{sprintSelected.title}}</mat-panel-description>
+              </mat-expansion-panel-header>
+              <mat-action-row>
                 <button mat-mini-fab matTooltip="Editer le Sprint" color="primary">
                   <mat-icon (click)="updateSprint()">edit</mat-icon>
                 </button>
                 <button mat-mini-fab matTooltip="Supprimer le Sprint" color="warn">
                   <mat-icon (click)="deleteSprint()">delete</mat-icon>
                 </button>
-
-                <mat-panel-title class="font-weight-bold">
-                 {{sprintSelected.title}} {{sprintSelected.sprintId}}
-                </mat-panel-title>
-
-                <mat-panel-description>
-                  Liste des issues du {{sprintSelected.title}}
-                  <button mat-mini-fab matTooltip="Demarrer le Sprint" color="basic" style="color: #00600f">
-                    <mat-icon (click)="startSprint()">double_arrow</mat-icon>
-                  </button>
-                </mat-panel-description>
-
-              </mat-expansion-panel-header>
+                <button mat-mini-fab matTooltip="Démarrer le Sprint" color="basic" style="color: #00600f">
+                  <mat-icon (click)="startSprint()">double_arrow</mat-icon>
+                </button>
+              </mat-action-row>
               <div class="main-frame">
                 <table mat-table [dataSource]="getIssuesBySprint(idSelectedSprint)" class="mat-elevation-z8">
                   <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
