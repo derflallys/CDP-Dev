@@ -26,14 +26,14 @@
 * **Tâche 1** : Inscription dans l'application.
 * **Tâche 2** : Connexion à l'application.
 * **Tâche 3** : Déconnexion de l'application
-* **Tâche 4** Changer l'etat d'une tâche
+* **Tâche 4** : Changer l'etat d'une tâche
 * **Tâche 5** : Ajouter une tâche.  
 * **Tâche 6** : Terminer un sprint.  
 * **Tâche 7** : Choisir une tâche pour la réaliser.  
 * **Tâche 8** : Test Unitaire  
 * **Tâche 9** : Test UI (Selenium) [FRONT-END]  
 * **Tâche 10** : Documentation API (OpenAPI) [BACK-END]  
-* **Tâche 11** :Documentation SAP [FRONT-END]
+* **Tâche 11** : Documentation SAP [FRONT-END]
 
 ## Liste des Tâches : Description et DoD
 

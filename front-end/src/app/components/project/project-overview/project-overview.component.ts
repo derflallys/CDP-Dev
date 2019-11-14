@@ -98,16 +98,16 @@ export class ProjectOverviewComponent implements OnInit {
   updateIssue(idIssue) {
     const diagoFormIssue = this.dialog.open(UpdateIssueComponent, {width: '800px', data: {issueId: idIssue} });
     diagoFormIssue.afterClosed().subscribe(error => {
-        console.log(error);
-        if (error === false) {
-          this.snackBar.open('✅ Modification effectuée avec succès !', 'Fermer', this.configSnackBar);
-          this.refreshIssuesBacklog();
-          this.refreshSprints();
-        } else {
-          if (error) {
-            this.snackBar.open('❌ Une erreur s\'est produite lors de la modification !', 'Fermer', this.configSnackBar);
-          }
+      console.log(error);
+      if (error === false) {
+        this.snackBar.open('✅ Modification effectuée avec succès !', 'Fermer', this.configSnackBar);
+        this.refreshIssuesBacklog();
+        this.refreshSprints();
+      } else {
+        if (error) {
+          this.snackBar.open('❌ Une erreur s\'est produite lors de la modification !', 'Fermer', this.configSnackBar);
         }
+      }
     });
   }
 
@@ -145,15 +145,15 @@ export class ProjectOverviewComponent implements OnInit {
 
   refreshSprints() {
     this.sprintService.getSprintByProject(this.projectId).subscribe(sprints => {
-        this.sprints = sprints;
-        if (this.sprints.length !== 0) {
-          const sprintGet = sprints.filter(sprint => sprint._id === this.idSelectedSprint);
-          if (sprintGet.length === 0) {
-            this.idSelectedSprint = this.sprints[0]._id;
-            this.sprintSelected = this.sprints[0];
-          } else {
-            this.sprintSelected = sprintGet[0];
-          }
+      this.sprints = sprints;
+      if (this.sprints.length !== 0) {
+        const sprintGet = sprints.filter(sprint => sprint._id === this.idSelectedSprint);
+        if (sprintGet.length === 0) {
+          this.idSelectedSprint = this.sprints[0]._id;
+          this.sprintSelected = this.sprints[0];
+        } else {
+          this.sprintSelected = sprintGet[0];
+        }
       } else {
         this.idSelectedSprint = null;
         this.sprintSelected = null;
