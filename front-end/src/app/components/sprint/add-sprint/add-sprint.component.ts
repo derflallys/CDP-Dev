@@ -52,9 +52,7 @@ export class AddSprintComponent implements OnInit {
     const Sdate = this.addSprint.controls.startDate.value;
     const Edate = this.addSprint.controls.endDate.value;
     const state = this.addSprint.controls.state.value;
-    if (!this.projectId) { 
-      this.projectId = '5dbf51c7cb6d97659ce04a2b';
-    }
+
     if (this.update) {
       const updateSprint = new Sprint(this.sprint._id, this.sprint.sprintId, this.sprint.projectId, title, Sdate, Edate, state);
       this.sprintService.updateSprint(updateSprint, this.sprint._id).subscribe(
