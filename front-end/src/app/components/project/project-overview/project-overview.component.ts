@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProjectService } from '../../../services/project.service';
+import { TaskService } from '../../../services/task.service';
 import { Project } from '../../../models/project';
 import { Issue } from '../../../models/issue';
 import { Sprint } from '../../../models/sprint';
@@ -17,6 +18,8 @@ import {
   MatTableDataSource
 } from '@angular/material';
 import { AddIssueComponent } from '../../issue/add-issue/add-issue.component';
+import { AddTaskComponent } from '../../task/add-task/add-task.component';
+import { UpdateTaskComponent } from '../../task/update-task/update-task.component';
 import { UpdateIssueComponent } from '../../issue/update-issue/update-issue.component';
 import { DeleteDialogComponent } from '../../utils/delete-dialog/delete-dialog.component';
 import { AddSprintComponent } from '../../sprint/add-sprint/add-sprint.component';
@@ -46,6 +49,7 @@ export class ProjectOverviewComponent implements OnInit {
   constructor(
     private projectService: ProjectService,
     private issueService: IssueService,
+    private taskService: TaskService,
     private sprintService: SprintService,
     private route: ActivatedRoute,
     public dialog: MatDialog,
@@ -115,6 +119,60 @@ export class ProjectOverviewComponent implements OnInit {
     });
   }
 
+  addTask() {
+    const diagoFormTask = this.dialog.open(AddTaskComponent, {width: '800px', data: {projectId: this.projectId} });
+    diagoFormTask.afterClosed().subscribe(error => {
+      console.log(error);
+      if (error === false) {
+        this.snackBar.open('✅ Ajout tâche effectuée avec succès !', 'Fermer', this.configSnackBar);
+        this.refreshTasks();
+      } else {
+        if (error) {
+          this.snackBar.open('❌ Une erreur s\'est produite lors de l\'ajout !', 'Fermer', this.configSnackBar);
+        }
+      }
+    });
+  }
+
+  updateTask(idTask) {
+    const diagoFormTask = this.dialog.open(UpdateTaskComponent, {width: '800px', data: {taskId: idTask} });
+    diagoFormTask.afterClosed().subscribe(error => {
+      console.log(error);
+      if (error === false) {
+        this.snackBar.open('✅ Modification effectuée avec succès !', 'Fermer', this.configSnackBar);
+        this.refreshTasks();
+      } else {
+        if (error) {
+          this.snackBar.open('❌ Une erreur s\'est produite lors de la modification !', 'Fermer', this.configSnackBar);
+        }
+      }
+    });
+  }
+
+  deleteTask(idTask) {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.data = {
+      title: 'Suppression de la tâche numéro "' + idTask + '"',
+      content: 'Êtes-vous sûr de vouloir supprimer cette tâche ? '
+    };
+    const dialogRefDelete = this.dialog.open(DeleteDialogComponent, dialogConfig);
+    dialogRefDelete.afterClosed().subscribe(result => {
+      if (result === true) {
+        this.taskService.deleteTask(idTask).subscribe(() => {
+          this.snackBar.open('✅ Suppression effectuée avec succès !', 'Fermer', this.configSnackBar);
+          this.refreshTasks();
+        },
+          error => {
+            console.log(error);
+            this.snackBar.open('❌ Une erreur s\'est produite lors de la suppression !', 'Fermer', this.configSnackBar);
+          }
+        );
+      }
+    });
+  }
+
   getSprintSelected() {
     console.log('change');
     this.sprintSelected = this.sprints.filter(sprint => sprint._id === this.idSelectedSprint)[0];
@@ -163,6 +221,10 @@ export class ProjectOverviewComponent implements OnInit {
         this.sprintSelected = null;
       }
     });
+  }
+
+  refreshTasks() {
+    // TODO
   }
 
   deleteIssue(idIssue, numberIssue) {
