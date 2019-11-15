@@ -4,7 +4,6 @@ import { environment } from '../../environments/environment';
 import { Observable } from 'rxjs';
 import { Sprint } from '../models/sprint';
 
-
 const httpOptions = {
   headers: new HttpHeaders({
     'Content-Type':  'application/json',

@@ -20,7 +20,9 @@ import {
   MatSnackBarModule,
   MatSortModule,
   MatBadgeModule,
-  MatTooltipModule
+  MatTooltipModule,
+  MatListModule,
+  MatCheckboxModule
 } from '@angular/material';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -37,6 +39,9 @@ import { UpdateSprintComponent } from './components/sprint/update-sprint/update-
 import { DeleteDialogComponent } from './components/utils/delete-dialog/delete-dialog.component';
 import { UpdateProjectComponent } from './components/project/update-project/update-project.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { AddTaskComponent } from './components/task/add-task/add-task.component';
+import { SignupComponent } from './components/user/signup/signup.component';
+import { UpdateTaskComponent } from './components/task/update-task/update-task.component';
 
 @NgModule({
   exports: [
@@ -53,7 +58,8 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     MatPaginatorModule,
     MatExpansionModule,
     MatSnackBarModule,
-    MatSortModule
+    MatSortModule,
+    MatCheckboxModule
   ],
   imports: [],
   declarations: []
@@ -71,7 +77,10 @@ export class MaterialModule {}
     ProjectOverviewComponent,
     UpdateSprintComponent,
     DeleteDialogComponent,
-    UpdateProjectComponent
+    AddTaskComponent,
+    SignupComponent,
+    UpdateProjectComponent,
+    UpdateTaskComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -84,10 +93,11 @@ export class MaterialModule {}
     MatDialogModule,
     DragDropModule,
     MatBadgeModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatListModule
   ],
   entryComponents: [ DeleteDialogComponent ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [ AppComponent ]
 })
 export class AppModule { }

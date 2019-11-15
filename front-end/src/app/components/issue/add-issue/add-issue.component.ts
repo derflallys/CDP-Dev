@@ -62,12 +62,13 @@ export class AddIssueComponent implements OnInit {
     const priority = this.addIssue.controls.priority.value;
     if (this.update) {
       const updateIssue = new Issue(this.issue.projectId, this.issue._id, description, state, priority, difficulty, this.issue.sprintId);
-      this.issueService.updateIssue(updateIssue, this.issue._id).subscribe( res => {
-        console.log(res);
-        console.log('Update');
-        this.dialogRefUpdate.close(this.error);
-        this.ngZone.run(() => this.router.navigate(['project/' + this.issue.projectId]));
-      },
+      this.issueService.updateIssue(updateIssue, this.issue._id).subscribe(
+        res => {
+          console.log(res);
+          console.log('Update');
+          this.dialogRefUpdate.close(this.error);
+          this.ngZone.run(() => this.router.navigate(['project/' + this.issue.projectId]));
+        },
         error => {
           this.error = true;
           this.dialogRefUpdate.close(this.error);
@@ -78,39 +79,40 @@ export class AddIssueComponent implements OnInit {
       const newIssue = new Issue(this.projectId, null, description, state, priority, difficulty);
       console.log(newIssue);
       console.log('Add');
-      this.issueService.addIssue(newIssue).subscribe(res => {
-        console.log(res);
-        this.dialogRef.close(this.error);
-        this.ngZone.run(() => this.router.navigate(['project/' + this.projectId]));
-      }
-      ,
+      this.issueService.addIssue(newIssue).subscribe(
+        res => {
+          console.log(res);
+          this.dialogRef.close(this.error);
+          this.ngZone.run(() => this.router.navigate(['project/' + this.projectId]));
+        },
         error => {
           this.error = true;
           this.dialogRef.close(this.error);
           console.log(error);
-        });
+        }
+      );
     }
   }
 
   private loadIssue() {
-    this.issueService.getIssue(this.issueId).subscribe(res => {
-      this.issue = res;
-      this.title = 'Modifier l\'issue';
-      this.addIssue = this.formBuilder.group({
-        description: [this.issue.description, Validators.required],
-        state: [this.issue.state, Validators.required],
-        difficulty: [this.issue.difficulty, Validators.required],
-        priority: [this.issue.priority, Validators.required]
-      });
-      this.update = true;
-    },
-      error => {
-        console.log(error);
-      }
+    this.issueService.getIssue(this.issueId).subscribe(
+      res => {
+        this.issue = res;
+        this.title = 'Modifier l\'issue';
+        this.addIssue = this.formBuilder.group({
+          description: [this.issue.description, Validators.required],
+          state: [this.issue.state, Validators.required],
+          difficulty: [this.issue.difficulty, Validators.required],
+          priority: [this.issue.priority, Validators.required]
+        });
+        this.update = true;
+      },
+      error => { console.log(error); }
     );
   }
 
   cancel() {
     this.dialogRef.close(undefined);
   }
+
 }

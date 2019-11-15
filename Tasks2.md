@@ -2,30 +2,46 @@
 
 | ID | US liée | Dépendances | Temps estimé | Etat | Affectation |
 |----|----|----|----|----|----|
-| 0.1 | * | 0.1 | 0.5 | TODO |  |
-| 0.2 | * | 0.1 | 0.5 | TODO |  |
-| 1 | * | 0.1 | 0.5 | TODO |  |
-| 2 | * | 0.1 | 0.5 | TODO |  |
-| 3 | * | 0.1 | 0.5 | TODO |  |
+| 0.1 | US1, US2, US3, US4, US5, US7  | x | 0.5 | DONE | Oumayma |
+| 0.2 | x | x | 0.5 | TODO | Alfred |
+| 1.1 | US1 | 0.1 | 0.5 | TODO | Oumayma |
+| 1.2 | US1 | 0.1 | 0.5 | TODO | Alfred  |
+| 2 | US2 | 0.1 | 0.5 | TODO |  |
+| 3 | US3 | 0.1 | 0.5 | TODO |  |
 | 4.0 | US13 | 0.1 | 0.5 | TODO |  |
-| 5 | * | 0.1 | 0.5 | TODO |  |
-| 6 | * | 0.1 | 0.5 | TODO |  |
-| 7 | * | 0.1 | 0.5 | TODO |  |
-| 8 | * | 0.1 | 0.5 | TODO |  |
-| 9 | * | 0.1 | 0.5 | TODO |  |
-| 10 | * | 0.1 | 0.5 | TODO |  |
+| 5 | US10 | 0.1 | 0.5 | TODO | Eudes |
+| 6 | US8 | 0.1 | 0.5 | TODO |  |
+| 7 | US12 | 0.1 | 0.5 | TODO |  |
+| 8 | x | 0.1 | 0.5 | TODO |  |
+| 9 | x | 0.1 | 0.5 | TODO |  |
+| 10 | x | 0.1 | 0.5 | TODO |  |
 | 11 | * | 0.1 | 0.5 | TODO |  |
 
 ---
 
-## Liste des Tâches et description
+## Liste des Tâches : Résumé
 
+* **Tâche 0.1** : Définir le schéma/modéle de la base de * données [BACK-END].  
+* **Tâche 0.2** Creer le fichier `docker-compose.yaml`.  
+* **Tâche 1** : Inscription dans l'application.
+* **Tâche 2** : Connexion à l'application.
+* **Tâche 3** : Déconnexion de l'application
+* **Tâche 4** : Changer l'etat d'une tâche
+* **Tâche 5** : Ajouter une tâche.  
+* **Tâche 6** : Terminer un sprint.  
+* **Tâche 7** : Choisir une tâche pour la réaliser.  
+* **Tâche 8** : Test Unitaire  
+* **Tâche 9** : Test UI (Selenium) [FRONT-END]  
+* **Tâche 10** : Documentation API (OpenAPI) [BACK-END]  
+* **Tâche 11** : Documentation SAP [FRONT-END]
+
+## Liste des Tâches : Description et DoD
 
 **Tâche 0.1** : Définir le schéma/modéle de la base de données [BACK-END].  
 **DoD** :
-> * `User` contenant les propriétés `(_id, username, mail, password)`
-> * `Tâche` contenant les propriétés `( _id, user_story_FK, description, durée, etat)`
 
+> * `User` contenant les propriétés `(_id, username, e-mail, password)`
+> * `Tâche` contenant les propriétés `( _id, issues, dod,  state, startDate, endDate, ToTest, ToDoc)`
 
 **Tâche 0.2** Creer le fichier `docker-compose.yaml`.  
 **DoD** :
@@ -42,7 +58,7 @@
 **Tâche 2** : Connexion à l'application.
 **DoD :**
 > Tâche 2.1 : [FRONT-END]
-> Les utilisateurs pourront se connecter à l'application aux travers d'une page `login`. Il leur sera présenter un formulaire de connexion contenant les champs e-mail et mot de passe. Ils pourront après avoir saisit ces deux informations appuyer sur le bouton de connexion. Si leurs identifiant sont inccorect, un message d'erreur apparaitra, sinon il seront redirigé vers la page qui liste leurs projets. 
+> Les utilisateurs pourront se connecter à l'application aux travers d'une page `login`. Il leur sera présenter un formulaire de connexion contenant les champs e-mail et mot de passe. Ils pourront après avoir saisit ces deux informations appuyer sur le bouton de connexion. Si leurs identifiant sont inccorect, un message d'erreur apparaitra, sinon il seront redirigé vers la page qui liste leurs projets.
 > Pour cela il faudrat créer le composant `authentification` qui appellera la méthode `connect` dans le fichier `authentification.service.ts`.
 > Après connexion, le client devra stocker le token pour pouvoir le renvoyer dans les requêtes qui suivront.
 >
@@ -50,23 +66,19 @@
 > Dans le fichier `authentication.js` (répertoire `util`), la méthode `checkAuthentication` vérifiera les informations envoyés par le client et si celles-ci sont valide, renverra au client un token (JWT).
 
 **Tâche 3** : Déconnexion de l'application
+**DoD** :
 > Tâche 3.1 : [FRONT-END]
 > Les utilisateurs connectés pourront se déconnecter de l'application en cliquant sur le bouton "Logout" présent en haut a droite du menu de navigation. Une fois déconnecter, ils seront rediriger vers la page de connexion.
 >
 > Tâche 3.2 : [BACK-END] :
-> TODO: Après réception de l'information de déconnexion du client, la méthode `disconnect` présente dans le fichier `authentication.js` (répertoire `util`) détruira le token associé à l'utilisateur.
-
-
-
+> Après réception de l'information de déconnexion du client, la méthode `disconnect` présente dans le fichier `authentication.js` (répertoire `util`) détruira le token associé à l'utilisateur.
 
 **Tâche 4** Changer l'etat d'une tâche
-> **DoD** : 
+ **DoD** :
 > Les developpeurs pourront modifier l'etat d'une tâche avec une liste deroulante qui contient les valeurs (Doing, Todo, Done).
 > Tâche 4.0** : [FRONT-END]
 >Les developpeurs pourront modifier l'etat d'une tâche avec une liste deroulante qui contient les valeurs (Doing, Todo, Done) et des buttons de choix pour dire s'ils sont tester ou documenter en cliquant sur le bouton de modification présent sur la page `detail-project`. En cliquant sur ce bouton, le même formulaire que celui de l'ajout d'un sprint apparraitra, cette fonction de modification permet de modifier les informations d'un sprint en pré-remplissant le formulaire avec les informations existantes.
 >
-
-
 
 **Tâche 5** : Ajouter une tâche.  
 **DoD** :
@@ -78,8 +90,6 @@
 >**Tâche 5.2** : [BACK-END]
 > Ajouter dans le controlleur (`tache.controllers.js`) dans `tache` la methode qui permet d'ajouter ce modele dans la base de données après avoir defini le route dans le fichier `tache.router.js` avec la methode post de http du router.
 
-
-
 **Tâche 6** : Terminer un sprint.  
 **DoD** :
 > Le développeur peut terminer un sprint en cliquant sur le bouton  "Terminer Sprint" présent sur le cadre du sprint choisi dans la page 'details projet'. Une fois le sprint est terrminé toutes les issues non faites pendant ce sprint seront mises sur le sprint suivant.
@@ -89,7 +99,6 @@
 >
 >**Tâche 6.2** : [BACK-END]
 >La methode  sera fait dans le fichier `detail-project.component.ts` dans le composant detail-project et en ajouter aussi le service HTTP dans le fichier `sprint.service.ts` si il est pas defini.
-
 
 **Tâche 7** : Choisir une tâche pour la réaliser.  
 **DoD** :
@@ -104,16 +113,15 @@
 **DoD** :
 >
 >**Tâche 8.1** : [FRONT-END]
->La définition des testes unitaires est fait sur de chaque componsant se fait sur le fichier `nom_composant.spec.ts` avec Jasmine .
+>La définition des testes unitaires est fait sur de chaque componsant se fait sur le fichier `nom_composant.spec.ts` avec Jasmine.
 >**Tâche 8.2** : [BACK-END]
->La description des testes unitaires se font sur les dossiers __ tests __  de chaque modéles ( `project` ...) avec Jasmine .
+>La description des testes unitaires se font sur les dossiers __ tests __  de chaque modéles ( `project` ...) avec Jasmine.
 
 **Tâche 9** : Test UI (Selenium) [FRONT-END]  
 **DoD** :
 >
->**Tâche 9.1** : 
+>**Tâche 9.1** :
 >
-
 
 **Tâche 10** : Documentation API (OpenAPI) [BACK-END]  
 **DoD** :
@@ -123,9 +131,8 @@ Créer un dossier à la racine de votre projet nommez le api
 Créer un dossier dans api et nommez le swagger
 Créer un fichier dans swagger et nommez le swagger.yaml
 Renseigner les differents routes de l'api pour chaque entité
-Utiliser [https://swagger.io/tools/swagger-editor](https://) pour voir le rendu de la doc 
+Utiliser [https://swagger.io/tools/swagger-editor](https://) pour voir le rendu de la doc.
 
-
-**Tâche 11** :Documentation SAP [FRONT-END] 
+**Tâche 11** :Documentation SAP [FRONT-END]
 **DoD** :
 >Ecrire la description de chaque Component , en ajoutant les specifications de chacun d'un .

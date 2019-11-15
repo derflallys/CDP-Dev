@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild} from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ProjectService } from '../../../services/project.service';
 import {
   MatDialog,
@@ -20,13 +20,15 @@ import { DeleteDialogComponent } from '../../utils/delete-dialog/delete-dialog.c
   providers: []
 })
 export class ProjectListComponent implements OnInit {
+
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
-
   projects: MatTableDataSource<Project> = new MatTableDataSource<Project>();
+  configSnackBar = new MatSnackBarConfig();
+
   nbProject: Number
   displayedColumns: string[] = ['createdAt', 'title', 'duration', 'repositoryURL', 'actions'];
-  configSnackBar = new MatSnackBarConfig();
+
 
   constructor(
     private projectService: ProjectService,
@@ -44,7 +46,6 @@ export class ProjectListComponent implements OnInit {
       this.nbProject = res.length;
       this.projects.paginator = this.paginator;
       this.projects.sort = this.sort;
-
     });
   }
 

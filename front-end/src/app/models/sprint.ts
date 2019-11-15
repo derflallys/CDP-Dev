@@ -13,7 +13,7 @@ export class Sprint {
     this.state = state;
     this.projectId = projectId;
     this.title = title;
-    this.startDate = startDate ;
+    this.startDate = startDate;
     this.endDate = endDate;
   }
 }

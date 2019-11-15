@@ -35,7 +35,7 @@ export class AddProjectComponent implements OnInit {
       title: ['', Validators.required],
       duration: [1, Validators.required],
       description: ['', Validators.required],
-      url: ['https://www.url.tld/repo.git', Validators.required],
+      repositoryURL: ['https://www.url.tld/repo.git', Validators.required],
       refspecifying: ['', Validators.required]
     });
     if (this.projectId) { this.loadProject(); }
@@ -45,58 +45,55 @@ export class AddProjectComponent implements OnInit {
     if (this.addProject.invalid) { return; }
 
     const title = this.addProject.controls.title.value;
+    const users = []; // TMP
     const duration = Number(this.addProject.controls.duration.value);
     const description = this.addProject.controls.description.value;
-    const url = this.addProject.controls.url.value;
+    const repositoryURL = this.addProject.controls.repositoryURL.value;
     const refspecifying = this.addProject.controls.refspecifying.value;
 
     if (this.update) {
-      const updateProject = new Project(this.projectId, title, duration, description, url, refspecifying);
-      this.projectService.updateProject(updateProject, this.project._id).subscribe( res => {
-        console.log(res);
-        console.log('Update');
-        this.dialogRefUpdate.close();
-      },
-        error => {
-          console.log(error);
-        }
+      const updateProject = new Project(this.projectId, title, users, duration, description, repositoryURL, refspecifying);
+      this.projectService.updateProject(updateProject, this.project._id).subscribe(
+        res => {
+          console.log(res);
+          console.log('Update');
+          this.dialogRefUpdate.close();
+        },
+        error => { console.log(error); }
       );
     } else {
-      const newProject = new Project(null, title, duration, description, url, refspecifying);
+      const newProject = new Project(null, title, users, duration, description, repositoryURL, refspecifying);
       console.log(newProject);
-      this.projectService.addProject(newProject).subscribe(project => {
-        this.projectService.getProjects().subscribe(projets => {
-          project  = projets[projets.length - 1];
+      this.projectService.addProject(newProject).subscribe(() => {
+        this.projectService.getProjects().subscribe(projects => {
+          const project = projects[projects.length - 1];
+          // Create the first sprint of the project
           const endDate = new Date();
-          console.log(new Date(project.createdAt));
-          endDate.setDate(new Date(project.createdAt).getDate() + 10);
+          const sprintDuration = 10;
+          endDate.setDate(new Date(project.createdAt).getDate() + sprintDuration);
           const sprint0 = new Sprint(null, 0, project._id, 'Sprint 0', project.createdAt.toString(), endDate.toString());
-          this.sprintService.addSprint(sprint0).subscribe(sprint => {
-            console.log(sprint);
-          });
+          this.sprintService.addSprint(sprint0).subscribe(sprint => { console.log(sprint); });
+          this.dialogRef.close();
         });
-        this.dialogRef.close();
       });
     }
   }
 
-
   private loadProject() {
-    this.projectService.getProject(this.projectId).subscribe(res => {
-      this.project = res;
-      this.title = 'Modifier le projet';
-      this.addProject = this.formBuilder.group({
-        title: [this.project.title, Validators.required],
-        duration: [this.project.duration, Validators.required],
-        description: [this.project.description, Validators.required],
-        repositoryURL: [this.project.repositoryURL, Validators.required],
-        refspecifying: [this.project.refspecifying, Validators.required],
-      });
-      this.update = true;
-    },
-      error => {
-        console.log(error);
-      }
+    this.projectService.getProject(this.projectId).subscribe(
+      res => {
+        this.project = res;
+        this.title = 'Modifier le projet';
+        this.addProject = this.formBuilder.group({
+          title: [this.project.title, Validators.required],
+          duration: [this.project.duration, Validators.required],
+          description: [this.project.description, Validators.required],
+          repositoryURL: [this.project.repositoryURL, Validators.required],
+          refspecifying: [this.project.refspecifying, Validators.required],
+        });
+        this.update = true;
+      },
+      error => { console.log(error); }
     );
   }
 

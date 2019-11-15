@@ -1,9 +1,12 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProjectService } from '../../../services/project.service';
+import { TaskService } from '../../../services/task.service';
 import { Project } from '../../../models/project';
 import { Issue } from '../../../models/issue';
 import { Sprint } from '../../../models/sprint';
+import { Task } from '../../../models/task';
+
 import { IssueService } from '../../../services/issue.service';
 import { SprintService } from '../../../services/sprint.service';
 import {
@@ -15,6 +18,8 @@ import {
   MatTableDataSource
 } from '@angular/material';
 import { AddIssueComponent } from '../../issue/add-issue/add-issue.component';
+import { AddTaskComponent } from '../../task/add-task/add-task.component';
+import { UpdateTaskComponent } from '../../task/update-task/update-task.component';
 import { UpdateIssueComponent } from '../../issue/update-issue/update-issue.component';
 import { DeleteDialogComponent } from '../../utils/delete-dialog/delete-dialog.component';
 import { AddSprintComponent } from '../../sprint/add-sprint/add-sprint.component';
@@ -32,8 +37,10 @@ export class ProjectOverviewComponent implements OnInit {
   project: Project;
   issues: MatTableDataSource<Issue>;
   sprints: Sprint[] = [];
+  tasks: Task[] = [];
   projectId;
   displayedColumns: string[] = ['ID', 'Description', 'Priorité', 'Etat', 'Actions'];
+  displayedColumnsTask: string[] = ['ID', 'Description', 'Développeur', 'US liées', 'Actions']
   configSnackBar = new MatSnackBarConfig();
   allIssues: Issue[] = [];
   idSelectedSprint;
@@ -42,6 +49,7 @@ export class ProjectOverviewComponent implements OnInit {
   constructor(
     private projectService: ProjectService,
     private issueService: IssueService,
+    private taskService: TaskService,
     private sprintService: SprintService,
     private route: ActivatedRoute,
     public dialog: MatDialog,
@@ -98,16 +106,70 @@ export class ProjectOverviewComponent implements OnInit {
   updateIssue(idIssue) {
     const diagoFormIssue = this.dialog.open(UpdateIssueComponent, {width: '800px', data: {issueId: idIssue} });
     diagoFormIssue.afterClosed().subscribe(error => {
-        console.log(error);
-        if (error === false) {
-          this.snackBar.open('✅ Modification effectuée avec succès !', 'Fermer', this.configSnackBar);
-          this.refreshIssuesBacklog();
-          this.refreshSprints();
-        } else {
-          if (error) {
-            this.snackBar.open('❌ Une erreur s\'est produite lors de la modification !', 'Fermer', this.configSnackBar);
-          }
+      console.log(error);
+      if (error === false) {
+        this.snackBar.open('✅ Modification effectuée avec succès !', 'Fermer', this.configSnackBar);
+        this.refreshIssuesBacklog();
+        this.refreshSprints();
+      } else {
+        if (error) {
+          this.snackBar.open('❌ Une erreur s\'est produite lors de la modification !', 'Fermer', this.configSnackBar);
         }
+      }
+    });
+  }
+
+  addTask() {
+    const diagoFormTask = this.dialog.open(AddTaskComponent, {width: '800px', data: {projectId: this.projectId} });
+    diagoFormTask.afterClosed().subscribe(error => {
+      console.log(error);
+      if (error === false) {
+        this.snackBar.open('✅ Ajout tâche effectuée avec succès !', 'Fermer', this.configSnackBar);
+        this.refreshTasks();
+      } else {
+        if (error) {
+          this.snackBar.open('❌ Une erreur s\'est produite lors de l\'ajout !', 'Fermer', this.configSnackBar);
+        }
+      }
+    });
+  }
+
+  updateTask(idTask) {
+    const diagoFormTask = this.dialog.open(UpdateTaskComponent, {width: '800px', data: {taskId: idTask} });
+    diagoFormTask.afterClosed().subscribe(error => {
+      console.log(error);
+      if (error === false) {
+        this.snackBar.open('✅ Modification effectuée avec succès !', 'Fermer', this.configSnackBar);
+        this.refreshTasks();
+      } else {
+        if (error) {
+          this.snackBar.open('❌ Une erreur s\'est produite lors de la modification !', 'Fermer', this.configSnackBar);
+        }
+      }
+    });
+  }
+
+  deleteTask(idTask) {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.data = {
+      title: 'Suppression de la tâche numéro "' + idTask + '"',
+      content: 'Êtes-vous sûr de vouloir supprimer cette tâche ? '
+    };
+    const dialogRefDelete = this.dialog.open(DeleteDialogComponent, dialogConfig);
+    dialogRefDelete.afterClosed().subscribe(result => {
+      if (result === true) {
+        this.taskService.deleteTask(idTask).subscribe(() => {
+          this.snackBar.open('✅ Suppression effectuée avec succès !', 'Fermer', this.configSnackBar);
+          this.refreshTasks();
+        },
+          error => {
+            console.log(error);
+            this.snackBar.open('❌ Une erreur s\'est produite lors de la suppression !', 'Fermer', this.configSnackBar);
+          }
+        );
+      }
     });
   }
 
@@ -145,20 +207,24 @@ export class ProjectOverviewComponent implements OnInit {
 
   refreshSprints() {
     this.sprintService.getSprintByProject(this.projectId).subscribe(sprints => {
-        this.sprints = sprints;
-        if (this.sprints.length !== 0) {
-          const sprintGet = sprints.filter(sprint => sprint._id === this.idSelectedSprint);
-          if (sprintGet.length === 0) {
-            this.idSelectedSprint = this.sprints[0]._id;
-            this.sprintSelected = this.sprints[0];
-          } else {
-            this.sprintSelected = sprintGet[0];
-          }
+      this.sprints = sprints;
+      if (this.sprints.length !== 0) {
+        const sprintGet = sprints.filter(sprint => sprint._id === this.idSelectedSprint);
+        if (sprintGet.length === 0) {
+          this.idSelectedSprint = this.sprints[0]._id;
+          this.sprintSelected = this.sprints[0];
+        } else {
+          this.sprintSelected = sprintGet[0];
+        }
       } else {
         this.idSelectedSprint = null;
         this.sprintSelected = null;
       }
     });
+  }
+
+  refreshTasks() {
+    // TODO
   }
 
   deleteIssue(idIssue, numberIssue) {
