@@ -14,7 +14,9 @@
     "test-generate-fixtures": "node ./src/tests/fixtures.js",
     "dev": "nodemon --exec yarn restart",
     "restart": "rimraf dist && yarn build && yarn start",
-    "start": "node dist/index.js"
+    "prod": "rimraf dist && yarn build && yarn startProd",
+    "start": "node dist/index.js",
+    "startProd": "NODE_ENV=production node dist/index.js"
   },
   "dependencies": {
     "bcrypt": "^3.0.2",
