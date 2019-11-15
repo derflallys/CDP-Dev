@@ -24,7 +24,7 @@ export class AddSprintComponent implements OnInit {
   ];
 
   constructor(
-    private formBuilder: FormBuilder, 
+    private formBuilder: FormBuilder,
     private sprintService: SprintService,
     public dialogRef: MatDialogRef<AddSprintComponent>,
     @Inject(MAT_DIALOG_DATA) public data: {projectId: null},
