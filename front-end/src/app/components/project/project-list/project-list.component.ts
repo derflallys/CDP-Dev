@@ -26,7 +26,7 @@ export class ProjectListComponent implements OnInit {
   projects: MatTableDataSource<Project> = new MatTableDataSource<Project>();
   configSnackBar = new MatSnackBarConfig();
 
-  nbProject: Number
+  nbProject: number;
   displayedColumns: string[] = ['createdAt', 'title', 'duration', 'repositoryURL', 'actions'];
 
 
@@ -58,17 +58,31 @@ export class ProjectListComponent implements OnInit {
 
   addProject() {
     const diagoFormProject = this.dialog.open(AddProjectComponent, {width: '800px'});
-    diagoFormProject.afterClosed().subscribe(() => {
-      this.snackBar.open('✅ Ajout projet effectuée avec succès !', 'Fermer', this.configSnackBar);
-      this.refreshProjects();
+    diagoFormProject.afterClosed().subscribe(error => {
+      if (error === false) {
+        this.snackBar.open('✅ Ajout projet effectuée avec succès !', 'Fermer', this.configSnackBar);
+        this.refreshProjects();
+      } else {
+        if (error) {
+          this.snackBar.open('❌ Une erreur s\'est produite lors de l\'ajout !', 'Fermer', this.configSnackBar);
+        }
+      }
+
     });
   }
 
   updateProject(projectId) {
-    const diagoFormProject = this.dialog.open(UpdateProjectComponent, {width: '800px', data: {projectId: projectId} });
-    diagoFormProject.afterClosed().subscribe(() => {
-      this.snackBar.open('✅ Modification effectuée avec succès !', 'Fermer', this.configSnackBar);
-      this.refreshProjects();
+    const diagoFormProject = this.dialog.open(UpdateProjectComponent, {width: '800px', data: {projectId} });
+    diagoFormProject.afterClosed().subscribe(error => {
+      if (error === false) {
+        this.snackBar.open('✅ Modification effectuée avec succès !', 'Fermer', this.configSnackBar);
+        this.refreshProjects();
+      } else {
+        if (error) {
+          this.snackBar.open('❌ Une erreur s\'est produite lors de l\'ajout !', 'Fermer', this.configSnackBar);
+        }
+      }
+
     });
   }
 

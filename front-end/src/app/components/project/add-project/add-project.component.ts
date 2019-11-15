@@ -20,6 +20,7 @@ export class AddProjectComponent implements OnInit {
   project: Project;
   @Input() projectId = null;
   update = false;
+  error = false;
   URL_REGEX = /^(https?:\/\/)([\da-z.-]+)\.([a-z.]{2,6})\/?([\w .-]*)*(\.git)$/g;
 
   constructor(
@@ -57,9 +58,13 @@ export class AddProjectComponent implements OnInit {
         res => {
           console.log(res);
           console.log('Update');
-          this.dialogRefUpdate.close();
+          this.dialogRefUpdate.close(this.error);
         },
-        error => { console.log(error); }
+        error => {
+          this.error = true;
+          this.dialogRefUpdate.close(this.error);
+          console.log(error);
+        }
       );
     } else {
       const newProject = new Project(null, title, users, duration, description, repositoryURL, refspecifying);
@@ -73,8 +78,14 @@ export class AddProjectComponent implements OnInit {
           endDate.setDate(new Date(project.createdAt).getDate() + sprintDuration);
           const sprint0 = new Sprint(null, 0, project._id, 'Sprint 0', project.createdAt.toString(), endDate.toString());
           this.sprintService.addSprint(sprint0).subscribe(sprint => { console.log(sprint); });
-          this.dialogRef.close();
-        });
+          this.dialogRef.close(this.error);
+        },
+          error1 => {
+            this.error = true;
+            this.dialogRef.close(this.error);
+            console.log(error1);
+          }
+        );
       });
     }
   }
@@ -95,6 +106,10 @@ export class AddProjectComponent implements OnInit {
       },
       error => { console.log(error); }
     );
+  }
+
+  cancel() {
+    this.dialogRef.close(undefined);
   }
 
 }
