@@ -43,7 +43,7 @@ export class AuthenticationService {
     return !(date.valueOf() > new Date().valueOf());
   }
 
-  login(user): Promise<string> {
+  signin(user): Promise<string> {
     return this.http
       .post(`${this.url}/signin`, JSON.stringify(user), { headers: this.headers })
       .toPromise()

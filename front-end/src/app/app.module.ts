@@ -42,6 +42,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 import { AddTaskComponent } from './components/task/add-task/add-task.component';
 import { SignupComponent } from './components/user/signup/signup.component';
 import { UpdateTaskComponent } from './components/task/update-task/update-task.component';
+import { SigninComponent } from './components/user/signin/signin.component';
 
 @NgModule({
   exports: [
@@ -79,6 +80,7 @@ export class MaterialModule {}
     DeleteDialogComponent,
     AddTaskComponent,
     SignupComponent,
+    SigninComponent,
     UpdateProjectComponent,
     UpdateTaskComponent
   ],

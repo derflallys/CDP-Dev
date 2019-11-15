@@ -50,7 +50,5 @@ export class SignupComponent implements OnInit {
   }
 
 
-  cancel() {
-    this.dialogRef.close(undefined);
-  }
+
 }
