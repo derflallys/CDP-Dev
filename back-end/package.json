@@ -6,7 +6,7 @@
   "license": "MIT",
   "scripts": {
     "build": "babel src --out-dir dist",
-    "test": "NODE_ENV=testing jest --forceExit --detectOpenHandles  --silent",
+    "test": "NODE_ENV=testing jest --forceExit --detectOpenHandles --silent",
     "test-routes": "yarn test -t router",
     "test-models": "yarn test -t model",
     "test-controllers": "yarn test -t controllers",
@@ -31,6 +31,7 @@
     "mongoose": "^5.7.7",
     "mongoose-auto-increment": "^5.0.1",
     "mongoose-sequence": "^5.2.2",
+    "mongoose-unique-validator": "^2.0.3",
     "morgan": "^1.9.1",
     "validator": "^10.9.0"
   },
