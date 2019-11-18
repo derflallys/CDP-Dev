@@ -1,3 +1,5 @@
+import { initCounterProject } from './counter.model.js'
+
 export const getOne = model => async (req, res) => {
   try {
     const doc = await model
@@ -33,6 +35,17 @@ export const getMany = model => async (req, res) => {
 export const createOne = model => async (req, res) => {
   try {
     const doc = await model.create({ ...req.body })
+    res.status(201).json(doc)
+  } catch (e) {
+    console.error(e)
+    res.status(400).end()
+  }
+}
+
+export const createOneProject = model => async (req, res) => {
+  try {
+    const doc = await model.create({ ...req.body })
+    initCounterProject(doc._id)
     res.status(201).json(doc)
   } catch (e) {
     console.error(e)
@@ -124,6 +137,7 @@ export const crudControllers = model => ({
   getMany: getMany(model),
   getOne: getOne(model),
   createOne: createOne(model),
+  createOneProject: createOneProject(model),
   getByProject: getByProject(model),
   getBySprint: getBySprint(model)
 })

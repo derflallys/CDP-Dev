@@ -1,4 +1,4 @@
-import { getSeq } from '../../utils/counter.model'
+import { createCounterProjet, getSeq } from '../../utils/counter.model'
 const mongoose = require('mongoose')
 
 const SprintSchema = new mongoose.Schema({
@@ -33,7 +33,7 @@ const SprintSchema = new mongoose.Schema({
 SprintSchema.pre('save', function(next) {
   console.log('pre save')
   const st = this
-  const seq = getSeq('Sprint')
+  const seq = getSeq('Sprint', st.projectId)
   return seq.then(res => {
     st.sprintId = res
     next()

@@ -42,7 +42,8 @@ const IssueSchema = new mongoose.Schema(
 IssueSchema.pre('save', function(next) {
   console.log('pre save ')
   const st = this
-  const seq = getSeq('Issue')
+
+  const seq = getSeq('Issue', st.projectId)
   return seq.then(res => {
     st.issueId = res
     next()
