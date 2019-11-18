@@ -8,8 +8,8 @@ var UserRoleSchema = new mongoose.Schema({
   },
   role: {
     type: String,
-    required: true,
-    enum: ['DEV', 'PO']
+    enum: ['DEV', 'PO'],
+    required: true
   }
 })
 
