@@ -11,6 +11,7 @@ import { UpdateSprintComponent } from './components/sprint/update-sprint/update-
 import { UpdateProjectComponent } from './components/project/update-project/update-project.component';
 import { AddTaskComponent } from './components/task/add-task/add-task.component';
 import { SignupComponent } from './components/user/signup/signup.component';
+import {SigninComponent} from './components/user/signin/signin.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'projects', pathMatch: 'full' },
@@ -23,7 +24,9 @@ const routes: Routes = [
   { path: 'updatesprint/:id', component: UpdateSprintComponent },
   { path: 'addissue', component: AddIssueComponent },
   { path: 'addtask', component: AddTaskComponent },
-  { path: 'signup', component: SignupComponent }
+  { path: 'signup', component: SignupComponent },
+  { path: 'signin', component: SigninComponent }
+
 ];
 
 @NgModule({

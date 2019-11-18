@@ -6,7 +6,8 @@
 | 0.2 | x | x | 0.5 | TODO | Alfred |
 | 1.1 | US1 | 0.1 | 0.5 | TODO | Oumayma |
 | 1.2 | US1 | 0.1 | 0.5 | TODO | Alfred  |
-| 2 | US2 | 0.1 | 0.5 | TODO |  |
+| 2.1 | US2 | 0.1 | 0.5 | TODO | Oumayma |
+| 2.2 | US2 | 0.1 | 0.5 | TODO |  |
 | 3 | US3 | 0.1 | 0.5 | TODO |  |
 | 4.0 | US13 | 0.1 | 0.5 | TODO |  |
 | 5 | US10 | 0.1 | 0.5 | TODO | Eudes |
@@ -26,14 +27,14 @@
 * **Tâche 1** : Inscription dans l'application.
 * **Tâche 2** : Connexion à l'application.
 * **Tâche 3** : Déconnexion de l'application
-* **Tâche 4** : Changer l'etat d'une tâche
+* **Tâche 4** Changer l'etat d'une tâche
 * **Tâche 5** : Ajouter une tâche.  
 * **Tâche 6** : Terminer un sprint.  
 * **Tâche 7** : Choisir une tâche pour la réaliser.  
 * **Tâche 8** : Test Unitaire  
 * **Tâche 9** : Test UI (Selenium) [FRONT-END]  
 * **Tâche 10** : Documentation API (OpenAPI) [BACK-END]  
-* **Tâche 11** : Documentation SAP [FRONT-END]
+* **Tâche 11** :Documentation SAP [FRONT-END]
 
 ## Liste des Tâches : Description et DoD
 
@@ -50,7 +51,7 @@
 **Tâche 1** : Inscription dans l'application.
 **DoD :**
 > Tâche 1.1 : [FRONT-END]
-> Les utilisateurs pourront s'enregistrer sur l'application aux travers d'une page `register`. Il leur sera présenter un formulaire d'inscription contenant les champs e-mail, mot de passe, nom et pseudo. Si ces informations sont invalides (pseudo, e-mail déjà utilisé), un message d'erreur leur sera présenter. Sinon ils seront redirigé sur leur page personnel. Pour cela il faudrat créer le composant `register` qui appellera la méthode `tryRegister` dans le fichier `authentification.service.ts`.
+> Les utilisateurs pourront s'enregistrer sur l'application aux travers d'une page `Signup`. Il leur sera présenter un formulaire d'inscription contenant les champs e-mail, mot de passe, nom d'utilisateur. Si ces informations sont invalides (nom d'utilisateur, e-mail déjà utilisé), un message d'erreur leur sera présenter. Sinon ils seront redirigé sur leur page personnel. Pour cela il faudrat créer le composant `Signup` qui appellera la méthode `tryRegister` dans le fichier `authentification.service.ts`.
 >
 > Tâche 1.2 : [BACK-END]
 > Ajouter dans le controlleur (`user.controllers.js`) la méthode qui permet d'ajouter ce modèle dans la base de données après avoir défini la route dans le fichier `user.router.js` avec la methode post de http du router.
@@ -58,8 +59,8 @@
 **Tâche 2** : Connexion à l'application.
 **DoD :**
 > Tâche 2.1 : [FRONT-END]
-> Les utilisateurs pourront se connecter à l'application aux travers d'une page `login`. Il leur sera présenter un formulaire de connexion contenant les champs e-mail et mot de passe. Ils pourront après avoir saisit ces deux informations appuyer sur le bouton de connexion. Si leurs identifiant sont inccorect, un message d'erreur apparaitra, sinon il seront redirigé vers la page qui liste leurs projets.
-> Pour cela il faudrat créer le composant `authentification` qui appellera la méthode `connect` dans le fichier `authentification.service.ts`.
+> Les utilisateurs pourront se connecter à l'application aux travers d'une page `Signin`. Il leur sera présenter un formulaire de connexion contenant les champs e-mail et mot de passe. Ils pourront après avoir saisit ces deux informations appuyer sur le bouton de connexion. Si leurs identifiant sont inccorect, un message d'erreur apparaitra, sinon il seront redirigé vers la page qui liste leurs projets.
+> Pour cela il faudrat créer le composant `Signin` qui appellera la méthode `connect` dans le fichier `authentification.service.ts`.
 > Après connexion, le client devra stocker le token pour pouvoir le renvoyer dans les requêtes qui suivront.
 >
 > Tâche 2.2 : [BACK-END] :

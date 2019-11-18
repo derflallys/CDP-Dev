@@ -1,0 +1,31 @@
+<div class="row" style="margin-top: 70px">
+  <div class="col-md-6 col-lg-4 mx-auto">
+    <div class="card card-body">
+      <h3 class="text-center mb-4"  style="margin-top: 30px" >Se connecter</h3>
+      <form class="formGroup"  style="margin-top: 30px" novalidate [formGroup]="signinForm">
+
+
+        <mat-form-field class="input-field">
+          <input matInput placeholder="e-mail" formControlName="email" type="email"  >
+        </mat-form-field>
+
+
+        <mat-form-field class="input-field">
+          <input matInput placeholder="mot de passe" formControlName="password" type="password"  >
+        </mat-form-field>
+
+
+        <mat-dialog-actions >
+          <button mat-raised-button  color="primary" style="margin-left: 150px" type="submit" name="createAccount" (click)="submitSigninForm()">Se connecter</button>
+          <button mat-raised-button  color="warn"   style="margin-left: 30px" type="reset" name="reset" (click)="reset">Annuler</button>
+        </mat-dialog-actions>
+
+
+
+      </form>
+    </div>
+  </div>
+</div>
+
+
+
