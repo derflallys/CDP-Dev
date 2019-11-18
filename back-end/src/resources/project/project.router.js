@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import controllers from './project.controllers'
+import { crud, addUserOnProject } from './project.controllers'
 
 const router = Router()
 
@@ -7,15 +7,17 @@ const router = Router()
 
 router
   .route('/')
-  .get(controllers.getMany)
-  .post(controllers.createOneProject)
+  .get(crud.getMany)
+  .post(crud.createOneProject)
 
 // /api/project/:id
 
 router
   .route('/:id')
-  .get(controllers.getOne)
-  .put(controllers.updateOne)
-  .delete(controllers.removeOne)
+  .get(crud.getOne)
+  .put(crud.updateOne)
+  .delete(crud.removeOne)
+
+router.route('/user/:id/:un').post(addUserOnProject)
 
 export default router
