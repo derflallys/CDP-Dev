@@ -1,4 +1,4 @@
-import { createCounterProjet, getSeq } from '../../utils/counter.model'
+import {  getSeq } from '../../utils/counter.model'
 const mongoose = require('mongoose')
 
 const SprintSchema = new mongoose.Schema({

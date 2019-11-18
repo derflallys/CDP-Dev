@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import controllers from './sprint.controllers'
+import { crud } from './sprint.controllers'
 
 const router = Router()
 
@@ -7,18 +7,18 @@ const router = Router()
 
 router
   .route('/')
-  .get(controllers.getMany)
-  .post(controllers.createOne)
+  .get(crud.getMany)
+  .post(crud.createOne)
 
 // /api/sprint/:id
 
 router
   .route('/:id')
-  .get(controllers.getOne)
-  .put(controllers.updateOne)
-  .delete(controllers.removeOne)
+  .get(crud.getOne)
+  .put(crud.updateOne)
+  .delete(crud.removeOne)
 
 // /api/sprint/byproject
-router.route('/byproject/:id').get(controllers.getByProject)
+router.route('/byproject/:id').get(crud.getByProject)
 
 export default router

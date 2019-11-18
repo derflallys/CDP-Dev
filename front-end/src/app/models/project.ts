@@ -11,7 +11,6 @@ export class Project {
   refspecifying: string;
 
   constructor(id: string, title: string, users: Array<User>, duration: number, description: string, repositoryURL: string, refspecifying: string) {
-    this._id = id;
     this.title = title;
     this.users = users;
     this.duration = duration;

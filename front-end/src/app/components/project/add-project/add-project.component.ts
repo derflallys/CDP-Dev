@@ -27,8 +27,7 @@ export class AddProjectComponent implements OnInit {
     private formBuilder: FormBuilder,
     public dialogRef: MatDialogRef<AddProjectComponent>,
     public dialogRefUpdate: MatDialogRef<UpdateProjectComponent>,
-    private projectService: ProjectService,
-    private sprintService: SprintService
+    private projectService: ProjectService
   ) { }
 
   ngOnInit() {
@@ -69,24 +68,16 @@ export class AddProjectComponent implements OnInit {
     } else {
       const newProject = new Project(null, title, users, duration, description, repositoryURL, refspecifying);
       console.log(newProject);
-      this.projectService.addProject(newProject).subscribe(() => {
-        this.projectService.getProjects().subscribe(projects => {
-          const project = projects[projects.length - 1];
-          // Create the first sprint of the project
-          const endDate = new Date();
-          const sprintDuration = 10;
-          endDate.setDate(new Date(project.createdAt).getDate() + sprintDuration);
-          const sprint0 = new Sprint(null, 0, project._id, 'Sprint 0', project.createdAt.toString(), endDate.toString());
-          this.sprintService.addSprint(sprint0).subscribe(sprint => { console.log(sprint); });
+      this.projectService.addProject(newProject).subscribe(project => {
+        console.log(project);
+        this.dialogRef.close(this.error);
+      },
+        error1 => {
+          this.error = true;
           this.dialogRef.close(this.error);
-        },
-          error1 => {
-            this.error = true;
-            this.dialogRef.close(this.error);
-            console.log(error1);
-          }
-        );
-      });
+          console.log(error1);
+        }
+      );
     }
   }
 
