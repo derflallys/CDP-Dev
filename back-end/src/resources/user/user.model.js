@@ -25,11 +25,11 @@ const UserSchema = new mongoose.Schema(
   { timestamps: true }
 )
 
-//UserSchema.plugin(uniqueValidator)
+UserSchema.plugin(uniqueValidator)
 
 UserSchema.path('email').validate(function(email) {
-  var emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/
-  return emailRegex.test(email.text) // Assuming email has a text attribute
+  const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$/
+  return emailRegex.test(email)
 }, 'The e-mail field cannot be empty.')
 
 UserSchema.pre('save', function(next) {
