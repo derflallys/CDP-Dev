@@ -1,7 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators} from '@angular/forms';
+import {Component, NgZone, OnInit} from '@angular/core';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {HttpClient} from '@angular/common/http';
 import {MatDialogRef} from '@angular/material';
+import {User} from '../../../models/user';
+import {AuthenticationService} from '../../../services/authentication.service';
+import {UserService} from '../../../services/user.service';
+import {Router} from '@angular/router';
 
 
 @Component({
@@ -14,7 +18,10 @@ export class SignupComponent implements OnInit {
   errorMessage: string;
  dialogRef: MatDialogRef<SignupComponent>;
 
-  public constructor(private httpClient: HttpClient) { }
+  public constructor(private userService: UserService, private router: Router,
+                     private authenticationService: AuthenticationService,
+                     private ngZone: NgZone,
+                     private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
     this.signupForm = new FormGroup({
@@ -24,29 +31,23 @@ export class SignupComponent implements OnInit {
     });
   }
 
-  public get username() {
-    return this.signupForm.get('username');
-  }
-  public get email() {
-    return this.signupForm.get('email');
-  }
-  public get password() {
-    return this.signupForm.get('password');
-  }
+
 
   public submitSignupForm() {
-    if (this.signupForm.valid) {
-      this.httpClient.post(
-        '/api/addUser',
-        this.signupForm.value, {
-          responseType: 'json'
-        }).subscribe((response) => { // success
-        alert('Inscription fait avec succes\n Vous pouvez se connecter maintenant');
-      }, (error) => { // error
-        console.log(error);
-      });
-    } else {
+    if (this.signupForm.invalid) {
+      return;
     }
+    const username = this.signupForm.controls.username.value;
+    const email = this.signupForm.controls.email.value;
+    const password = this.signupForm.controls.password.value;
+    const newUser =  new User(null, username, email, password);
+    console.log(newUser);
+    this.userService.addUser(newUser).subscribe(res => {
+      console.log(res);
+      this.authenticationService.setToken(res.token);
+      this.ngZone.run(() => this.router.navigate(['projects']));
+
+    });
   }
 
 

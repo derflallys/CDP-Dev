@@ -1,8 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {Component, NgZone, OnInit} from '@angular/core';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {MatDialogRef} from '@angular/material';
 import {HttpClient} from '@angular/common/http';
 import {Router} from '@angular/router';
+import {UserService} from '../../../services/user.service';
+import {User} from '../../../models/user';
+import {AuthenticationService} from '../../../services/authentication.service';
 
 @Component({
   selector: 'app-signin',
@@ -11,53 +14,41 @@ import {Router} from '@angular/router';
 })
 export class SigninComponent implements OnInit {
   signinForm: FormGroup;
-  private emailLog;
-  dialogRef: MatDialogRef<SigninComponent>;
-  public userConnected: boolean;
 
-  public constructor(private httpClient: HttpClient, private router: Router) { }
+
+  public constructor(private userService: UserService, private router: Router,
+                     private authenticationService: AuthenticationService,
+                     private ngZone: NgZone,
+                     private formBuilder: FormBuilder) { }
 
   public ngOnInit(): void {
-    this.signinForm = new FormGroup({
-      email: new FormControl('', [Validators.required]),
-      password: new FormControl('', [Validators.required])
+    /*if (this.authenticationService.getToken() !== null) {
+      this.ngZone.run(() => this.router.navigate(['projects']));
+    }*/
+    this.signinForm = this.formBuilder.group({
+      email: ['', Validators.required],
+      password: ['', Validators.required]
     });
-    this.userConnected = JSON.parse(sessionStorage.getItem('isConnected'));
   }
 
-  public get email() {
-    return this.signinForm.get('email');
-  }
-  public get password() {
-    return this.signinForm.get('password');
-  }
 
 
   public submitSigninForm() {
-    if (this.signinForm.valid) {
-      this.httpClient.post(
-        '/api/signin',
-        this.signinForm.value, {
-          responseType: 'json'
-        }).subscribe((response) => { // success
-        sessionStorage.setItem('email', this.signinForm.value.email);
-        sessionStorage.setItem('isConnected', 'true');
-        this.emailLog = this.signinForm.value.email;
-        this.userConnected = true;
-        this.router.navigate(['Projects']);
-      }, (error) => { // error
-        console.log(error);
-      });
+    if (this.signinForm.invalid) {
+      return;
     }
+    const email = this.signinForm.controls.email.value;
+    const password = this.signinForm.controls.password.value;
+    const newUser =  new User(null, null, email, password);
+    console.log(newUser);
+    this.userService.connect(newUser).subscribe(res => {
+      console.log(res);
+      this.authenticationService.setToken(res.token);
+      this.ngZone.run(() => this.router.navigate(['projects']));
+
+    });
   }
 
-
-  public logout() {
-    sessionStorage.setItem('isConnected', 'false');
-    this.userConnected = false;
-    this.router.navigate(['signup']);
-    sessionStorage.setItem('username', null);
-  }
 
 
 }

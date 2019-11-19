@@ -43,6 +43,7 @@ import { AddTaskComponent } from './components/task/add-task/add-task.component'
 import { SignupComponent } from './components/user/signup/signup.component';
 import { UpdateTaskComponent } from './components/task/update-task/update-task.component';
 import { SigninComponent } from './components/user/signin/signin.component';
+import {JwtModule, JwtModuleOptions} from '@auth0/angular-jwt';
 
 @NgModule({
   exports: [
@@ -96,7 +97,15 @@ export class MaterialModule {}
     DragDropModule,
     MatBadgeModule,
     MatTooltipModule,
-    MatListModule
+    MatListModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: function  tokenGetter() {
+          return     localStorage.getItem('token'); },
+        whitelistedDomains: ['localhost:3000'],
+        blacklistedRoutes: ['http://localhost:3000/login']
+      }
+    })
   ],
   entryComponents: [ DeleteDialogComponent ],
   providers: [],
