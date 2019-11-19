@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {MatDialogRef} from '@angular/material';
-import {HttpClient} from '@angular/common/http';
-import {Router} from '@angular/router';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatDialogRef } from '@angular/material';
+import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signin',
@@ -10,8 +10,8 @@ import {Router} from '@angular/router';
   styleUrls: ['./signin.component.css']
 })
 export class SigninComponent implements OnInit {
+
   signinForm: FormGroup;
-  private emailLog;
   dialogRef: MatDialogRef<SigninComponent>;
   public userConnected: boolean;
 
@@ -28,10 +28,10 @@ export class SigninComponent implements OnInit {
   public get email() {
     return this.signinForm.get('email');
   }
+
   public get password() {
     return this.signinForm.get('password');
   }
-
 
   public submitSigninForm() {
     if (this.signinForm.valid) {
@@ -39,18 +39,16 @@ export class SigninComponent implements OnInit {
         '/api/signin',
         this.signinForm.value, {
           responseType: 'json'
-        }).subscribe((response) => { // success
+        }).subscribe(() => {
         sessionStorage.setItem('email', this.signinForm.value.email);
         sessionStorage.setItem('isConnected', 'true');
-        this.emailLog = this.signinForm.value.email;
         this.userConnected = true;
         this.router.navigate(['Projects']);
-      }, (error) => { // error
+      }, (error) => {
         console.log(error);
       });
     }
   }
-
 
   public logout() {
     sessionStorage.setItem('isConnected', 'false');
@@ -58,6 +56,5 @@ export class SigninComponent implements OnInit {
     this.router.navigate(['signup']);
     sessionStorage.setItem('username', null);
   }
-
 
 }

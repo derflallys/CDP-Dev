@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators} from '@angular/forms';
-import {HttpClient} from '@angular/common/http';
-import {MatDialogRef} from '@angular/material';
-
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
+import { MatDialogRef } from '@angular/material';
 
 @Component({
   selector: 'app-signup',
@@ -18,7 +17,7 @@ export class SignupComponent implements OnInit {
 
   ngOnInit(): void {
     this.signupForm = new FormGroup({
-      username: new FormControl('', [Validators.required]),
+      userName: new FormControl('', [Validators.required]),
       email: new FormControl('', [Validators.required]),
       password: new FormControl('', [Validators.required])
     });
@@ -40,15 +39,12 @@ export class SignupComponent implements OnInit {
         '/api/addUser',
         this.signupForm.value, {
           responseType: 'json'
-        }).subscribe((response) => { // success
-        alert('Inscription fait avec succes\n Vous pouvez se connecter maintenant');
-      }, (error) => { // error
+        }).subscribe(() => {
+        alert('Inscription fait avec succes\n Vous pouvez maintenant vous connecter');
+      }, (error) => {
         console.log(error);
       });
-    } else {
     }
   }
-
-
 
 }
