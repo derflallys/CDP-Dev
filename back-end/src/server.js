@@ -4,6 +4,7 @@ import morgan from 'morgan'
 import config from './config'
 import cors from 'cors'
 import { connect } from './utils/db'
+import { signin, signup, protect } from './utils/auth'
 import issueRouter from './resources/issue/issue.router'
 import projectRouter from './resources/project/project.router'
 import sprintRouter from './resources/sprint/sprint.router'
@@ -16,7 +17,10 @@ app.use(cors())
 app.use(json())
 app.use(urlencoded({ extended: true }))
 app.use(morgan('dev'))
+app.post('/signup', signup)
+app.post('/signin', signin)
 
+app.use('/api', protect)
 app.use('/api/issue', issueRouter)
 app.use('/api/project', projectRouter)
 app.use('/api/sprint', sprintRouter)
