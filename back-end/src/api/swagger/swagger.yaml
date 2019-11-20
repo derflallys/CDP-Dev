@@ -1,18 +1,677 @@
-swagger: "2.0"
+openapi: 3.0.0
 info:
-  title: Sample API
-  description: API description in Markdown.
-  version: 1.0.0
-host: api.example.com
-schemes:
-  - https
+  title: CDP Grp1 Eq5
+  description: API CDP 
+  version: 0.0.2
+servers:
+  - url: http://localhost:3000/api
+    description: Main development server
+
+
+
+
+
+
 paths:
-  /users:
+
+  /project:
     get:
-      summary: Returns a list of users.
-      description: Optional extended description in Markdown.
-      produces:
-        - application/json
+      tags:
+        - project
+      summary: Return list of all projects.
       responses:
-        200:
-          description: OK
+        '200':
+          description: A JSON array of projects.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Project'
+    post:
+      tags:
+        - project
+      summary: Create a project.
+      parameters:
+        - name: project
+          in: query
+          required: true
+          description: The properties of the project to create.
+          schema:
+            $ref: '#/components/schemas/Project'
+      responses:
+        '201':
+          description: Project has been created.
+        '400':
+          description: Bad request.
+
+  /project/{id}:
+    get:
+      tags:
+        - project
+      summary: Return a specific project.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The id of the project.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The corresponding project.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Project'
+        '400':
+          description: The requested project does not exist.
+    put:
+      tags:
+        - project
+      summary: Update a project.
+      parameters:
+        - name: project
+          in: query
+          description: The project to create.
+          schema:
+            $ref: '#/components/schemas/Project'
+        - name: id
+          in: path
+          required: true
+          description: The id of the project.
+          schema:
+            type : string
+      responses:
+        '200':
+          description: The project has been updated.
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/Project'
+        '400':
+          description: The requested project does not exist.
+    delete:
+      tags:
+        - project
+      summary: Remove a project.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The id of the project.
+          schema:
+            type : string
+      responses:
+        '200':
+          description: The project has been removed.
+        '400':
+          description: The requested project does not exist.
+
+  /project/user/{id}/{un}:
+    post:
+      tags:
+        - project
+      summary: Add a user to a project.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The id of the sprint.
+          schema:
+            type: string
+        - name: un
+          in: path
+          required: true
+          description: The username of the User to add.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The user has been added to the project.
+        '400':
+          description: Either the user or the project does not exist.
+
+
+
+
+
+
+
+
+
+
+  /issue:
+    get:
+      tags:
+        - issue
+      summary: Return list of all issues.
+      responses:
+        '200':
+          description: A JSON array of issues.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Issue'
+    post:
+      tags:
+        - issue
+      summary: Create an issue.
+      parameters:
+        - name: issue
+          in: query
+          required: true
+          description: The properties of the issue to create.
+          schema:
+            $ref: '#/components/schemas/Issue'
+      responses:
+        '201':
+          description: Issue has been created.
+        '400':
+          description: Bad request.
+
+  /issue/{id}:
+    get:
+      tags:
+        - issue
+      summary: Return a specific issue.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The id of the issue.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The corresponding issue.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Issue'
+        '400':
+          description: The requested issue does not exist.
+    put:
+      tags:
+        - issue
+      summary: Update an issue.
+      parameters:
+        - name: issue
+          in: query
+          description: The issue to create.
+          schema:
+            $ref: '#/components/schemas/Issue'
+        - name: id
+          in: path
+          required: true
+          description: The id of the issue.
+          schema:
+            type : string
+      responses:
+        '200':
+          description: The issue has been updated.
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/Issue'
+        '400':
+          description: The requested issue does not exist.
+    delete:
+      tags:
+        - issue
+      summary: Remove an issue.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The id of the issue.
+          schema:
+            type : string
+      responses:
+        '200':
+          description: The issue has been removed.
+        '400':
+          description: The requested issue does not exist.
+  
+  /issue/byproject/{id}:
+    get:
+      tags:
+        - issue
+      summary: Return list of issues of a specific project.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The id of the project.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The corresponding issues.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Issue'
+        '400':
+          description: The requested project does not exist.
+
+  /issue/bysprint/{id}:
+    get:
+      tags:
+        - issue
+      summary: Return list of issues of a specific sprint.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The id of the sprint.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The corresponding issues.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Issue'
+        '400':
+          description: The requested sprint does not exist.
+
+
+
+
+
+
+
+  /sprint:
+    get:
+      tags:
+        - sprint
+      summary: Return list of all sprints.
+      responses:
+        '200':
+          description: A JSON array of sprints.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Sprint'
+    post:
+      tags:
+        - sprint
+      summary: Create a sprint.
+      parameters:
+        - name: sprint
+          in: query
+          required: true
+          description: The properties of the sprint to create.
+          schema:
+            $ref: '#/components/schemas/Sprint'
+      responses:
+        '201':
+          description: Sprint has been created.
+        '400':
+          description: Bad request.
+
+  /sprint/{id}:
+    get:
+      tags:
+        - sprint
+      summary: Return a specific sprint.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The id of the sprint.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The corresponding sprint.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Sprint'
+        '400':
+          description: The requested sprint does not exist.
+    put:
+      tags:
+        - sprint
+      summary: Update a sprint.
+      parameters:
+        - name: sprint
+          in: query
+          description: The sprint to create.
+          schema:
+            $ref: '#/components/schemas/Project'
+        - name: id
+          in: path
+          required: true
+          description: The id of the sprint.
+          schema:
+            type : string
+      responses:
+        '200':
+          description: The sprint has been updated.
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/Project'
+        '400':
+          description: The requested sprint does not exist.
+    delete:
+      tags:
+        - sprint
+      summary: Remove a sprint.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The id of the sprint.
+          schema:
+            type : string
+      responses:
+        '200':
+          description: The sprint has been removed.
+        '400':
+          description: The requested sprint does not exist.
+
+  /sprint/byproject/{id}:
+    get:
+      tags:
+        - issue
+      summary: Return list of sprints of a specific project.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The id of the project.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The corresponding sprints.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Sprint'
+        '400':
+          description: The requested project does not exist.
+
+
+
+
+
+
+
+
+  /task:
+    get:
+      tags:
+        - task
+      summary: Return list of all tasks.
+      responses:
+        '200':
+          description: A JSON array of tasks.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Task'
+    post:
+      tags:
+        - task
+      summary: Create a task.
+      parameters:
+        - name: task
+          in: query
+          required: true
+          description: The properties of the task to create.
+          schema:
+            $ref: '#/components/schemas/Task'
+      responses:
+        '201':
+          description: Task has been created.
+        '400':
+          description: Bad request.
+
+  /task/{id}:
+    get:
+      tags:
+        - task
+      summary: Return a specific task.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The id of the task.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The corresponding task.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Task'
+        '400':
+          description: The requested task does not exist.
+    put:
+      tags:
+        - task
+      summary: Update a task.
+      parameters:
+        - name: task
+          in: query
+          description: The task to create.
+          schema:
+            $ref: '#/components/schemas/Task'
+        - name: id
+          in: path
+          required: true
+          description: The id of the task.
+          schema:
+            type : string
+      responses:
+        '200':
+          description: The task has been updated.
+          content:
+            application/json:
+              schema: 
+                $ref: '#/components/schemas/Task'
+        '400':
+          description: The requested task does not exist.
+    delete:
+      tags:
+        - task
+      summary: Remove a task.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The id of the task.
+          schema:
+            type : string
+      responses:
+        '200':
+          description: The task has been removed.
+        '400':
+          description: The requested task does not exist.
+
+  /task/byissue/{id}:
+    get:
+      tags:
+        - issue
+      summary: Return list of tasks of a specific issue.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The id of the issue.
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The corresponding tasks.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Task'
+        '400':
+          description: The requested issue does not exist.
+
+
+
+
+
+
+  /user:
+    get:
+      tags:
+        - user
+      summary: Return the user currently connected.
+      responses:
+        '200':
+          description: The currently connected user.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+    put:
+      tags:
+        - user
+      summary: Update the user currently connected.
+      parameters:
+        - name: user
+          in: query
+          description: The user information to edit.
+          schema:
+            $ref: '#/components/schemas/User'
+      responses:
+        '200':
+          description: The currently connected user.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+
+
+
+
+
+components:
+  schemas:
+    Issue:
+      type: object
+      properties:
+        _id:
+          type: string
+        sprintId:
+          type: string
+        projectId:
+          type: string
+        description:
+          type: string
+        issueId:
+          type: integer
+        state:
+          type: string
+        difficulty:
+          type: integer
+        priority:
+          type: string
+    Project:
+      type: object
+      properties:
+        _id:
+          type: string
+        createdAt:
+          type: string
+        users:
+          type: object
+          properties:
+            user:
+              type: string
+            role:
+              type: string
+        title:
+          type: string
+        description:
+          type: string
+        repositoryURL:
+          type: string
+        duration:
+          type: number
+        specificationsFilePath:
+          type: string
+    Sprint:
+      type: object
+      properties:
+        _id:
+          type: string
+        projectId:
+          type: string
+        sprintId:
+          type: string
+        title:
+          type: string
+        state:
+          type: string
+        startDate:
+          type: string
+        endDate:
+          type: string
+    Task:
+      type: object
+      properties:
+        _id:
+          type: string
+        issues:
+          type: array
+          items:
+            type: number
+        dev:
+          type: array
+          items:
+            type: string
+        taskId:
+          type: number
+        dod:
+          type: string
+        state:
+          type: string
+        toTest:
+          type: boolean
+        toDoc:
+          type: boolean
+        startDate:
+          type: string
+        endDate:
+          type: string
+    User:
+      type: object
+      properties:
+        _id:
+          type: string
+        tasks:
+          type: array
+          items:
+            type: string
+        userName:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
