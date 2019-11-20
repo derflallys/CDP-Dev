@@ -22,7 +22,7 @@ import {
   MatBadgeModule,
   MatTooltipModule,
   MatListModule,
-  MatCheckboxModule
+  MatCheckboxModule, MatChipsModule
 } from '@angular/material';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -44,6 +44,7 @@ import { SignupComponent } from './components/user/signup/signup.component';
 import { UpdateTaskComponent } from './components/task/update-task/update-task.component';
 import { SigninComponent } from './components/user/signin/signin.component';
 import {JwtModule, JwtModuleOptions} from '@auth0/angular-jwt';
+import {AuthGuardService} from './services/auth-guard.service';
 
 @NgModule({
   exports: [
@@ -100,15 +101,20 @@ export class MaterialModule {}
     MatListModule,
     JwtModule.forRoot({
       config: {
-        tokenGetter: function  tokenGetter() {
-          return     localStorage.getItem('token'); },
+        tokenGetter: function tokenGetter() {
+          return sessionStorage.getItem('token');
+        },
         whitelistedDomains: ['localhost:3000'],
         blacklistedRoutes: ['http://localhost:3000/login']
       }
-    })
+    }),
+    MatChipsModule
   ],
-  entryComponents: [ DeleteDialogComponent ],
-  providers: [],
+  entryComponents: [ DeleteDialogComponent, AddSprintComponent, AddIssueComponent, AddProjectComponent, AddTaskComponent,
+    UpdateSprintComponent, UpdateIssueComponent, UpdateProjectComponent, UpdateTaskComponent,
+
+  ],
+  providers: [AuthGuardService],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }

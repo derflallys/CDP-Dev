@@ -1,6 +1,6 @@
 import {Component, NgZone, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {MatDialogRef} from '@angular/material';
+import {MatDialogRef, MatSnackBar, MatSnackBarConfig} from '@angular/material';
 import {HttpClient} from '@angular/common/http';
 import {Router} from '@angular/router';
 import {UserService} from '../../../services/user.service';
@@ -14,12 +14,16 @@ import {AuthenticationService} from '../../../services/authentication.service';
 })
 export class SigninComponent implements OnInit {
   signinForm: FormGroup;
-
+  configSnackBar = new MatSnackBarConfig();
 
   public constructor(private userService: UserService, private router: Router,
                      private authenticationService: AuthenticationService,
-                     private ngZone: NgZone,
-                     private formBuilder: FormBuilder) { }
+                     private ngZone: NgZone, public snackBar: MatSnackBar,
+                     private formBuilder: FormBuilder) {
+    this.configSnackBar.verticalPosition = 'bottom';
+    this.configSnackBar.horizontalPosition = 'center';
+    this.configSnackBar.duration = 5000;
+  }
 
   public ngOnInit(): void {
     /*if (this.authenticationService.getToken() !== null) {
@@ -46,9 +50,17 @@ export class SigninComponent implements OnInit {
       this.authenticationService.setToken(res.token);
       this.ngZone.run(() => this.router.navigate(['projects']));
 
-    });
+    },
+      error => {
+          console.log(error);
+          this.snackBar.open('❌ ' + error.error.message, 'Fermer', this.configSnackBar);
+
+      }
+    );
   }
 
 
-
+  signUp() {
+    this.router.navigate(['signup']);
+  }
 }

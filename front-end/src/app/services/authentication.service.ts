@@ -13,20 +13,20 @@ export class AuthenticationService {
   constructor(private jwtHelperService: JwtHelperService) { }
 
   public isAuth(): boolean {
-    const token = localStorage.getItem(TOKEN_NAME);
+    const token = sessionStorage.getItem(TOKEN_NAME);
     return !this.jwtHelperService.isTokenExpired(token);
   }
 
   public getToken(): string {
-    return localStorage.getItem(TOKEN_NAME);
+    return sessionStorage.getItem(TOKEN_NAME);
   }
 
   public setToken(token: string): void {
-    localStorage.setItem(TOKEN_NAME, token);
+    sessionStorage.setItem(TOKEN_NAME, token);
   }
 
   public logout() {
-    sessionStorage.setItem(TOKEN_NAME, null);
+    sessionStorage.clear();
   }
 
 }

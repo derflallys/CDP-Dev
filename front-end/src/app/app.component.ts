@@ -16,6 +16,8 @@ export class AppComponent {
 
   public logout() {
     this.authService.logout();
+    console.log('After logout ');
     this.ngZone.run(() => this.router.navigate(['login']));
+    console.log('After logout ');
   }
 }

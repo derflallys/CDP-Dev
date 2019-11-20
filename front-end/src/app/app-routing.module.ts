@@ -8,7 +8,7 @@ import {SigninComponent} from './components/user/signin/signin.component';
 import {AuthGuardService} from './services/auth-guard.service';
 
 const routes: Routes = [
-  { path: '**', redirectTo: 'projects', pathMatch: 'full' },
+  { path: ' ', redirectTo: 'login', pathMatch: 'full' },
   { path: 'projects', component: ProjectListComponent , canActivate: [AuthGuardService] },
   { path: 'project/:id', component: ProjectOverviewComponent , canActivate: [AuthGuardService] },
   { path: 'signup', component: SignupComponent },

@@ -40,7 +40,7 @@ export const signin = async (req, res) => {
   }
   const user = await User.findOne({ email: req.body.email })
   if (!user) {
-    return res.status(401).end()
+    return res.status(401).send({ message: "Cette Email n'existe pas . " })
   }
   try {
     const match = user.checkPassword(req.body.password)

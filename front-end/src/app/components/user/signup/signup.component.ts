@@ -23,11 +23,11 @@ export class SignupComponent implements OnInit {
                      private ngZone: NgZone,
                      private formBuilder: FormBuilder) { }
 
-  ngOnInit(): void {
-    this.signupForm = new FormGroup({
-      username: new FormControl('', [Validators.required]),
-      email: new FormControl('', [Validators.required]),
-      password: new FormControl('', [Validators.required])
+  ngOnInit() {
+    this.signupForm = this.formBuilder.group({
+      username: ['', Validators.required],
+      email: ['', Validators.required],
+      password: ['', Validators.required]
     });
   }
 
@@ -51,5 +51,7 @@ export class SignupComponent implements OnInit {
   }
 
 
-
+  signIn() {
+    this.router.navigate(['login']);
+  }
 }

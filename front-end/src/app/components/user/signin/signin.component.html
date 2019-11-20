@@ -1,8 +1,6 @@
-<div class="row" style="margin-top: 70px">
-  <div class="col-md-6 col-lg-4 mx-auto">
-    <div class="card card-body">
+<div class="content">
       <h3 class="text-center mb-4"  style="margin-top: 30px" >Se connecter</h3>
-      <form class="formGroup"  style="margin-top: 30px"  [formGroup]="signinForm">
+      <form  class="contentForm"  [formGroup]="signinForm">
 
         <mat-form-field class="input-field">
           <input matInput placeholder="Email" formControlName="email" type="email"  >
@@ -15,12 +13,13 @@
 
         <mat-dialog-actions >
           <button mat-raised-button  color="primary" style="margin-left: 150px" type="submit" name="createAccount" (click)="submitSigninForm()">Se connecter</button>
-          <button mat-raised-button  color="warn"   style="margin-left: 30px" type="reset" name="reset" (click)="reset">Annuler</button>
+          <button mat-raised-button  color="warn"   style="margin-left: 30px" type="reset" name="reset">Annuler</button>
         </mat-dialog-actions>
 
       </form>
-    </div>
-  </div>
+      <mat-chip-list aria-label="Fish selection" >
+        <mat-chip color="primary" (click)="signUp()"  selected>S'inscrire</mat-chip>
+      </mat-chip-list>
 </div>
 
 
