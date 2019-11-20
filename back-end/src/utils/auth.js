@@ -25,7 +25,7 @@ export const signup = async (req, res) => {
   try {
     const user = await User.create(req.body)
     const token = newToken(user)
-    return res.status(201).send({ token })
+    return res.status(201).send({ username: user.userName, token: token })
   } catch (e) {
     console.error(e)
     return res.status(400).end()
@@ -34,21 +34,19 @@ export const signup = async (req, res) => {
 
 export const signin = async (req, res) => {
   if (!req.body.email || !req.body.password) {
-    return res
-      .status(400)
-      .send({ message: ' Email et Mot de passe sont requis .' })
+    return res.status(400).send({ message: 'Email et Mot de passe requis.' })
   }
   const user = await User.findOne({ email: req.body.email })
   if (!user) {
-    return res.status(401).send({ message: "Cette Email n'existe pas . " })
+    return res.status(401).send({ message: "Cette Email n'existe pas." })
   }
   try {
     const match = user.checkPassword(req.body.password)
     if (!match) {
-      return res.status(401).send({ message: 'Mot de passe incorrect ' })
+      return res.status(401).send({ message: 'Mot de passe incorrect.' })
     }
     const token = newToken(user)
-    return res.status(201).send({ token })
+    return res.status(201).send({ username: user.userName, token: token })
   } catch (e) {
     console.error(e)
     return res.status(401).send()
@@ -61,7 +59,7 @@ export const protect = async (req, res, next) => {
   }
   let token = req.headers.authorization.split('Bearer ')[1]
   if (!token) {
-    return res.status(401).send({ message: 'Pas authentifier ' })
+    return res.status(401).send({ message: 'Pas authentifier' })
   }
   try {
     const payoload = await verifyToken(token)
@@ -73,6 +71,6 @@ export const protect = async (req, res, next) => {
     next()
   } catch (e) {
     console.error(e)
-    return res.status(401).send({ message: 'Pas authentifier ' })
+    return res.status(401).send({ message: 'Pas authentifier' })
   }
 }

@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {environment} from '../../environments/environment';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
@@ -25,12 +25,12 @@ export class UserService {
     return this.http.get<User>(this.userUrl);
   }
 
-  addUser(user: User): Observable<{token: string}> {
-    return this.http.post<{token: string}>(this.useraddUrl, user, httpOptions);
+  addUser(user: User): Observable<{token: string, username: string}> {
+    return this.http.post<{token: string, username: string}>(this.useraddUrl, user, httpOptions);
   }
 
-  connect(user: User): Observable<{token: string}> {
-    return this.http.post<{token: string}>(this.userConnectUrl, user, httpOptions);
+  connect(user: User): Observable<{token: string, username: string}> {
+    return this.http.post<{token: string, username: string}>(this.userConnectUrl, user, httpOptions);
   }
 
   deleteUser(userId: string) {

@@ -1,14 +1,13 @@
 import { Injectable } from '@angular/core';
-import {JwtHelperService} from '@auth0/angular-jwt';
-
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 export const TOKEN_NAME = 'token';
+export const SESSION_USER = 'username';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationService {
-
 
   constructor(private jwtHelperService: JwtHelperService) { }
 
@@ -25,7 +24,15 @@ export class AuthenticationService {
     sessionStorage.setItem(TOKEN_NAME, token);
   }
 
-  public logout() {
+  public setUsername(username: string): void {
+    sessionStorage.setItem(SESSION_USER, username)
+  }
+
+  public getUsername(): string {
+    return sessionStorage.getItem(SESSION_USER)
+  }
+
+  public logout(): void {
     sessionStorage.clear();
   }
 
