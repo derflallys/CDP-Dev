@@ -15,13 +15,14 @@ const httpOptions = {
 })
 export class UserService {
 
+  private userUrl = environment.BACK_END_URL + '/user';
   private useraddUrl = environment.BACK_END_URL_WITHOUT_API + '/signup';
   private userConnectUrl = environment.BACK_END_URL_WITHOUT_API + '/signin';
 
   constructor(private http: HttpClient) { }
 
-  getUsers(): Observable<User[]> {
-    return this.http.get<User[]>(this.useraddUrl);
+  getUser(): Observable<User> {
+    return this.http.get<User>(this.userUrl);
   }
 
   addUser(user: User): Observable<{token: string}> {
@@ -34,10 +35,6 @@ export class UserService {
 
   deleteUser(userId: string) {
     return this.http.delete<Response>(this.useraddUrl + '/' + userId);
-  }
-
-  getUser(userId: string) {
-    return this.http.get<User>(this.useraddUrl + '/' + userId);
   }
 
   updateUser(user: User, id: string) {
