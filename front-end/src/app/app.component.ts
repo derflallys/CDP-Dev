@@ -8,16 +8,19 @@ import {Router} from '@angular/router';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  constructor(private authService: AuthenticationService, private router: Router,
-              private ngZone: NgZone) {
 
-  }
-  title = 'CDP';
+  constructor(
+    private authService: AuthenticationService,
+    private router: Router,
+    private ngZone: NgZone
+  ) { }
+
+  title = 'CDP';  
 
   public logout() {
     this.authService.logout();
-    console.log('After logout ');
+    console.log('After logout');
     this.ngZone.run(() => this.router.navigate(['login']));
-    console.log('After logout ');
   }
+
 }

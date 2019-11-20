@@ -29,7 +29,6 @@ export class ProjectListComponent implements OnInit {
   nbProject: number;
   displayedColumns: string[] = ['createdAt', 'title', 'duration', 'repositoryURL', 'actions'];
 
-
   constructor(
     private projectService: ProjectService,
     public dialog: MatDialog,
@@ -67,7 +66,6 @@ export class ProjectListComponent implements OnInit {
           this.snackBar.open('❌ Une erreur s\'est produite lors de l\'ajout !', 'Fermer', this.configSnackBar);
         }
       }
-
     });
   }
 
@@ -82,7 +80,6 @@ export class ProjectListComponent implements OnInit {
           this.snackBar.open('❌ Une erreur s\'est produite lors de l\'ajout !', 'Fermer', this.configSnackBar);
         }
       }
-
     });
   }
 

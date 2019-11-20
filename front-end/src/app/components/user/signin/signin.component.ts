@@ -1,7 +1,6 @@
 import {Component, NgZone, OnInit} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
-import {MatDialogRef, MatSnackBar, MatSnackBarConfig} from '@angular/material';
-import {HttpClient} from '@angular/common/http';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {MatSnackBar, MatSnackBarConfig} from '@angular/material';
 import {Router} from '@angular/router';
 import {UserService} from '../../../services/user.service';
 import {User} from '../../../models/user';
@@ -16,10 +15,14 @@ export class SigninComponent implements OnInit {
   signinForm: FormGroup;
   configSnackBar = new MatSnackBarConfig();
 
-  public constructor(private userService: UserService, private router: Router,
-                     private authenticationService: AuthenticationService,
-                     private ngZone: NgZone, public snackBar: MatSnackBar,
-                     private formBuilder: FormBuilder) {
+  public constructor(
+    private userService: UserService,
+    private router: Router,
+    private authenticationService: AuthenticationService,
+    private ngZone: NgZone,
+    public snackBar: MatSnackBar,
+    private formBuilder: FormBuilder
+  ) {
     this.configSnackBar.verticalPosition = 'bottom';
     this.configSnackBar.horizontalPosition = 'center';
     this.configSnackBar.duration = 5000;
@@ -35,8 +38,6 @@ export class SigninComponent implements OnInit {
     });
   }
 
-
-
   public submitSigninForm() {
     if (this.signinForm.invalid) {
       return;
@@ -48,19 +49,18 @@ export class SigninComponent implements OnInit {
     this.userService.connect(newUser).subscribe(res => {
       console.log(res);
       this.authenticationService.setToken(res.token);
+      this.authenticationService.setUsername(res.username);
       this.ngZone.run(() => this.router.navigate(['projects']));
-
     },
       error => {
-          console.log(error);
-          this.snackBar.open('❌ ' + error.error.message, 'Fermer', this.configSnackBar);
-
+        console.log(error);
+        this.snackBar.open('❌ ' + error.error.message, 'Fermer', this.configSnackBar);
       }
     );
   }
 
-
   signUp() {
     this.router.navigate(['signup']);
   }
+
 }

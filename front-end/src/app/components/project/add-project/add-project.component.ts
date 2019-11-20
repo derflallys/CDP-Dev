@@ -4,8 +4,6 @@ import { Project } from '../../../models/project';
 import { ProjectService } from '../../../services/project.service';
 import { UpdateProjectComponent } from '../update-project/update-project.component';
 import { MatDialogRef } from '@angular/material';
-import { Sprint } from '../../../models/sprint';
-import { SprintService } from '../../../services/sprint.service';
 
 @Component({
   selector: 'app-add-project',
@@ -45,14 +43,13 @@ export class AddProjectComponent implements OnInit {
     if (this.addProject.invalid) { return; }
 
     const title = this.addProject.controls.title.value;
-    const users = []; // TMP
     const duration = Number(this.addProject.controls.duration.value);
     const description = this.addProject.controls.description.value;
     const repositoryURL = this.addProject.controls.repositoryURL.value;
     const refspecifying = this.addProject.controls.refspecifying.value;
 
     if (this.update) {
-      const updateProject = new Project(this.projectId, title, users, duration, description, repositoryURL, refspecifying);
+      const updateProject = new Project(this.projectId, title, duration, description, repositoryURL, refspecifying);
       this.projectService.updateProject(updateProject, this.project._id).subscribe(
         res => {
           console.log(res);
@@ -66,12 +63,13 @@ export class AddProjectComponent implements OnInit {
         }
       );
     } else {
-      const newProject = new Project(null, title, users, duration, description, repositoryURL, refspecifying);
+      const newProject = new Project(null, title, duration, description, repositoryURL, refspecifying);
       console.log(newProject);
-      this.projectService.addProject(newProject).subscribe(project => {
-        console.log(project);
-        this.dialogRef.close(this.error);
-      },
+      this.projectService.addProject(newProject).subscribe(
+        project => {
+          console.log(project);
+          this.dialogRef.close(this.error);
+        },
         error1 => {
           this.error = true;
           this.dialogRef.close(this.error);
