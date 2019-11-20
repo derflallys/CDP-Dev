@@ -18,6 +18,11 @@ export const initCounterProject = function initCountProject(projectId) {
     project: projectId,
     seq: 0
   })
+  Counters.create({
+    type: 'Task',
+    project: projectId,
+    seq: 0
+  })
 }
 
 export const getSeq = async function getSeq(name, project) {
