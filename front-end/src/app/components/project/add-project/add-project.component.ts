@@ -4,8 +4,6 @@ import { Project } from '../../../models/project';
 import { ProjectService } from '../../../services/project.service';
 import { UpdateProjectComponent } from '../update-project/update-project.component';
 import { MatDialogRef } from '@angular/material';
-import { Sprint } from '../../../models/sprint';
-import { SprintService } from '../../../services/sprint.service';
 
 @Component({
   selector: 'app-add-project',

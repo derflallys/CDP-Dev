@@ -43,8 +43,8 @@ import { AddTaskComponent } from './components/task/add-task/add-task.component'
 import { SignupComponent } from './components/user/signup/signup.component';
 import { UpdateTaskComponent } from './components/task/update-task/update-task.component';
 import { SigninComponent } from './components/user/signin/signin.component';
-import {JwtModule, JwtModuleOptions} from '@auth0/angular-jwt';
-import {AuthGuardService} from './services/auth-guard.service';
+import { JwtModule } from '@auth0/angular-jwt';
+import { AuthGuardService } from './services/auth-guard.service';
 
 @NgModule({
   exports: [
@@ -110,11 +110,18 @@ export class MaterialModule {}
     }),
     MatChipsModule
   ],
-  entryComponents: [ DeleteDialogComponent, AddSprintComponent, AddIssueComponent, AddProjectComponent, AddTaskComponent,
-    UpdateSprintComponent, UpdateIssueComponent, UpdateProjectComponent, UpdateTaskComponent,
-
+  entryComponents: [
+    DeleteDialogComponent,
+    AddSprintComponent,
+    AddIssueComponent,
+    AddProjectComponent,
+    AddTaskComponent,
+    UpdateSprintComponent,
+    UpdateIssueComponent,
+    UpdateProjectComponent,
+    UpdateTaskComponent
   ],
-  providers: [AuthGuardService],
+  providers: [ AuthGuardService ],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }
