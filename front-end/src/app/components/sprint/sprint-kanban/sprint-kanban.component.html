@@ -1,20 +1,22 @@
+<h2 class="textCenter" *ngIf="sprint"> {{sprint.title}} {{sprint.sprintId}}</h2>
 <div class="box">
   <div cdkDropListGroup>
     <div class="task-container">
       <h2 class="textCenter">TODO</h2>
 
-      <div
+      <div id="todo"
         cdkDropList
         [cdkDropListData]="taskTodo"
         class="task-list"
         cdkDropListSortingDisabled
+
         (cdkDropListDropped)="drop($event)">
         <div class="task-box" *ngFor="let item of taskTodo" cdkDrag>
           <mat-accordion>
             <mat-expansion-panel >
               <mat-expansion-panel-header>
                 <mat-panel-title class="font-weight-bold">{{'#'+item.taskId}}</mat-panel-title>
-                <mat-panel-description>{{item.dod | slice:0:15 }}</mat-panel-description>
+                <mat-panel-description>{{item.dod | slice:0:15 }} </mat-panel-description>
               </mat-expansion-panel-header>
               <p>{{item.dod}}</p>
             </mat-expansion-panel>
@@ -26,10 +28,11 @@
     <div class="task-container">
       <h2 class="textCenter">In Progress</h2>
 
-      <div
+      <div id="cours"
         cdkDropList
         [cdkDropListData]="taskEncours"
         class="task-list"
+
         (cdkDropListDropped)="drop($event)">
         <div class="task-box" *ngFor="let item of taskEncours" cdkDrag>
           <mat-accordion>
@@ -48,13 +51,14 @@
     <div class="task-container">
       <h2 class="textCenter">Finish</h2>
 
-      <div
+      <div id="finish"
         cdkDropList
         [cdkDropListData]="taskEnTermine"
         class="task-list"
+
         (cdkDropListDropped)="drop($event)">
         <div class="task-box" *ngFor="let item of taskEnTermine" cdkDrag>
-          <mat-accordion>
+          <mat-accordion >
             <mat-expansion-panel >
               <mat-expansion-panel-header>
                 <mat-panel-title class="font-weight-bold">{{'#'+item.taskId}}</mat-panel-title>

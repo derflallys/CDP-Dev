@@ -50,6 +50,8 @@ export class SigninComponent implements OnInit {
       console.log(res);
       this.authenticationService.setToken(res.token);
       this.authenticationService.setUsername(res.username);
+      this.authenticationService.setIdUser(res.id);
+      this.authenticationService.setEmail(res.email);
       this.ngZone.run(() => this.router.navigate(['projects']));
     },
       error => {

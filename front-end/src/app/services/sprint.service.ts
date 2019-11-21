@@ -31,7 +31,7 @@ export class SprintService {
     return this.http.delete<Response>(this.sprintUrl + '/' + sprintNum);
   }
 
-  getSprint(sprintNum: number) {
+  getSprint(sprintNum: string) {
     return this.http.get<Sprint>(this.sprintUrl + '/' + sprintNum);
   }
 
