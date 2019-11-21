@@ -39,7 +39,7 @@ export class TaskService {
     return this.http.put<Response>(this.taskUrl + '/' + taskNum, task, httpOptions);
   }
 
-  getTaskBySprint(sprintId: number) {
+  getTaskBySprint(sprintId: string) {
     return this.http.get<Task[]>(this.taskBySprintUrl + '/' + sprintId);
   }
 
