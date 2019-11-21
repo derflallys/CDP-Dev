@@ -1,0 +1,13 @@
+
+<div class="content">
+  <h2 class="text-center">{{ title }}</h2>
+  <form (ngSubmit)="onSubmit()" [formGroup]="addUser" class="contentForm">
+    <mat-form-field class="input-field">
+      <input matInput placeholder="Username" formControlName="username" type="text">
+    </mat-form-field>
+  </form>
+  <div mat-dialog-actions align="center" class="mb-2">
+    <button mat-raised-button color="primary" class="mr-1" (click)="onSubmit()">Ajouter l'utilisateur</button>
+    <button mat-raised-button color="warn" (click)="cancel()">Annuler</button>
+  </div>
+</div>

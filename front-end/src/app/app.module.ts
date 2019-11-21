@@ -22,7 +22,8 @@ import {
   MatBadgeModule,
   MatTooltipModule,
   MatListModule,
-  MatCheckboxModule, MatChipsModule
+  MatCheckboxModule,
+  MatChipsModule
 } from '@angular/material';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -45,6 +46,7 @@ import { UpdateTaskComponent } from './components/task/update-task/update-task.c
 import { SigninComponent } from './components/user/signin/signin.component';
 import { JwtModule } from '@auth0/angular-jwt';
 import { AuthGuardService } from './services/auth-guard.service';
+import { AddUserComponent } from './components/project/add-user/add-user.component';
 
 @NgModule({
   exports: [
@@ -84,7 +86,8 @@ export class MaterialModule {}
     SignupComponent,
     SigninComponent,
     UpdateProjectComponent,
-    UpdateTaskComponent
+    UpdateTaskComponent,
+    AddUserComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -114,6 +117,7 @@ export class MaterialModule {}
     DeleteDialogComponent,
     AddSprintComponent,
     AddIssueComponent,
+    AddUserComponent,
     AddProjectComponent,
     AddTaskComponent,
     UpdateSprintComponent,

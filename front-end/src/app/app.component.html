@@ -6,7 +6,7 @@
       <a mat-button routerLink="/projects">Liste Projets</a>
     </div>
     
-    <small>Connecté en tant que <i>{{ this.authService.getUsername() }}</i></small>
+    <small>Connecté en tant que <em>{{ this.authService.getUsername() }}</em></small>
 
     <a mat-button title="Logout" (click)="logout()" class="icon-menu">
       <mat-icon class="icon">input</mat-icon>

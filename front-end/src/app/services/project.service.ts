@@ -15,6 +15,7 @@ const httpOptions = {
 })
 export class ProjectService {
   private projectUrl = environment.BACK_END_URL + '/project';
+  private projectUserUrl = environment.BACK_END_URL + '/project/user';
 
   constructor(private http: HttpClient) { }
 
@@ -36,6 +37,10 @@ export class ProjectService {
 
   updateProject(project: Project, id: string) {
     return this.http.put<Response>(this.projectUrl + '/' + id, project, httpOptions);
+  }
+
+  addUserOnProject(project: Project, id: string, username: string) {
+    return this.http.post<Project>(this.projectUserUrl + '/' + id + '/' + username, project, httpOptions);
   }
 
 }

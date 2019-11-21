@@ -8,6 +8,7 @@ export const crud = crudControllers(Project)
 
 export const addUserOnProject = async (req, res) => {
   try {
+    // Retrieve the requested project and user
     const project = await Project.findOne({ _id: req.params.id })
       .lean()
       .exec()
@@ -16,14 +17,20 @@ export const addUserOnProject = async (req, res) => {
       .exec()
     if (!project || !user) {
       return res.status(400).end()
-    } else {
-      const userRole = {
-        user: user._id,
-        role: 'DEV'
-      }
-      project.users.push(userRole)
-      res.status(200).json(project)
     }
+
+    // Update the project by adding the user
+    const userRole = {
+      user: user._id,
+      role: 'DEV'
+    }
+    const updatedProject = await Project.update(
+      { _id: req.params.id },
+      { $push: { users: userRole } }
+    )
+      .lean()
+      .exec()
+    res.status(200).json(updatedProject)
   } catch (e) {
     console.error(e)
     res.status(400).end()
