@@ -6,6 +6,10 @@ const TaskSchema = new mongoose.Schema(
     issues: {
       type: [Number]
     },
+    projectId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'project'
+    },
     dev: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'user'
@@ -44,14 +48,13 @@ const TaskSchema = new mongoose.Schema(
   { timestamps: true }
 )
 
-TaskSchema.pre('save', function(next) {
-  console.log('pre save ')
+TaskSchema.pre('save', async function(next) {
+  console.log('pre save')
   const st = this
   const seq = getSeq('Task', st.projectId)
-  return seq.then(res => {
-    st.taskId = res
-    next()
-  })
+  const res = await seq
+  st.taskId = res
+  next()
 })
 
 export const Task = mongoose.model('Task', TaskSchema)

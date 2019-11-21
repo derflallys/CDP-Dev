@@ -39,15 +39,13 @@ const IssueSchema = new mongoose.Schema(
   { timestamps: true }
 )
 
-IssueSchema.pre('save', function(next) {
-  console.log('pre save ')
+IssueSchema.pre('save', async function(next) {
+  console.log('pre save')
   const st = this
-
   const seq = getSeq('Issue', st.projectId)
-  return seq.then(res => {
-    st.issueId = res
-    next()
-  })
+  const res = await seq
+  st.issueId = res
+  next()
 })
 
 export const Issue = mongoose.model('Issue', IssueSchema)

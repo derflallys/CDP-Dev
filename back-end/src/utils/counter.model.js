@@ -29,7 +29,7 @@ export const getSeq = async function getSeq(name, project) {
   const req = await Counters.findOneAndUpdate(
     { type: name, project },
     { $inc: { seq: 1 } },
-    { new: true }
+    { new: true, useFindAndModify: false }
   )
     .lean()
     .exec()
