@@ -47,6 +47,7 @@ import { SigninComponent } from './components/user/signin/signin.component';
 import { JwtModule } from '@auth0/angular-jwt';
 import { AuthGuardService } from './services/auth-guard.service';
 import { AddUserComponent } from './components/project/add-user/add-user.component';
+import {HomeComponent} from './components/home/home.component';
 
 @NgModule({
   exports: [
@@ -87,7 +88,8 @@ export class MaterialModule {}
     SigninComponent,
     UpdateProjectComponent,
     UpdateTaskComponent,
-    AddUserComponent
+    AddUserComponent,
+    HomeComponent
   ],
   imports: [
     BrowserAnimationsModule,

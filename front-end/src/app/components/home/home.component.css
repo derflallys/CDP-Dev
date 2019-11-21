@@ -1,0 +1,31 @@
+.content-home{
+  align-items: center;
+  display: flex;
+  justify-content: center;;
+  flex-wrap: wrap;
+  flex-direction: column;
+  height: 500px;
+
+}
+
+.box{
+  width: 50%;
+  margin-left: 10px;
+  padding-left: 10px;
+  flex-basis: 5px;
+
+  box-shadow: 10px 5px 5px #c7c7c7;
+  border-radius: 30px;
+}
+
+
+.content-button a {
+  margin-bottom: 33px;
+}
+div.content-button{
+  margin-left: 126px;
+}
+
+a{
+  width: 75%;
+}

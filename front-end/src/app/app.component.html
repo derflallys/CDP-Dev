@@ -1,11 +1,11 @@
 <mat-toolbar *ngIf="authService.isAuth()">
   <mat-toolbar-row class="toolbar">
     <h1><a title="Home" mat-button [routerLink]="'/'">CDP - Gestion de projet</a></h1>
-    
+
     <div class="nav-menu">
       <a mat-button routerLink="/projects">Liste Projets</a>
     </div>
-    
+
     <small>Connecté en tant que <em>{{ this.authService.getUsername() }}</em></small>
 
     <a mat-button title="Logout" (click)="logout()" class="icon-menu">
@@ -19,5 +19,5 @@
 </main>
 
 <footer>
-  <p>Projet universitaire - Université de Bordeaux</p>
+  <p>Conduite de Projet - Université de Bordeaux</p>
 </footer>

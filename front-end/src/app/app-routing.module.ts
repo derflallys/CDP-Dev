@@ -6,12 +6,15 @@ import { ProjectOverviewComponent } from './components/project/project-overview/
 import { SignupComponent } from './components/user/signup/signup.component';
 import { SigninComponent } from './components/user/signin/signin.component';
 import { AuthGuardService } from './services/auth-guard.service';
+import {HomeComponent} from './components/home/home.component';
 
 const routes: Routes = [
-  { path: ' ', redirectTo: 'login', pathMatch: 'full' },
+
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'projects', component: ProjectListComponent, canActivate: [AuthGuardService] },
   { path: 'project/:id', component: ProjectOverviewComponent, canActivate: [AuthGuardService] },
   { path: 'signup', component: SignupComponent },
+  { path: 'home', component: HomeComponent },
   { path: 'login', component: SigninComponent }
 ];
 
