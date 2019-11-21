@@ -17,7 +17,7 @@ const routes: Routes = [
   { path: 'signup', component: SignupComponent },
   { path: 'home', component: HomeComponent },
   { path: 'login', component: SigninComponent },
-  { path: 'kanban/:id', component: SprintKanbanComponent }
+  { path: 'kanban/:id', component: SprintKanbanComponent, canActivate: [AuthGuardService] }
 ];
 
 @NgModule({

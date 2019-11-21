@@ -3,6 +3,8 @@
   justify-content: space-between;
   flex-wrap: nowrap;
   align-content: center;
+  margin-top: 5%;
+  margin-left: 8%;
 }
 .task-container {
   width: 400px;
@@ -20,6 +22,9 @@
   overflow: hidden;
   display: block;
 }
+.textCenter{
+  text-align: center;
+}
 
 .task-box {
   padding: 20px 10px;
@@ -34,7 +39,17 @@
   background: white;
   font-size: 14px;
 }
+.mat-accordion{
+  width: 100%;
+}
+.mat-expansion-panel-header-title, .mat-expansion-panel-header-description {
+  flex-basis: 0;
+}
 
+.mat-expansion-panel-header-description {
+  justify-content: space-between;
+  align-items: center;
+}
 
 .cdk-drag-preview {
   box-sizing: border-box;

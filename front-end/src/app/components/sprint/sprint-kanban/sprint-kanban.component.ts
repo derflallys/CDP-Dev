@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 import {Task} from '../../../models/task';
 import {TaskService} from '../../../services/task.service';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
+import {MatSnackBar, MatSnackBarConfig} from '@angular/material';
 
 @Component({
   selector: 'app-sprint-kanban',
@@ -15,7 +16,13 @@ export class SprintKanbanComponent implements OnInit {
   taskEnTermine: Task[] = [];
   allTasks: Task[] = [];
   sprintId: string;
-  constructor(private taskService: TaskService, private route: ActivatedRoute) { }
+  configSnackBar = new MatSnackBarConfig();
+  constructor(private taskService: TaskService, private route: ActivatedRoute,
+              private  router: Router, public snackBar: MatSnackBar) {
+    this.configSnackBar.verticalPosition = 'bottom';
+    this.configSnackBar.horizontalPosition = 'center';
+    this.configSnackBar.duration = 5000;
+  }
 
   ngOnInit() {
     this.sprintId = this.route.snapshot.paramMap.get('id');
@@ -24,6 +31,11 @@ export class SprintKanbanComponent implements OnInit {
     },
       error => {
        console.log(error);
+       this.snackBar.open('❌ Veuillez vous connecter  !', 'Fermer', this.configSnackBar);
+
+       if (error.status === 401) {
+         this.router.navigate(['login']);
+       }
       }
     );
   }
