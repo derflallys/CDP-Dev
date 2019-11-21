@@ -51,8 +51,8 @@ export class AddProjectComponent implements OnInit {
     if (this.update) {
       const updateProject = new Project(this.projectId, title, duration, description, repositoryURL, refspecifying);
       this.projectService.updateProject(updateProject, this.project._id).subscribe(
-        res => {
-          console.log(res);
+        project => {
+          console.log(project);
           console.log('Update');
           this.dialogRefUpdate.close(this.error);
         },
