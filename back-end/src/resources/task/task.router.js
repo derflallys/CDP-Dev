@@ -21,4 +21,7 @@ router
 // /api/issue/byissue
 router.route('/byissue/:id').get(controllers.getByIssue)
 
+// /api/issue/bysprint
+router.route('/bysprint/:id').get(controllers.getBySprint)
+
 export default router

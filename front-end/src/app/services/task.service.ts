@@ -4,7 +4,6 @@ import { environment } from '../../environments/environment';
 import { Observable } from 'rxjs';
 import { Task } from '../models/task';
 
-
 const httpOptions = {
   headers: new HttpHeaders({
     'Content-Type':  'application/json',
@@ -36,12 +35,12 @@ export class TaskService {
     return this.http.get<Task>(this.taskUrl + '/' + taskNum);
   }
 
-  getTaskBySprint(sprintId: number) {
-    return this.http.get<Task[]>(this.taskBySprintUrl + '/' + sprintId);
-  }
-
   updateTask(task: Task, taskNum: string) {
     return this.http.put<Response>(this.taskUrl + '/' + taskNum, task, httpOptions);
+  }
+
+  getTaskBySprint(sprintId: number) {
+    return this.http.get<Task[]>(this.taskBySprintUrl + '/' + sprintId);
   }
 
 }

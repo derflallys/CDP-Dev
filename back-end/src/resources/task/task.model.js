@@ -1,14 +1,19 @@
 import { getSeq } from '../../utils/counter.model'
+import { Issue } from '../issue/issue.model'
 const mongoose = require('mongoose')
 
 const TaskSchema = new mongoose.Schema(
   {
     issues: {
-      type: [Number]
+      type: [Issue]
     },
     projectId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'project'
+    },
+    sprintId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'sprint'
     },
     dev: {
       type: mongoose.Schema.Types.ObjectId,
