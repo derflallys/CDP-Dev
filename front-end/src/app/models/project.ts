@@ -1,7 +1,7 @@
 export class Project {
   _id: string;
   title: string;
-  users: Array<Object> // Store UserRole objects
+  users: Array<Object>; // Store UserRole objects
   duration: number;
   description: string;
   createdAt: Date;
@@ -9,7 +9,9 @@ export class Project {
   refspecifying: string;
 
   constructor(id: string, title: string, duration: number, description: string, repositoryURL: string, refspecifying: string) {
-    this._id = id
+    if (id !== null) {
+      this._id = id;
+    }
     this.title = title;
     this.users = [];
     this.duration = duration;
