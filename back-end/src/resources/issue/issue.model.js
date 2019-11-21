@@ -1,7 +1,7 @@
 import { getSeq } from '../../utils/counter.model'
 const mongoose = require('mongoose')
 
-const IssueSchema = new mongoose.Schema(
+export const IssueSchema = new mongoose.Schema(
   {
     sprintId: {
       type: mongoose.Schema.Types.ObjectId,

@@ -1,0 +1,40 @@
+<div class="box">
+  <div cdkDropListGroup>
+    <div class="task-container">
+      <h2>TODO</h2>
+
+      <div
+        cdkDropList
+        [cdkDropListData]="taskTodo"
+        class="task-list"
+        cdkDropListSortingDisabled
+        (cdkDropListDropped)="drop($event)">
+        <div class="task-box" *ngFor="let item of taskTodo" cdkDrag>{{item}}</div>
+      </div>
+    </div>
+
+    <div class="task-container">
+      <h2>In Progress</h2>
+
+      <div
+        cdkDropList
+        [cdkDropListData]="taskEncours"
+        class="task-list"
+        (cdkDropListDropped)="drop($event)">
+        <div class="task-box" *ngFor="let item of taskEncours" cdkDrag>{{item}}</div>
+      </div>
+    </div>
+
+    <div class="task-container">
+      <h2>Finish</h2>
+
+      <div
+        cdkDropList
+        [cdkDropListData]="taskEnTermine"
+        class="task-list"
+        (cdkDropListDropped)="drop($event)">
+        <div class="task-box" *ngFor="let item of taskEnTermine" cdkDrag>{{item}}</div>
+      </div>
+    </div>
+  </div>
+</div>

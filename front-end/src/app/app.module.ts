@@ -48,6 +48,7 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { AuthGuardService } from './services/auth-guard.service';
 import { AddUserComponent } from './components/project/add-user/add-user.component';
 import {HomeComponent} from './components/home/home.component';
+import { SprintKanbanComponent } from './components/sprint/sprint-kanban/sprint-kanban.component';
 
 @NgModule({
   exports: [
@@ -89,7 +90,8 @@ export class MaterialModule {}
     UpdateProjectComponent,
     UpdateTaskComponent,
     AddUserComponent,
-    HomeComponent
+    HomeComponent,
+    SprintKanbanComponent
   ],
   imports: [
     BrowserAnimationsModule,

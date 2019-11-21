@@ -7,6 +7,7 @@ import { SignupComponent } from './components/user/signup/signup.component';
 import { SigninComponent } from './components/user/signin/signin.component';
 import { AuthGuardService } from './services/auth-guard.service';
 import {HomeComponent} from './components/home/home.component';
+import {SprintKanbanComponent} from './components/sprint/sprint-kanban/sprint-kanban.component';
 
 const routes: Routes = [
 
@@ -15,7 +16,8 @@ const routes: Routes = [
   { path: 'project/:id', component: ProjectOverviewComponent, canActivate: [AuthGuardService] },
   { path: 'signup', component: SignupComponent },
   { path: 'home', component: HomeComponent },
-  { path: 'login', component: SigninComponent }
+  { path: 'login', component: SigninComponent },
+  { path: 'kanban/:id', component: SprintKanbanComponent }
 ];
 
 @NgModule({

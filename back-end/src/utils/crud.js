@@ -1,3 +1,5 @@
+import { Task } from '../resources/task/task.model'
+
 export const getOne = model => async (req, res) => {
   try {
     const doc = await model
@@ -118,6 +120,23 @@ export const getBySprint = model => async (req, res) => {
   }
 }
 
+// For Task
+export const getTaskBySprint = model => async (req, res) => {
+  try {
+    const doc = await model
+      .find({ sprintId: req.params.id })
+      .lean()
+      .exec()
+    if (!doc) {
+      return res.status(400).end()
+    }
+    res.status(200).json(doc)
+  } catch (e) {
+    console.error(e)
+    res.status(400).end()
+  }
+}
+
 export const crudControllers = model => ({
   removeOne: removeOne(model),
   updateOne: updateOne(model),
@@ -125,5 +144,6 @@ export const crudControllers = model => ({
   getOne: getOne(model),
   createOne: createOne(model),
   getByProject: getByProject(model),
-  getBySprint: getBySprint(model)
+  getBySprint: getBySprint(model),
+  getTaskBySprint: getTaskBySprint(model)
 })

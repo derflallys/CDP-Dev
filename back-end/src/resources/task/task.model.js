@@ -1,12 +1,10 @@
 import { getSeq } from '../../utils/counter.model'
-import { Issue } from '../issue/issue.model'
+import { IssueSchema } from '../issue/issue.model'
 const mongoose = require('mongoose')
 
 const TaskSchema = new mongoose.Schema(
   {
-    issues: {
-      type: [Issue]
-    },
+    issues: [IssueSchema],
     projectId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'project'

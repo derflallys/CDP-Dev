@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import controllers from './task.controllers'
+import { crud } from './task.controllers'
 
 const router = Router()
 
@@ -7,21 +7,21 @@ const router = Router()
 
 router
   .route('/')
-  .get(controllers.getMany)
-  .post(controllers.createOne)
+  .get(crud.getMany)
+  .post(crud.createOne)
 
 // /api/task/:id
 
 router
   .route('/:id')
-  .get(controllers.getOne)
-  .put(controllers.updateOne)
-  .delete(controllers.removeOne)
+  .get(crud.getOne)
+  .put(crud.updateOne)
+  .delete(crud.removeOne)
 
-// /api/issue/byissue
-router.route('/byissue/:id').get(controllers.getByIssue)
+// /api/task/byissue
+// router.route('/byissue/:id').get(crud.getByIssue)
 
-// /api/issue/bysprint
-router.route('/bysprint/:id').get(controllers.getBySprint)
+// /api/task/bysprint
+router.route('/bysprint/:id').get(crud.getBySprint)
 
 export default router
