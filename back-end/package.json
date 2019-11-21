@@ -6,7 +6,7 @@
   "license": "MIT",
   "scripts": {
     "build": "babel src --out-dir dist",
-    "test": "NODE_ENV=testing jest --forceExit --detectOpenHandles --silent",
+    "test": "cross-env NODE_ENV=testing jest --forceExit --detectOpenHandles --silent",
     "test-routes": "yarn test -t router",
     "test-models": "yarn test -t model",
     "test-controllers": "yarn test -t controllers",
@@ -26,6 +26,7 @@
     "dotenv": "^6.1.0",
     "express": "^4.16.4",
     "faker": "^4.1.0",
+    "cross-env": "^6.0.3",
     "jsonwebtoken": "^8.4.0",
     "lodash": "^4.17.15",
     "mongoose": "^5.7.7",
@@ -64,7 +65,7 @@
   },
   "jest": {
     "verbose": true,
-    "testURL": "http://localhost/",
+    "testURL": "http://localhost:3000/",
     "testEnvironment": "node",
     "setupTestFrameworkScriptFile": "<rootDir>/test-db-setup.js",
     "testPathIgnorePatterns": [

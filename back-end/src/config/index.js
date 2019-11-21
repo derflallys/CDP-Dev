@@ -10,11 +10,11 @@ const baseConfig = {
   isDev: env === 'development',
   isTest: env === 'testing',
   isProd: env === 'production',
-  port: 3000
-  /* secrets: {
+  port: 3000,
+  secrets: {
     jwt: process.env.JWT_SECRET,
     jwtExp: '100d'
-  } */
+  }
 }
 
 let envConfig = {}
