@@ -55,20 +55,28 @@ export class SprintKanbanComponent implements OnInit {
         event.container.data,
         event.previousIndex,
         event.currentIndex);
+      let message = ' ';
       const task = event.container.data[event.currentIndex];
       task.dev = this.authenticationService.getIdUser();
+
       if (event.container.id === 'cours') {
         task.state = 'DOING';
+        message = '✅ Cette tâche vous a été affecté !';
       }
       if (event.container.id === 'todo') {
         task.state = 'TODO';
+        task.dev = null;
+        message = '✅ Cette tâche vous n\'ait plus affecté !';
       }
       if (event.container.id === 'finish') {
         task.state = 'DONE';
+        message = '';
       }
       this.taskService.updateTask(task, task._id).subscribe(res => {
           console.log(res);
-          this.snackBar.open('✅ Cette tâche vous a été affecté !', 'Fermer', this.configSnackBar);
+          if (message) {
+            this.snackBar.open(message, 'Fermer', this.configSnackBar);
+          }
           this.refreshTasks();
         },
         error => {

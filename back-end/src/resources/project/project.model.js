@@ -20,6 +20,10 @@ const ProjectSchema = new mongoose.Schema(
       default: Date.now,
       immutable: true
     },
+    createBy: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'user'
+    },
     users: {
       type: [UserRoleSchema]
     },

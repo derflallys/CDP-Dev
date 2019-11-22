@@ -12,6 +12,7 @@ import { Project } from '../../../models/project';
 import { AddProjectComponent } from '../add-project/add-project.component';
 import { UpdateProjectComponent } from '../update-project/update-project.component';
 import { DeleteDialogComponent } from '../../utils/delete-dialog/delete-dialog.component';
+import {AuthenticationService} from '../../../services/authentication.service';
 
 @Component({
   selector: 'app-project-list',
@@ -32,6 +33,7 @@ export class ProjectListComponent implements OnInit {
   constructor(
     private projectService: ProjectService,
     public dialog: MatDialog,
+    public authenticationService: AuthenticationService,
     public snackBar: MatSnackBar
   ) {
     this.configSnackBar.verticalPosition = 'bottom';
@@ -40,7 +42,7 @@ export class ProjectListComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.projectService.getProjects().subscribe(res => {
+    this.projectService.getProjectByUser(this.authenticationService.getIdUser()).subscribe(res => {
       this.projects = new MatTableDataSource(res);
       this.nbProject = res.length;
       this.projects.paginator = this.paginator;
@@ -111,7 +113,7 @@ export class ProjectListComponent implements OnInit {
   }
 
   refreshProjects() {
-    this.projectService.getProjects().subscribe(projects => {
+    this.projectService.getProjectByUser(this.authenticationService.getIdUser()).subscribe(projects => {
       this.projects = new MatTableDataSource(projects);
       this.projects.paginator = this.paginator;
       this.projects.sort = this.sort;
