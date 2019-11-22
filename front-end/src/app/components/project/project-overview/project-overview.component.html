@@ -1,7 +1,7 @@
 
 <div class="header">
-  <h2 class="d-inline">Détail du Projet <em>{{ title }}</em></h2>
-  <button mat-mini-fab matTooltip="Ajouter un utilisateur" class="float-right" color="basic">
+  <h2>Détail du Projet <em>{{ title }}</em></h2>
+  <button mat-mini-fab matTooltip="Ajouter un utilisateur" class="d-block mx-auto" color="basic">
     <mat-icon (click)="addUser()">supervised_user_circle</mat-icon>
   </button>
 </div>
@@ -12,7 +12,7 @@
   <mat-form-field class="selectSprint">
     <mat-label>Afficher un sprint</mat-label>
     <mat-select [(value)]="idSelectedSprint" (selectionChange)="getSprintSelected()">
-      <mat-option *ngFor="let sprint of sprints" value="{{sprint._id}}">{{ sprint.title }}</mat-option>
+      <mat-option *ngFor="let sprint of sprints" value="{{sprint._id}}">{{ sprint.title }} {{ sprint.sprintId }}</mat-option>
     </mat-select>
   </mat-form-field>
   <button mat-raised-button class="button-add sprints-add" color="primary" (click)="addSprint()"> Ajouter un Sprint </button>
@@ -31,17 +31,17 @@
             <mat-panel-description>{{sprintSelected.title}} : Issues / Tâches</mat-panel-description>
           </mat-expansion-panel-header>
           <mat-action-row>
-            <button mat-mini-fab matTooltip="Ajouter une tâche" color="accent">
-              <mat-icon (click)="addTask()">add</mat-icon>
-            </button>
             <button mat-mini-fab matTooltip="Editer le Sprint" color="primary">
               <mat-icon (click)="updateSprint()">edit</mat-icon>
             </button>
             <button mat-mini-fab matTooltip="Supprimer le Sprint" color="warn">
               <mat-icon (click)="deleteSprint()">delete</mat-icon>
             </button>
-            <button mat-mini-fab matTooltip="Démarrer le Sprint" color="basic" style="color: #00600f">
-              <mat-icon (click)="startSprint()">double_arrow</mat-icon>
+            <button mat-mini-fab matTooltip="Sprint Overview" color="accent" [routerLink]="['/sprint', idSelectedSprint]">
+              <mat-icon>visibility</mat-icon>
+            </button>
+            <button mat-mini-fab matTooltip="Sprint Kanban" color="basic" style="color: #000000" [routerLink]="['/kanban', idSelectedSprint]">
+              <mat-icon>view_column</mat-icon>
             </button>
           </mat-action-row>
           <div class="main-frame">
@@ -82,44 +82,6 @@
               </ng-container>
             </table>
             <mat-paginator [pageSizeOptions]="[10, 25, 100]"></mat-paginator>
-
-            <!-- Tasks table -->
-            <table mat-table [dataSource]="tasks" class="mat-elevation-z8">
-              <tr mat-header-row *matHeaderRowDef="displayedColumnsTask; sticky: true"></tr>
-              <tr mat-row *matRowDef="let row; columns: displayedColumnsTask;"></tr>
-              <ng-container matColumnDef="ID">
-                <th mat-header-cell *matHeaderCellDef> ID </th>
-                <td mat-cell *matCellDef="let element"> {{ element.issueId }} </td>
-              </ng-container>
-              <ng-container matColumnDef="Description" maxlength="70%">
-                <th mat-header-cell *matHeaderCellDef> Description </th>
-                <td mat-cell *matCellDef="let element">
-                  {{ element.description }}
-                </td>
-              </ng-container>
-              <ng-container matColumnDef="Développeur">
-                <th mat-header-cell *matHeaderCellDef> Développeur </th>
-                <td mat-cell *matCellDef="let element"> {{ element.dev }} </td>
-              </ng-container>
-              <ng-container matColumnDef="US liées">
-                <th mat-header-cell *matHeaderCellDef> US liées </th>
-                <td mat-cell *matCellDef="let element">{{ element.issues }} </td>
-              </ng-container>
-              <ng-container matColumnDef="Actions">
-                <th mat-header-cell *matHeaderCellDef> Actions </th>
-                <td mat-cell *matCellDef="let element">
-                  <a (click)="updateTask(element._id)" matTooltip="Editer la tâche" mat-mini-fab mat-raised-button color="primary">
-                    <mat-icon>edit</mat-icon>
-                  </a>
-                  <a (click)="deleteTask(element._id)" matTooltip="Supprimer la tâche" mat-mini-fab mat-raised-button color="warn">
-                    <mat-icon>delete</mat-icon>
-                  </a>
-                </td>
-              </ng-container>
-            </table>
-
-            <mat-paginator [pageSizeOptions]="[10, 25, 100]"></mat-paginator>
-
           </div>
         </mat-expansion-panel>
       </mat-accordion>

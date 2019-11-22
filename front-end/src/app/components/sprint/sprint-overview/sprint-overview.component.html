@@ -1,0 +1,54 @@
+
+<div class="header">
+	<h2>Détail du Sprint <em>{{ title }}</em></h2>
+	<button mat-raised-button color="primary" (click)="addTask()"> Ajouter une Tâche </button>
+</div>
+
+<div class="main-frame">
+  <div class="contain-project">
+    <div class="box">
+      <h3>Tâches</h3>
+      
+      <table mat-table [dataSource]="tasks" class="mat-elevation-z8">
+        <tr mat-header-row *matHeaderRowDef="displayedColumnsTask; sticky: true"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumnsTask;"></tr>
+        <ng-container matColumnDef="ID">
+          <th mat-header-cell *matHeaderCellDef> ID </th>
+          <td mat-cell *matCellDef="let element"> {{ element.taskId }} </td>
+        </ng-container>
+        <ng-container matColumnDef="DoD" maxlength="70%">
+          <th mat-header-cell *matHeaderCellDef> DoD </th>
+          <td mat-cell *matCellDef="let element">
+            {{ element.dod }}
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="US liées">
+          <th mat-header-cell *matHeaderCellDef> US liées </th>
+          <td mat-cell *matCellDef="let element">{{ element.issues }} </td>
+        </ng-container>
+        <ng-container matColumnDef="Date début">
+          <th mat-header-cell *matHeaderCellDef> Date début </th>
+          <td mat-cell *matCellDef="let element">{{ element.startDate | date: 'dd/LL/yyyy' }} </td>
+        </ng-container>
+        <ng-container matColumnDef="Date fin">
+          <th mat-header-cell *matHeaderCellDef> Date fin </th>
+          <td mat-cell *matCellDef="let element">{{ element.endDate | date: 'dd/LL/yyyy' }} </td>
+        </ng-container>
+        <ng-container matColumnDef="Actions">
+          <th mat-header-cell *matHeaderCellDef> Actions </th>
+          <td mat-cell *matCellDef="let element">
+            <a (click)="updateTask(element._id)" matTooltip="Editer la tâche" mat-mini-fab mat-raised-button color="primary">
+              <mat-icon>edit</mat-icon>
+            </a>
+            <a (click)="deleteTask(element._id)" matTooltip="Supprimer la tâche" mat-mini-fab mat-raised-button color="warn">
+              <mat-icon>delete</mat-icon>
+            </a>
+          </td>
+        </ng-container>
+      </table>
+
+      <mat-paginator [pageSizeOptions]="[10, 25, 100]"></mat-paginator>
+
+    </div>
+  </div>
+</div>

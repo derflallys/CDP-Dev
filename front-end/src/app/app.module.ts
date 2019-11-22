@@ -47,8 +47,9 @@ import { SigninComponent } from './components/user/signin/signin.component';
 import { JwtModule } from '@auth0/angular-jwt';
 import { AuthGuardService } from './services/auth-guard.service';
 import { AddUserComponent } from './components/project/add-user/add-user.component';
-import {HomeComponent} from './components/home/home.component';
+import { HomeComponent } from './components/home/home.component';
 import { SprintKanbanComponent } from './components/sprint/sprint-kanban/sprint-kanban.component';
+import { SprintOverviewComponent } from './components/sprint/sprint-overview/sprint-overview.component';
 
 @NgModule({
   exports: [
@@ -91,7 +92,8 @@ export class MaterialModule {}
     UpdateTaskComponent,
     AddUserComponent,
     HomeComponent,
-    SprintKanbanComponent
+    SprintKanbanComponent,
+    SprintOverviewComponent
   ],
   imports: [
     BrowserAnimationsModule,

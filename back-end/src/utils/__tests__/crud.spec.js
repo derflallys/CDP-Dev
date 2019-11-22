@@ -1,6 +1,5 @@
 import { getOne, getMany, createOne, updateOne, removeOne } from '../crud'
 import { Sprint } from '../../resources/sprint/sprint.model'
-import { User } from '../../resources/user/user.model'
 import mongoose from 'mongoose'
 import { Issue } from '../../resources/issue/issue.model'
 import { Project } from '../../resources/project/project.model'
@@ -16,13 +15,11 @@ describe('crud controllers', () => {
       })
       const project = projectObject._id
 
-
       const t = await Counters.create({
         type: 'Sprint',
         project: project,
         seq: 0
       })
-
 
       const sprint = await Sprint.create({
         projectId: project,

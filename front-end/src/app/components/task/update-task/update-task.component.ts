@@ -9,10 +9,11 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 export class UpdateTaskComponent {
 
   taskId = this.data.taskId;
+  sprintId = this.data.sprintId;
 
   constructor(
     public dialogRef: MatDialogRef<UpdateTaskComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: {taskId: null}
+    @Inject(MAT_DIALOG_DATA) public data: {taskId: null, sprintId: null}
   ) { }
 
 }

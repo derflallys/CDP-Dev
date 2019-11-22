@@ -3,10 +3,12 @@ import {CdkDrag, CdkDragDrop, CdkDropList, moveItemInArray, transferArrayItem} f
 import {Task} from '../../../models/task';
 import {TaskService} from '../../../services/task.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {MatSnackBar, MatSnackBarConfig} from '@angular/material';
+import {MatDialog, MatDialogConfig, MatSnackBar, MatSnackBarConfig} from '@angular/material';
 import {AuthenticationService} from '../../../services/authentication.service';
 import {SprintService} from '../../../services/sprint.service';
 import {Sprint} from '../../../models/sprint';
+import { Location } from '@angular/common';
+import {DeleteDialogComponent} from '../../utils/delete-dialog/delete-dialog.component';
 
 @Component({
   selector: 'app-sprint-kanban',
@@ -23,7 +25,8 @@ export class SprintKanbanComponent implements OnInit {
   configSnackBar = new MatSnackBarConfig();
   constructor(private taskService: TaskService, private route: ActivatedRoute,
               private authenticationService: AuthenticationService,
-              private sprintService: SprintService,
+              private sprintService: SprintService, private location: Location,
+              public dialog: MatDialog,
               private  router: Router, public snackBar: MatSnackBar) {
     this.configSnackBar.verticalPosition = 'bottom';
     this.configSnackBar.horizontalPosition = 'center';
@@ -39,6 +42,11 @@ export class SprintKanbanComponent implements OnInit {
   }
 
   handleTasksBySprint(tasks) {
+      if (tasks.length <= 0) {
+        this.snackBar.open('❌ Ajouter des tâches avant de démarrer un sprint  !', 'Fermer', this.configSnackBar);
+
+        this.location.back();
+      }
       this.allTasks = tasks;
       this.taskTodo = tasks.filter(task => task.state === 'TODO');
       this.taskEncours = tasks.filter(task => task.state === 'DOING');
@@ -61,17 +69,18 @@ export class SprintKanbanComponent implements OnInit {
 
       if (event.container.id === 'cours') {
         task.state = 'DOING';
+        task.toTest = false;
+        task.toDoc = false;
         message = '✅ Cette tâche vous a été affecté !';
       }
       if (event.container.id === 'todo') {
         task.state = 'TODO';
         task.dev = null;
-        message = '✅ Cette tâche vous n\'ait plus affecté !';
+        task.toTest = false;
+        task.toDoc = false;
+        message = '✅ Cette tâche vous n\'est plus affecté !';
       }
-      if (event.container.id === 'finish') {
-        task.state = 'DONE';
-        message = '';
-      }
+
       this.taskService.updateTask(task, task._id).subscribe(res => {
           console.log(res);
           if (message) {
@@ -85,6 +94,12 @@ export class SprintKanbanComponent implements OnInit {
 
         }
       );
+      if (event.container.id === 'finish') {
+        this.taskTest(task);
+        this.taskDoc(task);
+        task.state = 'DONE';
+        message = '';
+      }
 
     }
   }
@@ -119,5 +134,61 @@ export class SprintKanbanComponent implements OnInit {
       return this.authenticationService.getUsername();
     }
   }
+
+  taskTest(task: Task) {
+  const dialogConfig = new MatDialogConfig();
+  dialogConfig.disableClose = true;
+  dialogConfig.autoFocus = true;
+  dialogConfig.data = {
+    title: ' Tests  Tâche ' + task.taskId,
+    content: 'Tests Effectués pour cette tâche ? '
+  };
+  const dialogRefDelete = this.dialog.open(DeleteDialogComponent, dialogConfig);
+  dialogRefDelete.afterClosed().subscribe(result => {
+    if (result === true) {
+      task.toTest = true;
+    }
+    this.taskService.updateTask(task, task._id).subscribe(res => {
+        console.log(res);
+        this.refreshTasks();
+      },
+      error => {
+        console.log(error);
+        this.snackBar.open('❌ Erreur lors de l\'affection de la tâche  !', 'Fermer', this.configSnackBar);
+
+      }
+    );
+    });
+
+  }
+  taskDoc(task: Task) {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.data = {
+      title: ' Documentation  Tâche ' + task.taskId,
+      content: 'Documentaion fait pour cette tâche ? '
+    };
+    const dialogRefDelete = this.dialog.open(DeleteDialogComponent, dialogConfig);
+    dialogRefDelete.afterClosed().subscribe(result => {
+      if (result === true) {
+        task.toTest = true;
+
+      }
+      this.taskService.updateTask(task, task._id).subscribe(res => {
+          console.log(res);
+          this.refreshTasks();
+        },
+        error => {
+          console.log(error);
+          this.snackBar.open('❌ Erreur lors de l\'affection de la tâche  !', 'Fermer', this.configSnackBar);
+
+        }
+      );
+    });
+
+  }
+
+
 
 }
