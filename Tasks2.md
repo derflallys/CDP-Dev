@@ -4,19 +4,22 @@
 |----|----|----|----|----|----|
 | 0.1 | US1, US2, US3, US4, US5, US7  | x | 0.5 | DONE | Oumayma |
 | 0.2 | x | x | 0.5 | TODO | Alfred |
-| 1.1 | US1 | 0.1 | 0.5 | TODO | Oumayma |
-| 1.2 | US1 | 0.1 | 0.5 | TODO | Alfred  |
-| 2.1 | US2 | 0.1 | 0.5 | TODO | Oumayma |
-| 2.2 | US2 | 0.1 | 0.5 | TODO |  |
-| 3 | US3 | 0.1 | 0.5 | TODO |  |
-| 4.0 | US13 | 0.1 | 0.5 | TODO |  |
-| 5 | US10 | 0.1 | 0.5 | TODO | Eudes |
+| 1.1 | US1 | 0.1 | 0.5 | DONE | Oumayma |
+| 1.2 | US1 | 0.1 | 0.5 | DONE | Alfred  |
+| 2.1 | US2 | 0.1 | 0.5 | DONE | Oumayma |
+| 2.2 | US2 | 0.1 | 0.5 | DONE | Alfred |
+| 3 | US3 | 0.1 | 0.5 | DONE |  Alfred|
+| 4.0 | US13 | 0.1 | 0.5 | DONE |  Alfred |
+| 5 | US10 | 0.1 | 0.5 | DONE | Eudes |
 | 6 | US8 | 0.1 | 0.5 | TODO |  |
-| 7 | US12 | 0.1 | 0.5 | TODO |  |
-| 8 | x | 0.1 | 0.5 | TODO |  |
+| 7 | US12 | 0.1 | 0.5 | DONE | Eudes |
+| 8.1 | x | 0.1 | 0.5 | TODO |   |
+| 8.2 | x | 0.1 | 0.5 | DONE | Alfred  |
 | 9 | x | 0.1 | 0.5 | TODO |  |
-| 10 | x | 0.1 | 0.5 | TODO |  |
-| 11 | * | 0.1 | 0.5 | TODO |  |
+| 10 | x | 0.1 | 0.5 | DONE | Eudes |
+| 11 | * | 0.1 | 0.5 | DONE | Oumayma |
+| 12 | * | 0.1 | 0.5 | DONE | Oumayma  |
+
 
 ---
 
@@ -137,3 +140,7 @@ Utiliser [https://swagger.io/tools/swagger-editor](https://) pour voir le rendu 
 **Tâche 11** :Documentation SAP [FRONT-END]
 **DoD** :
 >Ecrire la description de chaque Component , en ajoutant les specifications de chacun d'un .
+
+**Tâche 12** : Scénarios Gherkin [FRONT-END]
+**DoD** :
+Faire les scénarios de chaque fonctionnalité.
