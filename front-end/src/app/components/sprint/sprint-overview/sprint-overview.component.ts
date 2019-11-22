@@ -76,7 +76,7 @@ export class SprintOverviewComponent implements OnInit {
   }
 
   addTask() {
-    const diagoFormTask = this.dialog.open(AddTaskComponent, {width: '800px', data: {projectId: this.projectId} });
+    const diagoFormTask = this.dialog.open(AddTaskComponent, {width: '800px', data: {projectId: this.projectId, sprintId: this.sprintId} });
     diagoFormTask.afterClosed().subscribe(error => {
       console.log(error);
       if (error === false) {
@@ -134,7 +134,7 @@ export class SprintOverviewComponent implements OnInit {
   }
 
   updateSprint() {
-    const diagoFormSprint = this.dialog.open(UpdateSprintComponent, {width: '800px', data: {idSprint: this.idSelectedSprint} });
+    const diagoFormSprint = this.dialog.open(UpdateSprintComponent, {width: '800px', data: {idSprint: this.sprintId} });
     diagoFormSprint.afterClosed().subscribe(error => {
       if (error === false) {
         this.snackBar.open('✅ Modification effectuée avec succès !', 'Fermer', this.configSnackBar);
