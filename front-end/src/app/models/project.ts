@@ -14,7 +14,9 @@ export class Project {
       this._id = id;
     }
     this.title = title;
+    const userRole = { user: createBy, role: 'PO' };
     this.users = [];
+    this.users.push(userRole);
     this.createBy = createBy;
     this.duration = duration;
     this.description = description;
