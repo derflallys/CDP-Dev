@@ -106,4 +106,10 @@ export class SprintKanbanComponent implements OnInit {
     );
   }
 
+  getNameUser(idUser) {
+    if (this.authenticationService.getIdUser() === idUser) {
+      return this.authenticationService.getUsername();
+    }
+  }
+
 }

@@ -11,7 +11,7 @@
         cdkDropListSortingDisabled
 
         (cdkDropListDropped)="drop($event)">
-        <div class="task-box" *ngFor="let item of taskTodo" cdkDrag>
+        <div class="task-box" *ngFor="let item of taskTodo"  cdkDrag>
           <mat-accordion>
             <mat-expansion-panel >
               <mat-expansion-panel-header>
@@ -19,6 +19,9 @@
                 <mat-panel-description>{{item.dod | slice:0:15 }} </mat-panel-description>
               </mat-expansion-panel-header>
               <p>{{item.dod}}</p>
+              <mat-action-row>
+                <p class="font-weight-bold">Affecté à: {{getNameUser(item.dev)}}</p>
+              </mat-action-row>
             </mat-expansion-panel>
           </mat-accordion>
         </div>
@@ -34,7 +37,7 @@
         class="task-list"
 
         (cdkDropListDropped)="drop($event)">
-        <div class="task-box" *ngFor="let item of taskEncours" cdkDrag>
+        <div class="task-box" *ngFor="let item of taskEncours" [cdkDragDisabled]="item.dev !== authenticationService.getIdUser()" cdkDrag>
           <mat-accordion>
             <mat-expansion-panel >
               <mat-expansion-panel-header>
@@ -42,6 +45,9 @@
                 <mat-panel-description>{{item.dod | slice:0:15 }}</mat-panel-description>
               </mat-expansion-panel-header>
               <p>{{item.dod}}</p>
+              <mat-action-row>
+                <p class="font-weight-bold">Affecté à: {{getNameUser(item.dev)}}</p>
+              </mat-action-row>
             </mat-expansion-panel>
           </mat-accordion>
           </div>
@@ -57,7 +63,7 @@
         class="task-list"
 
         (cdkDropListDropped)="drop($event)">
-        <div class="task-box" *ngFor="let item of taskEnTermine" cdkDrag>
+        <div class="task-box" *ngFor="let item of taskEnTermine" [cdkDragDisabled]="item.dev !== authenticationService.getIdUser()" cdkDrag>
           <mat-accordion >
             <mat-expansion-panel >
               <mat-expansion-panel-header>
@@ -65,6 +71,9 @@
                 <mat-panel-description>{{item.dod | slice:0:15 }}</mat-panel-description>
               </mat-expansion-panel-header>
               <p>{{item.dod}}</p>
+              <mat-action-row>
+                  <p class="font-weight-bold">Affecté à: {{getNameUser(item.dev)}} </p>
+              </mat-action-row>
             </mat-expansion-panel>
           </mat-accordion>
         </div>
