@@ -7,6 +7,7 @@ import {MatSnackBar, MatSnackBarConfig} from '@angular/material';
 import {AuthenticationService} from '../../../services/authentication.service';
 import {SprintService} from '../../../services/sprint.service';
 import {Sprint} from '../../../models/sprint';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-sprint-kanban',
@@ -23,7 +24,7 @@ export class SprintKanbanComponent implements OnInit {
   configSnackBar = new MatSnackBarConfig();
   constructor(private taskService: TaskService, private route: ActivatedRoute,
               private authenticationService: AuthenticationService,
-              private sprintService: SprintService,
+              private sprintService: SprintService, private location: Location,
               private  router: Router, public snackBar: MatSnackBar) {
     this.configSnackBar.verticalPosition = 'bottom';
     this.configSnackBar.horizontalPosition = 'center';
@@ -39,6 +40,11 @@ export class SprintKanbanComponent implements OnInit {
   }
 
   handleTasksBySprint(tasks) {
+      if (tasks.length <= 0) {
+        this.snackBar.open('❌ Ajouter des tâches avant de démarrer un sprint  !', 'Fermer', this.configSnackBar);
+
+        this.location.back();
+      }
       this.allTasks = tasks;
       this.taskTodo = tasks.filter(task => task.state === 'TODO');
       this.taskEncours = tasks.filter(task => task.state === 'DOING');

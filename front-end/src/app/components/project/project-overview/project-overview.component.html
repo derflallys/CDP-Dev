@@ -12,7 +12,7 @@
   <mat-form-field class="selectSprint">
     <mat-label>Afficher un sprint</mat-label>
     <mat-select [(value)]="idSelectedSprint" (selectionChange)="getSprintSelected()">
-      <mat-option *ngFor="let sprint of sprints" value="{{sprint._id}}">{{ sprint.title }}</mat-option>
+      <mat-option *ngFor="let sprint of sprints" value="{{sprint._id}}">{{ sprint.title }} {{ sprint.sprintId }}</mat-option>
     </mat-select>
   </mat-form-field>
   <button mat-raised-button class="button-add sprints-add" color="primary" (click)="addSprint()"> Ajouter un Sprint </button>
