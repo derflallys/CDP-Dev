@@ -1,0 +1,21 @@
+table {
+    width: 100%;
+    text-align: center !important;
+}
+
+.row {
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+.main-frame {
+  width: 80% !important;
+}
+
+.mat-header-cell {
+    text-align: center;
+}
+
+.mat-row:not(.mat-header-cell):hover {
+    background: #CCC;
+}

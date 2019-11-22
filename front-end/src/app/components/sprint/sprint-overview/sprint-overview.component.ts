@@ -1,9 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { SprintService } from 'src/app/services/sprint.service';
-import { IssueService } from 'src/app/services/issue.service';
 import { TaskService } from '../../../services/task.service';
-import { Issue } from '../../../models/issue';
 import { Sprint } from '../../../models/sprint';
 import { Task } from '../../../models/task';
 
@@ -23,7 +21,7 @@ import { UpdateSprintComponent } from '../../sprint/update-sprint/update-sprint.
 @Component({
   selector: 'app-sprint-overview',
   templateUrl: './sprint-overview.component.html',
-  styleUrls: ['./sprint-overview.component.css']
+  styleUrls: ['./sprint-overview.component.css'],
 })
 export class SprintOverviewComponent implements OnInit {
 
@@ -31,17 +29,17 @@ export class SprintOverviewComponent implements OnInit {
 
   title = '';
   sprint: Sprint;
-  issues: MatTableDataSource<Issue>;
-  tasks: Task[] = [];
   sprintId;
   projectId;
-  displayedColumnsIssue: string[] = ['ID', 'Description', 'Priorité', 'Etat'];
-  displayedColumnsTask: string[] = ['ID', 'Description', 'Développeur', 'US liées', 'Actions']
+
+  tasks: MatTableDataSource<Task>;
+
+  displayedColumnsTask: string[] = ['ID', 'DoD', 'US liées', 'Date début', 'Date fin', 'Actions']
+
   configSnackBar = new MatSnackBarConfig();
 
   constructor(
     private sprintService: SprintService,
-    private issueService: IssueService,
     private taskService: TaskService,
     private route: ActivatedRoute,
     public dialog: MatDialog,
@@ -56,22 +54,20 @@ export class SprintOverviewComponent implements OnInit {
     this.sprintId = this.route.snapshot.paramMap.get('id');
     this.sprintService.getSprint(this.sprintId).subscribe(res => {
       this.sprint = res;
-      this.projectId = this.sprint.projectId
+      this.projectId = this.sprint.projectId;
       this.title = this.sprint.title;
     });
-    this.issueService.getIssueBySprint(this.sprintId).subscribe(issues => {
-      this.issues = new MatTableDataSource(issues);
-      this.issues.paginator = this.paginator;
-    });
+
     this.taskService.getTaskBySprint(this.sprintId).subscribe(tasks => {
-      this.tasks = tasks;
+      this.tasks = new MatTableDataSource(tasks);
+      this.tasks.paginator = this.paginator;
     });
   }
 
   applyFilter(filterValue: string) {
-    this.issues.filter = filterValue.trim().toLowerCase();
-    if (this.issues.paginator) {
-      this.issues.paginator.firstPage();
+    this.tasks.filter = filterValue.trim().toLowerCase();
+    if (this.tasks.paginator) {
+      this.tasks.paginator.firstPage();
     }
   }
 
@@ -91,7 +87,7 @@ export class SprintOverviewComponent implements OnInit {
   }
 
   updateTask(idTask) {
-    const diagoFormTask = this.dialog.open(UpdateTaskComponent, {width: '800px', data: {taskId: idTask} });
+    const diagoFormTask = this.dialog.open(UpdateTaskComponent, {width: '800px', data: {taskId: idTask, sprintId: this.sprintId} });
     diagoFormTask.afterClosed().subscribe(error => {
       console.log(error);
       if (error === false) {
@@ -130,19 +126,9 @@ export class SprintOverviewComponent implements OnInit {
   }
 
   refreshTasks() {
-    // TODO
-  }
-
-  updateSprint() {
-    const diagoFormSprint = this.dialog.open(UpdateSprintComponent, {width: '800px', data: {idSprint: this.sprintId} });
-    diagoFormSprint.afterClosed().subscribe(error => {
-      if (error === false) {
-        this.snackBar.open('✅ Modification effectuée avec succès !', 'Fermer', this.configSnackBar);
-      } else {
-        if (error) {
-          this.snackBar.open('❌ Une erreur s\'est produite lors de la modification !', 'Fermer', this.configSnackBar);
-        }
-      }
+    this.taskService.getTaskBySprint(this.sprintId).subscribe(tasks => {
+      this.tasks = new MatTableDataSource(tasks);
+      this.tasks.paginator = this.paginator;
     });
   }
 
