@@ -4,6 +4,7 @@ import { Project } from '../../../models/project';
 import { ProjectService } from '../../../services/project.service';
 import { UpdateProjectComponent } from '../update-project/update-project.component';
 import { MatDialogRef } from '@angular/material';
+import {AuthenticationService} from '../../../services/authentication.service';
 
 @Component({
   selector: 'app-add-project',
@@ -25,6 +26,7 @@ export class AddProjectComponent implements OnInit {
     private formBuilder: FormBuilder,
     public dialogRef: MatDialogRef<AddProjectComponent>,
     public dialogRefUpdate: MatDialogRef<UpdateProjectComponent>,
+    private authenticationService: AuthenticationService,
     private projectService: ProjectService
   ) { }
 
@@ -49,7 +51,7 @@ export class AddProjectComponent implements OnInit {
     const refspecifying = this.addProject.controls.refspecifying.value;
 
     if (this.update) {
-      const updateProject = new Project(this.projectId, title, duration, description, repositoryURL, refspecifying);
+      const updateProject = new Project(this.projectId, title, duration, description, repositoryURL, refspecifying, this.authenticationService.getIdUser());
       this.projectService.updateProject(updateProject, this.project._id).subscribe(
         project => {
           console.log(project);
@@ -63,7 +65,7 @@ export class AddProjectComponent implements OnInit {
         }
       );
     } else {
-      const newProject = new Project(null, title, duration, description, repositoryURL, refspecifying);
+      const newProject = new Project(null, title, duration, description, repositoryURL, refspecifying, this.authenticationService.getIdUser());
       console.log(newProject);
       this.projectService.addProject(newProject).subscribe(
         project => {

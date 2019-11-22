@@ -37,6 +37,23 @@ export const addUserOnProject = async (req, res) => {
   }
 }
 
+export const getProjectByUser = async (req, res) => {
+  try {
+    const doc = await Project.find({ createBy: req.params.id })
+      .lean()
+      .exec()
+
+    if (!doc) {
+      return res.status(400).end()
+    }
+
+    res.status(200).json(doc)
+  } catch (e) {
+    console.error(e)
+    res.status(400).end()
+  }
+}
+
 export const createOneProject = async (req, res) => {
   try {
     const doc = await Project.create({ ...req.body })

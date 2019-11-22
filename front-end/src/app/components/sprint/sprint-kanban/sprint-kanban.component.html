@@ -63,7 +63,7 @@
         class="task-list"
 
         (cdkDropListDropped)="drop($event)">
-        <div class="task-box" *ngFor="let item of taskEnTermine" [cdkDragDisabled]="item.dev !== authenticationService.getIdUser()" cdkDrag>
+        <div class="task-box" *ngFor="let item of taskEnTermine"  cdkDrag>
           <mat-accordion >
             <mat-expansion-panel >
               <mat-expansion-panel-header>

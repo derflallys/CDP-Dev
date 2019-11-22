@@ -15,6 +15,7 @@ const httpOptions = {
 })
 export class ProjectService {
   private projectUrl = environment.BACK_END_URL + '/project';
+  private projectByUserUrl = environment.BACK_END_URL + '/project/byuser';
   private projectUserUrl = environment.BACK_END_URL + '/project/user';
 
   constructor(private http: HttpClient) { }
@@ -33,6 +34,10 @@ export class ProjectService {
 
   getProject(projectId: string) {
     return this.http.get<Project>(this.projectUrl + '/' + projectId);
+  }
+
+  getProjectByUser(userId: string): Observable<Project[]> {
+    return this.http.get<Project[]>(this.projectByUserUrl + '/' + userId);
   }
 
   updateProject(project: Project, id: string) {

@@ -25,7 +25,12 @@ export const signup = async (req, res) => {
   try {
     const user = await User.create(req.body)
     const token = newToken(user)
-    return res.status(201).send({ username: user.userName, token: token })
+    return res.status(201).send({
+      username: user.userName,
+      email: user.email,
+      id: user._id,
+      token: token
+    })
   } catch (e) {
     console.error(e)
     return res.status(400).end()
@@ -46,7 +51,12 @@ export const signin = async (req, res) => {
       return res.status(401).send({ message: 'Mot de passe incorrect.' })
     }
     const token = newToken(user)
-    return res.status(201).send({ username: user.userName, token: token })
+    return res.status(201).send({
+      username: user.userName,
+      email: user.email,
+      id: user._id,
+      token: token
+    })
   } catch (e) {
     console.error(e)
     return res.status(401).send()
