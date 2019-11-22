@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import { crud, addUserOnProject, createOneProject , getProjectByUser} from './project.controllers'
+import { crud, addUserOnProject, createOneProject , getProjectsByUser} from './project.controllers'
 
 const router = Router()
 
@@ -22,6 +22,6 @@ router
 router.route('/user/:id/:un').post(addUserOnProject)
 
 // /api/project/byuser/:id
-router.route('/byuser/:id').get(getProjectByUser)
+router.route('/byuser/:id').get(getProjectsByUser)
 
 export default router

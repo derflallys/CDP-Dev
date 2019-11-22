@@ -37,17 +37,28 @@ export const addUserOnProject = async (req, res) => {
   }
 }
 
-export const getProjectByUser = async (req, res) => {
+export const getProjectsByUser = async (req, res) => {
   try {
-    const doc = await Project.find({ createBy: req.params.id })
+    const doc = await Project.find({})
       .lean()
       .exec()
 
     if (!doc) {
       return res.status(400).end()
     }
+    const id = req.params.id
+    const projectUser = []
 
-    res.status(200).json(doc)
+    doc.forEach(project => {
+      if (project.users) {
+        if (
+          project.users.find(userR => userR.user.toString() === id.toString())
+        ) {
+          projectUser.push(project)
+        }
+      }
+    })
+    res.status(200).json(projectUser)
   } catch (e) {
     console.error(e)
     res.status(400).end()
