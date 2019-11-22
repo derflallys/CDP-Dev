@@ -10,7 +10,7 @@
         <mat-form-field class="input-field">
             <mat-label>US liées</mat-label>
             <mat-select formControlName="issues" multiple>
-                <mat-option *ngFor="let id of issueIds" [value]="issueIds">{{id}}</mat-option>
+                <mat-option *ngFor="let id of issueIds" [value]="id">{{id}}</mat-option>
             </mat-select>
         </mat-form-field>
 
