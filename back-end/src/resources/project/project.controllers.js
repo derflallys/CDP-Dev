@@ -42,17 +42,12 @@ export const getProjectsByUser = async (req, res) => {
     const doc = await Project.find({})
       .lean()
       .exec()
-    const creatPro = await Project.find({ createBy: req.params.id })
-      .lean()
-      .exec()
 
     if (!doc) {
       return res.status(400).end()
     }
-    console.log(creatPro)
     const id = req.params.id
     const projectUser = []
-    if (creatPro !== null) projectUser.push(creatPro[0])
 
     doc.forEach(project => {
       console.log(project.createBy)
