@@ -1,0 +1,43 @@
+
+<div class="header">
+	<h2>Détail du Sprint <em>{{ title }}</em></h2>
+	<button mat-raised-button color="primary" (click)="addTask()"> Ajouter une Tâche </button>
+</div>
+
+<div class="main-frame">
+  <div class="contain-project">
+    <div class="box sprint">
+      <!-- Table Sprint -->
+      <mat-accordion>
+        <mat-expansion-panel [expanded]="true">
+					<h3>Sprint Backlog | Tâches</h3>
+          <div class="main-frame">
+            <table mat-table [dataSource]="issues" class="mat-elevation-z8">
+              <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+              <ng-container matColumnDef="ID">
+                <th mat-header-cell *matHeaderCellDef> ID </th>
+                <td mat-cell *matCellDef="let element"> {{ element.issueId }} </td>
+              </ng-container>
+              <ng-container matColumnDef="Description" maxlength="70%">
+                <th mat-header-cell *matHeaderCellDef> Description </th>
+                <td mat-cell *matCellDef="let element">
+                  {{ element.description }}
+                </td>
+              </ng-container>
+              <ng-container matColumnDef="Priorité">
+                <th mat-header-cell *matHeaderCellDef> Priorité </th>
+                <td mat-cell *matCellDef="let element"> {{ element.priority }} </td>
+              </ng-container>
+              <ng-container matColumnDef="Etat">
+                <th mat-header-cell *matHeaderCellDef> Etat </th>
+                <td mat-cell *matCellDef="let element">{{ element.state }} </td>
+              </ng-container>
+            </table>
+            <mat-paginator [pageSizeOptions]="[10, 25, 100]"></mat-paginator>
+          </div>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+  </div>
+</div>

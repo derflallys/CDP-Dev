@@ -1,17 +1,18 @@
 import { getSeq } from '../../utils/counter.model'
-import { IssueSchema } from '../issue/issue.model'
 const mongoose = require('mongoose')
 
 const TaskSchema = new mongoose.Schema(
   {
-    issues: [IssueSchema],
+    issues: [Number],
     projectId: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'project'
+      ref: 'project',
+      required: true
     },
     sprintId: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'sprint'
+      ref: 'sprint',
+      required: true
     },
     dev: {
       type: mongoose.Schema.Types.ObjectId,
@@ -23,7 +24,7 @@ const TaskSchema = new mongoose.Schema(
     dod: {
       type: String,
       required: true,
-      maxlength: 100
+      maxlength: 250
     },
     state: {
       type: String,
@@ -33,11 +34,11 @@ const TaskSchema = new mongoose.Schema(
     },
     toTest: {
       type: Boolean,
-      default: false
+      default: true
     },
     toDoc: {
       type: Boolean,
-      default: false
+      default: true
     },
     startDate: {
       type: Date,
