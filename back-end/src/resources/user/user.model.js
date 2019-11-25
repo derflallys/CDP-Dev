@@ -1,4 +1,4 @@
-import bcrypt from 'bcrypt'
+import bcrypt from 'bcryptjs'
 const mongoose = require('mongoose')
 const uniqueValidator = require('mongoose-unique-validator')
 
