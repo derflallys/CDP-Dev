@@ -50,8 +50,6 @@ export const getProjectsByUser = async (req, res) => {
     const projectUser = []
 
     doc.forEach(project => {
-      console.log(project.createBy)
-
       if (project.users) {
         if (
           project.users.find(userR => userR.user.toString() === id.toString())
