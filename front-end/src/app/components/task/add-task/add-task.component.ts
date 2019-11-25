@@ -54,12 +54,10 @@ export class AddTaskComponent implements OnInit {
   onSubmit() {
     if (this.addTask.invalid) { return; }
 
-    const issues = this.addTask.controls.issues.value[0];
+    const issues = this.addTask.controls.issues.value;
     const dod = this.addTask.controls.dod.value;
     const startDate = this.addTask.controls.startDate.value;
     const endDate = this.addTask.controls.endDate.value;
-
-    console.log('issues', issues)
     
     if (this.update) {
       const updateTask = new Task(null, this.projectId, this.sprintId, issues, dod, startDate, endDate);
@@ -77,8 +75,6 @@ export class AddTaskComponent implements OnInit {
       );
     } else {
       const newTask = new Task(null, this.projectId, this.sprintId, issues, dod, startDate, endDate);
-      console.log(newTask);
-      console.log('Add');
       this.taskService.addTask(newTask).subscribe(
         res => {
           console.log(res);

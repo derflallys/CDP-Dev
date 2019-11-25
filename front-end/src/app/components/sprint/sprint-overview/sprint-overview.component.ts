@@ -1,45 +1,61 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { SprintService } from 'src/app/services/sprint.service';
+import { IssueService } from 'src/app/services/issue.service';
 import { TaskService } from '../../../services/task.service';
+import { Issue } from '../../../models/issue';
 import { Sprint } from '../../../models/sprint';
 import { Task } from '../../../models/task';
 
 import {
   MatDialog,
   MatDialogConfig,
-  MatPaginator,
   MatSnackBar,
   MatSnackBarConfig,
-  MatTableDataSource
 } from '@angular/material';
 import { AddTaskComponent } from '../../task/add-task/add-task.component';
 import { UpdateTaskComponent } from '../../task/update-task/update-task.component';
 import { DeleteDialogComponent } from '../../utils/delete-dialog/delete-dialog.component';
-import { UpdateSprintComponent } from '../../sprint/update-sprint/update-sprint.component';
+import { animate, state, style, transition, trigger } from '@angular/animations';
+
+interface TaskLinkIssue {
+  id: number;
+  description: string;
+  priority: string;
+  tasks: Task[];
+}
 
 @Component({
   selector: 'app-sprint-overview',
   templateUrl: './sprint-overview.component.html',
   styleUrls: ['./sprint-overview.component.css'],
+  animations: [
+    trigger('detailExpand', [
+      state('collapsed', style({height: '0px', minHeight: '0'})),
+      state('expanded', style({height: '*'})),
+      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
+    ]),
+  ],
 })
 export class SprintOverviewComponent implements OnInit {
-
-  @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
   title = '';
   sprint: Sprint;
   sprintId;
   projectId;
 
-  tasks: MatTableDataSource<Task>;
-
-  displayedColumnsTask: string[] = ['ID', 'DoD', 'US liées', 'Date début', 'Date fin', 'Actions']
+  issues: Issue[];
+  tasks: Task[];
+  taskLinkIssue: TaskLinkIssue[];
+  displayedColumns = ['ID', 'Description', 'Priorité'];
+  displayedColumnsTask = ['ID', 'DoD', 'Date début', 'Date fin', 'Actions'];
+  expandedElement: TaskLinkIssue | null;
 
   configSnackBar = new MatSnackBarConfig();
 
   constructor(
     private sprintService: SprintService,
+    private issueService: IssueService,
     private taskService: TaskService,
     private route: ActivatedRoute,
     public dialog: MatDialog,
@@ -55,20 +71,33 @@ export class SprintOverviewComponent implements OnInit {
     this.sprintService.getSprint(this.sprintId).subscribe(res => {
       this.sprint = res;
       this.projectId = this.sprint.projectId;
-      this.title = this.sprint.title;
+      this.title += this.sprint.title + ' ' + this.sprint.sprintId;
     });
-
-    this.taskService.getTaskBySprint(this.sprintId).subscribe(tasks => {
-      this.tasks = new MatTableDataSource(tasks);
-      this.tasks.paginator = this.paginator;
+    this.issueService.getIssueBySprint(this.sprintId).subscribe(issues => {
+      this.issues = issues;
+      this.taskService.getTaskBySprint(this.sprintId).subscribe(tasks => {
+        this.tasks = tasks;
+        this.generateTaskLinkIssue();
+      });
     });
   }
 
-  applyFilter(filterValue: string) {
-    this.tasks.filter = filterValue.trim().toLowerCase();
-    if (this.tasks.paginator) {
-      this.tasks.paginator.firstPage();
-    }
+  generateTaskLinkIssue() {
+    this.taskLinkIssue = [];
+    this.issues.forEach(issue => {
+      let relatedTasks = [];
+      this.tasks.forEach(task => {
+        if (task.issues.includes(issue.issueId)) {
+          relatedTasks.push(task);
+        }
+      });
+      this.taskLinkIssue.push({
+        id: issue.issueId,
+        description: issue.description,
+        priority: issue.priority,
+        tasks: relatedTasks
+      });
+    });
   }
 
   addTask() {
@@ -127,9 +156,10 @@ export class SprintOverviewComponent implements OnInit {
 
   refreshTasks() {
     this.taskService.getTaskBySprint(this.sprintId).subscribe(tasks => {
-      this.tasks = new MatTableDataSource(tasks);
-      this.tasks.paginator = this.paginator;
+      this.tasks = tasks;
+      this.generateTaskLinkIssue();
     });
   }
+
 
 }

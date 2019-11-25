@@ -1,6 +1,6 @@
 table {
-    width: 100%;
-    text-align: center !important;
+  width: 100%;
+  text-align: center !important;
 }
 
 .row {
@@ -13,9 +13,24 @@ table {
 }
 
 .mat-header-cell {
-    text-align: center;
+  text-align: center;
 }
 
-.mat-row:not(.mat-header-cell):hover {
-    background: #CCC;
+.expanded-row:hover {
+  background: #CCC;
+}
+
+
+
+tr.detail-row {
+  height: 0;
+}
+
+tr.element-row:not(.expanded-row):hover {
+  background: #777;
+}
+
+.element-detail {
+  overflow: hidden;
+  display: flex;
 }
