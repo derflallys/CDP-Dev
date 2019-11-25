@@ -3,7 +3,7 @@
 | ID | US liée | Dépendances | Temps estimé | Etat | Affectation |
 |----|----|----|----|----|----|
 | 0.1 | US1, US2, US3, US4, US5, US7  | x | 0.5 | DONE | Oumayma |
-| 0.2 | x | x | 0.5 | TODO | Alfred |
+| 0.2 | x | x | 0.5 | DONE | Alfred |
 | 1.1 | US1 | 0.1 | 0.5 | DONE | Oumayma |
 | 1.2 | US1 | 0.1 | 0.5 | DONE | Alfred  |
 | 2.1 | US2 | 0.1 | 0.5 | DONE | Oumayma |
