@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import { crud } from './task.controllers'
+import { crud, getTasksByDev } from './task.controllers'
 
 const router = Router()
 
@@ -21,7 +21,10 @@ router
 // /api/task/byissue
 // router.route('/byissue/:id').get(crud.getByIssue)
 
-// /api/task/bysprint
+// /api/task/bysprint/:id
 router.route('/bysprint/:id').get(crud.getBySprint)
+
+// /api/task/byuser/:id
+router.route('/byuser/:id').get(getTasksByDev)
 
 export default router

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import { SprintService } from 'src/app/services/sprint.service';
 import { IssueService } from 'src/app/services/issue.service';
 import { TaskService } from '../../../services/task.service';
@@ -17,6 +17,7 @@ import { AddTaskComponent } from '../../task/add-task/add-task.component';
 import { UpdateTaskComponent } from '../../task/update-task/update-task.component';
 import { DeleteDialogComponent } from '../../utils/delete-dialog/delete-dialog.component';
 import { animate, state, style, transition, trigger } from '@angular/animations';
+import {Location} from '@angular/common';
 
 interface TaskLinkIssue {
   id: number;
@@ -58,8 +59,10 @@ export class SprintOverviewComponent implements OnInit {
     private issueService: IssueService,
     private taskService: TaskService,
     private route: ActivatedRoute,
+    private router: Router,
     public dialog: MatDialog,
-    public snackBar: MatSnackBar
+    public snackBar: MatSnackBar,
+    private location: Location
   ) {
     this.configSnackBar.verticalPosition = 'bottom';
     this.configSnackBar.horizontalPosition = 'center';
@@ -162,4 +165,12 @@ export class SprintOverviewComponent implements OnInit {
   }
 
 
+  startSprint() {
+    // TODO Update Sprint to START
+    this.router.navigate(['kanban/' + this.sprintId]);
+  }
+
+  goBack() {
+    this.location.back();
+  }
 }

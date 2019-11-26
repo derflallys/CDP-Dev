@@ -1,5 +1,8 @@
 
 <div class="header">
+    <button mat-mini-fab matTooltip="Retour" class="d-block mx-auto button-back" color="primary">
+      <mat-icon (click)="goBack()">arrow_back</mat-icon>
+    </button>
     <h2>
       <span matBadge="{{ nbProject }}" matBadgeOverlap="false">Liste des Projets</span>
     </h2>

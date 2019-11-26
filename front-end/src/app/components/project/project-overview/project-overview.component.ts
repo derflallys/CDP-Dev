@@ -21,6 +21,7 @@ import { DeleteDialogComponent } from '../../utils/delete-dialog/delete-dialog.c
 import { AddSprintComponent } from '../../sprint/add-sprint/add-sprint.component';
 import { UpdateSprintComponent } from '../../sprint/update-sprint/update-sprint.component';
 import { AddUserComponent } from '../add-user/add-user.component';
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-project-overview',
@@ -47,7 +48,8 @@ export class ProjectOverviewComponent implements OnInit {
     private sprintService: SprintService,
     private route: ActivatedRoute,
     public dialog: MatDialog,
-    public snackBar: MatSnackBar
+    public snackBar: MatSnackBar,
+    private location: Location
   ) {
     this.configSnackBar.verticalPosition = 'bottom';
     this.configSnackBar.horizontalPosition = 'center';
@@ -88,7 +90,7 @@ export class ProjectOverviewComponent implements OnInit {
       console.log(error);
       if (error === false) {
         this.snackBar.open('✅ Ajout de l\'utilisateur effectuée avec succès !', 'Fermer', this.configSnackBar);
-        console.log(this.project.users)
+        console.log(this.project.users);
       } else {
         if (error) {
           this.snackBar.open('❌ L\'utilisateur n\'a pas été trouver !', 'Fermer', this.configSnackBar);
@@ -266,4 +268,7 @@ export class ProjectOverviewComponent implements OnInit {
     );
   }
 
+  goBack() {
+    this.location.back();
+  }
 }

@@ -1,4 +1,12 @@
-<h2 class="textCenter" *ngIf="sprint"> {{sprint.title}} {{sprint.sprintId}}</h2>
+
+<div class="header">
+  <button mat-mini-fab matTooltip="Retour" class="d-block mx-auto button-back" color="primary">
+    <mat-icon (click)="goBack()">arrow_back</mat-icon>
+  </button>
+  <h2 class="textCenter" *ngIf="sprint"> {{sprint.title}} {{sprint.sprintId}}</h2>
+</div>
+
+
 <div class="box">
   <div cdkDropListGroup>
     <div class="task-container">

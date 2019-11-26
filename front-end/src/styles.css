@@ -12,7 +12,15 @@ body {
     font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
+.button-back{
+  float: left;
+  margin-left: 11px !important;
+}
 
+.button-right{
+  float: right;
+  margin-right: 25px !important;
+}
 
 /* Page Content */
 .header {

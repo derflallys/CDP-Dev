@@ -190,5 +190,7 @@ export class SprintKanbanComponent implements OnInit {
   }
 
 
-
+  goBack() {
+    this.location.back();
+  }
 }

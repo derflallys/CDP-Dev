@@ -13,6 +13,7 @@ import { AddProjectComponent } from '../add-project/add-project.component';
 import { UpdateProjectComponent } from '../update-project/update-project.component';
 import { DeleteDialogComponent } from '../../utils/delete-dialog/delete-dialog.component';
 import {AuthenticationService} from '../../../services/authentication.service';
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-project-list',
@@ -34,7 +35,8 @@ export class ProjectListComponent implements OnInit {
     private projectService: ProjectService,
     public dialog: MatDialog,
     public authenticationService: AuthenticationService,
-    public snackBar: MatSnackBar
+    public snackBar: MatSnackBar,
+    private location: Location
   ) {
     this.configSnackBar.verticalPosition = 'bottom';
     this.configSnackBar.horizontalPosition = 'center';
@@ -122,4 +124,7 @@ export class ProjectListComponent implements OnInit {
     });
   }
 
+  goBack() {
+     this.location.back();
+  }
 }

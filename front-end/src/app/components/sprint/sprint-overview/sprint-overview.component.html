@@ -1,7 +1,13 @@
 
 <div class="header">
+  <button mat-mini-fab matTooltip="Retour" class="d-block mx-auto button-back" color="primary">
+    <mat-icon (click)="goBack()">arrow_back</mat-icon>
+  </button>
 	<h2 class="pb-3">Sprint Backlog (<em>{{ title }}</em>)</h2>
 	<button mat-raised-button color="primary" (click)="addTask()"> Ajouter une Tâche </button>
+  <button mat-mini-fab matTooltip="Démarrer le sprint" class="d-block mx-auto button-right" color="basic">
+    <mat-icon (click)="startSprint()">view_column</mat-icon>
+  </button>
 </div>
 
 <div class="main-frame">

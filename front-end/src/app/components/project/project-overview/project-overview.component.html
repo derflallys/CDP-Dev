@@ -1,9 +1,14 @@
 
 <div class="header">
+  <button mat-mini-fab matTooltip="Retour" class="d-block mx-auto button-back" color="primary">
+    <mat-icon (click)="goBack()">arrow_back</mat-icon>
+  </button>
   <h2>Détail du Projet <em>{{ title }}</em></h2>
-  <button mat-mini-fab matTooltip="Ajouter un utilisateur" class="d-block mx-auto" color="basic">
+
+  <button mat-mini-fab matTooltip="Ajouter un utilisateur" class="d-block mx-auto " color="basic">
     <mat-icon (click)="addUser()">supervised_user_circle</mat-icon>
   </button>
+
 </div>
 <div class="main-frame row">
   <h4 class="filter sprints">
