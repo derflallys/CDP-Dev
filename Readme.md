@@ -1,5 +1,7 @@
 # Backlog UE CDP (Groupe 1 - Equipe 5)
+## Build travis:
 
+[![Build Travis Status](https://travis-ci.com/derflallys/CDP-Dev.svg?token=gsystqqqLGzAApB6oXpS&branch=master)](https://travis-ci.com/derflallys/CDP-Dev)
 ## Description des rôles
 
 * Un **visiteur** c'est celui qui a  crée un compte et qui est connecté sur l'application. Il possède un nom, un pseudo, un e-mail et un mot de passe.
