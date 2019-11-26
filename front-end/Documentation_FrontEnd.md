@@ -58,7 +58,6 @@ Toute notre implémentation est présente dans le dossier `src/app`, le reste es
 Voici la liste des dépendances pour le projet (inscrite dans le fichier `package.json`). 
 La partie "devDependencies" correspond aux dépendances nécéssaires en développement mais non utilisé en production.
 
-La partie "devDependencies" correspond aux dépendances nécéssaires en développement mais non utilisé en production.
 
 ```
 {
