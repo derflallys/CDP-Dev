@@ -22,7 +22,8 @@ const ProjectSchema = new mongoose.Schema(
     },
     createBy: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'user'
+      ref: 'user',
+      required: true
     },
     users: {
       type: [UserRoleSchema]
