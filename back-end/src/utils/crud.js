@@ -1,5 +1,3 @@
-import { Task } from '../resources/task/task.model'
-
 export const getOne = model => async (req, res) => {
   try {
     const doc = await model
@@ -50,7 +48,7 @@ export const updateOne = model => async (req, res) => {
           _id: req.params.id
         },
         req.body,
-        { new: true }
+        { new: true, useFindAndModify: false }
       )
       .lean()
       .exec()
