@@ -11,7 +11,7 @@ const models = { User, Project, Sprint, Issue }
 const url =
   process.env.MONGODB_URI ||
   process.env.DB_URL ||
-  'mongodb://localhost:27017/cdp'
+  'mongodb://mongo:27017/cdp'
 
 global.newId = () => {
   return mongoose.Types.ObjectId()
