@@ -147,7 +147,8 @@
 
 **Tâche 9** : Test UI (Selenium)   
 >**Définition of done** : 
->
+> 
+> Il faudrat mettre en place un ensemble de scénarios de tests de l'interface graphique. Pour ce faire, nous utiliserons l'add-on Firefox Selenium-IDE.
 > 
 
 >**Tâche 9.1** : [FRONT-END]
