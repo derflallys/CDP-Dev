@@ -1,6 +1,7 @@
 language: node_js
 node_js:
   - "10"
+  - "12"
 dist: trusty
 sudo: false
 
@@ -12,6 +13,11 @@ addons:
   chrome: stable
 
 script:
+  - cd back-end
+  - npm install
+  - npm run test-auth
+  - cd front-end
+  - npm install
   - npm run lint
   - npm run test:headless
   - npm run build
