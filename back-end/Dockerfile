@@ -7,6 +7,7 @@ WORKDIR /app
 COPY package.json  /app
 COPY .babelrc  /app
 COPY nodemon.json  /app
+COPY test-db-setup.js  /app
 COPY ./src /app/src
 
 RUN npm install

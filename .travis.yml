@@ -1,7 +1,6 @@
 language: node_js
 node_js:
   - "10"
-  - "12"
 sudo: required
 addons:
   apt:
@@ -19,10 +18,8 @@ before_install:
 
 script:
   - docker-compose run back-end sh -c "npm run test-auth"
-  - cd front-end
-  - npm install
-  - npm run build
-  - xvfb-run npm run e2e
+  - docker-compose run front-end sh -c "npm run e2e"
+
 
 after_script:
   - cd Docker; docker-compose down -v --rmi all
