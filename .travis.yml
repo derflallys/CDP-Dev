@@ -18,7 +18,6 @@ before_install:
 
 script:
   - docker-compose run back-end sh -c "npm run test-auth"
-  - docker-compose run front-end sh -c "npm run e2e"
 
 
 after_script:
