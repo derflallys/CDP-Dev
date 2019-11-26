@@ -22,7 +22,7 @@
 ## Release Sprint 2
  
 > #### Date de cette release : Le 22 Novembre 2018
-> #### Liens pour le téléchargement : https://github.com/derflallys/CDP-Release/releases/tag/0.0.1
+> #### Liens pour le téléchargement : https://github.com/derflallys/CDP-Release/releases/tag/0.0.2
 
 
 ### Les Issues traités dans cette release : 
