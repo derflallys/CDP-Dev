@@ -41,7 +41,7 @@
 * **Tâche 0.2** : Création du squelette de l'application [FRONT-END].
 * **Tâche 0.3** : Définir la page d'index, ainsi que le template de base de l'application avec les menus de navigation, les couleurs de bases utilisées pour l'application, etc.
 * **Tâche 0.4** : Création du squelette de l'application [BACK-END]. 
-* **Tâche 0.5** Creer le fichier `docker-compose.yaml`.
+* **Tâche 0.5** : Creer le fichier `docker-compose.yaml`.
 * **Tâche 1** : Ajouter les modéles du projet [FRONT-END].
 * **Tâche 2** : Ajouter les services du projet [FRONT-END].
 * **Tâche 3** : Lister les projets.
@@ -54,7 +54,7 @@
 * **Tâche 10** : Modifier une issue.  
 * **Tâche 11** : Créer un sprint.   
 * **Tâche 12** : Modifier un sprint.  
-* **Tâche 13** Supprimer un sprint.  
+* **Tâche 13** : Supprimer un sprint.  
 
 
 ## Liste des Tâches : Description et définition of done
@@ -76,26 +76,32 @@
 
 **Tâche 0.2** : Création du squelette de l'application [FRONT-END].  
 >**Définition of done** : 
+>
 > Générer le squelette du projet avec angular cli et definir les dépendances dans `package.json`.
 
 **Tâche 0.3** :
 >**Définition of done** : 
+>
 >Définir la page d'index, ainsi que le template de base de l'application avec les menus de navigation, les couleurs de bases utilisées pour l'application, etc.
 
 **Tâche 0.4** : Création du squelette de l'application [BACK-END].  
 >**Définition of done** : 
+>
 > Creer le squelette l'application NodeJS et definir les dependances dans `package.json`.
 
 **Tâche 0.5** Creer le fichier `docker-compose.yaml`.  
 >**Définition of done** : 
+>
 > Contenant un container pour application MEAN Stack
 
 **Tache 1** : Ajouter les modéles du projet [FRONT-END].  
 >**Définition of done** : 
+>
 > Créer un dossier nommé `modeles` à savoir Project, Issues, Sprint où il faut creer les fichiers `nommodele.ts` et les définir sur chaque fichier la classe de l'entité avec son constructeur.
 
 **Tache 2** : Ajouter les services du projet [FRONT-END].  
 >**Définition of done** : 
+>
 > Créer un dossier nommé `services` à savoir Project, Issues, Sprint où il faut créer les fichiers `nommodele.service.ts` où seront défini les méthodes HTTP.
 
 **Tâche 3** : Lister les projets  
