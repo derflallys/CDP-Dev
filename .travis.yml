@@ -2,23 +2,27 @@ language: node_js
 node_js:
   - "10"
   - "12"
-dist: trusty
-sudo: false
-
-cache:
-  directories:
-    - node_modules
-
+sudo: required
 addons:
-  chrome: stable
+  apt:
+    packages:
+      - docker-ce
+
+services:
+  - docker
+
+
+before_install:
+
+  - docker-compose  build
+  - docker-compose up -d mongo
 
 script:
-  - cd back-end
+  - docker-compose run back-end sh -c "npm run test-auth"
+  - cd front-end
   - npm install
-  - npm run test-auth
-  - cd .. && cd front-end
-  - npm install
-  - npm run lint
-  - npm run test:headless
   - npm run build
   - xvfb-run npm run e2e
+
+after_script:
+  - cd Docker; docker-compose down -v --rmi all
