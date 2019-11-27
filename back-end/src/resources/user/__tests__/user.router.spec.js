@@ -1,7 +1,7 @@
 import router from '../user.router'
 
 describe('user router', () => {
-  test('has crud routes', () => {
+  test('has crud routes user', () => {
     const routes = [{ path: '/', method: 'get' }, { path: '/', method: 'post' }]
     routes.forEach(route => {
       const match = router.stack.find(

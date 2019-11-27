@@ -1,7 +1,7 @@
 import router from '../project.router'
 
 describe('project router', () => {
-  test('has crud routes', () => {
+  test('has crud routes project', () => {
     const routes = [
       { path: '/', method: 'get' },
       { path: '/:id', method: 'get' },

@@ -1,7 +1,7 @@
 import router from '../sprint.router'
 
 describe('sprint router', () => {
-  test('has crud routes', () => {
+  test('has crud routes sprint', () => {
     const routes = [
       { path: '/', method: 'get' },
       { path: '/:id', method: 'get' },

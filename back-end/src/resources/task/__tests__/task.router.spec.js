@@ -1,7 +1,7 @@
 import router from '../task.router'
 
 describe('task router', () => {
-  test('has crud routes', () => {
+  test('has crud routes task', () => {
     const routes = [
       { path: '/', method: 'get' },
       { path: '/:id', method: 'get' },
