@@ -19,3 +19,12 @@ footer {
   height: 100px;
   margin-top: 130px;
 }
+
+a {
+  color: currentColor;
+}
+
+a:hover {
+  text-decoration: none;
+  color: currentColor;
+}

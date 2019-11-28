@@ -15,7 +15,7 @@ export class AddUserComponent implements OnInit {
   addUser: FormGroup;
   project: Project = this.data.project;
   error = false;
-  title = 'Ajouter un utilisateur';
+  title = 'Ajouter un collaborateur';
 
   constructor(
     private formBuilder: FormBuilder,

@@ -51,6 +51,11 @@
   flex-basis: 0;
 }
 
+
+.mat-expansion-panel-header {
+  cursor: move !important;
+}
+
 .mat-expansion-panel-header-description {
   justify-content: space-between;
   align-items: center;
