@@ -12,8 +12,7 @@ import { Project } from '../../../models/project';
 import { AddProjectComponent } from '../add-project/add-project.component';
 import { UpdateProjectComponent } from '../update-project/update-project.component';
 import { DeleteDialogComponent } from '../../utils/delete-dialog/delete-dialog.component';
-import {AuthenticationService} from '../../../services/authentication.service';
-import {Location} from '@angular/common';
+import { AuthenticationService } from '../../../services/authentication.service';
 
 @Component({
   selector: 'app-project-list',
@@ -36,7 +35,6 @@ export class ProjectListComponent implements OnInit {
     public dialog: MatDialog,
     public authenticationService: AuthenticationService,
     public snackBar: MatSnackBar,
-    private location: Location
   ) {
     this.configSnackBar.verticalPosition = 'bottom';
     this.configSnackBar.horizontalPosition = 'center';
