@@ -15,6 +15,13 @@
         </mat-form-field>
 
         <mat-form-field class="input-field">
+            <mat-label>Dépendances</mat-label>
+            <mat-select formControlName="dependencies" multiple>
+                <mat-option *ngFor="let id of taskIds" [value]="id">#{{id}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field class="input-field">
             <input matInput [matDatepicker]="picker1" placeholder="Date de début" formControlName="startDate">
             <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
             <mat-datepicker #picker1></mat-datepicker>

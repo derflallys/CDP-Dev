@@ -6,6 +6,8 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { UpdateTaskComponent } from '../update-task/update-task.component';
 import { IssueService } from 'src/app/services/issue.service';
 
+import { remove } from 'lodash'
+
 @Component({
   selector: 'app-add-task',
   templateUrl: './add-task.component.html',
@@ -17,6 +19,7 @@ export class AddTaskComponent implements OnInit {
   addTask: FormGroup;
   task: Task;
   issueIds: Number[];
+  taskIds: Number[];
   error = false;
   close = true;
   @Input() taskId = null;
@@ -37,6 +40,7 @@ export class AddTaskComponent implements OnInit {
   ngOnInit() {
     this.addTask = this.formBuilder.group({
       issues: ['', Validators.required],
+      dependencies: [''],
       dod: ['Il faudra ...', Validators.required],
       startDate: ['', Validators.required],
       endDate: ['', Validators.required]
@@ -48,6 +52,13 @@ export class AddTaskComponent implements OnInit {
       })
       this.issueIds = ids;
     });
+    this.taskService.getTaskBySprint(this.sprintId).subscribe(tasks => {
+      const ids = [];
+      tasks.forEach(function(task) {
+        ids.push(task.taskId)
+      })
+      this.taskIds = ids;
+    });
     if (this.taskId) { this.loadTask(); }
   }
 
@@ -55,12 +66,13 @@ export class AddTaskComponent implements OnInit {
     if (this.addTask.invalid) { return; }
 
     const issues = this.addTask.controls.issues.value;
+    const dependencies = this.addTask.controls.dependencies.value;
     const dod = this.addTask.controls.dod.value;
     const startDate = this.addTask.controls.startDate.value;
     const endDate = this.addTask.controls.endDate.value;
-    
+
     if (this.update) {
-      const updateTask = new Task(null, this.projectId, this.sprintId, issues, dod, startDate, endDate);
+      const updateTask = new Task(null, this.projectId, this.sprintId, dependencies, issues, dod, startDate, endDate);
       this.taskService.updateTask(updateTask, this.task._id).subscribe(
         res => {
           console.log(res);
@@ -74,7 +86,7 @@ export class AddTaskComponent implements OnInit {
         }
       );
     } else {
-      const newTask = new Task(null, this.projectId, this.sprintId, issues, dod, startDate, endDate);
+      const newTask = new Task(null, this.projectId, this.sprintId, dependencies, issues, dod, startDate, endDate);
       this.taskService.addTask(newTask).subscribe(
         res => {
           console.log(res);
@@ -96,11 +108,14 @@ export class AddTaskComponent implements OnInit {
         this.title = 'Modifier la tâche';
         this.addTask = this.formBuilder.group({
           issues: [this.task.issues, Validators.required],
+          dependencies: [this.task.dependencies],
           dod: [this.task.dod, Validators.required],
           startDate: [this.task.startDate, Validators.required],
           endDate: [this.task.endDate, Validators.required]
         });
         this.update = true;
+        // A task cannot depends to itself.
+        remove(this.taskIds, (n: number) => n === this.task.taskId)
       },
       error => { console.log(error); }
     );

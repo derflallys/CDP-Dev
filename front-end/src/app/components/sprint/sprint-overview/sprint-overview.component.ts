@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { SprintService } from 'src/app/services/sprint.service';
 import { IssueService } from 'src/app/services/issue.service';
 import { TaskService } from '../../../services/task.service';
@@ -17,7 +17,7 @@ import { AddTaskComponent } from '../../task/add-task/add-task.component';
 import { UpdateTaskComponent } from '../../task/update-task/update-task.component';
 import { DeleteDialogComponent } from '../../utils/delete-dialog/delete-dialog.component';
 import { animate, state, style, transition, trigger } from '@angular/animations';
-import {Location} from '@angular/common';
+import { Location } from '@angular/common';
 
 interface TaskLinkIssue {
   id: number;
@@ -49,7 +49,7 @@ export class SprintOverviewComponent implements OnInit {
   tasks: Task[];
   taskLinkIssue: TaskLinkIssue[];
   displayedColumns = ['ID', 'Description', 'Priorité'];
-  displayedColumnsTask = ['ID', 'DoD', 'Date début', 'Date fin', 'Actions'];
+  displayedColumnsTask = ['ID', 'DoD', 'Dépendance', 'Date début', 'Date fin', 'Actions'];
   expandedElement: TaskLinkIssue | null;
 
   configSnackBar = new MatSnackBarConfig();
@@ -104,7 +104,8 @@ export class SprintOverviewComponent implements OnInit {
   }
 
   addTask() {
-    const diagoFormTask = this.dialog.open(AddTaskComponent, {width: '800px', data: {projectId: this.projectId, sprintId: this.sprintId} });
+    const options = { width: '800px', data: { projectId: this.projectId, sprintId: this.sprintId } };
+    const diagoFormTask = this.dialog.open(AddTaskComponent, options);
     diagoFormTask.afterClosed().subscribe(error => {
       console.log(error);
       if (error === false) {
@@ -119,7 +120,8 @@ export class SprintOverviewComponent implements OnInit {
   }
 
   updateTask(idTask) {
-    const diagoFormTask = this.dialog.open(UpdateTaskComponent, {width: '800px', data: {taskId: idTask, sprintId: this.sprintId} });
+    const options = { width: '800px', data: { taskId: idTask, sprintId: this.sprintId } }
+    const diagoFormTask = this.dialog.open(UpdateTaskComponent, options);
     diagoFormTask.afterClosed().subscribe(error => {
       console.log(error);
       if (error === false) {
