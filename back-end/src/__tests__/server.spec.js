@@ -1,9 +1,6 @@
 import request from 'supertest'
 import { app } from '../server'
 import { User } from '../resources/user/user.model'
-import { Sprint } from '../resources/sprint/sprint.model'
-import { Issue } from '../resources/issue/issue.model'
-import { Project } from '../resources/project/project.model'
 import { newToken } from '../utils/auth'
 import mongoose from 'mongoose'
 
