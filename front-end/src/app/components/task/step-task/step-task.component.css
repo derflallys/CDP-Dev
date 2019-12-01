@@ -1,0 +1,40 @@
+.task-todo, .task-doing, .task-done {
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    padding: 8px;
+    background: #fff;
+    text-align: center;
+    font: 16px Arial, sans-serif;
+}
+
+.task-todo {
+    border: 2px solid rgb(236, 0, 0);
+    color: rgb(236, 0, 0);
+}
+
+
+.task-doing {
+    border: 2px solid rgb(0, 36, 241);
+    color: rgb(0, 36, 241);
+}
+
+.task-done {
+    border: 2px solid rgb(30, 170, 30);
+    color: rgb(30, 170, 30);
+}
+
+ul {
+    list-style-type:none
+}
+
+.task-frame {
+    display: inline-block;
+    margin-bottom: 0px;
+}
+
+.legend > span {
+    padding-right: 5px;
+    padding-left: 5px;
+}
+

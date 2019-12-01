@@ -51,6 +51,7 @@ import { HomeComponent } from './components/home/home.component';
 import { SprintKanbanComponent } from './components/sprint/sprint-kanban/sprint-kanban.component';
 import { SprintOverviewComponent } from './components/sprint/sprint-overview/sprint-overview.component';
 import { UsersProjectComponent } from './components/user/users-project/users-project.component';
+import { StepTaskComponent } from './components/task/step-task/step-task.component';
 
 @NgModule({
   exports: [
@@ -94,7 +95,8 @@ export class MaterialModule {}
     AddUserComponent,
     HomeComponent,
     SprintKanbanComponent,
-    SprintOverviewComponent
+    SprintOverviewComponent,
+    StepTaskComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -130,7 +132,8 @@ export class MaterialModule {}
     UpdateSprintComponent,
     UpdateIssueComponent,
     UpdateProjectComponent,
-    UpdateTaskComponent
+    UpdateTaskComponent,
+    StepTaskComponent
   ],
   providers: [ AuthGuardService ],
   bootstrap: [ AppComponent ]

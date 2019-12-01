@@ -9,6 +9,7 @@ import {SprintService} from '../../../services/sprint.service';
 import {Sprint} from '../../../models/sprint';
 import { Location } from '@angular/common';
 import {DeleteDialogComponent} from '../../utils/delete-dialog/delete-dialog.component';
+import { StepTaskComponent } from '../../task/step-task/step-task.component';
 
 @Component({
   selector: 'app-sprint-kanban',
@@ -39,6 +40,10 @@ export class SprintKanbanComponent implements OnInit {
       this.sprint = res;
     });
     this.refreshTasks();
+  }
+
+  openStepTask() {
+    this.dialog.open(StepTaskComponent, { width: '800px', data: { tasks: this.allTasks } })
   }
 
   handleTasksBySprint(tasks) {
