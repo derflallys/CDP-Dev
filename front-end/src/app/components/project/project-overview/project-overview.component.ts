@@ -1,10 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProjectService } from '../../../services/project.service';
+
 import { Project } from '../../../models/project';
 import { Issue } from '../../../models/issue';
 import { Sprint } from '../../../models/sprint';
-
 import { IssueService } from '../../../services/issue.service';
 import { SprintService } from '../../../services/sprint.service';
 import {
@@ -36,7 +36,7 @@ export class ProjectOverviewComponent implements OnInit {
   issues: MatTableDataSource<Issue>;
   sprints: Sprint[] = [];
   projectId;
-  displayedColumns: string[] = ['ID', 'Description', 'Priorité', 'Etat', 'Actions'];
+  displayedColumns: string[] = ['ID', 'Description', 'Note', 'Priorité', 'Etat', 'Actions'];
   configSnackBar = new MatSnackBarConfig();
   allIssues: Issue[] = [];
   idSelectedSprint;

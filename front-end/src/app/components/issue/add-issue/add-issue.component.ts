@@ -5,6 +5,7 @@ import { IssueService } from '../../../services/issue.service';
 import { Router } from '@angular/router';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { UpdateIssueComponent } from '../update-issue/update-issue.component';
+import {AuthenticationService} from '../../../services/authentication.service';
 
 @Component({
   selector: 'app-add-issue',
@@ -43,6 +44,7 @@ export class AddIssueComponent implements OnInit {
   ngOnInit() {
     this.addIssue =  this.formBuilder.group({
       description: ['En tant que', Validators.required],
+      note: ['', Validators.required],
       state: ['TODO', Validators.required],
       difficulty: [1, Validators.required],
       priority: ['LOW', Validators.required]
@@ -57,12 +59,13 @@ export class AddIssueComponent implements OnInit {
       return;
     }
     const description = this.addIssue.controls.description.value;
+    const note = this.addIssue.controls.note.value;
     const state = this.addIssue.controls.state.value;
     const difficulty = Number(this.addIssue.controls.difficulty.value);
     const priority = this.addIssue.controls.priority.value;
     if (this.update) {
-      const updateIssue = new Issue(this.issue.projectId, this.issue._id, description, state, priority, difficulty, this.issue.sprintId);
-      this.issueService.updateIssue(updateIssue, this.issue._id).subscribe(
+ const updateIssue = new Issue(this.issue.projectId, this.issue._id, description, note, state, priority, difficulty, this.issue.sprintId);
+ this.issueService.updateIssue(updateIssue, this.issue._id).subscribe(
         res => {
           console.log(res);
           console.log('Update');
@@ -76,7 +79,7 @@ export class AddIssueComponent implements OnInit {
         }
       );
     } else {
-      const newIssue = new Issue(this.projectId, null, description, state, priority, difficulty);
+      const newIssue = new Issue(this.projectId, null, description, note, state, priority, difficulty);
       console.log(newIssue);
       console.log('Add');
       this.issueService.addIssue(newIssue).subscribe(
@@ -101,6 +104,7 @@ export class AddIssueComponent implements OnInit {
         this.title = 'Modifier l\'issue';
         this.addIssue = this.formBuilder.group({
           description: [this.issue.description, Validators.required],
+          note: [this.issue.note, Validators.required],
           state: [this.issue.state, Validators.required],
           difficulty: [this.issue.difficulty, Validators.required],
           priority: [this.issue.priority, Validators.required]
