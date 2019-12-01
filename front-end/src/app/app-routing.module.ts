@@ -9,6 +9,7 @@ import { AuthGuardService } from './services/auth-guard.service';
 import { HomeComponent } from './components/home/home.component';
 import { SprintKanbanComponent } from './components/sprint/sprint-kanban/sprint-kanban.component';
 import { SprintOverviewComponent } from './components/sprint/sprint-overview/sprint-overview.component';
+import {UsersProjectComponent} from './components/user/users-project/users-project.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -18,7 +19,9 @@ const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'login', component: SigninComponent },
   { path: 'kanban/:id', component: SprintKanbanComponent, canActivate: [AuthGuardService] },
-  { path: 'sprint/:id', component: SprintOverviewComponent, canActivate: [AuthGuardService] }
+  { path: 'sprint/:id', component: SprintOverviewComponent, canActivate: [AuthGuardService] },
+  { path: 'users/:id', component: UsersProjectComponent, canActivate: [AuthGuardService] }
+
 ];
 
 @NgModule({

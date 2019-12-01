@@ -30,7 +30,7 @@ export class ProjectListComponent implements OnInit {
 
   nbProject: number;
   displayedColumns: string[] = ['createdAt', 'title', 'duration', 'repositoryURL', 'actions'];
-
+  idSelectedProject;
   constructor(
     private projectService: ProjectService,
     public dialog: MatDialog,

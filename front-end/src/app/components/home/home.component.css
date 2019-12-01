@@ -6,6 +6,7 @@
   flex-direction: column;
   height: 500px;
 
+
 }
 
 .box{
@@ -13,7 +14,8 @@
   margin-left: 10px;
   padding-left: 10px;
   flex-basis: 5px;
-
+  background-color: white;
+  height: 550px;
   box-shadow: 10px 5px 5px #c7c7c7;
   border-radius: 30px;
 }

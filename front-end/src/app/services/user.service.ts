@@ -4,6 +4,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {User} from '../models/user';
 import {TokenUser} from '../models/TokenUser';
+import {Sprint} from '../models/sprint';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -19,11 +20,16 @@ export class UserService {
   private userUrl = environment.BACK_END_URL + '/user';
   private useraddUrl = environment.BACK_END_URL_WITHOUT_API + '/signup';
   private userConnectUrl = environment.BACK_END_URL_WITHOUT_API + '/signin';
+  private userByProjectUrl = environment.BACK_END_URL + '/user/byproject';
+
 
   constructor(private http: HttpClient) { }
 
   getUser(): Observable<User> {
     return this.http.get<User>(this.userUrl);
+  }
+  getUserByProject(projectId: number) {
+  //  return this.http.get<User[]>(this.userByProjectUrl() + '/' + projectId);
   }
 
   addUser(user: User): Observable<TokenUser> {

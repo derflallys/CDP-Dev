@@ -1,5 +1,8 @@
 main {
   min-height:  calc(100vh - 300px);
+  color:black;
+  background-color:white;
+  background-image: url(./Images/test.PNG);
 }
 mat-toolbar {
   background-color: black;

@@ -1,9 +1,12 @@
+
+<h2  class="text-center" style="margin-top: 30px">Gestion de projets</h2>
+
 <div class="content-home">
   <div ></div>
+
   <div class="box" >
-    <h2 class="text-center">Gestion de projet</h2>
     <div class="content-button"  *ngIf="!authService.isAuth()">
-      <a mat-raised-button color="primary" routerLink="/login">Se Connecter</a>
+      <a  style="margin-top: 20px" mat-raised-button color="primary" routerLink="/login">Se Connecter</a>
       <a mat-raised-button color="accent" routerLink="/signup">S'inscrire</a>
     </div>
     <h3 class="text-center" *ngIf="authService.isAuth()">Liste des tâches à faire par projet </h3>

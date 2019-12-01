@@ -11,5 +11,7 @@ router
     .get(me)
     .post(updateMe)
 
+// /api/user/byproject
+router.route('/byproject/:id').get(crud.getByProject)
 
 export default router

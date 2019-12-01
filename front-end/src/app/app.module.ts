@@ -50,6 +50,7 @@ import { AddUserComponent } from './components/project/add-user/add-user.compone
 import { HomeComponent } from './components/home/home.component';
 import { SprintKanbanComponent } from './components/sprint/sprint-kanban/sprint-kanban.component';
 import { SprintOverviewComponent } from './components/sprint/sprint-overview/sprint-overview.component';
+import { UsersProjectComponent } from './components/user/users-project/users-project.component';
 
 @NgModule({
   exports: [
@@ -70,7 +71,7 @@ import { SprintOverviewComponent } from './components/sprint/sprint-overview/spr
     MatCheckboxModule
   ],
   imports: [],
-  declarations: []
+  declarations: [UsersProjectComponent]
 })
 export class MaterialModule {}
 

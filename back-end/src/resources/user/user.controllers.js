@@ -1,4 +1,5 @@
 import { User } from './user.model'
+import { crudControllers } from '../../utils/crud'
 
 export const me = (req, res) => {
   res.status(200).json(req.user)
@@ -18,3 +19,4 @@ export const updateMe = async (req, res) => {
     res.status(400).end()
   }
 }
+export const crud = crudControllers(User)
