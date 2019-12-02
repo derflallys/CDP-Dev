@@ -22,6 +22,8 @@ export class AddSprintComponent implements OnInit {
   states = [
     'To Start', 'In progress', 'Completed'
   ];
+  URL_REGEX = /^(https?:\/\/)([\da-z.-]+)\.([a-z.]{2,6})\/?([\w .-]*)*(\.git)$/g;
+
 
   constructor(
     private formBuilder: FormBuilder,
@@ -38,7 +40,9 @@ export class AddSprintComponent implements OnInit {
       title: ['Sprint', Validators.required],
       startDate: [new Date().toString, Validators.required],
       endDate: [new Date().toString, Validators.required],
-      state: ['To Start', Validators.required]
+      state: ['To Start', Validators.required],
+      release: ['https://www.url.tld/repo.git', Validators.required]
+
     });
     if (this.sprintId) {
       this.loadSprint();
@@ -52,9 +56,10 @@ export class AddSprintComponent implements OnInit {
     const Sdate = this.addSprint.controls.startDate.value;
     const Edate = this.addSprint.controls.endDate.value;
     const state = this.addSprint.controls.state.value;
+    const release = this.addSprint.controls.release.value;
 
     if (this.update) {
-      const updateSprint = new Sprint(this.sprint._id, this.sprint.sprintId, this.sprint.projectId, title, Sdate, Edate, state);
+      const updateSprint = new Sprint(this.sprint._id, this.sprint.sprintId, this.sprint.projectId, title, Sdate, Edate, state, release);
       this.sprintService.updateSprint(updateSprint, this.sprint._id).subscribe(
         res => {
           console.log(res);
@@ -68,7 +73,7 @@ export class AddSprintComponent implements OnInit {
         }
       );
     } else {
-      const newSprint = new Sprint(null, null, this.projectId , title, Sdate, Edate, state);
+      const newSprint = new Sprint(null, null, this.projectId , title, Sdate, Edate, state, release);
       console.log(newSprint);
       this.sprintService.addSprint(newSprint).subscribe(
         res => {
@@ -93,7 +98,9 @@ export class AddSprintComponent implements OnInit {
           title: [this.sprint.title, Validators.required],
           startDate: [this.sprint.startDate, Validators.required],
           endDate: [this.sprint.endDate, Validators.required],
-          state: [this.sprint.state, Validators.required]
+          state: [this.sprint.state, Validators.required],
+          release: [this.sprint.release, Validators.required]
+
         });
         this.update = true;
       },

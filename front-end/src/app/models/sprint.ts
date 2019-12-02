@@ -6,8 +6,9 @@ export class Sprint {
   projectId: string;
   startDate: string;
   endDate: string;
+  release: string;
 
-  constructor(id: string, sprintId: number, projectId: string, title: string, startDate: string, endDate: string, state: string = 'To Start') {
+constructor(id: string, sprintId: number, projectId: string, title: string, startDate: string, endDate: string, state: string = 'To Start', release: string) {
     if ( id !== null) {
     this._id = id;
     }
@@ -17,5 +18,6 @@ export class Sprint {
     this.title = title;
     this.startDate = startDate;
     this.endDate = endDate;
+    this.release = release ;
   }
 }

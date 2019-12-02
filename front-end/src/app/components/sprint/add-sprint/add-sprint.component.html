@@ -26,6 +26,11 @@
       <mat-datepicker #picker2></mat-datepicker>
     </mat-form-field>
 
+
+    <mat-form-field class="input-field">
+      <input matInput placeholder="URL de la release" formControlName="release" type="url" [pattern]="URL_REGEX">
+    </mat-form-field>
+
   </form>
   <mat-dialog-actions>
     <button mat-raised-button color="primary" (click)="onSubmit()">Enregister le sprint</button>
