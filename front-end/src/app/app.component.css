@@ -2,7 +2,7 @@ main {
   min-height:  calc(100vh - 300px);
   color:black;
   background-color:white;
-  background-image: url(./Images/test.PNG);
+  background-image: url(../assets/images/test.PNG);
 }
 mat-toolbar {
   background-color: black;

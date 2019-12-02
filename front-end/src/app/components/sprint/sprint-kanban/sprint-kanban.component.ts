@@ -40,6 +40,7 @@ export class SprintKanbanComponent implements OnInit {
       this.sprint = res;
     });
     this.refreshTasks();
+
   }
 
   openStepTask() {
@@ -56,6 +57,7 @@ export class SprintKanbanComponent implements OnInit {
       this.taskTodo = tasks.filter(task => task.state === 'TODO');
       this.taskEncours = tasks.filter(task => task.state === 'DOING');
       this.taskEnTermine = tasks.filter(task => task.state === 'DONE');
+      this.updateSprint();
   }
 
   drop(event: CdkDragDrop<Task[]>) {
@@ -194,8 +196,32 @@ export class SprintKanbanComponent implements OnInit {
 
   }
 
+  updateSprint() {
+    if (this.allTasks.length > 0 && this.sprint.state === 'To Start') {
+      this.sprint.state = 'In progress';
+      this.sprintService.updateSprint(this.sprint, this.sprintId).subscribe( sprint => {
+        console.log(sprint);
+        this.snackBar.open(' Sprint en Cours ! ✅', 'Fermer', this.configSnackBar);
+      },
+        error => {
+        console.log(error);
+        this.snackBar.open(' Erreur lors de la mise à jour de l\'etat du sprint ! ❌ ', 'Fermer', this.configSnackBar);
+        }
+      );
+    }
+  }
 
   goBack() {
     this.location.back();
+  }
+
+  getState() {
+    if (this.sprint.state === 'In progress') {
+      return 'En cours';
+    }
+    if (this.sprint.state === 'Completed') {
+      return 'Terminé';
+    }
+    return '';
   }
 }

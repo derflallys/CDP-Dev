@@ -271,4 +271,8 @@ export class ProjectOverviewComponent implements OnInit {
   goBack() {
     this.location.back();
   }
+
+  startSprint() {
+
+  }
 }
