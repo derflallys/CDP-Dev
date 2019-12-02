@@ -8,9 +8,8 @@ import topologicalSort from './topological-sort';
  * Firstly, the tasks is described as a DAG (if it can't be, the component displays an error).
  * If the graph is not a DAG (i.e. there is a cycle), the topological sort is not applicable.
  * Secondly, a topological sort is applied on the DAG to determine the task ordering.
- * Finally, it apply a step organisation algorithm (i.e. check which task can be effectuated
- * simultaneousely). Tasks can be effectuated simultaneously iff there is no dependencies
- * between task in the same step and if tasks are adjacent in the ordered task list.
+ * Finally, it apply a step organisation algorithm that check which task can be effectuated
+ * simultaneousely.
  */
 @Component({
   selector: 'app-step-task',
