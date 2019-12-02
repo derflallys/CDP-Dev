@@ -30,6 +30,7 @@ export class StepTaskComponent implements OnInit {
   hasCircularDependency = false;
   numberOfStep: Number;
   numberMaxDeveloper: Number;
+  numberCriticalPath: Number;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: { tasks: null }
@@ -52,6 +53,7 @@ export class StepTaskComponent implements OnInit {
       console.log('Step Organisation', this.stepsTasks)
       this.numberOfStep = this.stepsTasks.length;
       this.numberMaxDeveloper = this.getNumberMaxDeveloper();
+      this.numberCriticalPath = this.getNumberCriticalPath();
     }
   }
 
@@ -64,6 +66,16 @@ export class StepTaskComponent implements OnInit {
     var stepLengths = this.stepsTasks.map(s => s.length);
     let maxDevOnStep = stepLengths.indexOf(Math.max.apply(Math, stepLengths));
     return this.stepsTasks[maxDevOnStep].length;
+  }
+
+  /**
+   * The number of critical paths (as defined per PERT) is the number of steps
+   * where there is a minimal number of tasks.
+   */
+  getNumberCriticalPath(): number {
+    const stepLengths = this.stepsTasks.map(s => s.length);
+    const criticalPathLength = Math.min.apply(null, stepLengths);
+    return stepLengths.filter(l => l === criticalPathLength).length
   }
 
   /**
