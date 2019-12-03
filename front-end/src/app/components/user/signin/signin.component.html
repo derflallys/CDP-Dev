@@ -1,28 +1,33 @@
-<div class="content">
-  <h3 class="text-center mb-4 mt-3">Se connecter</h3>
-  <form class="contentForm" [formGroup]="signinForm">
+<div class="content-home">
+  <div ></div>
+  <div class="content">
+    <h3 class="title text-center mb-4 mt-3 " >Se connecter</h3>
+    <form class="contentForm" [formGroup]="signinForm">
 
-    <mat-form-field class="input-field">
-      <input matInput placeholder="Email" formControlName="email" type="email">
-    </mat-form-field>
+      <mat-form-field class="input-field">
+        <input matInput placeholder="Email" formControlName="email" type="email">
+      </mat-form-field>
 
-    <mat-form-field class="input-field">
-      <input matInput placeholder="Mot de passe" formControlName="password" type="password">
-    </mat-form-field>
+      <mat-form-field class="input-field">
+        <input matInput placeholder="Mot de passe" formControlName="password" type="password">
+      </mat-form-field>
 
-    <div mat-dialog-actions align="center">
-      <button mat-raised-button class="mr-1" color="primary" type="submit" name="createAccount" (click)="submitSigninForm()">Se connecter</button>
-      <button mat-raised-button color="warn" type="reset" name="reset">Annuler</button>
-    </div>
+      <div mat-dialog-actions align="center">
+        <button mat-raised-button class="mr-1" color="primary" type="submit" name="createAccount" (click)="submitSigninForm()">Se connecter</button>
+        <button mat-raised-button color="warn" type="reset" name="reset">Annuler</button>
+      </div>
 
-    <hr>
+      <hr>
 
-    <mat-chip-list aria-label="Fish selection">
-      <mat-chip color="primary" (click)="signUp()" selected>S'inscrire</mat-chip>
-    </mat-chip-list>
+      <mat-chip-list aria-label="Fish selection">
+        <mat-chip color="primary" (click)="signUp()" selected>S'inscrire</mat-chip>
+      </mat-chip-list>
 
-  </form>
+    </form>
+  </div>
+  <div ></div>
 </div>
+
 
 
 

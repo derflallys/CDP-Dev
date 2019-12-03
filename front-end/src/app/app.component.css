@@ -5,7 +5,7 @@ main {
   background-image: url(../assets/images/test.PNG);
 }
 mat-toolbar {
-  background-color: black;
+  background-color: #3f51b5;
 }
 .nav-menu {
   flex: 1 1 auto;
@@ -13,6 +13,10 @@ mat-toolbar {
 }
 .toolbar {
   color: white;
+}
+.title{
+  color:#2196f3;
+  font-weight: bold;
 }
 footer {
   background: #fff;
