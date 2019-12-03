@@ -65,6 +65,30 @@ export const getProjectsByUser = async (req, res) => {
   }
 }
 
+export const getallUsersOnProject = async (req, res) => {
+  try {
+    const doc = await Project.findOne({ _id: req.params.id })
+      .lean()
+      .exec()
+
+    if (!doc) {
+      return res.status(400).end()
+    }
+    let users = []
+    for (const user of doc.users) {
+      const userSelect = await User.findOne({ _id: user.user }, 'userName')
+        .lean()
+        .exec()
+      user.username = userSelect.userName
+      users.push(user)
+    }
+    res.status(200).json(users)
+  } catch (e) {
+    console.error(e)
+    res.status(400).end()
+  }
+}
+
 export const createOneProject = async (req, res) => {
   try {
     const doc = await Project.create({ ...req.body })

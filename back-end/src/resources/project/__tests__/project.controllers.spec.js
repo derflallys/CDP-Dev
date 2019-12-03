@@ -1,4 +1,11 @@
-import { crud , dfgkhdfg, addUserOnProject,createOneProject,getProjectsByUser} from '../project.controllers'
+import {
+  crud,
+  dfgkhdfg,
+  addUserOnProject,
+  createOneProject,
+  getProjectsByUser,
+  getallUsersOnProject
+} from '../project.controllers'
 import { isFunction } from 'lodash'
 
 describe('project controllers', () => {
@@ -21,5 +28,9 @@ describe('project controllers', () => {
 
   test('has createOneProject', () => {
     expect(isFunction(createOneProject)).toBe(true)
+  })
+
+  test('has getallUsersOnProject', () => {
+    expect(isFunction(getallUsersOnProject)).toBe(true)
   })
 })
