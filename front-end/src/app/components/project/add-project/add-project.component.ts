@@ -35,8 +35,7 @@ export class AddProjectComponent implements OnInit {
       title: ['', Validators.required],
       duration: [1, Validators.required],
       description: ['', Validators.required],
-      repositoryURL: ['https://www.url.tld/repo.git', Validators.required],
-      refspecifying: ['', Validators.required]
+      repositoryURL: ['https://www.url.tld/repo.git', Validators.required]
     });
     if (this.projectId) { this.loadProject(); }
   }
@@ -48,10 +47,9 @@ export class AddProjectComponent implements OnInit {
     const duration = Number(this.addProject.controls.duration.value);
     const description = this.addProject.controls.description.value;
     const repositoryURL = this.addProject.controls.repositoryURL.value;
-    const refspecifying = this.addProject.controls.refspecifying.value;
 
     if (this.update) {
-      const updateProject = new Project(this.projectId, title, duration, description, repositoryURL, refspecifying,
+      const updateProject = new Project(this.projectId, title, duration, description, repositoryURL, null,
         this.authenticationService.getIdUser());
       this.projectService.updateProject(updateProject, this.project._id).subscribe(
         project => {
@@ -66,7 +64,7 @@ export class AddProjectComponent implements OnInit {
         }
       );
     } else {
-      const newProject = new Project(null, title, duration, description, repositoryURL, refspecifying, this.authenticationService.getIdUser());
+      const newProject = new Project(null, title, duration, description, repositoryURL, null, this.authenticationService.getIdUser());
       console.log(newProject);
       this.projectService.addProject(newProject).subscribe(
         project => {

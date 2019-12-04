@@ -10,6 +10,7 @@ import {Sprint} from '../../../models/sprint';
 import { Location } from '@angular/common';
 import {DeleteDialogComponent} from '../../utils/delete-dialog/delete-dialog.component';
 import { StepTaskComponent } from '../../task/step-task/step-task.component';
+import {ProjectService} from '../../../services/project.service';
 
 @Component({
   selector: 'app-sprint-kanban',
@@ -24,10 +25,11 @@ export class SprintKanbanComponent implements OnInit {
   sprintId: string;
   sprint: Sprint ;
   configSnackBar = new MatSnackBarConfig();
+  users = [];
   constructor(private taskService: TaskService, private route: ActivatedRoute,
               private authenticationService: AuthenticationService,
               private sprintService: SprintService, private location: Location,
-              public dialog: MatDialog,
+              public dialog: MatDialog, private projectService: ProjectService,
               private  router: Router, public snackBar: MatSnackBar) {
     this.configSnackBar.verticalPosition = 'bottom';
     this.configSnackBar.horizontalPosition = 'center';
@@ -38,13 +40,20 @@ export class SprintKanbanComponent implements OnInit {
     this.sprintId = this.route.snapshot.paramMap.get('id');
     this.sprintService.getSprint(this.sprintId).subscribe( res => {
       this.sprint = res;
+      this.getAllUser();
     });
     this.refreshTasks();
+  }
 
+  getAllUser() {
+    this.projectService.getUsersByProject(this.sprint.projectId).subscribe( users => {
+      this.users = users ;
+      console.log(this.users);
+    });
   }
 
   openStepTask() {
-    this.dialog.open(StepTaskComponent, { width: '800px', data: { tasks: this.allTasks } })
+    this.dialog.open(StepTaskComponent, { width: '800px', data: { tasks: this.allTasks } });
   }
 
   handleTasksBySprint(tasks) {
@@ -137,9 +146,11 @@ export class SprintKanbanComponent implements OnInit {
   }
 
   getNameUser(idUser) {
-    if (this.authenticationService.getIdUser() === idUser) {
-      return this.authenticationService.getUsername();
+    const userChoose =  this.users.find(user =>  user.user === idUser);
+    if (userChoose) {
+      return userChoose.username;
     }
+    return ;
   }
 
   taskTest(task: Task) {

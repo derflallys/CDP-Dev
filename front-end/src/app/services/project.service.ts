@@ -17,6 +17,7 @@ export class ProjectService {
   private projectUrl = environment.BACK_END_URL + '/project';
   private projectByUserUrl = environment.BACK_END_URL + '/project/byuser';
   private projectUserUrl = environment.BACK_END_URL + '/project/user';
+  private projectUsers = environment.BACK_END_URL + '/project/users';
 
   constructor(private http: HttpClient) { }
 
@@ -48,4 +49,7 @@ export class ProjectService {
     return this.http.post<Project>(this.projectUserUrl + '/' + id + '/' + username, project, httpOptions);
   }
 
+  getUsersByProject(projectId: string) {
+    return this.http.get(this.projectUsers + '/' + projectId);
+  }
 }
