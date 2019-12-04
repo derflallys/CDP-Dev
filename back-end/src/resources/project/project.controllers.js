@@ -76,10 +76,11 @@ export const getallUsersOnProject = async (req, res) => {
     }
     let users = []
     for (const user of doc.users) {
-      const userSelect = await User.findOne({ _id: user.user }, 'userName')
+      const userSelect = await User.findOne({ _id: user.user })
         .lean()
         .exec()
       user.username = userSelect.userName
+      user.email = userSelect.email
       users.push(user)
     }
     res.status(200).json(users)
