@@ -45,7 +45,7 @@
                 <a *ngIf="element.createBy === authenticationService.getIdUser()" (click)="deleteProject(element._id, element.title)" mat-mini-fab mat-raised-button color="warn">
                     <mat-icon>delete</mat-icon>
                 </a>
-              <button mat-mini-fab matTooltip="Utilisateurs du projet" color="accent" [routerLink]="['/users', idSelectedProject]">
+              <button mat-mini-fab matTooltip="Utilisateurs du projet" color="accent" [routerLink]="['/users',element._id]">
                 <mat-icon>visibility</mat-icon>
               </button>
             </td>

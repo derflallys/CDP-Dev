@@ -168,8 +168,10 @@ export class SprintOverviewComponent implements OnInit {
 
 
   startSprint() {
-    // TODO Update Sprint to START
-    this.router.navigate(['kanban/' + this.sprintId]);
+    this.sprint.state = 'In progress';
+    this.sprintService.updateSprint(this.sprint, this.sprintId).subscribe(
+      () => { this.router.navigate(['kanban/' + this.sprintId]); }
+    );
   }
 
   goBack() {

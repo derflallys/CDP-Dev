@@ -27,6 +27,7 @@ export class StepTaskComponent implements OnInit {
   stepsTasks: Array<Task[]>;
   // Information data
   hasCircularDependency = false;
+  undefinedDependencies = true;
   numberOfStep: Number;
   numberMaxDeveloper: Number;
   numberCriticalPath: Number;
@@ -37,22 +38,29 @@ export class StepTaskComponent implements OnInit {
 
   ngOnInit() {
     console.log('Tasks:', this.tasks);
-    this.dependencyGraph = this.setupDependencyGraph(this.tasks);
-    console.log('Dependency Graph:', this.dependencyGraph);
-    try {
-      this.orderedTasks = topologicalSort(this.dependencyGraph);
-      console.log('Ordered Tasks:', this.orderedTasks);
-    } catch(error) {
-      this.hasCircularDependency = true;
-      console.log("The dependency graph contains at least one cycle.")
-    }
-    if (!this.hasCircularDependency) {
-      let stepsTaskIds = this.resolveStepOrganisation(this.orderedTasks);
-      this.stepsTasks = this.convertDatastructure(stepsTaskIds);
-      console.log('Step Organisation', this.stepsTasks)
-      this.numberOfStep = this.stepsTasks.length;
-      this.numberMaxDeveloper = this.getNumberMaxDeveloper();
-      this.numberCriticalPath = this.getNumberCriticalPath();
+    this.tasks.forEach(t => {
+      if (t.dependencies[0] != null) {
+        this.undefinedDependencies = false;
+      }
+    });
+    if (!this.undefinedDependencies) {
+      this.dependencyGraph = this.setupDependencyGraph(this.tasks);
+      console.log('Dependency Graph:', this.dependencyGraph);
+      try {
+        this.orderedTasks = topologicalSort(this.dependencyGraph);
+        console.log('Ordered Tasks:', this.orderedTasks);
+      } catch(error) {
+        this.hasCircularDependency = true;
+        console.log("The dependency graph contains at least one cycle.")
+      }
+      if (!this.hasCircularDependency) {
+        let stepsTaskIds = this.resolveStepOrganisation(this.orderedTasks);
+        this.stepsTasks = this.convertDatastructure(stepsTaskIds);
+        console.log('Step Organisation', this.stepsTasks)
+        this.numberOfStep = this.stepsTasks.length;
+        this.numberMaxDeveloper = this.getNumberMaxDeveloper();
+        this.numberCriticalPath = this.getNumberCriticalPath();
+      }
     }
   }
 

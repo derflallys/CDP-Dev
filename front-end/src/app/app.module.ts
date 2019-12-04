@@ -72,7 +72,7 @@ import { StepTaskComponent } from './components/task/step-task/step-task.compone
     MatCheckboxModule
   ],
   imports: [],
-  declarations: [UsersProjectComponent]
+  declarations: []
 })
 export class MaterialModule {}
 
@@ -96,7 +96,8 @@ export class MaterialModule {}
     HomeComponent,
     SprintKanbanComponent,
     SprintOverviewComponent,
-    StepTaskComponent
+    StepTaskComponent,
+    UsersProjectComponent
   ],
   imports: [
     BrowserAnimationsModule,
