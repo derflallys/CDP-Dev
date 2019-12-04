@@ -25,7 +25,7 @@ export class SprintKanbanComponent implements OnInit {
   sprintId: string;
   sprint: Sprint ;
   configSnackBar = new MatSnackBarConfig();
-  users = [];
+  users: any = [];
   constructor(private taskService: TaskService, private route: ActivatedRoute,
               private authenticationService: AuthenticationService,
               private sprintService: SprintService, private location: Location,
