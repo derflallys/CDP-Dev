@@ -18,7 +18,6 @@ export const IssueSchema = new mongoose.Schema(
     },
     note: {
       type: String,
-      required: true,
       maxlength: 750
     },
     issueId: {

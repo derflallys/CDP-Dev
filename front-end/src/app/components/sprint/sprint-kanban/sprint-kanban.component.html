@@ -3,7 +3,14 @@
   <button mat-mini-fab matTooltip="Retour" class="d-block mx-auto button-back" color="primary">
     <mat-icon (click)="goBack()">arrow_back</mat-icon>
   </button>
-  <h2 class="textCenter" *ngIf="sprint"> {{sprint.title}} {{sprint.sprintId}}</h2>
+  <h2 class="textCenter" *ngIf="sprint"> Kanban {{sprint.title}} {{sprint.sprintId}}
+    <button mat-fab [color]="getStateColor()"
+            [matBadge]="getDaysLeft()" matBadgePosition="below after" matBadgeDescription="Nombre de Jours Restants" matTooltip="Nombre de Jours Restants" matBadgeColor="warn">
+      {{getState()}}
+    </button>
+  </h2>
+
+
   <button mat-mini-fab matTooltip="Ordre des tâches" class="d-block mx-auto" (click)="openStepTask()" color="basic">
     <mat-icon>clear_all</mat-icon>
   </button>
@@ -66,7 +73,7 @@
     </div>
 
     <div class="task-container">
-      <h2 class="textCenter" style="background-color: #8BDB47">Terminer</h2>
+      <h2 class="textCenter" style="background-color: #8BDB47">Terminé</h2>
 
       <div id="finish"
         cdkDropList

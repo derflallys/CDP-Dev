@@ -9,10 +9,10 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 export class UpdateIssueComponent {
 
   issueId = this.data.issueId;
-
+  role = this.data.role;
   constructor(
     public dialogRef: MatDialogRef<UpdateIssueComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: {issueId: null}
+    @Inject(MAT_DIALOG_DATA) public data: {issueId: null,role: null}
   ) { }
 
 }

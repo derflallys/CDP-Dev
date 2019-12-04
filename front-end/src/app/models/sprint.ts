@@ -8,7 +8,8 @@ export class Sprint {
   endDate: string;
   release: string;
 
-constructor(id: string, sprintId: number, projectId: string, title: string, startDate: string, endDate: string, state: string = 'To Start', release: string) {
+constructor(id: string, sprintId: number, projectId: string, title: string, startDate: string,
+            endDate: string, state: string = 'To Start', release: string) {
     if ( id !== null) {
     this._id = id;
     }

@@ -20,6 +20,7 @@ export class AddIssueComponent implements OnInit {
   error = false;
   close = true;
   @Input() issueId = null;
+  @Input() role = null;
   title = 'Ajouter une issue';
   update = false;
   projectId = this.data.projectId;
@@ -29,6 +30,7 @@ export class AddIssueComponent implements OnInit {
   states = [
     'TODO', 'DOING', 'DONE'
   ];
+  roleUser ;
 
 
   constructor(
@@ -37,16 +39,19 @@ export class AddIssueComponent implements OnInit {
     private ngZone: NgZone,
     public dialogRef: MatDialogRef<AddIssueComponent>,
     public dialogRefUpdate: MatDialogRef<UpdateIssueComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: {projectId: null},
+    @Inject(MAT_DIALOG_DATA) public data: {projectId: null, role: null},
     private issueService: IssueService
-  ) { }
+  ) {
+    this.roleUser = this.data.role;
+  }
 
   ngOnInit() {
+    this.roleUser = this.role;
     this.addIssue =  this.formBuilder.group({
-      description: ['En tant que', Validators.required],
-      note: ['', Validators.required],
-      state: ['TODO', Validators.required],
-      difficulty: [1, Validators.required],
+      description: [{value: 'En tant que', disabled: this.roleUser === 'PO'}, Validators.required],
+      note: [''],
+      state: [ {value: 'TODO', disabled: this.roleUser === 'PO' }, Validators.required],
+      difficulty: [ {value: 1,  disabled: this.roleUser === 'PO'}, Validators.required],
       priority: ['LOW', Validators.required]
     });
     if (this.issueId) {
@@ -103,11 +108,11 @@ export class AddIssueComponent implements OnInit {
         this.issue = res;
         this.title = 'Modifier l\'issue';
         this.addIssue = this.formBuilder.group({
-          description: [this.issue.description, Validators.required],
-          note: [this.issue.note, Validators.required],
-          state: [this.issue.state, Validators.required],
-          difficulty: [this.issue.difficulty, Validators.required],
-          priority: [this.issue.priority, Validators.required]
+          description: [{value: this.issue.description, disabled: this.roleUser === 'PO'}, Validators.required],
+          state: [{value: this.issue.state, disabled: this.roleUser === 'PO' }, Validators.required],
+          difficulty: [{value: this.issue.difficulty, disabled: this.roleUser === 'PO' }, Validators.required],
+          priority: [this.issue.priority, Validators.required],
+          note: [this.issue.note]
         });
         this.update = true;
       },

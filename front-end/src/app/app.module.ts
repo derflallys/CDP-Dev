@@ -23,7 +23,7 @@ import {
   MatTooltipModule,
   MatListModule,
   MatCheckboxModule,
-  MatChipsModule
+  MatChipsModule, MAT_DATE_LOCALE
 } from '@angular/material';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -135,7 +135,7 @@ export class MaterialModule {}
     UpdateTaskComponent,
     StepTaskComponent
   ],
-  providers: [ AuthGuardService ],
+  providers: [ AuthGuardService, {provide: MAT_DATE_LOCALE, useValue: 'fr-FR'} ],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {CdkDrag, CdkDragDrop, CdkDropList, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 import {Task} from '../../../models/task';
 import {TaskService} from '../../../services/task.service';
@@ -7,9 +7,9 @@ import {MatDialog, MatDialogConfig, MatSnackBar, MatSnackBarConfig} from '@angul
 import {AuthenticationService} from '../../../services/authentication.service';
 import {SprintService} from '../../../services/sprint.service';
 import {Sprint} from '../../../models/sprint';
-import { Location } from '@angular/common';
+import {Location} from '@angular/common';
 import {DeleteDialogComponent} from '../../utils/delete-dialog/delete-dialog.component';
-import { StepTaskComponent } from '../../task/step-task/step-task.component';
+import {StepTaskComponent} from '../../task/step-task/step-task.component';
 import {ProjectService} from '../../../services/project.service';
 
 @Component({
@@ -234,5 +234,22 @@ export class SprintKanbanComponent implements OnInit {
       return 'Terminé';
     }
     return '';
+  }
+
+  getDaysLeft() {
+    const date1 = new Date(this.sprint.endDate);
+    const date2 = new Date(this.sprint.startDate);
+    const diffTime = date1.getTime() - date2.getTime();
+    return Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+  }
+
+  getStateColor() {
+    switch (this.getState()
+      ) {
+      case 'En cours': return 'primary';
+      case 'Terminé': return 'accent';
+      case '': return 'accent';
+
+    }
   }
 }

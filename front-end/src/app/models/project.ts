@@ -1,11 +1,11 @@
 export class Project {
   _id: string;
   title: string;
-  users: Array<Object>; // Store UserRole objects
+  users: any[]; // Store UserRole objects
   duration: number;
   description: string;
   createdAt: Date;
-  createBy:string;
+  createBy: string;
   repositoryURL: string;
   refspecifying: string;
 

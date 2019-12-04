@@ -6,26 +6,28 @@
       <textarea matInput placeholder="Description Issue" formControlName="description" rows="4"></textarea>
     </mat-form-field>
 
-    <mat-form-field class="input-field" >
-      <textarea  matInput placeholder="Note" formControlName="note" rows="4"></textarea>
-    </mat-form-field>
+
 
     <mat-form-field class="input-field">
       <mat-label>Etat</mat-label>
-      <mat-select value="TODO" formControlName="state">
-        <mat-option *ngFor="let state of states" [value]="state">{{ state }}</mat-option>
+      <mat-select value="TODO" formControlName="state" >
+        <mat-option *ngFor="let state of states"  value="{{state}}">{{ state }}</mat-option>
       </mat-select>
     </mat-form-field>
 
     <mat-form-field class="input-field">
       <mat-label>Priorité</mat-label>
       <mat-select value="LOW" formControlName="priority">
-        <mat-option *ngFor="let priority of priorities" value="{{priority}}" >{{ priority }}</mat-option>
+        <mat-option *ngFor="let priority of priorities"  value="{{priority}}" >{{ priority }}</mat-option>
       </mat-select>
     </mat-form-field>
 
     <mat-form-field class="input-field">
       <input matInput placeholder="Difficulté" formControlName="difficulty" type="number" [min]="1">
+    </mat-form-field>
+
+    <mat-form-field class="input-field" *ngIf="this.roleUser === 'PO'">
+      <textarea  matInput placeholder="Note" formControlName="note" rows="4"></textarea>
     </mat-form-field>
 
   </form>

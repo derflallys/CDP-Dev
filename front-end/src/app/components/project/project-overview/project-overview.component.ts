@@ -22,6 +22,7 @@ import { AddSprintComponent } from '../../sprint/add-sprint/add-sprint.component
 import { UpdateSprintComponent } from '../../sprint/update-sprint/update-sprint.component';
 import { AddUserComponent } from '../add-user/add-user.component';
 import {Location} from '@angular/common';
+import {AuthenticationService} from '../../../services/authentication.service';
 
 @Component({
   selector: 'app-project-overview',
@@ -41,6 +42,7 @@ export class ProjectOverviewComponent implements OnInit {
   allIssues: Issue[] = [];
   idSelectedSprint;
   sprintSelected: Sprint = null;
+  role: any;
 
   constructor(
     private projectService: ProjectService,
@@ -49,6 +51,7 @@ export class ProjectOverviewComponent implements OnInit {
     private route: ActivatedRoute,
     public dialog: MatDialog,
     public snackBar: MatSnackBar,
+    public authenticationService: AuthenticationService,
     private location: Location
   ) {
     this.configSnackBar.verticalPosition = 'bottom';
@@ -61,6 +64,7 @@ export class ProjectOverviewComponent implements OnInit {
     this.projectService.getProject(this.projectId).subscribe(res => {
       this.project = res;
       this.title = this.project.title;
+      this.getRoleUserProject();
     });
     this.sprintService.getSprintByProject(this.projectId).subscribe(sprints => {
       this.sprints = sprints;
@@ -75,6 +79,13 @@ export class ProjectOverviewComponent implements OnInit {
       this.issues = new MatTableDataSource(issues.filter(issue => issue.sprintId === null || issue.sprintId === undefined));
       this.issues.paginator = this.paginator;
     });
+  }
+
+  getRoleUserProject() {
+    const userCo = this.project.users.find(user => user.user === this.authenticationService.getIdUser());
+    if (userCo) {
+      this.role = userCo.role;
+    }
   }
 
   applyFilter(filterValue: string) {
@@ -100,7 +111,8 @@ export class ProjectOverviewComponent implements OnInit {
   }
 
   addIssue() {
-    const diagoFormIssue = this.dialog.open(AddIssueComponent, {width: '800px', data: {projectId: this.projectId} });
+
+    const diagoFormIssue = this.dialog.open(AddIssueComponent, {width: '800px', data: {projectId: this.projectId, role: this.role} });
     diagoFormIssue.afterClosed().subscribe(error => {
       console.log(error);
       if (error === false) {
@@ -115,7 +127,7 @@ export class ProjectOverviewComponent implements OnInit {
   }
 
   updateIssue(idIssue) {
-    const diagoFormIssue = this.dialog.open(UpdateIssueComponent, {width: '800px', data: {issueId: idIssue} });
+    const diagoFormIssue = this.dialog.open(UpdateIssueComponent, {width: '800px', data: {issueId: idIssue, role: this.role} });
     diagoFormIssue.afterClosed().subscribe(error => {
       console.log(error);
       if (error === false) {
