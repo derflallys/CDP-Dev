@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { Project } from '../models/project';
 import { Observable } from 'rxjs';
+import {SESSION_USER_ID} from './authentication.service';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -24,6 +25,8 @@ export class ProjectService {
   getProjects(): Observable<Project[]> {
     return this.http.get<Project[]>(this.projectUrl);
   }
+
+
 
   addProject(project: Project): Observable<Project> {
     return this.http.post<Project>(this.projectUrl, project, httpOptions);
@@ -50,6 +53,6 @@ export class ProjectService {
   }
 
   getUsersByProject(projectId: string) {
-    return this.http.get(this.projectUsers + '/' + projectId);
+    return this.http.get<[]>(this.projectUsers + '/' + projectId);
   }
 }
