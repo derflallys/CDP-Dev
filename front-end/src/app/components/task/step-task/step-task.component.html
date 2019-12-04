@@ -3,35 +3,38 @@
 
 <span class="mx-auto" layout="row">
 
-    <p class="text-center" *ngIf="hasCircularDependency; else correctDependencyGraph">
-        <strong class="text-danger">Erreur:</strong> Ordonnancement non applicable (le graphe de dépendances possède un cycle).
-    </p>
-    <ng-template #correctDependencyGraph>
-        <p class="text-center">
-            Les tâches doivent être effectués colonne par colonne (de gauche à droite).
-            <br>
-            Les tâches d'une même colonne peuvent être effectués en simultanée.
+    <p class="text-center" *ngIf="undefinedDependencies; else definedDependencies">Vos tâches ne possèdent pas de dépendances.</p>
+    <ng-template #definedDependencies>
+        <p class="text-center" *ngIf="hasCircularDependency; else correctDependencyGraph">
+            <strong class="text-danger">Erreur:</strong> Ordonnancement non applicable (le graphe de dépendances possède un cycle).
         </p>
-        <hr class="pb-4" flex/>
-        <div class="task-frame" *ngFor="let step of stepsTasks; let i = index">
-            <ul>
-                <li class="text-center">{{ i + 1 }}</li>
-                <li *ngFor="let task of step" [className]="'task-' + task.state.toLowerCase()">
-                    {{ task.taskId }}
-                </li>
-            </ul>
-            <br>
-        </div>
-        <hr flex/>
-        <div class="legend text-center">
-            <span class="task-done">DONE</span>
-            <span class="task-doing">DOING</span>
-            <span class="task-todo">TODO</span>
-        </div>
-        <p class="text-center mb-0 mt-3">
-            Nombre étape: {{ numberOfStep }}<br>
-            Nombre chemin critique: {{ numberCriticalPath }}<br>
-            Nombre développeur: {{ numberMaxDeveloper }}
-        </p>
+        <ng-template #correctDependencyGraph>
+            <p class="text-center">
+                Les tâches doivent être effectuées colonne par colonne (de gauche à droite).
+                <br>
+                Les tâches d'une même colonne peuvent être effectuées en simultanée.
+            </p>
+            <hr class="pb-4" flex/>
+            <div class="task-frame" *ngFor="let step of stepsTasks; let i = index">
+                <ul>
+                    <li class="text-center">{{ i + 1 }}</li>
+                    <li *ngFor="let task of step" [className]="'task-' + task.state.toLowerCase()">
+                        {{ task.taskId }}
+                    </li>
+                </ul>
+                <br>
+            </div>
+            <hr flex/>
+            <div class="legend text-center">
+                <span class="task-done">DONE</span>
+                <span class="task-doing">DOING</span>
+                <span class="task-todo">TODO</span>
+            </div>
+            <p class="text-center mb-0 mt-3">
+                Nombre étape: {{ numberOfStep }}<br>
+                Nombre chemin critique: {{ numberCriticalPath }}<br>
+                Nombre développeur: {{ numberMaxDeveloper }}
+            </p>
+        </ng-template>
     </ng-template>
 </span>
