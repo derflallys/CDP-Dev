@@ -272,7 +272,4 @@ export class ProjectOverviewComponent implements OnInit {
     this.location.back();
   }
 
-  startSprint() {
-
-  }
 }

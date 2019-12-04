@@ -42,12 +42,15 @@
             <button mat-mini-fab matTooltip="Supprimer le Sprint" color="warn">
               <mat-icon (click)="deleteSprint()">delete</mat-icon>
             </button>
-            <button mat-mini-fab matTooltip="Sprint Overview" color="accent" [routerLink]="['/sprint', idSelectedSprint]">
-              <mat-icon>visibility</mat-icon>
+            <button *ngIf="sprintSelected.state == 'In Progress'; else kanbanBtn;"
+                mat-mini-fab matTooltip="Définition des tâches" color="accent" [routerLink]="['/sprint', idSelectedSprint]">
+              <mat-icon>assignment</mat-icon>
             </button>
-            <button mat-mini-fab matTooltip="Démarrer le Sprint" color="basic" style="color: #000000"  [routerLink]="['/kanban', idSelectedSprint]">
-              <mat-icon>view_column</mat-icon>
-            </button>
+            <ng-template #kanbanBtn>
+              <button mat-mini-fab matTooltip="Suivi des tâches" color="accent" [routerLink]="['/kanban', idSelectedSprint]">
+                <mat-icon>view_column</mat-icon>
+              </button>
+            </ng-template>
           </mat-action-row>
           <div class="main-frame">
             <table mat-table [dataSource]="getIssuesBySprint(idSelectedSprint)" class="mat-elevation-z8">
