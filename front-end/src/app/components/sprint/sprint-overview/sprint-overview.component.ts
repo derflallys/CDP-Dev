@@ -49,8 +49,8 @@ export class SprintOverviewComponent implements OnInit {
   issues: Issue[];
   tasks: Task[];
   taskLinkIssue: TaskLinkIssue[];
-  displayedColumns = ['ID', 'Description', 'Priorité'];
-  displayedColumnsTask = ['ID', 'DoD', 'Dépendance', 'Date début', 'Date fin', 'Actions'];
+  displayedColumns = ['ID Issue', 'Description', 'Priorité'];
+  displayedColumnsTask = ['ID Tâche', 'DoD', 'Dépendances', 'Date début', 'Date fin', 'Actions'];
   expandedElement: TaskLinkIssue | null;
 
   configSnackBar = new MatSnackBarConfig();

@@ -20,7 +20,7 @@ import {ProjectService} from '../../../services/project.service';
 export class SprintKanbanComponent implements OnInit {
   taskTodo: Task[] = [];
   taskEncours: Task[] = [];
-  taskEnTermine: Task[] = [];
+  taskFinish: Task[] = [];
   allTasks: Task[] = [];
   sprintId: string;
   sprint: Sprint ;
@@ -69,7 +69,7 @@ export class SprintKanbanComponent implements OnInit {
       this.allTasks = tasks;
       this.taskTodo = tasks.filter(task => task.state === 'TODO');
       this.taskEncours = tasks.filter(task => task.state === 'DOING');
-      this.taskEnTermine = tasks.filter(task => task.state === 'DONE');
+      this.taskFinish = tasks.filter(task => task.state === 'DONE');
   }
 
   drop(event: CdkDragDrop<Task[]>) {
@@ -123,14 +123,37 @@ export class SprintKanbanComponent implements OnInit {
     }
   }
 
-  evenPredicate(item: CdkDrag<Task>, te: CdkDropList) {
-    console.log(te);
-    console.log(item);
-    return item.data.dev === this.authenticationService.getIdUser();
+  getStateTask(idTask, state) {
+    let taskU: Task = null;
+    if (state === 'TODO') {
+      taskU = this.taskTodo.find(task => task._id === idTask);
+    }
+    if (state === 'DOING') {
+      taskU = this.taskEncours.find(task => task._id === idTask);
+    }
+    if (state === 'DONE') {
+      taskU = this.taskFinish.find(task => task._id === idTask);
+    }
+
+    if (taskU) {
+      const dayLeftTask = this.getNbreDay(new Date(taskU.endDate), new Date() );
+
+      if ((taskU.state === 'TODO' || taskU.state === 'DOING') && dayLeftTask <= 2 ) {
+        return 'warn';
+      }
+      if (taskU.state === 'DONE' ) {
+        return 'primary';
+      }
+    }
+    return 'accent';
   }
 
-  noReturnPredicate() {
-    return false;
+  showStateTask(idTask, state) {
+    switch (this.getStateTask(idTask, state)) {
+      case 'primary': return 'OK';
+      case 'accent' : return 'Dans les temps';
+      case 'warn' : return 'Urgent';
+    }
   }
 
   refreshTasks() {
@@ -226,11 +249,15 @@ export class SprintKanbanComponent implements OnInit {
     return '';
   }
 
+  getNbreDay(date1, date2) {
+    const diffTime = Math.abs(date1.getTime() - date2.getTime()) ;
+    return Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+  }
+
   getDaysLeft() {
     const date1 = new Date(this.sprint.endDate);
     const date2 = new Date(this.sprint.startDate);
-    const diffTime = date1.getTime() - date2.getTime();
-    return Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    return this.getNbreDay(date1, date2);
   }
 
   getStateColor() {

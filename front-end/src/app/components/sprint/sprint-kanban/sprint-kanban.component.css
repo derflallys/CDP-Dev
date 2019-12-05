@@ -28,6 +28,10 @@ mat-chip {
 .textCenter{
   text-align: center;
 }
+mat-chip {
+  max-width: 200px;
+}
+
 
 .task-box {
   padding: 20px 10px;
@@ -62,6 +66,12 @@ mat-chip {
   justify-content: space-between;
   align-items: center;
 }
+.statusTask{
+  height: 87%;
+  width: 16%;
+  cursor: default;
+}
+
 
 .cdk-drag-preview {
   box-sizing: border-box;
@@ -85,4 +95,14 @@ mat-chip {
 
 .task-list.cdk-drop-list-dragging .task-box:not(.cdk-drag-placeholder) {
   transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+.mat-chip-list-stacked .mat-chip-list-wrapper{
+  margin: auto !important;
+  align-content: center !important;
+}
+
+div.mat-chip-list-wrapper{
+  margin: auto !important;
+  align-content: center !important;
+  align-items: center !important;
 }

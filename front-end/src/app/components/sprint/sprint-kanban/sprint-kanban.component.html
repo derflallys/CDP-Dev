@@ -20,8 +20,11 @@
 <div class="box">
   <div cdkDropListGroup>
     <div class="task-container">
-      <h2 class="textCenter"  style="background-color: #FF1717">Reste à faire</h2>
-
+      <mat-chip-list class="mat-chip-list-stacked " aria-label="Color selection">
+        <mat-chip  selected color="warn">
+         <h5 class="textCenter">Reste à faire</h5>
+        </mat-chip>
+      </mat-chip-list>
       <div id="todo"
         cdkDropList
         [cdkDropListData]="taskTodo"
@@ -34,7 +37,9 @@
             <mat-expansion-panel >
               <mat-expansion-panel-header>
                 <mat-panel-title class="font-weight-bold">{{'#'+item.taskId}}</mat-panel-title>
-                <mat-panel-description>{{item.dod | slice:0:15 }} </mat-panel-description>
+                <mat-panel-description>{{item.endDate | date: 'dd/MM/yyyy'  }}
+                  <button mat-mini-fab class="statusTask" [color]=getStateTask(item._id,item.state) [matTooltip]="showStateTask(item._id,item.state)"></button>
+                </mat-panel-description>
               </mat-expansion-panel-header>
               <p>{{item.dod}}</p>
               <mat-action-row>
@@ -47,7 +52,11 @@
     </div>
 
     <div class="task-container">
-      <h2 class="textCenter" style="background-color: #FFD817">En cours</h2>
+      <mat-chip-list class="mat-chip-list-stacked " aria-label="Color selection">
+        <mat-chip  selected color="primary">
+          <h5 class="textCenter">En cours</h5>
+        </mat-chip>
+      </mat-chip-list>
 
       <div id="cours"
         cdkDropList
@@ -60,7 +69,9 @@
             <mat-expansion-panel >
               <mat-expansion-panel-header>
                 <mat-panel-title class="font-weight-bold">{{'#'+item.taskId}}</mat-panel-title>
-                <mat-panel-description>{{item.dod | slice:0:15 }}</mat-panel-description>
+                <mat-panel-description>{{item.endDate | date: 'dd/MM/yyyy'}}
+                  <button mat-mini-fab class="statusTask" [color]=getStateTask(item._id,item.state) [matTooltip]="showStateTask(item._id,item.state)"></button>
+                </mat-panel-description>
               </mat-expansion-panel-header>
               <p>{{item.dod}}</p>
               <mat-action-row>
@@ -73,24 +84,37 @@
     </div>
 
     <div class="task-container">
-      <h2 class="textCenter" style="background-color: #8BDB47">Terminé</h2>
+      <div class="titleBox">
+        <mat-chip-list class="mat-chip-list-stacked " aria-label="Color selection">
+          <mat-chip  selected color="accent">
+            <h5 class="textCenter">Terminé</h5>
+          </mat-chip>
+        </mat-chip-list>
+      </div>
+
 
       <div id="finish"
         cdkDropList
-        [cdkDropListData]="taskEnTermine"
+        [cdkDropListData]="taskFinish"
         class="task-list"
 
         (cdkDropListDropped)="drop($event)">
-        <div class="task-box" *ngFor="let item of taskEnTermine"  cdkDrag>
+        <div class="task-box" *ngFor="let item of taskFinish" cdkDrag>
           <mat-accordion >
             <mat-expansion-panel >
               <mat-expansion-panel-header>
                 <mat-panel-title class="font-weight-bold">{{'#'+item.taskId}}</mat-panel-title>
-                <mat-panel-description>{{item.dod | slice:0:15 }}</mat-panel-description>
+                <mat-panel-description>{{item.endDate | date: 'dd/MM/yyyy' }}
+                  <button mat-mini-fab class="statusTask" [color]=getStateTask(item._id,item.state) [matTooltip]="showStateTask(item._id,item.state)"></button>
+                </mat-panel-description>
               </mat-expansion-panel-header>
               <p>{{item.dod}}</p>
               <mat-action-row>
-                  <p class="font-weight-bold">Affecté à: {{getNameUser(item.dev)}} </p>
+
+                  <p class="font-weight-bold">
+                    {{item.startDate | date: 'dd/MM/yyyy' }}
+                    Affecté à: {{getNameUser(item.dev)}}
+                  </p>
               </mat-action-row>
             </mat-expansion-panel>
           </mat-accordion>
