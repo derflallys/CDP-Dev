@@ -185,7 +185,7 @@ export class SprintKanbanComponent implements OnInit {
   dialogConfig.autoFocus = true;
   dialogConfig.data = {
     title: ' Tests  Tâche ' + task.taskId,
-    content: 'Tests Effectués pour cette tâche ? '
+    content: 'Est ce que cette tâche a été testée ? '
   };
   const dialogRefDelete = this.dialog.open(DeleteDialogComponent, dialogConfig);
   dialogRefDelete.afterClosed().subscribe(result => {
@@ -211,7 +211,7 @@ export class SprintKanbanComponent implements OnInit {
     dialogConfig.autoFocus = true;
     dialogConfig.data = {
       title: ' Documentation  Tâche ' + task.taskId,
-      content: 'Documentaion fait pour cette tâche ? '
+      content: 'Est ce que cette tâche a été documentée ? '
     };
     const dialogRefDelete = this.dialog.open(DeleteDialogComponent, dialogConfig);
     dialogRefDelete.afterClosed().subscribe(result => {
@@ -296,14 +296,14 @@ export class SprintKanbanComponent implements OnInit {
 
   showStateTest(idTask: string) {
     switch (this.getStateTest(idTask)) {
-      case 'accent' : return 'Les tests ont été fait pour cette tâche';
-      case 'warn' : return 'Les tests n\'ont pas été fait pour cette tâche ';
+      case 'accent' : return 'Tâche Testée';
+      case 'warn' : return 'Tâche non testée ';
     }
   }
   showStateDoc(idTask: string) {
     switch (this.getStateDoc(idTask)) {
-      case 'accent' : return 'La documentaion fait pour cette tâche';
-      case 'warn' : return 'La documentaion non fait pour cette tâche ';
+      case 'accent' : return 'Tâche documentée';
+      case 'warn' : return 'Tâche non documentée ';
     }
   }
 }

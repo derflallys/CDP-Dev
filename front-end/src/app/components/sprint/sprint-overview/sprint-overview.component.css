@@ -20,6 +20,11 @@ table {
   background: #CCC;
 }
 
+.mat-column-DoD {
+  width: 50% !important;
+  text-align: justify;
+}
+
 
 
 tr.detail-row {
