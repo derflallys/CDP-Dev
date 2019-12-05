@@ -4,57 +4,47 @@
     <mat-icon (click)="goBack()">arrow_back</mat-icon>
   </button>
   <h2>
-    <span matBadge="{{ nbUserProject }}" matBadgeOverlap="false">Liste des collaborateurs </span>
+    <span matBadge="{{ nbUserProject }}" matBadgeOverlap="false">Liste des collaborateurs</span>
   </h2>
 </div>
-
 
 <div class="main-frame">
   <div class="row">
     <div class="filtre">
-      <mat-form-field class="filter" >
-      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtre">
-    </mat-form-field>
-
+      <mat-form-field class="filter">
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtre">
+      </mat-form-field>
+    </div>
   </div>
-  </div>
 
-  <div class="table">
   <table mat-table [dataSource]="users" matSort matSortStart="desc" class="mat-elevation-z8">
     <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
     <ng-container matColumnDef="username">
       <th mat-header-cell mat-sort-header *matHeaderCellDef> Nom du collaborateur </th>
-      <td mat-cell *matCellDef="let element">
-        <a > {{ element.username }} </a>
-      </td>
+      <td mat-cell *matCellDef="let element">{{ element.username }}</td>
     </ng-container>
 
     <ng-container matColumnDef="role">
       <th mat-header-cell mat-sort-header *matHeaderCellDef> Rôle </th>
-      <td mat-cell *matCellDef="let element">
-        <a> {{ element.role }} </a>
-      </td>
+      <td mat-cell *matCellDef="let element">{{ element.role }}</td>
     </ng-container>
 
     <ng-container matColumnDef="email">
       <th mat-header-cell mat-sort-header *matHeaderCellDef> Email </th>
-      <td mat-cell *matCellDef="let element">
-        <a> {{ element.email}} </a>
-      </td>
+      <td mat-cell *matCellDef="let element">{{ element.email }}</td>
     </ng-container>
     <div class="button">
-    <ng-container matColumnDef="Actions">
-      <th mat-header-cell *matHeaderCellDef> Actions </th>
-      <td mat-cell *matCellDef="let element">
-        <a  (click)="deleteUserProject(element.user,element.username)"   *ngIf="element.role !== 'PO' " mat-mini-fab mat-raised-button color="warn">
-          <mat-icon>delete</mat-icon>
-        </a>
-      </td>
-    </ng-container>
+      <ng-container matColumnDef="Actions">
+        <th mat-header-cell *matHeaderCellDef> Actions </th>
+        <td mat-cell *matCellDef="let element">
+          <a (click)="deleteUserProject(element.user,element.username)" *ngIf="element.role !== 'PO'" mat-mini-fab mat-raised-button color="warn">
+            <mat-icon>delete</mat-icon>
+          </a>
+        </td>
+      </ng-container>
     </div>
   </table>
-  </div>
   <mat-paginator [pageSizeOptions]="[10]"></mat-paginator>
 </div>

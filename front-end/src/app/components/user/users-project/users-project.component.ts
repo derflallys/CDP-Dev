@@ -1,14 +1,12 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {MatDialog, MatDialogConfig, MatPaginator, MatSnackBar, MatSnackBarConfig, MatSort, MatTableDataSource} from '@angular/material';
 import {User} from '../../../models/user';
-import {UserService} from '../../../services/user.service';
-import { ProjectService } from '../../../services/project.service';
+import {ProjectService} from '../../../services/project.service';
 import {AuthenticationService} from '../../../services/authentication.service';
 import {Location} from '@angular/common';
 import {DeleteDialogComponent} from '../../utils/delete-dialog/delete-dialog.component';
 import {ActivatedRoute} from '@angular/router';
-import {AddUserComponent} from '../../project/add-user/add-user.component';
-import { Project } from '../../../models/project';
+import {Project} from '../../../models/project';
 
 @Component({
   selector: 'app-users-project',
@@ -17,20 +15,18 @@ import { Project } from '../../../models/project';
 })
 export class UsersProjectComponent implements OnInit {
 
-
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   users: MatTableDataSource<User> = new MatTableDataSource<User>();
   configSnackBar = new MatSnackBarConfig();
   index;
   nbUserProject: number;
-  projectId ;
+  projectId;
   project: Project;
-  displayedColumns: string[] = [ 'username', 'role', 'email', 'Actions'];
-  role: any;
+  displayedColumns: string[] = [ 'username', 'role', 'email', 'Actions' ];
+  role;
 
-  constructor( private userService: UserService,
-               private projectService: ProjectService,
+  constructor(private projectService: ProjectService,
                public dialog: MatDialog,
                public activatedRoute: ActivatedRoute,
                public authenticationService: AuthenticationService,
@@ -53,7 +49,6 @@ export class UsersProjectComponent implements OnInit {
     this.projectService.getProject(this.projectId).subscribe(res => {
       this.project = res;
       this.getRoleUserProject();
-
     });
   }
 
@@ -86,8 +81,6 @@ export class UsersProjectComponent implements OnInit {
 
     dialogRefDelete.afterClosed().subscribe(result => {
       if (result === true) {
-        const role = this.role;
-        const user = this.project.users.find( users => users.user === userId && users.user !== this.authenticationService.getIdUser());
         this.index = this.project.users.findIndex( users => users.user === userId );
         this.project.users.splice(this.index, 1);
         this.projectService.updateProject(this.project, this.projectId).subscribe(() => {
@@ -103,7 +96,6 @@ export class UsersProjectComponent implements OnInit {
     });
   }
 
-
   refreshUsers() {
     this.projectService.getUsersByProject(this.projectId).subscribe(users => {
       this.users = new MatTableDataSource(users);
@@ -117,4 +109,5 @@ export class UsersProjectComponent implements OnInit {
   goBack() {
     this.location.back();
   }
+
 }
