@@ -27,6 +27,8 @@ export class UsersProjectComponent implements OnInit {
   projectId ;
   project: Project;
   displayedColumns: string[] = [ 'username', 'role', 'email', 'Actions'];
+  role: any;
+
   constructor( private userService: UserService,
                private projectService: ProjectService,
                public dialog: MatDialog,
@@ -50,7 +52,16 @@ export class UsersProjectComponent implements OnInit {
     });
     this.projectService.getProject(this.projectId).subscribe(res => {
       this.project = res;
+      this.getRoleUserProject();
+
     });
+  }
+
+  getRoleUserProject() {
+    const userCo = this.project.users.find(user => user.user === this.authenticationService.getIdUser());
+    if (userCo) {
+      this.role = userCo.role;
+    }
   }
 
   applyFilter(filterValue: string) {
@@ -75,8 +86,9 @@ export class UsersProjectComponent implements OnInit {
 
     dialogRefDelete.afterClosed().subscribe(result => {
       if (result === true) {
-        const user = this.project.users.find( users => users.user === userId);
-        this.index = this.project.users.findIndex( users => users.user === userId);
+        const role = this.role;
+        const user = this.project.users.find( users => users.user === userId && users.user !== this.authenticationService.getIdUser());
+        this.index = this.project.users.findIndex( users => users.user === userId );
         this.project.users.splice(this.index, 1);
         this.projectService.updateProject(this.project, this.projectId).subscribe(() => {
             this.snackBar.open('✅ Suppression effectuée avec succès !', 'Fermer', this.configSnackBar);
