@@ -37,14 +37,14 @@
             <mat-expansion-panel >
               <mat-expansion-panel-header>
                 <mat-panel-title class="font-weight-bold">{{'#'+item.taskId}}</mat-panel-title>
-                <mat-panel-description>{{item.endDate | date: 'dd/MM/yyyy'  }}
+                <mat-panel-description>{{item.endDate | date: 'dd/MM'  }}
                   <button mat-mini-fab class="statusTask" [color]=getStateTask(item._id,item.state) [matTooltip]="showStateTask(item._id,item.state)"></button>
                 </mat-panel-description>
               </mat-expansion-panel-header>
               <div>
                 <p>{{item.dod}}</p>
                 <p class="font-weight-bold" style="float: left">
-                  {{item.startDate | date: 'dd/MM/yyyy' }}
+                  {{item.startDate | date: 'dd/MM' }}
                 </p>
                 <p class="font-weight-bold" style="float: right">Affecté à: {{getNameUser(item.dev)}}</p>
               </div>
@@ -75,14 +75,14 @@
             <mat-expansion-panel >
               <mat-expansion-panel-header>
                 <mat-panel-title class="font-weight-bold">{{'#'+item.taskId}}</mat-panel-title>
-                <mat-panel-description>{{item.endDate | date: 'dd/MM/yyyy'}}
+                <mat-panel-description>{{item.endDate | date: 'dd/MM'}}
                   <button mat-mini-fab class="statusTask" [color]=getStateTask(item._id,item.state) [matTooltip]="showStateTask(item._id,item.state)"></button>
                 </mat-panel-description>
               </mat-expansion-panel-header>
               <div>
                 <p>{{item.dod}}</p>
                 <p class="font-weight-bold" style="float: left">
-                  {{item.startDate | date: 'dd/MM/yyyy' }}
+                  {{item.startDate | date: 'dd/MM' }}
                 </p>
                 <p class="font-weight-bold" style="float: right">Affecté à: {{getNameUser(item.dev)}}</p>
               </div>
@@ -115,14 +115,14 @@
             <mat-expansion-panel >
               <mat-expansion-panel-header>
                 <mat-panel-title class="font-weight-bold">{{'#'+item.taskId}}</mat-panel-title>
-                <mat-panel-description>{{item.endDate | date: 'dd/MM/yyyy' }}
+                <mat-panel-description>{{item.endDate | date: 'dd/MM' }}
                   <button mat-mini-fab class="statusTask" [color]=getStateTask(item._id,item.state) [matTooltip]="showStateTask(item._id,item.state)"></button>
                 </mat-panel-description>
               </mat-expansion-panel-header>
               <div>
                 <p>{{item.dod}}</p>
                 <p class="font-weight-bold" style="float: left">
-                  {{item.startDate | date: 'dd/MM/yyyy' }}
+                  {{item.startDate | date: 'dd/MM' }}
                 </p>
                 <p class="font-weight-bold" style="float: right">Affecté à: {{getNameUser(item.dev)}}</p>
               </div>
