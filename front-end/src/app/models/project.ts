@@ -7,9 +7,8 @@ export class Project {
   createdAt: Date;
   createBy: string;
   repositoryURL: string;
-  refspecifying: string;
 
-  constructor(id: string, title: string, duration: number, description: string, repositoryURL: string, refspecifying: string, createBy: string) {
+  constructor(id: string, title: string, duration: number, description: string, repositoryURL: string, createBy: string) {
     if (id !== null) {
       this._id = id;
     }
@@ -21,7 +20,6 @@ export class Project {
     this.duration = duration;
     this.description = description;
     this.repositoryURL = repositoryURL;
-    this.refspecifying = refspecifying;
   }
 
 }

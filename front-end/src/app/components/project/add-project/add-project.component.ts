@@ -49,7 +49,7 @@ export class AddProjectComponent implements OnInit {
     const repositoryURL = this.addProject.controls.repositoryURL.value;
 
     if (this.update) {
-      const updateProject = new Project(this.projectId, title, duration, description, repositoryURL, null,
+      const updateProject = new Project(this.projectId, title, duration, description, repositoryURL,
         this.authenticationService.getIdUser());
       this.projectService.updateProject(updateProject, this.project._id).subscribe(
         project => {
@@ -64,7 +64,7 @@ export class AddProjectComponent implements OnInit {
         }
       );
     } else {
-      const newProject = new Project(null, title, duration, description, repositoryURL, null, this.authenticationService.getIdUser());
+      const newProject = new Project(null, title, duration, description, repositoryURL, this.authenticationService.getIdUser());
       console.log(newProject);
       this.projectService.addProject(newProject).subscribe(
         project => {
@@ -90,7 +90,6 @@ export class AddProjectComponent implements OnInit {
           duration: [this.project.duration, Validators.required],
           description: [this.project.description, Validators.required],
           repositoryURL: [this.project.repositoryURL, Validators.required],
-          refspecifying: [this.project.refspecifying, Validators.required],
         });
         this.update = true;
       },
