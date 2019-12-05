@@ -41,9 +41,15 @@
                   <button mat-mini-fab class="statusTask" [color]=getStateTask(item._id,item.state) [matTooltip]="showStateTask(item._id,item.state)"></button>
                 </mat-panel-description>
               </mat-expansion-panel-header>
-              <p>{{item.dod}}</p>
+              <div>
+                <p>{{item.dod}}</p>
+                <p class="font-weight-bold" style="float: left">
+                  {{item.startDate | date: 'dd/MM/yyyy' }}
+                </p>
+                <p class="font-weight-bold" style="float: right">Affecté à: {{getNameUser(item.dev)}}</p>
+              </div>
               <mat-action-row>
-                <p class="font-weight-bold">Affecté à: {{getNameUser(item.dev)}}</p>
+
               </mat-action-row>
             </mat-expansion-panel>
           </mat-accordion>
@@ -73,9 +79,14 @@
                   <button mat-mini-fab class="statusTask" [color]=getStateTask(item._id,item.state) [matTooltip]="showStateTask(item._id,item.state)"></button>
                 </mat-panel-description>
               </mat-expansion-panel-header>
-              <p>{{item.dod}}</p>
+              <div>
+                <p>{{item.dod}}</p>
+                <p class="font-weight-bold" style="float: left">
+                  {{item.startDate | date: 'dd/MM/yyyy' }}
+                </p>
+                <p class="font-weight-bold" style="float: right">Affecté à: {{getNameUser(item.dev)}}</p>
+              </div>
               <mat-action-row>
-                <p class="font-weight-bold">Affecté à: {{getNameUser(item.dev)}}</p>
               </mat-action-row>
             </mat-expansion-panel>
           </mat-accordion>
@@ -108,13 +119,21 @@
                   <button mat-mini-fab class="statusTask" [color]=getStateTask(item._id,item.state) [matTooltip]="showStateTask(item._id,item.state)"></button>
                 </mat-panel-description>
               </mat-expansion-panel-header>
-              <p>{{item.dod}}</p>
+              <div>
+                <p>{{item.dod}}</p>
+                <p class="font-weight-bold" style="float: left">
+                  {{item.startDate | date: 'dd/MM/yyyy' }}
+                </p>
+                <p class="font-weight-bold" style="float: right">Affecté à: {{getNameUser(item.dev)}}</p>
+              </div>
               <mat-action-row>
 
-                  <p class="font-weight-bold">
-                    {{item.startDate | date: 'dd/MM/yyyy' }}
-                    Affecté à: {{getNameUser(item.dev)}}
-                  </p>
+                <button mat-mini-fab [matTooltip]="showStateDoc(item._id)" [color]=getStateDoc(item._id)  >
+                  <mat-icon>check_circle</mat-icon>
+                </button>
+                <button mat-mini-fab [matTooltip]="showStateTest(item._id)" [color]=getStateTest(item._id)  >
+                  <mat-icon>check_circle</mat-icon>
+                </button>
               </mat-action-row>
             </mat-expansion-panel>
           </mat-accordion>

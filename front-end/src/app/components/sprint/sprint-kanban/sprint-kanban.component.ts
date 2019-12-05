@@ -246,7 +246,7 @@ export class SprintKanbanComponent implements OnInit {
     if (this.sprint.state === 'Completed') {
       return 'Terminé';
     }
-    return '';
+    return 'Non Debuté';
   }
 
   getNbreDay(date1, date2) {
@@ -265,8 +265,45 @@ export class SprintKanbanComponent implements OnInit {
       ) {
       case 'En cours': return 'primary';
       case 'Terminé': return 'accent';
-      case '': return 'accent';
+      case 'Non Debuté': return 'warn';
 
+    }
+  }
+
+  getStateTest(idTask: string) {
+    const taskU = this.taskFinish.find(task => task._id === idTask);
+    if (taskU) {
+      if (taskU.toTest) {
+        return 'accent';
+      } else {
+        return 'warn';
+      }
+    }
+    return 'basic';
+  }
+
+  getStateDoc(idTask: string) {
+    const taskU = this.taskFinish.find(task => task._id === idTask);
+    if (taskU) {
+      if (taskU.toDoc) {
+        return 'accent';
+      } else {
+        return 'warn';
+      }
+    }
+    return 'basic';
+  }
+
+  showStateTest(idTask: string) {
+    switch (this.getStateTest(idTask)) {
+      case 'accent' : return 'Les tests ont été fait pour cette tâche';
+      case 'warn' : return 'Les tests n\'ont pas été fait pour cette tâche ';
+    }
+  }
+  showStateDoc(idTask: string) {
+    switch (this.getStateDoc(idTask)) {
+      case 'accent' : return 'La documentaion fait pour cette tâche';
+      case 'warn' : return 'La documentaion non fait pour cette tâche ';
     }
   }
 }
