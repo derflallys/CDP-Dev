@@ -45,10 +45,6 @@ const ProjectSchema = new mongoose.Schema(
       type: Number,
       min: 1,
       max: 1825
-    },
-    specificationsFilePath: {
-      type: String,
-      maxlength: 150
     }
   },
   { timestamps: true }
