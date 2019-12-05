@@ -15,8 +15,16 @@
 }
 
 .table {
+   margin-left: 250px;
+   width: 50px;
+ }
+.filtre {
+  margin-left: 250px;
+  width: 150px;
+
+}
+.button {
   margin-left: 200px;
-  width: 1050px;
 }
 .task-list {
   border: solid 1px #ccc;

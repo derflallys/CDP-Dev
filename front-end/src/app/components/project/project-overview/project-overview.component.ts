@@ -96,16 +96,16 @@ export class ProjectOverviewComponent implements OnInit {
   }
 
   addUser() {
-    const diagoFormUser = this.dialog.open(AddUserComponent, {width: '400px', data: {project: this.project} });
-    diagoFormUser.afterClosed().subscribe(error => {
-      console.log(error);
-      if (error === false) {
-        this.snackBar.open('✅ Ajout de l\'utilisateur effectuée avec succès !', 'Fermer', this.configSnackBar);
-        console.log(this.project.users);
-      } else {
-        if (error) {
-          this.snackBar.open('❌ L\'utilisateur n\'a pas été trouver !', 'Fermer', this.configSnackBar);
-        }
+          const diagoFormUser = this.dialog.open(AddUserComponent, {width: '400px', data: {project: this.project} });
+          diagoFormUser.afterClosed().subscribe(error => {
+            console.log(error);
+            if (error === false) {
+              this.snackBar.open('✅ Ajout de l\'utilisateur effectuée avec succès !', 'Fermer', this.configSnackBar);
+              console.log(this.project.users);
+            } else {
+              if (error) {
+                this.snackBar.open('❌ L\'utilisateur n\'a pas été trouver !', 'Fermer', this.configSnackBar);
+              }
       }
     });
   }

@@ -7,6 +7,8 @@ import {AuthenticationService} from '../../../services/authentication.service';
 import {Location} from '@angular/common';
 import {DeleteDialogComponent} from '../../utils/delete-dialog/delete-dialog.component';
 import {ActivatedRoute} from '@angular/router';
+import {AddUserComponent} from '../../project/add-user/add-user.component';
+import { Project } from '../../../models/project';
 
 @Component({
   selector: 'app-users-project',
@@ -20,11 +22,11 @@ export class UsersProjectComponent implements OnInit {
   @ViewChild(MatSort, {static: true}) sort: MatSort;
   users: MatTableDataSource<User> = new MatTableDataSource<User>();
   configSnackBar = new MatSnackBarConfig();
-
+  index;
   nbUserProject: number;
   projectId ;
-  displayedColumns: string[] = [ 'username', 'role', 'email'];
-  idSelectedProject;
+  project: Project;
+  displayedColumns: string[] = [ 'username', 'role', 'email', 'Actions'];
   constructor( private userService: UserService,
                private projectService: ProjectService,
                public dialog: MatDialog,
@@ -46,6 +48,9 @@ export class UsersProjectComponent implements OnInit {
       this.users.paginator = this.paginator;
       this.users.sort = this.sort;
     });
+    this.projectService.getProject(this.projectId).subscribe(res => {
+      this.project = res;
+    });
   }
 
   applyFilter(filterValue: string) {
@@ -55,8 +60,37 @@ export class UsersProjectComponent implements OnInit {
     }
   }
 
-  deleteUserProject(userId, userName) {
+  deleteUserProject(userId, username) {
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+
+    dialogConfig.data = {
+      title: 'Suppression du collaborateur "' + username + '"',
+      content: 'Êtes-vous sûr de vouloir supprimer ce collaborateur ? '
+    };
+    this.snackBar.open('⌛ Suppression en cours...', 'Fermer', this.configSnackBar);
+    const dialogRefDelete = this.dialog.open(DeleteDialogComponent, dialogConfig);
+
+    dialogRefDelete.afterClosed().subscribe(result => {
+      if (result === true) {
+        const user = this.project.users.find( users => users.user === userId);
+        this.index = this.project.users.findIndex( users => users.user === userId);
+        this.project.users.splice(this.index, 1);
+        this.projectService.updateProject(this.project, this.projectId).subscribe(() => {
+            this.snackBar.open('✅ Suppression effectuée avec succès !', 'Fermer', this.configSnackBar);
+            this.refreshUsers();
+          },
+          error => {
+            console.log(error);
+            this.snackBar.open('❌ Une erreur s\'est produite lors de la suppression !', 'Fermer', this.configSnackBar);
+          }
+        );
+      }
+    });
   }
+
 
   refreshUsers() {
     this.projectService.getUsersByProject(this.projectId).subscribe(users => {
