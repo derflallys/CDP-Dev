@@ -257,6 +257,10 @@ export class ProjectOverviewComponent implements OnInit {
   }
 
   moveIssueTo(idIssue, to) {
+    if (to === 'backlog' && this.sprintSelected.state !== 'To Start') {
+      this.snackBar.open(' On ne peut deplacer un issue d\'un sprint en cour ou terminé !❌', 'Fermer', this.configSnackBar);
+      return;
+    }
     this.snackBar.open('⌛ Déplacement de l\'issue en cours...', 'Fermer', this.configSnackBar);
     console.log(this.idSelectedSprint);
     console.log(idIssue);

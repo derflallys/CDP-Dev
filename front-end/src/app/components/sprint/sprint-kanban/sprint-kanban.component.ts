@@ -40,6 +40,11 @@ export class SprintKanbanComponent implements OnInit {
     this.sprintId = this.route.snapshot.paramMap.get('id');
     this.sprintService.getSprint(this.sprintId).subscribe( res => {
       this.sprint = res;
+      if ( this.sprint.state === 'To Start') {
+        this.snackBar.open(' Le sprint n\'a pas encore debuté  ❌!', 'Fermer', this.configSnackBar);
+        this.location.back();
+        return;
+      }
       this.getAllUser();
     });
     this.refreshTasks();
@@ -58,15 +63,13 @@ export class SprintKanbanComponent implements OnInit {
 
   handleTasksBySprint(tasks) {
       if (tasks.length <= 0) {
-        this.snackBar.open('❌ Ajouter des tâches avant de démarrer un sprint  !', 'Fermer', this.configSnackBar);
-
+        this.snackBar.open('Ajouter des tâches avant de faire le suivi ❌!', 'Fermer', this.configSnackBar);
         this.location.back();
       }
       this.allTasks = tasks;
       this.taskTodo = tasks.filter(task => task.state === 'TODO');
       this.taskEncours = tasks.filter(task => task.state === 'DOING');
       this.taskEnTermine = tasks.filter(task => task.state === 'DONE');
-      this.updateSprint();
   }
 
   drop(event: CdkDragDrop<Task[]>) {
@@ -207,20 +210,7 @@ export class SprintKanbanComponent implements OnInit {
 
   }
 
-  updateSprint() {
-    if (this.allTasks.length > 0 && this.sprint.state === 'To Start') {
-      this.sprint.state = 'In progress';
-      this.sprintService.updateSprint(this.sprint, this.sprintId).subscribe( sprint => {
-        console.log(sprint);
-        this.snackBar.open(' Sprint en Cours ! ✅', 'Fermer', this.configSnackBar);
-      },
-        error => {
-        console.log(error);
-        this.snackBar.open(' Erreur lors de la mise à jour de l\'etat du sprint ! ❌ ', 'Fermer', this.configSnackBar);
-        }
-      );
-    }
-  }
+
 
   goBack() {
     this.location.back();

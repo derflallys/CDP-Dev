@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import {ActivatedRoute, NavigationEnd, Router, RoutesRecognized} from '@angular/router';
 import { SprintService } from 'src/app/services/sprint.service';
 import { IssueService } from 'src/app/services/issue.service';
 import { TaskService } from '../../../services/task.service';
@@ -18,6 +18,7 @@ import { UpdateTaskComponent } from '../../task/update-task/update-task.componen
 import { DeleteDialogComponent } from '../../utils/delete-dialog/delete-dialog.component';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Location } from '@angular/common';
+import {filter, pairwise} from 'rxjs/operators';
 
 interface TaskLinkIssue {
   id: number;
@@ -78,17 +79,24 @@ export class SprintOverviewComponent implements OnInit {
     });
     this.issueService.getIssueBySprint(this.sprintId).subscribe(issues => {
       this.issues = issues;
+      if ( issues.length <= 0 ) {
+        this.snackBar.open('Veuillez definir les issues avant les tâches du sprint  ❌ ', 'Fermer', this.configSnackBar);
+        this.location.back();
+        return;
+      }
       this.taskService.getTaskBySprint(this.sprintId).subscribe(tasks => {
         this.tasks = tasks;
         this.generateTaskLinkIssue();
+        this.updateSprint();
       });
     });
   }
 
+
   generateTaskLinkIssue() {
     this.taskLinkIssue = [];
     this.issues.forEach(issue => {
-      let relatedTasks = [];
+      const relatedTasks = [];
       this.tasks.forEach(task => {
         if (task.issues.includes(issue.issueId)) {
           relatedTasks.push(task);
@@ -119,8 +127,32 @@ export class SprintOverviewComponent implements OnInit {
     });
   }
 
+  updateSprint() {
+    this.sprintService.getSprintByProject(this.projectId).subscribe(sprints => {
+        console.log(sprints);
+        if ( sprints.filter(sprint => sprint.state === 'In progress' && sprint._id !== this.sprintId ).length > 0 ) {
+          this.snackBar.open('Ce sprint n\'a pas encore demarrer car ,il y\'a déjà un sprint en cours  ❌ ', 'Fermer', this.configSnackBar);
+        } else {
+          if ( this.sprint.state === 'To Start') {
+            this.sprint.state = 'In progress';
+            this.sprintService.updateSprint(this.sprint, this.sprintId).subscribe( sprint => {
+                console.log(sprint);
+                this.snackBar.open(' Sprint en Cours ! ✅', 'Fermer', this.configSnackBar);
+              },
+              error => {
+                console.log(error);
+                this.snackBar.open(' Erreur lors de la mise à jour de l\'etat du sprint ! ❌ ', 'Fermer', this.configSnackBar);
+              }
+            );
+          }
+        }
+      }
+    );
+
+  }
+
   updateTask(idTask) {
-    const options = { width: '800px', data: { taskId: idTask, sprintId: this.sprintId } }
+    const options = { width: '800px', data: { taskId: idTask, sprintId: this.sprintId } };
     const diagoFormTask = this.dialog.open(UpdateTaskComponent, options);
     diagoFormTask.afterClosed().subscribe(error => {
       console.log(error);
@@ -167,11 +199,12 @@ export class SprintOverviewComponent implements OnInit {
   }
 
 
-  startSprint() {
-    this.sprint.state = 'In progress';
-    this.sprintService.updateSprint(this.sprint, this.sprintId).subscribe(
-      () => { this.router.navigate(['kanban/' + this.sprintId]); }
-    );
+  goKanban() {
+    if (this.sprint.state === 'To Start') {
+      this.snackBar.open(' Le sprint n\'a pas encore debuté  ❌!', 'Fermer', this.configSnackBar);
+    } else {
+      this.router.navigate(['kanban/' + this.sprintId]);
+    }
   }
 
   goBack() {

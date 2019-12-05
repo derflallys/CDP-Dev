@@ -46,11 +46,11 @@
                 mat-mini-fab matTooltip="Définition des tâches" color="accent" [routerLink]="['/sprint', idSelectedSprint]">
               <mat-icon>assignment</mat-icon>
             </button>
-            <ng-template *ngIf="sprintSelected.state == 'In Progress'">
-              <button mat-mini-fab matTooltip="Suivi des tâches" color="accent" [routerLink]="['/kanban', idSelectedSprint]">
-                <mat-icon>view_column</mat-icon>
-              </button>
-            </ng-template>
+            <button *ngIf="sprintSelected.state === 'In progress'" mat-mini-fab matTooltip="Suivi des tâches" color="accent" [routerLink]="['/kanban', idSelectedSprint]">
+              <mat-icon>view_column</mat-icon>
+            </button>
+
+
           </mat-action-row>
           <div class="main-frame">
             <table mat-table [dataSource]="getIssuesBySprint(idSelectedSprint)" class="mat-elevation-z8">
@@ -132,7 +132,7 @@
                 </td>
               </ng-container>
               <ng-container matColumnDef="Note">
-                <th mat-header-cell *matHeaderCellDef> Note </th>
+                <th mat-header-cell *matHeaderCellDef> Note (PO) </th>
                 <td mat-cell *matCellDef="let element">
                   {{ element.note}}
                 </td>
