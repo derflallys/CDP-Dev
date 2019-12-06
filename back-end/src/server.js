@@ -10,6 +10,7 @@ import projectRouter from './resources/project/project.router'
 import sprintRouter from './resources/sprint/sprint.router'
 import userRouter from './resources/user/user.router'
 import taskRouter from './resources/task/task.router'
+import testRouter from './resources/test/test.router'
 
 export const app = express()
 
@@ -28,6 +29,7 @@ app.use('/api/user', userRouter)
 app.use('/api/task', taskRouter)
 app.use('/api/project', projectRouter)
 app.use('/api/sprint', sprintRouter)
+app.use('/api/test', testRouter)
 
 export const start = async () => {
   try {
