@@ -15,6 +15,7 @@ Il suffit ensuite de lancer la commande executant l'application ensuite disponib
 __Le back__ [le manuel complet](https://github.com/derflallys/CDP-Dev/blob/master/back-end/Documentation_BackEnd.md) : 
 Cette partie gère le traitement des données, ainsi que les interactions avec la base de données.
 il faut installer les dépendances du projet à l'aide de la commande à executer au niveau du code du back:  
+   
     $ npm install 
 
 Il vous suffit ensuite de lancer l'application avec la commande :

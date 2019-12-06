@@ -15,6 +15,27 @@
 * Alfred Aboubacar
 * Eudes Martinez
 
+## Backlog | Sprints | Tasks 
+
+* Le détail du **Backlog** est disponible ici : https://github.com/derflallys/CDP-Dev/blob/master/Backlog.md 
+
+> * Le détail du **Sprint 1** est disponible ici : 
+>https://github.com/derflallys/CDP-Dev/blob/master/Sprint1.md     
+ > Les tâches associées à ce sprint sont disponible ici :
+https://github.com/derflallys/CDP-Dev/blob/master/Tasks1.md
+
+> * Le détail du **Sprint 2** est disponible ici : 
+>https://github.com/derflallys/CDP-Dev/blob/master/Sprint2.md     
+ > Les tâches associées à ce sprint sont disponible ici :
+https://github.com/derflallys/CDP-Dev/blob/master/Tasks2.md
+
+
+> * Le détail du **Sprint 3** est disponible ici : 
+>https://github.com/derflallys/CDP-Dev/blob/master/Sprint3.md     
+ > Les tâches associées à ce sprint sont disponible ici :
+https://github.com/derflallys/CDP-Dev/blob/master/Tasks3.md
+
+
 ## Technologies 
  * **Base de données** :  Mongodb
  * **Front-end** : Angular
@@ -24,7 +45,7 @@
   
 ## Installation : 
 
-*  Vous trouverez le guide d'installation [ici](https://github.com/derflallys/CDP-Dev/blob/master/RunDocker.md)
+*  Vous trouverez le guide d'installation [ici](https://github.com/derflallys/CDP-Dev/blob/master/Install.md)
 
 
 
