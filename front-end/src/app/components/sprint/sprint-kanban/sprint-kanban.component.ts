@@ -11,6 +11,8 @@ import {Location} from '@angular/common';
 import {DeleteDialogComponent} from '../../utils/delete-dialog/delete-dialog.component';
 import {StepTaskComponent} from '../../task/step-task/step-task.component';
 import {ProjectService} from '../../../services/project.service';
+import {IssueService} from '../../../services/issue.service';
+import {Issue} from '../../../models/issue';
 
 @Component({
   selector: 'app-sprint-kanban',
@@ -26,10 +28,13 @@ export class SprintKanbanComponent implements OnInit {
   sprint: Sprint ;
   configSnackBar = new MatSnackBarConfig();
   users: any = [];
+  private issuesSprint: Issue[] = [];
+  private tasksByIssue: [] = [];
   constructor(private taskService: TaskService, private route: ActivatedRoute,
               private authenticationService: AuthenticationService,
               private sprintService: SprintService, private location: Location,
               public dialog: MatDialog, private projectService: ProjectService,
+              private issueService: IssueService,
               private  router: Router, public snackBar: MatSnackBar) {
     this.configSnackBar.verticalPosition = 'bottom';
     this.configSnackBar.horizontalPosition = 'center';
@@ -47,7 +52,8 @@ export class SprintKanbanComponent implements OnInit {
       }
       this.getAllUser();
     });
-    this.refreshTasks();
+    this.refreshTasks(null);
+    this.getAllTaskByIssue();
   }
 
   getAllUser() {
@@ -105,7 +111,8 @@ export class SprintKanbanComponent implements OnInit {
           if (message) {
             this.snackBar.open(message, 'Fermer', this.configSnackBar);
           }
-          this.refreshTasks();
+          this.refreshTasks(task);
+
         },
         error => {
           console.log(error);
@@ -114,14 +121,29 @@ export class SprintKanbanComponent implements OnInit {
         }
       );
       if (event.container.id === 'finish') {
-        this.taskTest(task);
-        this.taskDoc(task);
         task.state = 'DONE';
         message = '';
+        this.taskTest(task);
+        this.taskDoc(task);
+
       }
 
     }
   }
+  getAllTaskByIssue() {
+    this.tasksByIssue = [];
+    this.issueService.getIssueBySprint(this.sprintId).subscribe( issues => {
+      this.issuesSprint = issues;
+      this.issuesSprint.forEach(issueSprint => {
+       const tasks =  this.allTasks.filter(task => task.issues.find(issueTask => issueTask === issueSprint.issueId));
+       // @ts-ignore
+       this.tasksByIssue.push({issue: issueSprint, task: tasks});
+      });
+      console.log(this.tasksByIssue);
+
+    });
+  }
+
 
   getStateTask(idTask, state) {
     let taskU: Task = null;
@@ -156,9 +178,12 @@ export class SprintKanbanComponent implements OnInit {
     }
   }
 
-  refreshTasks() {
+  refreshTasks(task ) {
     this.taskService.getTaskBySprint(this.sprintId).subscribe(tasks => {
         this.handleTasksBySprint(tasks);
+        if (task) {
+          this.updateIssueStateOfTask(task);
+        }
       },
       error => {
         console.log(error);
@@ -194,7 +219,8 @@ export class SprintKanbanComponent implements OnInit {
     }
     this.taskService.updateTask(task, task._id).subscribe(res => {
         console.log(res);
-        this.refreshTasks();
+        this.refreshTasks(task);
+
       },
       error => {
         console.log(error);
@@ -221,7 +247,7 @@ export class SprintKanbanComponent implements OnInit {
       }
       this.taskService.updateTask(task, task._id).subscribe(res => {
           console.log(res);
-          this.refreshTasks();
+          this.refreshTasks(task);
         },
         error => {
           console.log(error);
@@ -305,5 +331,67 @@ export class SprintKanbanComponent implements OnInit {
       case 'accent' : return 'Tâche documentée';
       case 'warn' : return 'Tâche non documentée ';
     }
+  }
+
+  getDependTask(idTask, state) {
+    let taskU: Task = null;
+    if (state === 'TODO') {
+      taskU = this.taskTodo.find(task => task._id === idTask);
+    }
+    if (state === 'DOING') {
+      taskU = this.taskEncours.find(task => task._id === idTask);
+    }
+    if (state === 'DONE') {
+      taskU = this.taskFinish.find(task => task._id === idTask);
+    }
+    if (taskU && taskU.dependencies.length > 0) {
+      let dep = ' - [ ';
+      taskU.dependencies.forEach(d => {if (d != null) { dep +=  ('#' + d + ' ' ); }});
+      dep += ' ]';
+      return dep;
+    }
+    if ( !taskU || taskU.dependencies.length === 0) {
+      return '';
+    }
+
+  }
+
+  private updateIssueStateOfTask(task) {
+    // @ts-ignore
+    const choose  = this.tasksByIssue.filter(value => value.task.find(t => t._id === task._id));
+
+    // @ts-ignore
+    const issue: Issue =  choose.map(value => value.issue)[0];
+    // @ts-ignore
+    const tasks: Task [] =  choose.map(value => value.task)[0];
+    const lastStateIssue = issue.state;
+    console.log(choose);
+
+    if ( tasks.filter(t => t.state === 'DOING' ).length >= 1 || tasks.filter(t => t.state === 'DONE' ).length >= 1 ) {
+      issue.state = 'DOING';
+    }
+
+    if (tasks.filter(t => t.state === 'DONE' ).length === tasks.length ) {
+      issue.state = 'DONE';
+    }
+
+    if (tasks.filter(t => t.state === 'TODO' ).length === tasks.length ) {
+      issue.state = 'TODO';
+    }
+    console.log(lastStateIssue);
+    console.log(issue.state);
+    if (lastStateIssue !== issue.state) {
+      console.log(issue);
+      this.issueService.updateIssue(issue, issue._id).subscribe(res => {
+        console.log(res);
+        this.snackBar.open(' L\' issue ' + issue.issueId + ' est à l\'état ' + issue.state, 'Fermer', this.configSnackBar);
+
+        this.getAllTaskByIssue();
+      },
+        error => {
+        console.log(error);
+        });
+    }
+
   }
 }

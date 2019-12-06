@@ -36,7 +36,7 @@
           <mat-accordion>
             <mat-expansion-panel >
               <mat-expansion-panel-header>
-                <mat-panel-title class="font-weight-bold">{{'#'+item.taskId}}</mat-panel-title>
+                <mat-panel-title class="font-weight-bold">{{'#'+item.taskId}} {{getDependTask(item._id,item.state)}}</mat-panel-title>
                 <mat-panel-description>{{item.endDate | date: 'dd/MM'  }}
                   <button mat-mini-fab class="statusTask" [color]=getStateTask(item._id,item.state) [matTooltip]="showStateTask(item._id,item.state)"></button>
                 </mat-panel-description>
@@ -46,7 +46,7 @@
                 <p class="font-weight-bold" style="float: left">
                   {{item.startDate | date: 'dd/MM' }}
                 </p>
-                <p class="font-weight-bold" style="float: right">Affecté à: {{getNameUser(item.dev)}}</p>
+                <p class="font-weight-bold" *ngIf="item.dev !== null" style="float: right">Affecté à: {{getNameUser(item.dev)}}</p>
               </div>
               <mat-action-row>
 
@@ -74,7 +74,7 @@
           <mat-accordion>
             <mat-expansion-panel >
               <mat-expansion-panel-header>
-                <mat-panel-title class="font-weight-bold">{{'#'+item.taskId}}</mat-panel-title>
+                <mat-panel-title class="font-weight-bold">{{'#'+item.taskId}} {{getDependTask(item._id,item.state)}}</mat-panel-title>
                 <mat-panel-description>{{item.endDate | date: 'dd/MM'}}
                   <button mat-mini-fab class="statusTask" [color]=getStateTask(item._id,item.state) [matTooltip]="showStateTask(item._id,item.state)"></button>
                 </mat-panel-description>
@@ -84,7 +84,7 @@
                 <p class="font-weight-bold" style="float: left">
                   {{item.startDate | date: 'dd/MM' }}
                 </p>
-                <p class="font-weight-bold" style="float: right">Affecté à: {{getNameUser(item.dev)}}</p>
+                <p class="font-weight-bold" *ngIf="item.dev !== null"  style="float: right">Affecté à: {{getNameUser(item.dev)}}</p>
               </div>
               <mat-action-row>
               </mat-action-row>
@@ -114,7 +114,7 @@
           <mat-accordion >
             <mat-expansion-panel >
               <mat-expansion-panel-header>
-                <mat-panel-title class="font-weight-bold">{{'#'+item.taskId}}</mat-panel-title>
+                <mat-panel-title class="font-weight-bold">{{'#'+item.taskId}} {{getDependTask(item._id,item.state)}}</mat-panel-title>
                 <mat-panel-description>{{item.endDate | date: 'dd/MM' }}
                   <button mat-mini-fab class="statusTask" [color]=getStateTask(item._id,item.state) [matTooltip]="showStateTask(item._id,item.state)"></button>
                 </mat-panel-description>
@@ -124,7 +124,7 @@
                 <p class="font-weight-bold" style="float: left">
                   {{item.startDate | date: 'dd/MM' }}
                 </p>
-                <p class="font-weight-bold" style="float: right">Affecté à: {{getNameUser(item.dev)}}</p>
+                <p class="font-weight-bold" *ngIf="item.dev !== null"  style="float: right">Affecté à: {{getNameUser(item.dev)}}</p>
               </div>
               <mat-action-row>
 

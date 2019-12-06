@@ -40,7 +40,7 @@ export class IssueService {
     return this.http.get<Issue[]>(this.issueByProjectUrl + '/' + projectId);
   }
 
-  getIssueBySprint(sprintId: number) {
+  getIssueBySprint(sprintId: string) {
     return this.http.get<Issue[]>(this.issueBySprintUrl + '/' + sprintId);
   }
 
