@@ -50,7 +50,7 @@ export class AddIssueComponent implements OnInit {
     this.addIssue =  this.formBuilder.group({
       description: [{value: 'En tant que', disabled: this.roleUser === 'PO'}, Validators.required],
       note: [''],
-      state: [ {value: 'TODO', disabled: this.roleUser === 'PO' }, Validators.required],
+      state: [ {value: 'TODO', disabled: true }, Validators.required],
       difficulty: [ {value: 1,  disabled: this.roleUser === 'PO'}, Validators.required],
       priority: ['LOW', Validators.required]
     });
@@ -109,7 +109,7 @@ export class AddIssueComponent implements OnInit {
         this.title = 'Modifier l\'issue';
         this.addIssue = this.formBuilder.group({
           description: [{value: this.issue.description, disabled: this.roleUser === 'PO'}, Validators.required],
-          state: [{value: this.issue.state, disabled: this.roleUser === 'PO' }, Validators.required],
+          state: [{value: this.issue.state, disabled: true }, Validators.required],
           difficulty: [{value: this.issue.difficulty, disabled: this.roleUser === 'PO' }, Validators.required],
           priority: [this.issue.priority, Validators.required],
           note: [this.issue.note]
