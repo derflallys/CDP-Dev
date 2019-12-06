@@ -41,7 +41,9 @@ https://github.com/derflallys/CDP-Dev/blob/master/Tasks3.md
  * **Front-end** : Angular
  * **Back-end** : NodeJs
 
-
+## Installation : 
+Vous trouverez le détail de toutes les Releases [ici](https://github.com/derflallys/CDP-Dev/blob/master/Release.md
+)
   
 ## Installation : 
 
