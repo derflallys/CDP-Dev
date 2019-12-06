@@ -2,25 +2,26 @@
 
 | ID | US liée | Dépendances | Temps estimé | Etat | Affectation |
 |----|----|----|----|----|----|
-| 0.0 | x | x | 1 | TODO |  |
+| 0.0 | x | x | 1 | DONE |  Alfred |
 | 1.0 | x | x | 1 | TODO |  |
 | 1.1 | x | x | 1 | TODO |  |
 | 2.0 | x | x | 1 | TODO |  |
-| 3.1 | US8 | x | 1 | TODO |  |
-| 3.2 | US8 | x | 0.5 | TODO |  |
-| 4.1 | US5 | x | 0.5  | TODO |  |
-| 4.2 |  US5 | x | 0.5  | TODO |  |
-| 5.1 | US5 | 4.1 | 0.5  | TODO |  |
-| 5.2 | US5 | x | 0.5 | TODO |  |
-| 6.1 | US16 | x | 0.5 | TODO |  |
-| 6.2 | US16 | x | 0.5 | TODO |  |
-| 7.1 | US17 | 6.1, 6.2 | 1.5 | TODO |  |
+| 3.1 | US8 | x | 1 | TODO |  Alfred |
+| 3.2 | US8 | x | 0.5 | TODO | Alfred |
+| 4.1 | US5 | x | 0.5  | DONE |  Oumayma|
+| 4.2 |  US5 | x | 0.5  | DONE | Oumayma |
+| 5.1 | US5 | 4.1 | 0.5  | DONE |  Oumayma |
+| 5.2 | US5 | x | 0.5 | DONE | Oumayma |
+| 6.1 | US16 | x | 0.5 | DONE |  Eudes |
+| 6.2 | US16 | x | 0.5 | DONE |  Eudes |
+| 7.1 | US17 | 6.1, 6.2 | 1.5 | DONE |  Eudes |
 | 8.1 | US18 | x | 1.5 | TODO |  |
 | 8.2 | US18 | x  | 1.5 | TODO |  |
-| 9.1 | US19 | x  | 0.5 | TODO |  |
-| 9.2 | US19 | x | 0.5 | TODO |  |
+| 9.1 | US19 | x  | 0.5 | DONE | Oumayma & Alfred |
+| 9.2 | US19 | x | 0.5 | DONE | Oumayma   |
 | 10.1 | US20 | 3.1, 3.2 | 0.5 | TODO |  |
 | 10.2 | US20 | 10.1 | 1 | TODO |  |
+
 
 ---
 
@@ -160,3 +161,4 @@
 > Dans un premier temps, il faudrat mettre en place une méthode qui calcule la difficulté totale du projet, ainsi qu'une méthode qui calcule à chaque fin de sprint, la difficulté des issues effectués.
 >**Tâche 10.2** : [FRONT-END]
 Une fois ces deux valeurs récupérés, il faudrat générer une visualisation graphique de ces valeurs.
+
