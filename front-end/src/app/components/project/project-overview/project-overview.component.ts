@@ -21,8 +21,9 @@ import { DeleteDialogComponent } from '../../utils/delete-dialog/delete-dialog.c
 import { AddSprintComponent } from '../../sprint/add-sprint/add-sprint.component';
 import { UpdateSprintComponent } from '../../sprint/update-sprint/update-sprint.component';
 import { AddUserComponent } from '../add-user/add-user.component';
-import {Location} from '@angular/common';
-import {AuthenticationService} from '../../../services/authentication.service';
+import { Location } from '@angular/common';
+import { AuthenticationService } from '../../../services/authentication.service';
+import { ProjectBurndownChartComponent } from '../project-burndown-chart/project-burndown-chart.component';
 
 @Component({
   selector: 'app-project-overview',
@@ -81,6 +82,11 @@ export class ProjectOverviewComponent implements OnInit {
     });
   }
 
+  openBurnDownChart() {
+    const parameter = { sprints: this.sprints, issues: this.allIssues }
+    this.dialog.open(ProjectBurndownChartComponent, { width: '800px', data: parameter });
+  }
+
   getRoleUserProject() {
     const userCo = this.project.users.find(user => user.user === this.authenticationService.getIdUser());
     if (userCo) {
@@ -96,22 +102,21 @@ export class ProjectOverviewComponent implements OnInit {
   }
 
   addUser() {
-          const diagoFormUser = this.dialog.open(AddUserComponent, {width: '400px', data: {project: this.project} });
-          diagoFormUser.afterClosed().subscribe(error => {
-            console.log(error);
-            if (error === false) {
-              this.snackBar.open('✅ Ajout de l\'utilisateur effectuée avec succès !', 'Fermer', this.configSnackBar);
-              console.log(this.project.users);
-            } else {
-              if (error) {
-                this.snackBar.open('❌ L\'utilisateur n\'a pas été trouver !', 'Fermer', this.configSnackBar);
-              }
+    const diagoFormUser = this.dialog.open(AddUserComponent, {width: '400px', data: {project: this.project} });
+    diagoFormUser.afterClosed().subscribe(error => {
+      console.log(error);
+      if (error === false) {
+        this.snackBar.open('✅ Ajout de l\'utilisateur effectuée avec succès !', 'Fermer', this.configSnackBar);
+        console.log(this.project.users);
+      } else {
+        if (error) {
+          this.snackBar.open('❌ L\'utilisateur n\'a pas été trouver !', 'Fermer', this.configSnackBar);
+        }
       }
     });
   }
 
   addIssue() {
-
     const diagoFormIssue = this.dialog.open(AddIssueComponent, {width: '800px', data: {projectId: this.projectId, role: this.role} });
     diagoFormIssue.afterClosed().subscribe(error => {
       console.log(error);

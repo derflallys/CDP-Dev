@@ -52,6 +52,7 @@ import { SprintKanbanComponent } from './components/sprint/sprint-kanban/sprint-
 import { SprintOverviewComponent } from './components/sprint/sprint-overview/sprint-overview.component';
 import { UsersProjectComponent } from './components/user/users-project/users-project.component';
 import { StepTaskComponent } from './components/task/step-task/step-task.component';
+import { ProjectBurndownChartComponent } from './components/project/project-burndown-chart/project-burndown-chart.component';
 
 @NgModule({
   exports: [
@@ -97,7 +98,8 @@ export class MaterialModule {}
     SprintKanbanComponent,
     SprintOverviewComponent,
     StepTaskComponent,
-    UsersProjectComponent
+    UsersProjectComponent,
+    ProjectBurndownChartComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -134,7 +136,8 @@ export class MaterialModule {}
     UpdateIssueComponent,
     UpdateProjectComponent,
     UpdateTaskComponent,
-    StepTaskComponent
+    StepTaskComponent,
+    ProjectBurndownChartComponent
   ],
   providers: [ AuthGuardService, {provide: MAT_DATE_LOCALE, useValue: 'fr-FR'} ],
   bootstrap: [ AppComponent ]
