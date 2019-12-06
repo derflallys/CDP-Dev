@@ -49,10 +49,10 @@ https://github.com/derflallys/CDP-Dev/blob/master/Tasks3.md
 
 
 
-## Documentation : 
+## Documentations : 
 
  * [Documentaion Développeur Front-end](https://github.com/derflallys/CDP-Dev/blob/master/front-end/Documentation_FrontEnd.md)  
  * [Documentaion Développeur Back-end](https://github.com/derflallys/CDP-Dev/blob/master/back-end/Documentation_BackEnd.md) 
  * [Documentaion Release](https://github.com/derflallys/CDP-Dev/blob/master/Release.md) 
- * [Documenation Utilisateur]  
+ * [Documenation Utilisateur](https://github.com/derflallys/CDP-Dev/blob/master/User-Manual.md)  
 
