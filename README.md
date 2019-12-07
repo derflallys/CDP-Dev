@@ -53,8 +53,8 @@ Vous trouverez le détail de toutes les Releases [ici](https://github.com/derfla
 
 ## Documentations : 
 
- * [Documentaion Développeur Front-end](https://github.com/derflallys/CDP-Dev/blob/master/front-end/Documentation_FrontEnd.md)  
- * [Documentaion Développeur Back-end](https://github.com/derflallys/CDP-Dev/blob/master/back-end/Documentation_BackEnd.md) 
- * [Documentaion Release](https://github.com/derflallys/CDP-Dev/blob/master/Release.md) 
- * [Documenation Utilisateur](https://github.com/derflallys/CDP-Dev/blob/master/User-Manual.md)  
+ * [Documentation Développeur Front-end](https://github.com/derflallys/CDP-Dev/blob/master/front-end/Documentation_FrontEnd.md)  
+ * [Documentation Développeur Back-end](https://github.com/derflallys/CDP-Dev/blob/master/back-end/Documentation_BackEnd.md) 
+ * [Documentation Release](https://github.com/derflallys/CDP-Dev/blob/master/Release.md) 
+ * [Documentation Utilisateur](https://github.com/derflallys/CDP-Dev/blob/master/User-Manual.md)  
 
