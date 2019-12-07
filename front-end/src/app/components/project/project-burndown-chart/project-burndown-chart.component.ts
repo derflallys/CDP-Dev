@@ -26,6 +26,7 @@ export class ProjectBurndownChartComponent implements OnInit {
   issues: Issue[] = this.data.issues;
   totalDifficulty: number;
   velocities: SprintVelocity[] = [];
+  noData: boolean;
 
   // D3JS
   private margin = { top: 20, right: 20, bottom: 30, left: 50 };
@@ -45,20 +46,22 @@ export class ProjectBurndownChartComponent implements OnInit {
 
   ngOnInit() {
     const sumDifficulty = (arr: Issue[]) => arr.map((i: Issue) => i.difficulty).reduce((a, b) => a + b, 0);
-
     this.totalDifficulty = sumDifficulty(this.issues);
 
-    console.log('issues', this.issues);
-    console.log('sprints', this.sprints);
+    // Consider only sprints that has been started (others have 0 difficulty point)
+    let startedSprint = this.sprints.filter(s => s.state != 'To Start');
+    this.noData = startedSprint.length == 0;
 
     this.velocities.push({
       sprintTitle: "Début projet",
       velocity: this.totalDifficulty
-    })
+    });
     let currentDifficulty = this.totalDifficulty;
-    this.sprints.forEach(sprint => {
+    startedSprint.forEach(sprint => {
       let sprintIssues = this.issues.filter(i => i.sprintId == sprint._id);
-      let velocity = sumDifficulty(sprintIssues);
+      // Velocity is determined by calculating sum of finished issues in sprint
+      let doneSprintIssues = sprintIssues.filter(i => i.state == 'DONE')
+      let velocity = sumDifficulty(doneSprintIssues);
       currentDifficulty -= velocity;
       this.velocities.push({
         sprintTitle: sprint.title + ' - ' + sprint.sprintId,

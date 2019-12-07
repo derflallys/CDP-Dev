@@ -1,3 +1,5 @@
 <h2 class="text-center">{{ title }}</h2>
 
+<p *ngIf="noData" class="text-center">Aucun sprint n'a encore démarré.</p>
+
 <svg id="burndown" width="700" height="400"></svg>
