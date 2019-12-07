@@ -8,21 +8,25 @@
             [matBadge]="getDaysLeft()" matBadgePosition="below after" matBadgeDescription="Nombre de Jours Restants" matTooltip="Nombre de Jours Restants" matBadgeColor="warn">
       {{getState()}}
     </button>
+    <button mat-mini-fab matTooltip="Terminé le Sprint" *ngIf="!sprintFinish"  class="d-block mx-auto button-right" (click)="endSprint()" color="warn">
+      <mat-icon>stop</mat-icon>
+    </button>
   </h2>
 
 
   <button mat-mini-fab matTooltip="Ordre des tâches" class="d-block mx-auto" (click)="openStepTask()" color="basic">
     <mat-icon>clear_all</mat-icon>
   </button>
+
 </div>
 
 
 <div class="box">
   <div cdkDropListGroup>
     <div class="task-container">
-      <mat-chip-list class="mat-chip-list-stacked " aria-label="Color selection">
-        <mat-chip  selected color="warn">
-         <h5 class="textCenter">Reste à faire</h5>
+      <mat-chip-list class="mat-chip-list-stacked textCenter" aria-label="Color selection">
+        <mat-chip  selected color="warn" >
+          <h5 class="textHeaderStep">Reste à faire</h5>
         </mat-chip>
       </mat-chip-list>
       <div id="todo"
@@ -32,7 +36,7 @@
         cdkDropListSortingDisabled
 
         (cdkDropListDropped)="drop($event)">
-        <div class="task-box" *ngFor="let item of taskTodo"  cdkDrag>
+        <div class="task-box" *ngFor="let item of taskTodo"[cdkDragDisabled]="sprintFinish" cdkDrag>
           <mat-accordion>
             <mat-expansion-panel >
               <mat-expansion-panel-header>
@@ -60,7 +64,7 @@
     <div class="task-container">
       <mat-chip-list class="mat-chip-list-stacked " aria-label="Color selection">
         <mat-chip  selected color="primary">
-          <h5 class="textCenter">En cours</h5>
+          <h5 class="textHeaderStep">En cours</h5>
         </mat-chip>
       </mat-chip-list>
 
@@ -70,7 +74,7 @@
         class="task-list"
 
         (cdkDropListDropped)="drop($event)">
-        <div class="task-box" *ngFor="let item of taskEncours" [cdkDragDisabled]="item.dev !== authenticationService.getIdUser()" cdkDrag>
+        <div class="task-box" *ngFor="let item of taskEncours" [cdkDragDisabled]="item.dev !== authenticationService.getIdUser() || sprintFinish" cdkDrag>
           <mat-accordion>
             <mat-expansion-panel >
               <mat-expansion-panel-header>
@@ -98,7 +102,7 @@
       <div class="titleBox">
         <mat-chip-list class="mat-chip-list-stacked " aria-label="Color selection">
           <mat-chip  selected color="accent">
-            <h5 class="textCenter">Terminé</h5>
+            <h5 class="textHeaderStep">Terminé</h5>
           </mat-chip>
         </mat-chip-list>
       </div>
@@ -110,7 +114,7 @@
         class="task-list"
 
         (cdkDropListDropped)="drop($event)">
-        <div class="task-box" *ngFor="let item of taskFinish" cdkDrag>
+        <div class="task-box" *ngFor="let item of taskFinish" [cdkDragDisabled]="sprintFinish" cdkDrag>
           <mat-accordion >
             <mat-expansion-panel >
               <mat-expansion-panel-header>

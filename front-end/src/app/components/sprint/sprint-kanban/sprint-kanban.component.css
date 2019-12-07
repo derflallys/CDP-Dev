@@ -31,7 +31,14 @@ mat-chip {
 mat-chip {
   max-width: 200px;
 }
+.mat-chip.mat-standard-chip.mat-chip-selected {
+  margin-left: 25%;
+  margin-bottom: 2%;
+}
 
+.textHeaderStep{
+  margin: auto;
+}
 
 .task-box {
   padding: 20px 10px;

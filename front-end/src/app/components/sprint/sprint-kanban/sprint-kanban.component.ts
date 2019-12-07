@@ -30,6 +30,7 @@ export class SprintKanbanComponent implements OnInit {
   users: any = [];
   private issuesSprint: Issue[] = [];
   private tasksByIssue: [] = [];
+  sprintFinish = false;
   constructor(private taskService: TaskService, private route: ActivatedRoute,
               private authenticationService: AuthenticationService,
               private sprintService: SprintService, private location: Location,
@@ -44,13 +45,7 @@ export class SprintKanbanComponent implements OnInit {
   ngOnInit() {
     this.sprintId = this.route.snapshot.paramMap.get('id');
     this.sprintService.getSprint(this.sprintId).subscribe( res => {
-      this.sprint = res;
-      if ( this.sprint.state === 'To Start') {
-        this.snackBar.open(' Le sprint n\'a pas encore debuté  ❌!', 'Fermer', this.configSnackBar);
-        this.location.back();
-        return;
-      }
-      this.getAllUser();
+      this.handleSprint(res);
     });
     this.refreshTasks(null);
     this.getAllTaskByIssue();
@@ -65,6 +60,19 @@ export class SprintKanbanComponent implements OnInit {
 
   openStepTask() {
     this.dialog.open(StepTaskComponent, { width: '800px', data: { tasks: this.allTasks } });
+  }
+
+  handleSprint(res){
+    this.sprint = res;
+    if ( this.sprint.state === 'To Start') {
+      this.snackBar.open(' Le sprint n\'a pas encore debuté  ❌!', 'Fermer', this.configSnackBar);
+      this.location.back();
+      return;
+    }
+    if ( this.sprint.state === 'Completed'){
+      this.sprintFinish = true;
+    }
+    this.getAllUser();
   }
 
   handleTasksBySprint(tasks) {
@@ -400,5 +408,40 @@ export class SprintKanbanComponent implements OnInit {
         });
     }
 
+  }
+
+  endSprint() {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.data = {
+      title: ' Terminé le sprint ' + this.sprint.sprintId,
+      content: 'Est ce que vous voulez vraiment terminé le sprint ? ',
+    };
+    const dialogRefEndSprint = this.dialog.open(DeleteDialogComponent, dialogConfig);
+
+    dialogRefEndSprint.afterClosed().subscribe(result => {
+      if (result === true) {
+        this.sprintFinish = true;
+        this.sprint.state = 'Completed';
+        dialogConfig.data = {
+          title: ' Terminé le sprint ' + this.sprint.sprintId,
+          content: 'Voulez vous mettre les issues en cours ou qui reste à faire au sprint suivant ? ',
+        };
+        const dialogRefMoveIssue = this.dialog.open(DeleteDialogComponent, dialogConfig);
+        dialogRefMoveIssue.afterClosed().subscribe(moveIssue => {
+          if (moveIssue === true) {
+
+          } else {
+
+            this.sprintService.updateSprint(this.sprint, this.sprintId).subscribe(sprint => {
+              this.snackBar.open('Sprint Terminé ✅ !', 'Fermer', this.configSnackBar);
+            });
+          }
+        });
+      }
+
+
+    });
   }
 }

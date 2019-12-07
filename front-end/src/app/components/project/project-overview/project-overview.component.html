@@ -52,7 +52,7 @@
                 mat-mini-fab matTooltip="Définition des tâches" color="accent" [routerLink]="['/sprint', idSelectedSprint]">
               <mat-icon>assignment</mat-icon>
             </button>
-            <button *ngIf="sprintSelected.state === 'In progress'" mat-mini-fab matTooltip="Suivi des tâches" color="accent" [routerLink]="['/kanban', idSelectedSprint]">
+            <button *ngIf="sprintSelected.state !== 'To Start'" mat-mini-fab matTooltip="Suivi des tâches" color="accent" [routerLink]="['/kanban', idSelectedSprint]">
               <mat-icon>view_column</mat-icon>
             </button>
 
