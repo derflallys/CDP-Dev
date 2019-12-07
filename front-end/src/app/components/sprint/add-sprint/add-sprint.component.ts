@@ -40,7 +40,7 @@ export class AddSprintComponent implements OnInit {
       title: ['Sprint', Validators.required],
       startDate: [new Date().toString, Validators.required],
       endDate: [new Date().toString, Validators.required],
-      state: [{value: 'To Start', disabled: false}, Validators.required],
+      state: [{value: 'To Start', disabled: true}, Validators.required],
     });
     if (this.sprintId) {
       this.loadSprint();
@@ -94,7 +94,7 @@ export class AddSprintComponent implements OnInit {
           title: [this.sprint.title, Validators.required],
           startDate: [this.sprint.startDate, Validators.required],
           endDate: [this.sprint.endDate, Validators.required],
-          state: [{value: this.sprint.state, disabled: false}, Validators.required]
+          state: [{value: this.sprint.state, disabled: true}, Validators.required]
 
 
         });
