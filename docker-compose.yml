@@ -8,13 +8,13 @@ services:
     container_name: front-container
     restart: always
   back-end:
-          container_name: back-container
-          build: back-end
-          ports:
-            - "3000:3000"
-          restart: always
-          depends_on:
-            - mongo
+    container_name: back-container
+    build: back-end
+    ports:
+      - "3000:3000"
+    restart: always
+    depends_on:
+      - mongo
   mongo:
       image: mongo
       ports:

@@ -1,22 +1,41 @@
-language: node_js
-node_js:
-  - "10"
+# BackEnd test is runned in Docker (need Mongo)
+# FrontEnd is runned directly in Travis VM
+dist: trusty
 
 sudo: required
+
+language: node_js
+node_js:
+  - '10'
+
 addons:
   apt:
+    sources:
+      - google-chrome
     packages:
       - docker-ce
+      - google-chrome-stable
 
 services:
   - docker
 
+cache:
+  directories:
+    - ./node_modules
+
 before_install:
   - docker-compose build
   - docker-compose up -d mongo
+  - cd front-end
+
+install:
+  - npm install
 
 script:
+  - npm run test -- --watch=false --no-progress --browsers=ChromeHeadlessNoSandbox
+  - cd ..
   - docker-compose run back-end sh -c "npm run test-auth && npm run test-controllers && npm run test-routes"
 
 after_script:
-  - cd Docker; docker-compose down -v --rmi all
+  - cd Docker
+  - docker-compose down -v --rmi all
