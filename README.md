@@ -12,7 +12,7 @@
 ## L'équipe
 
 * Oumayma Jellite
-* Alfred Aboubacar
+* Alfred Aboubacar SYLLA
 * Eudes Martinez
 
 ## Backlog | Sprints | Tasks 
