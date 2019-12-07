@@ -214,35 +214,35 @@ export class SprintKanbanComponent implements OnInit {
   }
 
   taskTest(task: Task) {
-  const dialogConfig = new MatDialogConfig();
-  dialogConfig.disableClose = true;
-  dialogConfig.autoFocus = true;
-  dialogConfig.data = {
-    title: ' Tests  Tâche ' + task.taskId,
-    content: 'Est ce que cette tâche a été testée ? '
-  };
-  const dialogRefDelete = this.dialog.open(DeleteDialogComponent, dialogConfig);
-  dialogRefDelete.afterClosed().subscribe(result => {
-    if (result === true) {
-      task.toTest = true;
-    }
-    this.taskService.updateTask(task, task._id).subscribe(res => {
-        console.log(res);
-        this.refreshTasks(task);
-
-      },
-      error => {
-        console.log(error);
-        this.snackBar.open('❌ Erreur lors de l\'affection de la tâche  !', 'Fermer', this.configSnackBar);
-
-      },
-      () => {
-        this.updateIssueStateOfTask(task);
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.data = {
+      title: ' Tests Tâche ' + task.taskId,
+      content: 'Est ce que cette tâche a été testée ? '
+    };
+    const dialogRefDelete = this.dialog.open(DeleteDialogComponent, dialogConfig);
+    dialogRefDelete.afterClosed().subscribe(result => {
+      if (result === true) {
+        task.toTest = true;
       }
-    );
+      this.taskService.updateTask(task, task._id).subscribe(
+        res => {
+          console.log(res);
+          this.refreshTasks(task);
+        },
+        error => {
+          console.log(error);
+          this.snackBar.open('❌ Erreur lors de l\'affection de la tâche !', 'Fermer', this.configSnackBar);
+        },
+        () => {
+          this.updateIssueStateOfTask(task);
+        }
+      );
     });
-
   }
+
+
   taskDoc(task: Task) {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
@@ -254,8 +254,7 @@ export class SprintKanbanComponent implements OnInit {
     const dialogRefDelete = this.dialog.open(DeleteDialogComponent, dialogConfig);
     dialogRefDelete.afterClosed().subscribe(result => {
       if (result === true) {
-        task.toTest = true;
-
+        task.toDoc = true;
       }
       this.taskService.updateTask(task, task._id).subscribe(res => {
           console.log(res);
@@ -264,7 +263,6 @@ export class SprintKanbanComponent implements OnInit {
         error => {
           console.log(error);
           this.snackBar.open('❌ Erreur lors de l\'affection de la tâche  !', 'Fermer', this.configSnackBar);
-
         },
         () => {
           this.updateIssueStateOfTask(task);
