@@ -7,6 +7,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
+import { NgxMdModule } from 'ngx-md';
+
 import {
   MatTableModule,
   MatToolbarModule,
@@ -106,6 +108,7 @@ export class MaterialModule {}
   imports: [
     BrowserAnimationsModule,
     BrowserModule,
+    NgxMdModule.forRoot(),
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
