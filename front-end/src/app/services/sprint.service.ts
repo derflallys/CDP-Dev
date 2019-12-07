@@ -15,6 +15,7 @@ const httpOptions = {
 })
 export class SprintService {
   private sprintUrl = environment.BACK_END_URL + '/sprint';
+  private sprintNextUrl = environment.BACK_END_URL + '/sprint/next';
   private sprintByProjectUrl = environment.BACK_END_URL + '/sprint/byproject';
 
   constructor(private http: HttpClient) { }
@@ -33,6 +34,10 @@ export class SprintService {
 
   getSprint(sprintNum: string) {
     return this.http.get<Sprint>(this.sprintUrl + '/' + sprintNum);
+  }
+
+  getNextSprint(sprintNum: string) {
+    return this.http.get<Sprint>(this.sprintNextUrl + '/' + sprintNum);
   }
 
   getSprintByProject(projectId: number) {

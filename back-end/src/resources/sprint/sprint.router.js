@@ -1,5 +1,5 @@
 import { Router } from 'express'
-import { crud } from './sprint.controllers'
+import { crud, getNextSprint } from './sprint.controllers'
 
 const router = Router()
 
@@ -20,5 +20,7 @@ router
 
 // /api/sprint/byproject
 router.route('/byproject/:id').get(crud.getByProject)
+// /api/sprint/next
+router.route('/next/:id').get(getNextSprint)
 
 export default router
