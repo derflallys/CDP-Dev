@@ -7,9 +7,9 @@
   <h2>Détail du Projet <em>{{ title }}</em></h2>
 
   <div class="d-block mx-auto">
-    <button (click)="addUser()" mat-mini-fab matTooltip="Ajouter un collaborateur" color="basic" class="mr-2">
-      <mat-icon>person_add</mat-icon>
-    </button>
+    <button (click)="addUser()" *ngIf="role==='PO'" mat-mini-fab matTooltip="Ajouter un collaborateur" color="basic" class="mr-2">
+    <mat-icon>person_add</mat-icon>
+  </button>
     <button (click)="openBurnDownChart()" mat-mini-fab matTooltip="BurnDown Chart" color="basic">
       <mat-icon>show_chart</mat-icon>
     </button>

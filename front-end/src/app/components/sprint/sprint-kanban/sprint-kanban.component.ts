@@ -118,6 +118,9 @@ export class SprintKanbanComponent implements OnInit {
           console.log(error);
           this.snackBar.open('❌ Erreur lors de l\'affection de la tâche  !', 'Fermer', this.configSnackBar);
 
+        },
+        () => {
+          this.updateIssueStateOfTask(task);
         }
       );
       if (event.container.id === 'finish') {
@@ -181,9 +184,7 @@ export class SprintKanbanComponent implements OnInit {
   refreshTasks(task ) {
     this.taskService.getTaskBySprint(this.sprintId).subscribe(tasks => {
         this.handleTasksBySprint(tasks);
-        if (task) {
-          this.updateIssueStateOfTask(task);
-        }
+        this.getAllTaskByIssue();
       },
       error => {
         console.log(error);
@@ -226,6 +227,9 @@ export class SprintKanbanComponent implements OnInit {
         console.log(error);
         this.snackBar.open('❌ Erreur lors de l\'affection de la tâche  !', 'Fermer', this.configSnackBar);
 
+      },
+      () => {
+        this.updateIssueStateOfTask(task);
       }
     );
     });
@@ -253,6 +257,9 @@ export class SprintKanbanComponent implements OnInit {
           console.log(error);
           this.snackBar.open('❌ Erreur lors de l\'affection de la tâche  !', 'Fermer', this.configSnackBar);
 
+        },
+        () => {
+          this.updateIssueStateOfTask(task);
         }
       );
     });
@@ -359,7 +366,7 @@ export class SprintKanbanComponent implements OnInit {
   private updateIssueStateOfTask(task) {
     // @ts-ignore
     const choose  = this.tasksByIssue.filter(value => value.task.find(t => t._id === task._id));
-
+    console.log(choose);
     // @ts-ignore
     const issue: Issue =  choose.map(value => value.issue)[0];
     // @ts-ignore
