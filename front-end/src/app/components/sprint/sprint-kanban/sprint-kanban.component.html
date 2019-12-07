@@ -50,7 +50,7 @@
                 <p class="font-weight-bold" style="float: left">
                   {{item.startDate | date: 'dd/MM' }}
                 </p>
-                <p class="font-weight-bold" *ngIf="item.dev !== null" style="float: right">Affecté à: {{getNameUser(item.dev)}}</p>
+                <p class="font-weight-bold" *ngIf="item.dev" style="float: right">Affecté à: {{getNameUser(item.dev)}}</p>
               </div>
               <mat-action-row>
 
