@@ -53,6 +53,7 @@ import { SprintOverviewComponent } from './components/sprint/sprint-overview/spr
 import { UsersProjectComponent } from './components/user/users-project/users-project.component';
 import { StepTaskComponent } from './components/task/step-task/step-task.component';
 import { ProjectBurndownChartComponent } from './components/project/project-burndown-chart/project-burndown-chart.component';
+import { GuideComponent } from './components/guide/guide.component';
 
 @NgModule({
   exports: [
@@ -99,7 +100,8 @@ export class MaterialModule {}
     SprintOverviewComponent,
     StepTaskComponent,
     UsersProjectComponent,
-    ProjectBurndownChartComponent
+    ProjectBurndownChartComponent,
+    GuideComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -137,7 +139,8 @@ export class MaterialModule {}
     UpdateProjectComponent,
     UpdateTaskComponent,
     StepTaskComponent,
-    ProjectBurndownChartComponent
+    ProjectBurndownChartComponent,
+    GuideComponent
   ],
   providers: [ AuthGuardService, {provide: MAT_DATE_LOCALE, useValue: 'fr-FR'} ],
   bootstrap: [ AppComponent ]

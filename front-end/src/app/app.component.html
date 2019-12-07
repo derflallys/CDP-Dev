@@ -5,7 +5,9 @@
     <div class="nav-menu">
       <a mat-button routerLink="/projects">Liste de Projets</a>
     </div>
-
+    <a mat-button title="Help"  matTooltip="Guide" (click)="help()" class="icon-menu">
+      <mat-icon class="icon">help_outline</mat-icon>
+    </a>
     <small>Connecté en tant que <em>{{ this.authService.getUsername() }}</em></small>
 
     <a mat-button title="Logout" (click)="logout()" class="icon-menu">
