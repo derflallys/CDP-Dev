@@ -16,6 +16,7 @@ const httpOptions = {
 export class TaskService {
   private taskUrl = environment.BACK_END_URL + '/task';
   private taskBySprintUrl = environment.BACK_END_URL + '/task/bysprint';
+  private taskByUserUrl = environment.BACK_END_URL + '/task/byuser';
 
   constructor(private http: HttpClient) { }
 
@@ -41,6 +42,10 @@ export class TaskService {
 
   getTaskBySprint(sprintId: string) {
     return this.http.get<Task[]>(this.taskBySprintUrl + '/' + sprintId);
+  }
+
+  getTaskByUser(userId: string) {
+    return this.http.get<Task[]>(this.taskByUserUrl + '/' + userId);
   }
 
 }

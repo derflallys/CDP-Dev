@@ -20,13 +20,11 @@ export class UserService {
   private useraddUrl = environment.BACK_END_URL_WITHOUT_API + '/signup';
   private userConnectUrl = environment.BACK_END_URL_WITHOUT_API + '/signin';
   private userByProjectUrl = environment.BACK_END_URL + '/project/users';
-constructor(private http: HttpClient) { }
+
+  constructor(private http: HttpClient) { }
 
   getUser(): Observable<User> {
     return this.http.get<User>(this.userUrl);
-  }
-  getUserByProject(projectId: number) {
-  //  return this.http.get<User[]>(this.userByProjectUrl() + '/' + projectId);
   }
 
   addUser(user: User): Observable<TokenUser> {

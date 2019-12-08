@@ -1,15 +1,13 @@
-.content-home{
+.content-home {
   align-items: center;
   display: flex;
-  justify-content: center;;
+  justify-content: center;
   flex-wrap: wrap;
   flex-direction: column;
   height: 500px;
-
-
 }
 
-.box{
+.box {
   width: 50%;
   margin-left: 10px;
   padding-left: 10px;
@@ -20,14 +18,23 @@
   border-radius: 30px;
 }
 
+table {
+  width: 100%;
+  text-align: justify;
+}
+
+.mat-header-cell {
+  text-align: justify;
+}
 
 .content-button a {
   margin-bottom: 33px;
 }
-div.content-button{
+
+div.content-button {
   margin-left: 126px;
 }
 
-a{
+a {
   width: 75%;
 }
