@@ -4,7 +4,7 @@
     <mat-icon (click)="goBack()">arrow_back</mat-icon>
   </button>
 	<h2 class="pb-3">Sprint Backlog (<em>{{ title }}</em>)</h2>
-	<button mat-raised-button color="primary" (click)="addTask()"> Ajouter une Tâche </button>
+	<button mat-raised-button color="primary" *ngIf="sprint" [disabled]="sprint.state === 'Completed'" (click)="addTask()"> Ajouter une Tâche </button>
   <button mat-mini-fab matTooltip="Suivi des tâches" class="d-block mx-auto button-right" color="accent">
     <mat-icon (click)="goKanban()">view_column</mat-icon>
   </button>
@@ -58,11 +58,11 @@
                 <th mat-header-cell *matHeaderCellDef> Date fin </th>
                 <td mat-cell *matCellDef="let element">{{ element.endDate | date: 'dd/LL' }}</td>
               </ng-container>
-              <ng-container matColumnDef="Actions">
+              <ng-container matColumnDef="Actions" >
                 <th mat-header-cell *matHeaderCellDef> Actions </th>
-                <td mat-cell *matCellDef="let element">
-                  <a (click)="updateTask(element._id)" mat-mini-fab mat-raised-button color="primary"><mat-icon>edit</mat-icon></a>
-                  <a (click)="deleteTask(element._id)" mat-mini-fab mat-raised-button color="warn"><mat-icon>delete</mat-icon></a>
+                <td mat-cell *matCellDef="let element" >
+                  <a (click)="updateTask(element._id)" *ngIf="sprint" [disabled]="sprint.state === 'Completed'" mat-mini-fab mat-raised-button color="primary"><mat-icon>edit</mat-icon></a>
+                  <a (click)="deleteTask(element._id)" *ngIf="sprint" [disabled]="sprint.state === 'Completed'" mat-mini-fab mat-raised-button color="warn"><mat-icon>delete</mat-icon></a>
                 </td>
               </ng-container>
             </table>

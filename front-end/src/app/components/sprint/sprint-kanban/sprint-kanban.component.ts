@@ -13,6 +13,7 @@ import {StepTaskComponent} from '../../task/step-task/step-task.component';
 import {ProjectService} from '../../../services/project.service';
 import {IssueService} from '../../../services/issue.service';
 import {Issue} from '../../../models/issue';
+import {UpdateSprintComponent} from '../update-sprint/update-sprint.component';
 
 @Component({
   selector: 'app-sprint-kanban',
@@ -47,7 +48,7 @@ export class SprintKanbanComponent implements OnInit {
     this.sprintService.getSprint(this.sprintId).subscribe( res => {
       this.handleSprint(res);
     });
-    this.refreshTasks(null);
+    this.refreshTasks();
     this.getAllTaskByIssue();
   }
 
@@ -119,7 +120,7 @@ export class SprintKanbanComponent implements OnInit {
           if (message) {
             this.snackBar.open(message, 'Fermer', this.configSnackBar);
           }
-          this.refreshTasks(task);
+          this.refreshTasks();
 
         },
         error => {
@@ -188,7 +189,7 @@ export class SprintKanbanComponent implements OnInit {
     }
   }
 
-  refreshTasks(task ) {
+  refreshTasks( ) {
     this.taskService.getTaskBySprint(this.sprintId).subscribe(tasks => {
         this.handleTasksBySprint(tasks);
         this.getAllTaskByIssue();
@@ -228,7 +229,7 @@ export class SprintKanbanComponent implements OnInit {
       this.taskService.updateTask(task, task._id).subscribe(
         res => {
           console.log(res);
-          this.refreshTasks(task);
+          this.refreshTasks();
         },
         error => {
           console.log(error);
@@ -257,7 +258,7 @@ export class SprintKanbanComponent implements OnInit {
       }
       this.taskService.updateTask(task, task._id).subscribe(res => {
           console.log(res);
-          this.refreshTasks(task);
+          this.refreshTasks();
         },
         error => {
           console.log(error);
@@ -368,6 +369,20 @@ export class SprintKanbanComponent implements OnInit {
 
   }
 
+  updateSprintRelease() {
+    // tslint:disable-next-line:max-line-length
+    const diagoFormSprint = this.dialog.open(UpdateSprintComponent, {width: '800px', data: {idSprint: this.sprintId, finishSprint: true } });
+    diagoFormSprint.afterClosed().subscribe(error => {
+      if (error === false) {
+        this.snackBar.open('✅ Lien Release ajouté avec succès !', 'Fermer', this.configSnackBar);
+      } else {
+        if (error) {
+          this.snackBar.open('❌ Une erreur s\'est produite lors de la modification !', 'Fermer', this.configSnackBar);
+        }
+      }
+    });
+  }
+
   private updateIssueStateOfTask(task) {
     // @ts-ignore
     const choose  = this.tasksByIssue.filter(value => value.task.find(t => t._id === task._id));
@@ -421,50 +436,53 @@ export class SprintKanbanComponent implements OnInit {
       if (result === true) {
         this.sprintFinish = true;
         this.sprint.state = 'Completed';
+        this.updateSprintRelease();
         this.sprintService.updateSprint(this.sprint, this.sprintId).subscribe(sprint => {
           this.snackBar.open('Sprint Terminé ✅ !', 'Fermer', this.configSnackBar);
         });
-        dialogConfig.data = {
-          title: ' Terminé le sprint ' + this.sprint.sprintId,
-          content: 'Voulez vous mettre les issues en cours ou qui reste à faire au sprint suivant ? ',
-        };
-        const dialogRefMoveIssue = this.dialog.open(DeleteDialogComponent, dialogConfig);
-        dialogRefMoveIssue.afterClosed().subscribe(moveIssue => {
-          if (moveIssue === true) {
-              this.moveIssueToSprint();
+        const issueToMove = this.issuesSprint.filter(issue => issue.state !== 'DONE');
+        if (issueToMove && issueToMove.length > 1) {
+          dialogConfig.data = {
+            title: ' Terminé le sprint ' + this.sprint.sprintId,
+            content: 'Voulez vous mettre les issues et tâches en cours ou qui reste à faire au sprint suivant ? ',
+          };
+          const dialogRefMoveIssue = this.dialog.open(DeleteDialogComponent, dialogConfig);
+          dialogRefMoveIssue.afterClosed().subscribe(moveIssue => {
+            if (moveIssue === true) {
+              this.moveIssueToSprint(issueToMove);
               this.snackBar.open('Issues et tâche déplacés ✅ !', 'Fermer', this.configSnackBar);
+              this.refreshTasks();
+            }
+          });
+        }
 
-          }
-        });
       }
 
 
     });
   }
 
-  moveIssueToSprint() {
+  moveIssueToSprint(issueToMove) {
     this.sprintService.getNextSprint(this.sprintId).subscribe(sprint => {
-       console.log(sprint);
-       const issueToMove = this.issuesSprint.filter(issue => issue.state !== 'DONE');
-       console.log(issueToMove);
-       if (issueToMove) {
-         issueToMove.forEach(issue => {
-           issue.sprintId = sprint._id;
-           this.issueService.updateIssue(issue, issue._id).subscribe(res => {
+      console.log(sprint);
 
-           }, error => {
-             console.log(error);
-           });
-           this.moveTaskToNextSprint(issue);
-         });
-       }
+
+      issueToMove.forEach(issue => {
+        issue.sprintId = sprint._id;
+        this.issueService.updateIssue(issue, issue._id).subscribe(res => {
+
+        }, error => {
+          console.log(error);
+        });
+        this.moveTaskToNextSprint(issue);
+      });
+
     });
   }
 
   moveTaskToNextSprint(issue) {
     // @ts-ignore
     const taskOfIssue = this.tasksByIssue.filter(value => value.issue._id === issue._id).map(value => value.task);
-    console.log(taskOfIssue);
     if (taskOfIssue) {
       taskOfIssue[0].forEach(task => {
         if (task.state !== 'DONE') {

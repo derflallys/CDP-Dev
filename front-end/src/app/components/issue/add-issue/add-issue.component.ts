@@ -106,7 +106,7 @@ export class AddIssueComponent implements OnInit {
     this.issueService.getIssue(this.issueId).subscribe(
       res => {
         this.issue = res;
-        this.title = 'Modifier l\'issue';
+        this.title = 'Modifier l\'issue ' + res.issueId;
         this.addIssue = this.formBuilder.group({
           description: [{value: this.issue.description, disabled: this.roleUser === 'PO'}, Validators.required],
           state: [{value: this.issue.state, disabled: true }, Validators.required],

@@ -83,7 +83,7 @@ export class ProjectOverviewComponent implements OnInit {
   }
 
   openBurnDownChart() {
-    const parameter = { sprints: this.sprints, issues: this.allIssues }
+    const parameter = { sprints: this.sprints, issues: this.allIssues };
     this.dialog.open(ProjectBurndownChartComponent, { width: '800px', data: parameter });
   }
 
@@ -293,4 +293,7 @@ export class ProjectOverviewComponent implements OnInit {
     this.location.back();
   }
 
+  goToRelease() {
+    window.open(this.sprintSelected.release, '_blank');
+  }
 }

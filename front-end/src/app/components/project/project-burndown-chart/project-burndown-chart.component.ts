@@ -21,7 +21,7 @@ export interface SprintVelocity {
 })
 export class ProjectBurndownChartComponent implements OnInit {
 
-  title = 'BurnDownChart du projet'
+  title = 'BurnDownChart du projet';
   sprints: Sprint[] = this.data.sprints;
   issues: Issue[] = this.data.issues;
   totalDifficulty: number;
@@ -49,19 +49,19 @@ export class ProjectBurndownChartComponent implements OnInit {
     this.totalDifficulty = sumDifficulty(this.issues);
 
     // Consider only sprints that has been started (others have 0 difficulty point)
-    let startedSprint = this.sprints.filter(s => s.state != 'To Start');
-    this.noData = startedSprint.length == 0;
+    const startedSprint = this.sprints.filter(s => s.state !== 'To Start');
+    this.noData = startedSprint.length === 0;
 
     this.velocities.push({
-      sprintTitle: "Début projet",
+      sprintTitle: 'Début projet',
       velocity: this.totalDifficulty
     });
     let currentDifficulty = this.totalDifficulty;
     startedSprint.forEach(sprint => {
-      let sprintIssues = this.issues.filter(i => i.sprintId == sprint._id);
+      const sprintIssues = this.issues.filter(i => i.sprintId === sprint._id);
       // Velocity is determined by calculating sum of finished issues in sprint
-      let doneSprintIssues = sprintIssues.filter(i => i.state == 'DONE')
-      let velocity = sumDifficulty(doneSprintIssues);
+      const doneSprintIssues = sprintIssues.filter(i => i.state === 'DONE');
+      const velocity = sumDifficulty(doneSprintIssues);
       currentDifficulty -= velocity;
       this.velocities.push({
         sprintTitle: sprint.title + ' - ' + sprint.sprintId,
