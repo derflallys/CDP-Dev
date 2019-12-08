@@ -1,5 +1,5 @@
 
-<h1 class="text-center mt-2">Gestion de projets</h1>
+<h1 class="text-center mt-2  " >Gestion de projets</h1>
 
 <!-- Non connected user -->
 <div *ngIf="!authService.isAuth()" class="content-home">
@@ -13,7 +13,7 @@
 
 <!-- Connected user -->
 <div class="main-frame" *ngIf="authService.isAuth()">
-  <h3 class="text-center">Liste de vos tâches à effectuer</h3>
+  <h3 class=" text-center">Liste de vos tâches à effectuer</h3>
 
   <table mat-table [dataSource]="tasks" matSort matSortStart="desc" class="mat-elevation-z8">
     <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>

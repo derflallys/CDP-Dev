@@ -52,7 +52,7 @@ export class SigninComponent implements OnInit {
       this.authenticationService.setUsername(res.username);
       this.authenticationService.setIdUser(res.id);
       this.authenticationService.setEmail(res.email);
-      this.ngZone.run(() => this.router.navigate(['projects']));
+      this.ngZone.run(() => this.router.navigate(['home']));
     },
       error => {
         console.log(error);
