@@ -3,6 +3,8 @@ import { MAT_DIALOG_DATA } from '@angular/material';
 import { Sprint } from 'src/app/models/sprint';
 import { Issue } from 'src/app/models/issue';
 
+import {saveAs} from 'file-saver';
+
 import * as d3 from 'd3-selection';
 import * as d3Scale from 'd3-scale';
 import * as d3Shape from 'd3-shape';
@@ -121,6 +123,118 @@ export class ProjectBurndownChartComponent implements OnInit {
       .datum(this.velocities)
       .attr('class', 'line')
       .attr('d', this.line);
+  }
+
+  contains(str, arr) {
+    return arr.indexOf( str ) === -1 ? false : true;
+  }
+
+  getCSSStyles( parentElement ) {
+    const selectorTextArr = [];
+
+    // Add Parent element Id and Classes to the list
+    selectorTextArr.push( '#' + parentElement.id );
+
+    // tslint:disable-next-line:prefer-for-of
+    for (let c = 0; c < parentElement.classList.length; c++) {
+      if ( !this.contains('.' + parentElement.classList[c], selectorTextArr) ) {
+        selectorTextArr.push( '.' + parentElement.classList[c] );
+      }
+    }
+
+    // Add Children element Ids and Classes to the list
+    const nodes = parentElement.getElementsByTagName('*');
+    // tslint:disable-next-line:prefer-for-of
+    for (let i = 0; i < nodes.length; i++) {
+      const id = nodes[i].id;
+      if ( !this.contains('#' + id, selectorTextArr) ) {
+        selectorTextArr.push( '#' + id );
+      }
+
+      const classes = nodes[i].classList;
+      // tslint:disable-next-line:prefer-for-of
+      for (let c = 0; c < classes.length; c++) {
+        if ( !this.contains('.' + classes[c], selectorTextArr) ) {
+          selectorTextArr.push( '.' + classes[c] );
+        }
+      }
+    }
+
+    // Extract CSS Rules
+    let extractedCSSText = '';
+    // tslint:disable-next-line:prefer-for-of
+    for (let i = 0; i < document.styleSheets.length; i++) {
+      const s = document.styleSheets[i];
+
+      try {
+        // @ts-ignore
+        if (!s.cssRules) { continue; }
+      } catch ( e ) {
+        if (e.name !== 'SecurityError') { throw e; } // for Firefox
+        continue;
+      }
+
+      // @ts-ignore
+      const cssRules = s.cssRules;
+
+      // tslint:disable-next-line:prefer-for-of
+      for (let r = 0; r < cssRules.length; r++) {
+        if ( this.contains( cssRules[r].selectorText, selectorTextArr ) ) {
+          extractedCSSText += cssRules[r].cssText;
+        }
+      }
+    }
+
+
+    return extractedCSSText;
+
+  }
+
+
+  saveFile(dataBlob ) {
+    saveAs( dataBlob, 'BurnDownChart Project'  );
+  }
+  appendCSS( cssText, element ) {
+    const styleElement = document.createElement('style');
+    styleElement.setAttribute('type', 'text/css');
+    styleElement.innerHTML = cssText;
+    const refNode = element.hasChildNodes() ? element.children[0] : null;
+    element.insertBefore( styleElement, refNode );
+  }
+  exportImg() {
+    const doctype = '<?xml version="1.0" standalone="no"?>'
+      + '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"\n' +
+      '    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">';
+    const svgNode = d3.select('#burndown').node();
+    const cssStyle = this.getCSSStyles(svgNode);
+    this.appendCSS(cssStyle, svgNode);
+    const serializer = new XMLSerializer();
+    let svgString = serializer.serializeToString(svgNode);
+    svgString = svgString.replace(/(\w+)?:?xlink=/g, 'xmlns:xlink=');
+    svgString = svgString.replace(/NS\d+:href/g, 'xlink:href');
+
+    const blob = new Blob([ doctype + svgString], { type: 'image/svg+xml' });
+
+    const url = window.URL.createObjectURL(blob);
+    const img = new Image();
+
+    img.onload = () => {
+      const canvas = d3.select('body').append('canvas').node();
+      canvas.width = 700;
+      canvas.height = 400;
+
+      const ctx = canvas.getContext('2d');
+
+      // draw image on canvas
+      ctx.clearRect ( 0, 0, 700, 400 );
+      ctx.drawImage(img, 0, 0, 700, 400);
+      const canvasUrl = canvas.toDataURL('image/png');
+      this.saveFile(canvasUrl);
+      canvas.remove();
+      // ajax call to send canvas(base64) url to server. Or create anchor tag to give download option
+    };
+    img.src =  url;
+
   }
 
 }
