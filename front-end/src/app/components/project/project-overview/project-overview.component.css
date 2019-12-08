@@ -34,6 +34,13 @@
   justify-content: center;
 }
 
+.listButton{
+  margin-left:8px;
+}
+tr.mat-footer-row {
+  font-weight: bold;
+}
+
 table {
   width: 100%;
   text-align: center !important;
@@ -80,6 +87,11 @@ table {
 }
 
 .mat-column-Description {
+  width: 50% !important;
+  text-align: justify;
+}
+
+.mat-column-Action {
   width: 50% !important;
   text-align: justify;
 }

@@ -296,4 +296,23 @@ export class ProjectOverviewComponent implements OnInit {
   goToRelease() {
     window.open(this.sprintSelected.release, '_blank');
   }
+
+  getTotalDifficulty() {
+
+    const backlogIssue = this.allIssues.filter(issue => issue.sprintId === null || issue.sprintId === undefined);
+    if (backlogIssue) {
+        return backlogIssue.map(issue => issue.difficulty).reduce((accumulator, currentValue) => accumulator + currentValue , 0);
+    }
+
+    return 0;
+  }
+
+  getTotalDifficultySprint() {
+    const sprintIssue = this.allIssues.filter(issue => issue.sprintId === this.sprintSelected._id );
+    if (sprintIssue) {
+      return sprintIssue.map(issue => issue.difficulty).reduce((accumulator, currentValue) => accumulator + currentValue , 0);
+    }
+
+    return 0;
+  }
 }

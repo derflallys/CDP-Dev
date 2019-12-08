@@ -151,6 +151,15 @@ export class SprintOverviewComponent implements OnInit {
 
   }
 
+  getTotalDifficultySprint() {
+    if (this.issues) {
+      return this.issues.map(issue => issue.difficulty).reduce((accumulator, currentValue) => accumulator + currentValue , 0);
+    }
+
+
+    return 0;
+  }
+
   updateTask(idTask) {
     const options = { width: '800px', data: { taskId: idTask, sprintId: this.sprintId } };
     const diagoFormTask = this.dialog.open(UpdateTaskComponent, options);

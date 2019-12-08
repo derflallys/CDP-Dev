@@ -24,7 +24,9 @@ table {
   width: 50% !important;
   text-align: justify;
 }
-
+tr.mat-footer-row {
+  font-weight: bold;
+}
 
 
 tr.detail-row {

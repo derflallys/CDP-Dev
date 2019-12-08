@@ -13,6 +13,7 @@
 <div class="main-frame">
   <table mat-table [dataSource]="taskLinkIssue" multiTemplateDataRows class="mat-elevation-z12">
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-footer-row *matFooterRowDef="displayedColumns; sticky: true"></tr>
     <tr mat-row *matRowDef="let element; columns: displayedColumns;" class="element-row"
         [class.expanded-row]="expandedElement === element"
         (click)="expandedElement = expandedElement === element ? null : element">
@@ -21,14 +22,17 @@
     <ng-container matColumnDef="ID Issue">
       <th mat-header-cell *matHeaderCellDef> ID Issue </th>
       <td mat-cell *matCellDef="let element"> {{ element.id }} </td>
+      <td mat-footer-cell *matFooterCellDef> Total Difficulté: </td>
     </ng-container>
     <ng-container matColumnDef="Description">
       <th mat-header-cell *matHeaderCellDef> Description </th>
       <td mat-cell *matCellDef="let element">{{ element.description }}</td>
+      <td mat-footer-cell *matFooterCellDef></td>
     </ng-container>
     <ng-container matColumnDef="Priorité">
       <th mat-header-cell *matHeaderCellDef> Priorité </th>
       <td mat-cell *matCellDef="let element"> {{ element.priority }} </td>
+      <td  mat-footer-cell *matFooterCellDef> {{getTotalDifficultySprint() | number}} </td>
     </ng-container>
     <ng-container matColumnDef="expandedDetail">
       <td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns.length">
