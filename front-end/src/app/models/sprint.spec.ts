@@ -1,4 +1,4 @@
-import { Sprint } from './sprint';
+import {Sprint} from './sprint';
 
 describe('Sprint', () => {
   it('should create an instance', () => {

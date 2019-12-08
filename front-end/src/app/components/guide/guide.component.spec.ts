@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { GuideComponent } from './guide.component';
+import {GuideComponent} from './guide.component';
 
 describe('GuideComponent', () => {
   let component: GuideComponent;

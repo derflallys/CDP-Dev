@@ -1,14 +1,14 @@
-import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import {NgModule} from '@angular/core';
+import {RouterModule, Routes} from '@angular/router';
 
-import { ProjectListComponent } from './components/project/project-list/project-list.component';
-import { ProjectOverviewComponent } from './components/project/project-overview/project-overview.component';
-import { SignupComponent } from './components/user/signup/signup.component';
-import { SigninComponent } from './components/user/signin/signin.component';
-import { AuthGuardService } from './services/auth-guard.service';
-import { HomeComponent } from './components/home/home.component';
-import { SprintKanbanComponent } from './components/sprint/sprint-kanban/sprint-kanban.component';
-import { SprintOverviewComponent } from './components/sprint/sprint-overview/sprint-overview.component';
+import {ProjectListComponent} from './components/project/project-list/project-list.component';
+import {ProjectOverviewComponent} from './components/project/project-overview/project-overview.component';
+import {SignupComponent} from './components/user/signup/signup.component';
+import {SigninComponent} from './components/user/signin/signin.component';
+import {AuthGuardService} from './services/auth-guard.service';
+import {HomeComponent} from './components/home/home.component';
+import {SprintKanbanComponent} from './components/sprint/sprint-kanban/sprint-kanban.component';
+import {SprintOverviewComponent} from './components/sprint/sprint-overview/sprint-overview.component';
 import {UsersProjectComponent} from './components/user/users-project/users-project.component';
 
 const routes: Routes = [

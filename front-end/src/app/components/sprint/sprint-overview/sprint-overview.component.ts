@@ -1,24 +1,18 @@
-import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute, NavigationEnd, Router, RoutesRecognized} from '@angular/router';
-import { SprintService } from 'src/app/services/sprint.service';
-import { IssueService } from 'src/app/services/issue.service';
-import { TaskService } from '../../../services/task.service';
-import { Issue } from '../../../models/issue';
-import { Sprint } from '../../../models/sprint';
-import { Task } from '../../../models/task';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {SprintService} from 'src/app/services/sprint.service';
+import {IssueService} from 'src/app/services/issue.service';
+import {TaskService} from '../../../services/task.service';
+import {Issue} from '../../../models/issue';
+import {Sprint} from '../../../models/sprint';
+import {Task} from '../../../models/task';
 
-import {
-  MatDialog,
-  MatDialogConfig,
-  MatSnackBar,
-  MatSnackBarConfig,
-} from '@angular/material';
-import { AddTaskComponent } from '../../task/add-task/add-task.component';
-import { UpdateTaskComponent } from '../../task/update-task/update-task.component';
-import { DeleteDialogComponent } from '../../utils/delete-dialog/delete-dialog.component';
-import { animate, state, style, transition, trigger } from '@angular/animations';
-import { Location } from '@angular/common';
-import {filter, pairwise} from 'rxjs/operators';
+import {MatDialog, MatDialogConfig, MatSnackBar, MatSnackBarConfig,} from '@angular/material';
+import {AddTaskComponent} from '../../task/add-task/add-task.component';
+import {UpdateTaskComponent} from '../../task/update-task/update-task.component';
+import {DeleteDialogComponent} from '../../utils/delete-dialog/delete-dialog.component';
+import {animate, state, style, transition, trigger} from '@angular/animations';
+import {Location} from '@angular/common';
 
 interface TaskLinkIssue {
   id: number;

@@ -1,11 +1,10 @@
-import { Component, Inject, Input, NgZone, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Issue } from '../../../models/issue';
-import { IssueService } from '../../../services/issue.service';
-import { Router } from '@angular/router';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
-import { UpdateIssueComponent } from '../update-issue/update-issue.component';
-import {AuthenticationService} from '../../../services/authentication.service';
+import {Component, Inject, Input, NgZone, OnInit} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {Issue} from '../../../models/issue';
+import {IssueService} from '../../../services/issue.service';
+import {Router} from '@angular/router';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
+import {UpdateIssueComponent} from '../update-issue/update-issue.component';
 
 @Component({
   selector: 'app-add-issue',

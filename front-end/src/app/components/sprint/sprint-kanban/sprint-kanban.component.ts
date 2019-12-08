@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {CdkDrag, CdkDragDrop, CdkDropList, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
+import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 import {Task} from '../../../models/task';
 import {TaskService} from '../../../services/task.service';
 import {ActivatedRoute, Router} from '@angular/router';

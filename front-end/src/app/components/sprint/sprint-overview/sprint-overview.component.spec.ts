@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { SprintOverviewComponent } from './sprint-overview.component';
+import {SprintOverviewComponent} from './sprint-overview.component';
 
 describe('SprintOverviewComponent', () => {
   let component: SprintOverviewComponent;

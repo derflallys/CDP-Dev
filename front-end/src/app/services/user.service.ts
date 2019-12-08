@@ -4,8 +4,6 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {User} from '../models/user';
 import {TokenUser} from '../models/TokenUser';
-import {Sprint} from '../models/sprint';
-import {Project} from '../models/project';
 
 const httpOptions = {
   headers: new HttpHeaders({

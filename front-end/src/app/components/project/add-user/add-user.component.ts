@@ -1,9 +1,9 @@
-import { Component, Inject, NgZone, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Project } from '../../../models/project';
-import { ProjectService } from '../../../services/project.service';
-import { Router } from '@angular/router';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
+import {Component, Inject, NgZone, OnInit} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {Project} from '../../../models/project';
+import {ProjectService} from '../../../services/project.service';
+import {Router} from '@angular/router';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 
 @Component({
   selector: 'app-add-user',

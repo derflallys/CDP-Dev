@@ -1,17 +1,10 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { ProjectService } from '../../../services/project.service';
-import {
-  MatDialog,
-  MatDialogConfig,
-  MatPaginator,
-  MatSnackBar,
-  MatSnackBarConfig, MatSort,
-  MatTableDataSource
-} from '@angular/material';
-import { Project } from '../../../models/project';
-import { AddProjectComponent } from '../add-project/add-project.component';
-import { UpdateProjectComponent } from '../update-project/update-project.component';
-import { DeleteDialogComponent } from '../../utils/delete-dialog/delete-dialog.component';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {ProjectService} from '../../../services/project.service';
+import {MatDialog, MatDialogConfig, MatPaginator, MatSnackBar, MatSnackBarConfig, MatSort, MatTableDataSource} from '@angular/material';
+import {Project} from '../../../models/project';
+import {AddProjectComponent} from '../add-project/add-project.component';
+import {UpdateProjectComponent} from '../update-project/update-project.component';
+import {DeleteDialogComponent} from '../../utils/delete-dialog/delete-dialog.component';
 import {AuthenticationService} from '../../../services/authentication.service';
 import {Location} from '@angular/common';
 

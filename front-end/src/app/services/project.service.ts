@@ -1,9 +1,8 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { environment } from '../../environments/environment';
-import { Project } from '../models/project';
-import { Observable } from 'rxjs';
-import {SESSION_USER_ID} from './authentication.service';
+import {Injectable} from '@angular/core';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {environment} from '../../environments/environment';
+import {Project} from '../models/project';
+import {Observable} from 'rxjs';
 
 const httpOptions = {
   headers: new HttpHeaders({

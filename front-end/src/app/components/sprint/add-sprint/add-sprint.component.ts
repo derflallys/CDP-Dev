@@ -1,9 +1,9 @@
-import { Component, Inject, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Sprint } from '../../../models/sprint';
-import { SprintService } from '../../../services/sprint.service';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
-import { UpdateSprintComponent } from '../update-sprint/update-sprint.component';
+import {Component, Inject, Input, OnInit} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {Sprint} from '../../../models/sprint';
+import {SprintService} from '../../../services/sprint.service';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
+import {UpdateSprintComponent} from '../update-sprint/update-sprint.component';
 
 @Component({
   selector: 'app-add-sprint',

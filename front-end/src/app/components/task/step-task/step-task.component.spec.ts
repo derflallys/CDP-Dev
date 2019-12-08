@@ -1,10 +1,10 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { StepTaskComponent } from './step-task.component';
-import { Task } from 'src/app/models/task';
-import { MatDialogModule, MAT_DIALOG_DATA } from '@angular/material';
+import {StepTaskComponent} from './step-task.component';
+import {Task} from 'src/app/models/task';
+import {MAT_DIALOG_DATA, MatDialogModule} from '@angular/material';
 
-import { isEqual } from 'lodash'
+import {isEqual} from 'lodash';
 
 export interface StepTaskModel {
   tasks: Task[];

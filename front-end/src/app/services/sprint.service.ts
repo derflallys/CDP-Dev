@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { environment } from '../../environments/environment';
-import { Observable } from 'rxjs';
-import { Sprint } from '../models/sprint';
+import {Injectable} from '@angular/core';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {environment} from '../../environments/environment';
+import {Observable} from 'rxjs';
+import {Sprint} from '../models/sprint';
 
 const httpOptions = {
   headers: new HttpHeaders({

@@ -1,7 +1,6 @@
 import {Component, NgZone} from '@angular/core';
 import {AuthenticationService} from './services/authentication.service';
 import {Router} from '@angular/router';
-import {StepTaskComponent} from './components/task/step-task/step-task.component';
 import {MatDialog, MatSnackBarConfig} from '@angular/material';
 import {GuideComponent} from './components/guide/guide.component';
 

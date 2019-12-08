@@ -1,29 +1,22 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { ProjectService } from '../../../services/project.service';
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {ProjectService} from '../../../services/project.service';
 
-import { Project } from '../../../models/project';
-import { Issue } from '../../../models/issue';
-import { Sprint } from '../../../models/sprint';
-import { IssueService } from '../../../services/issue.service';
-import { SprintService } from '../../../services/sprint.service';
-import {
-  MatDialog,
-  MatDialogConfig,
-  MatPaginator,
-  MatSnackBar,
-  MatSnackBarConfig,
-  MatTableDataSource
-} from '@angular/material';
-import { AddIssueComponent } from '../../issue/add-issue/add-issue.component';
-import { UpdateIssueComponent } from '../../issue/update-issue/update-issue.component';
-import { DeleteDialogComponent } from '../../utils/delete-dialog/delete-dialog.component';
-import { AddSprintComponent } from '../../sprint/add-sprint/add-sprint.component';
-import { UpdateSprintComponent } from '../../sprint/update-sprint/update-sprint.component';
-import { AddUserComponent } from '../add-user/add-user.component';
-import { Location } from '@angular/common';
-import { AuthenticationService } from '../../../services/authentication.service';
-import { ProjectBurndownChartComponent } from '../project-burndown-chart/project-burndown-chart.component';
+import {Project} from '../../../models/project';
+import {Issue} from '../../../models/issue';
+import {Sprint} from '../../../models/sprint';
+import {IssueService} from '../../../services/issue.service';
+import {SprintService} from '../../../services/sprint.service';
+import {MatDialog, MatDialogConfig, MatPaginator, MatSnackBar, MatSnackBarConfig, MatTableDataSource} from '@angular/material';
+import {AddIssueComponent} from '../../issue/add-issue/add-issue.component';
+import {UpdateIssueComponent} from '../../issue/update-issue/update-issue.component';
+import {DeleteDialogComponent} from '../../utils/delete-dialog/delete-dialog.component';
+import {AddSprintComponent} from '../../sprint/add-sprint/add-sprint.component';
+import {UpdateSprintComponent} from '../../sprint/update-sprint/update-sprint.component';
+import {AddUserComponent} from '../add-user/add-user.component';
+import {Location} from '@angular/common';
+import {AuthenticationService} from '../../../services/authentication.service';
+import {ProjectBurndownChartComponent} from '../project-burndown-chart/project-burndown-chart.component';
 
 @Component({
   selector: 'app-project-overview',

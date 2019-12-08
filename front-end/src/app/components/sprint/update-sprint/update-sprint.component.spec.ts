@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { UpdateSprintComponent } from './update-sprint.component';
+import {UpdateSprintComponent} from './update-sprint.component';
 
 describe('UpdateSprintComponent', () => {
   let component: UpdateSprintComponent;

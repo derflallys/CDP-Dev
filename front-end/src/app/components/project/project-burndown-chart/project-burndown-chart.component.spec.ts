@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { ProjectBurndownChartComponent } from './project-burndown-chart.component';
+import {ProjectBurndownChartComponent} from './project-burndown-chart.component';
 
 describe('ProjectBurndownChartComponent', () => {
   let component: ProjectBurndownChartComponent;

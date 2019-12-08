@@ -1,6 +1,6 @@
-import { TestBed } from '@angular/core/testing';
+import {TestBed} from '@angular/core/testing';
 
-import { SprintService } from './sprint.service';
+import {SprintService} from './sprint.service';
 
 describe('SprintService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));

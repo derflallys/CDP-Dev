@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
-import { JwtHelperService } from '@auth0/angular-jwt';
+import {Injectable} from '@angular/core';
+import {JwtHelperService} from '@auth0/angular-jwt';
 
 export const TOKEN_NAME = 'token';
 export const SESSION_USER = 'username';

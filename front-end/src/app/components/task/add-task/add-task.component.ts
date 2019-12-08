@@ -1,12 +1,12 @@
-import { Component, Inject, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Task } from '../../../models/task';
-import { TaskService } from '../../../services/task.service';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
-import { UpdateTaskComponent } from '../update-task/update-task.component';
-import { IssueService } from 'src/app/services/issue.service';
+import {Component, Inject, Input, OnInit} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {Task} from '../../../models/task';
+import {TaskService} from '../../../services/task.service';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
+import {UpdateTaskComponent} from '../update-task/update-task.component';
+import {IssueService} from 'src/app/services/issue.service';
 
-import { remove } from 'lodash'
+import {remove} from 'lodash';
 
 @Component({
   selector: 'app-add-task',

@@ -1,6 +1,6 @@
-import { Component, Inject, OnInit } from '@angular/core';
-import { Task } from 'src/app/models/task';
-import { MAT_DIALOG_DATA } from '@angular/material';
+import {Component, Inject, OnInit} from '@angular/core';
+import {Task} from 'src/app/models/task';
+import {MAT_DIALOG_DATA} from '@angular/material';
 import topologicalSort from './topological-sort';
 
 /**
@@ -87,7 +87,7 @@ export class StepTaskComponent implements OnInit {
 
   /**
    * Create a graph from the tasks dependencies information.
-   * If task x depends on task y, then there is an arc from x to y 
+   * If task x depends on task y, then there is an arc from x to y
    * (and so the y graph's property is set to [x]).
    * @param {Task[]} tasks The set of tasks on which construct the graph.
    * @return {Object} The generated dependency graph.
@@ -121,7 +121,7 @@ export class StepTaskComponent implements OnInit {
     let nbTasks = tasks.length;
     const stepOrganisation = [];
 
-    for (let i = 0; i < nbTasks; i++) { 
+    for (let i = 0; i < nbTasks; i++) {
       let ti = tasks[i];
       let stepTasks = []; // Stores tasks that is on the same step.
       stepTasks.push(Number(ti)); // Add the first task to the beginning step.

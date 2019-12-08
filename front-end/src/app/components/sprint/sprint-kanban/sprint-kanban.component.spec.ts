@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { SprintKanbanComponent } from './sprint-kanban.component';
+import {SprintKanbanComponent} from './sprint-kanban.component';
 
 describe('SprintKanbanComponent', () => {
   let component: SprintKanbanComponent;

@@ -1,7 +1,7 @@
-import { Component, ViewEncapsulation, OnInit, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA } from '@angular/material';
-import { Sprint } from 'src/app/models/sprint';
-import { Issue } from 'src/app/models/issue';
+import {Component, Inject, OnInit, ViewEncapsulation} from '@angular/core';
+import {MAT_DIALOG_DATA} from '@angular/material';
+import {Sprint} from 'src/app/models/sprint';
+import {Issue} from 'src/app/models/issue';
 
 import {saveAs} from 'file-saver';
 

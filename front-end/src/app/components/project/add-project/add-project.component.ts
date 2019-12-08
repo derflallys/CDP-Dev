@@ -1,9 +1,9 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Project } from '../../../models/project';
-import { ProjectService } from '../../../services/project.service';
-import { UpdateProjectComponent } from '../update-project/update-project.component';
-import { MatDialogRef } from '@angular/material';
+import {Component, Input, OnInit} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {Project} from '../../../models/project';
+import {ProjectService} from '../../../services/project.service';
+import {UpdateProjectComponent} from '../update-project/update-project.component';
+import {MatDialogRef} from '@angular/material';
 import {AuthenticationService} from '../../../services/authentication.service';
 
 @Component({
