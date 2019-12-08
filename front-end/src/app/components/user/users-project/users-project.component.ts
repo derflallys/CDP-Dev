@@ -7,6 +7,7 @@ import {Location} from '@angular/common';
 import {DeleteDialogComponent} from '../../utils/delete-dialog/delete-dialog.component';
 import {ActivatedRoute} from '@angular/router';
 import {Project} from '../../../models/project';
+import {AddUserComponent} from '../../project/add-user/add-user.component';
 
 @Component({
   selector: 'app-users-project',
@@ -49,6 +50,22 @@ export class UsersProjectComponent implements OnInit {
     this.projectService.getProject(this.projectId).subscribe(res => {
       this.project = res;
       this.getRoleUserProject();
+    });
+  }
+
+  addUser() {
+    const diagoFormUser = this.dialog.open(AddUserComponent, {width: '400px', data: {project: this.project} });
+    diagoFormUser.afterClosed().subscribe(error => {
+      console.log(error);
+      if (error === false) {
+        this.snackBar.open('✅ Ajout de l\'utilisateur effectuée avec succès !', 'Fermer', this.configSnackBar);
+        console.log(this.project.users);
+        this.refreshUsers();
+      } else {
+        if (error) {
+          this.snackBar.open('❌ L\'utilisateur n\'a pas été trouver !', 'Fermer', this.configSnackBar);
+        }
+      }
     });
   }
 

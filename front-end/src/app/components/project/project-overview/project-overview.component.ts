@@ -13,7 +13,6 @@ import {UpdateIssueComponent} from '../../issue/update-issue/update-issue.compon
 import {DeleteDialogComponent} from '../../utils/delete-dialog/delete-dialog.component';
 import {AddSprintComponent} from '../../sprint/add-sprint/add-sprint.component';
 import {UpdateSprintComponent} from '../../sprint/update-sprint/update-sprint.component';
-import {AddUserComponent} from '../add-user/add-user.component';
 import {Location} from '@angular/common';
 import {AuthenticationService} from '../../../services/authentication.service';
 import {ProjectBurndownChartComponent} from '../project-burndown-chart/project-burndown-chart.component';
@@ -92,21 +91,6 @@ export class ProjectOverviewComponent implements OnInit {
     if (this.issues.paginator) {
       this.issues.paginator.firstPage();
     }
-  }
-
-  addUser() {
-    const diagoFormUser = this.dialog.open(AddUserComponent, {width: '400px', data: {project: this.project} });
-    diagoFormUser.afterClosed().subscribe(error => {
-      console.log(error);
-      if (error === false) {
-        this.snackBar.open('✅ Ajout de l\'utilisateur effectuée avec succès !', 'Fermer', this.configSnackBar);
-        console.log(this.project.users);
-      } else {
-        if (error) {
-          this.snackBar.open('❌ L\'utilisateur n\'a pas été trouver !', 'Fermer', this.configSnackBar);
-        }
-      }
-    });
   }
 
   addIssue() {

@@ -38,7 +38,7 @@ export class AddUserComponent implements OnInit {
     this.projectService.addUserOnProject(this.project, this.project._id, username).subscribe(
       () => {
         this.dialogRef.close(this.error);
-        this.ngZone.run(() => this.router.navigate(['project/' + this.project._id]));
+        this.ngZone.run(() => this.router.navigate(['users/' + this.project._id]));
       }, () => {
         this.error = true;
         this.dialogRef.close(this.error);

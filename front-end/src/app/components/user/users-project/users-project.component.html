@@ -6,6 +6,9 @@
   <h2>
     <span matBadge="{{ nbUserProject }}" matBadgeOverlap="false">Liste des collaborateurs</span>
   </h2>
+  <button class="d-block mx-auto" (click)="addUser()" *ngIf="role==='PO'" mat-mini-fab matTooltip="Ajouter un collaborateur" color="basic">
+    <mat-icon>person_add</mat-icon>
+  </button>
 </div>
 
 <div class="main-frame">
