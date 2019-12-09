@@ -6,8 +6,8 @@
 | 1.1 | x | x | 1 | TODO |  |
 | 1.2 | x | x | 1 | DONE | Alfred |
 | 2 | x | x | 1 | TODO |  |
-| 3.1 | US8 | x | 1 | TODO |  Alfred |
-| 3.2 | US8 | x | 0.5 | TODO | Alfred |
+| 3.1 | US8 | x | 1 | DONE |  Alfred |
+| 3.2 | US8 | x | 0.5 | DONE | Alfred |
 | 4.1 | US5 | x | 0.5  | DONE |  Oumayma|
 | 4.2 |  US5 | x | 0.5  | DONE | Oumayma |
 | 5.1 | US5 | 4.1 | 0.5  | DONE |  Oumayma |
@@ -15,15 +15,13 @@
 | 6.1 | US16 | x | 0.5 | DONE |  Eudes |
 | 6.2 | US16 | x | 0.5 | DONE |  Eudes |
 | 7.1 | US17 | 6.1, 6.2 | 1.5 | DONE |  Eudes |
-| 8.1 | US18 | x | 1.5 | TODO |  |
-| 8.2 | US18 | x  | 1.5 | TODO |  |
+| 8.1 | US18 | x | 1.5 | DONE | Alfred |
+| 8.2 | US18 | x  | 1.5 | DONE |  Alfred |
 | 9.1 | US19 | x  | 0.5 | DONE | Oumayma & Alfred |
 | 9.2 | US19 | x | 0.5 | DONE | Oumayma   |
-| 10.1 | US20 | 3.1, 3.2 | 0.5 | TODO |  |
-| 10.2 | US20 | 10.1 | 1 | TODO |  |
-| 11.1 |  | x | 0.5 | TODO |  |
-| 11.2 |  | 11.1, 11.3 | 0.5 | TODO |  |
-| 11.3 |  | 11.1| 0.5 | TODO |  |
+| 10.1 | US20 | 3.1, 3.2 | 0.5 | DONE | Eudes |
+| 10.2 | US20 | 10.1 | 1 | DONE |  Eudes |
+| 11 |  | x | 0.5 | DONE | Oumayma |
 
 
 ---
@@ -41,7 +39,7 @@
 * **Tâche 8** : Associer une release (sous la forme d’un lien) à un sprint.
 * **Tâche 9** : Ajouter des notes aux issues.
 * **Tâche 10** : Visualiser la vélocité (BurnDownChart) d'un projet.
-* **Tâche 11** : Ajouter un formulaire pour l'ajout d'un test.
+* **Tâche 11** : Manuel d'utilisation
 
 
 ## Liste des Tâches : Description et DoD
@@ -167,19 +165,7 @@
 **Tâche 10.2** : [FRONT-END]
 >Une fois ces deux valeurs récupérés, il faudrat générer une visualisation graphique de ces valeurs.
 
-
-
-**Tâche 11** : Ajouter un formulaire pour l'ajout d'un test.
+**Tâche 11** :  Manuel d'utilisation.
 >**Définition of done** :
-> Création d'un formulaire qui permet aux développeurs  d'ajouter un test à une tâche une fois elle est terminée.
-> Le développeur pourra ajouter un test en cliquant sur le bouton "Ajout test" présent sur la page listant les tâches. A l'appui de ce bouton, un formulaire apparaitra lui présentant les champs suivants : un nom , un type et le résultat attendu. Il sera automatiquement associé au test un id unique.
-
->**Tâche 11.1** : [Base de données]
->  * `Test` définit par `(identifiant, nom, type,  resultat_attendu)`.
 >
->**Tâche 11.2** : [FRONT-END]
-> En cliquant sur le bouton "ajouter test", un formulaire apparaitra qui présentera au développeur les champs suivants :un nom , un type et le résultat attendu. Pour cela il faut créer un composant angular `add-test` qui comprend un fichier TypeScript contenant le controleur ainsi qu'un fichier html ou sera defini le formulaire et un fichier css.
->
->**Tâche 11.3** : [BACK-END]
-> Ajouter dans le controlleur (`test.controllers.js`) dans `test` la methode qui permet d'ajouter ce modele dans la base de données après avoir defini le route dans le fichier `test.router.js` avec la methode post de http du router.
-
+> Décrire un manuel manuel d'utilisation de notre applciation afin d'expliquer aux utilisateurs comment se connecter à l'application, comment créer des projets, gérer leurs backlogs, sprints et tâches.
