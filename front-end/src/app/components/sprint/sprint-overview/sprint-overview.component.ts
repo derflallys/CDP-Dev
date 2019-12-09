@@ -73,7 +73,7 @@ export class SprintOverviewComponent implements OnInit {
     });
     this.issueService.getIssueBySprint(this.sprintId).subscribe(issues => {
       this.issues = issues;
-      if ( issues.length <= 0 ) {
+      if ( issues.length <= 0 && this.sprint.state !== 'Completed') {
         this.snackBar.open('Veuillez definir les issues avant les tâches du sprint  ❌ ', 'Fermer', this.configSnackBar);
         this.location.back();
         return;

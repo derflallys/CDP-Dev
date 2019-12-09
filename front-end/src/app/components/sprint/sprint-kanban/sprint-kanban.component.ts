@@ -77,9 +77,10 @@ export class SprintKanbanComponent implements OnInit {
   }
 
   handleTasksBySprint(tasks) {
-      if (tasks.length <= 0) {
-        this.snackBar.open('Ajouter des tâches avant de faire le suivi ❌!', 'Fermer', this.configSnackBar);
-        this.location.back();
+      if (tasks.length <= 0 && this.sprint.state !== 'Completed') {
+          this.snackBar.open('Ajouter des tâches avant de faire le suivi ❌!', 'Fermer', this.configSnackBar);
+          this.location.back();
+
       }
       this.allTasks = tasks;
       this.taskTodo = tasks.filter(task => task.state === 'TODO');
@@ -375,6 +376,7 @@ export class SprintKanbanComponent implements OnInit {
     diagoFormSprint.afterClosed().subscribe(error => {
       if (error === false) {
         this.snackBar.open('✅ Lien Release ajouté avec succès !', 'Fermer', this.configSnackBar);
+        this.refreshTasks();
       } else {
         if (error) {
           this.snackBar.open('❌ Une erreur s\'est produite lors de la modification !', 'Fermer', this.configSnackBar);
@@ -436,12 +438,12 @@ export class SprintKanbanComponent implements OnInit {
       if (result === true) {
         this.sprintFinish = true;
         this.sprint.state = 'Completed';
-        this.updateSprintRelease();
         this.sprintService.updateSprint(this.sprint, this.sprintId).subscribe(sprint => {
           this.snackBar.open('Sprint Terminé ✅ !', 'Fermer', this.configSnackBar);
         });
         const issueToMove = this.issuesSprint.filter(issue => issue.state !== 'DONE');
-        if (issueToMove && issueToMove.length > 1) {
+        console.log(issueToMove);
+        if (issueToMove && issueToMove.length >= 1) {
           dialogConfig.data = {
             title: ' Terminé le sprint ' + this.sprint.sprintId,
             content: 'Voulez vous mettre les issues et tâches en cours ou qui reste à faire au sprint suivant ? ',
@@ -451,7 +453,7 @@ export class SprintKanbanComponent implements OnInit {
             if (moveIssue === true) {
               this.moveIssueToSprint(issueToMove);
               this.snackBar.open('Issues et tâche déplacés ✅ !', 'Fermer', this.configSnackBar);
-              this.refreshTasks();
+              this.updateSprintRelease();
             }
           });
         }
@@ -465,8 +467,6 @@ export class SprintKanbanComponent implements OnInit {
   moveIssueToSprint(issueToMove) {
     this.sprintService.getNextSprint(this.sprintId).subscribe(sprint => {
       console.log(sprint);
-
-
       issueToMove.forEach(issue => {
         issue.sprintId = sprint._id;
         this.issueService.updateIssue(issue, issue._id).subscribe(res => {
@@ -481,8 +481,11 @@ export class SprintKanbanComponent implements OnInit {
   }
 
   moveTaskToNextSprint(issue) {
+    console.log(issue);
+    console.log(this.tasksByIssue);
     // @ts-ignore
     const taskOfIssue = this.tasksByIssue.filter(value => value.issue._id === issue._id).map(value => value.task);
+    console.log(taskOfIssue);
     if (taskOfIssue) {
       taskOfIssue[0].forEach(task => {
         if (task.state !== 'DONE') {

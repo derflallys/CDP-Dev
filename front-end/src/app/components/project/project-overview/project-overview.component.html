@@ -6,9 +6,14 @@
   </button>
   <h2>Détail du Projet <em>{{ title }}</em></h2>
 
-  <button class="d-block mx-auto" (click)="openBurnDownChart()" mat-mini-fab matTooltip="BurnDown Chart" color="basic">
-    <mat-icon>show_chart</mat-icon>
-  </button>
+  <div class="d-block mx-auto">
+    <button (click)="addUser()" *ngIf="role==='PO'" mat-mini-fab matTooltip="Ajouter un collaborateur" color="basic" class="mr-2">
+      <mat-icon>person_add</mat-icon>
+    </button>
+    <button (click)="openBurnDownChart()" mat-mini-fab matTooltip="BurnDown Chart" color="basic">
+      <mat-icon>show_chart</mat-icon>
+    </button>
+  </div>
 
 </div>
 <div class="main-frame row">
@@ -128,7 +133,7 @@
           </mat-expansion-panel-header>
           <div class="row">
             <mat-form-field class="filter">
-              <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+              <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtrer les issues">
             </mat-form-field>
             <button mat-raised-button class="button-add" color="primary" (click)="addIssue()" *ngIf="role !== 'PO'"> Ajouter une Issue </button>
           </div>
