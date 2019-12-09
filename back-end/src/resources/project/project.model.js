@@ -1,3 +1,7 @@
+import { Sprint } from '../sprint/sprint.model'
+import { Issue } from '../issue/issue.model'
+import {Task} from "../task/task.model";
+
 const mongoose = require('mongoose')
 
 var UserRoleSchema = new mongoose.Schema({
@@ -49,6 +53,11 @@ const ProjectSchema = new mongoose.Schema(
   },
   { timestamps: true }
 )
+
+ProjectSchema.pre('remove', function(next) {
+  Sprint.remove({ projectId: this._id }).exec()
+  next()
+})
 
 ProjectSchema.path('repositoryURL').validate(function(value) {
   // Match URLs that end with ".git"

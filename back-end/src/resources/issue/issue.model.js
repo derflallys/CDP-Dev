@@ -1,4 +1,5 @@
 import { getSeq } from '../../utils/counter.model'
+import { Task } from '../task/task.model'
 const mongoose = require('mongoose')
 
 export const IssueSchema = new mongoose.Schema(
@@ -49,6 +50,11 @@ IssueSchema.pre('save', async function(next) {
   const seq = getSeq('Issue', st.projectId)
   const res = await seq
   st.issueId = res
+  next()
+})
+
+IssueSchema.pre('remove', function(next) {
+  Task.remove({ sprintId: this._id }).exec()
   next()
 })
 
