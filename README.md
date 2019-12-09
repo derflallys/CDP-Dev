@@ -36,7 +36,7 @@ Le détail du **Backlog** est disponible ici : <https://github.com/derflallys/CD
 
 ## Release
 
-Vous trouverez le détail de toutes les Releases [ici](https://github.com/derflallys/CDP-Dev/blob/master/Release.md)
+* Vous trouverez le détail de toutes les Releases [ici](https://github.com/derflallys/CDP-Dev/blob/master/Release.md)
   
 ## Installation
 
