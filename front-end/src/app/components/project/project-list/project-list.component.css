@@ -1,3 +1,6 @@
+.main-frame {
+  width: 90%;
+}
 table {
     width: 100%;
     text-align: center !important;
@@ -18,9 +21,10 @@ table {
   align-content: flex-start;
   margin-left: 2%;
 }
-.main-frame{
-  width: 80% !important;
+.button-margin{
+  margin-left: 5px !important;
 }
+
 
 .mat-header-cell {
     text-align: center;

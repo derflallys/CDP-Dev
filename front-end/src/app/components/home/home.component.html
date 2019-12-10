@@ -13,9 +13,10 @@
 
 <!-- Connected user -->
 <div class="main-frame" *ngIf="authService.isAuth()">
-  <h3 class=" text-center">Liste de vos tâches à effectuer</h3>
+  <h3 class=" text-center" *ngIf="tasks && tasks.length>0">Liste de vos tâches à effectuer</h3>
+  <h3 class=" text-center" *ngIf="tasks && tasks.length===0">Pas de tâche à effectuer</h3>
 
-  <table mat-table [dataSource]="tasks" matSort matSortStart="desc" class="mat-elevation-z8">
+  <table *ngIf="tasks && tasks.length>0" mat-table [dataSource]="tasks" matSort matSortStart="desc" class="mat-elevation-z8">
     <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
 
@@ -25,7 +26,7 @@
     </ng-container>
 
     <ng-container matColumnDef="ID">
-      <th mat-header-cell mat-sort-header *matHeaderCellDef> ID tâche </th>
+      <th mat-header-cell mat-sort-header *matHeaderCellDef> ID Tâche </th>
       <td mat-cell *matCellDef="let element">{{ element.taskId }}</td>
     </ng-container>
 

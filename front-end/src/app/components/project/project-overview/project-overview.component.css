@@ -46,6 +46,10 @@ table {
   text-align: center !important;
 }
 
+.button-margin{
+  margin-left: 5px !important;
+}
+
 .mat-header-cell {
   text-align: center;
 }

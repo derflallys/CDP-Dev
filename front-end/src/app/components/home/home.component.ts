@@ -21,7 +21,7 @@ export class HomeComponent implements OnInit {
   async ngOnInit() {
     if (this.authService.isAuth()) {
       this.taskService.getTaskByUser(this.authService.getIdUser()).subscribe(
-        res => { this.tasks = res }
+        res => { this.tasks = res; }
       );
     }
   }
