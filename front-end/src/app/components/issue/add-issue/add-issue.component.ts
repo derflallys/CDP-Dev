@@ -71,8 +71,6 @@ export class AddIssueComponent implements OnInit {
  const updateIssue = new Issue(this.issue.projectId, this.issue._id, description, note, state, priority, difficulty, this.issue.sprintId);
  this.issueService.updateIssue(updateIssue, this.issue._id).subscribe(
         res => {
-          console.log(res);
-          console.log('Update');
           this.dialogRefUpdate.close(this.error);
           this.ngZone.run(() => this.router.navigate(['project/' + this.issue.projectId]));
         },
@@ -84,11 +82,8 @@ export class AddIssueComponent implements OnInit {
       );
     } else {
       const newIssue = new Issue(this.projectId, null, description, note, state, priority, difficulty);
-      console.log(newIssue);
-      console.log('Add');
       this.issueService.addIssue(newIssue).subscribe(
         res => {
-          console.log(res);
           this.dialogRef.close(this.error);
           this.ngZone.run(() => this.router.navigate(['project/' + this.projectId]));
         },

@@ -45,9 +45,7 @@ export class SignupComponent implements OnInit {
     const email = this.signupForm.controls.email.value;
     const password = this.signupForm.controls.password.value;
     const newUser = new User(null, username, email, password);
-    console.log(newUser);
     this.userService.addUser(newUser).subscribe(res => {
-      console.log(res);
       this.authenticationService.setToken(res.token);
       this.authenticationService.setUsername(res.username);
       this.authenticationService.setIdUser(res.id);

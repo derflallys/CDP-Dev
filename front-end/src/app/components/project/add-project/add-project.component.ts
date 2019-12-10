@@ -53,8 +53,6 @@ export class AddProjectComponent implements OnInit {
         this.authenticationService.getIdUser());
       this.projectService.updateProject(updateProject, this.project._id).subscribe(
         project => {
-          console.log(project);
-          console.log('Update');
           this.dialogRefUpdate.close(this.error);
         },
         error => {
