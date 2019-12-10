@@ -5,7 +5,7 @@
 | 0.0 | x | x | 1 | DONE |  Alfred |
 | 1.1 | x | x | 1 | TODO |  |
 | 1.2 | x | x | 1 | DONE | Alfred |
-| 2 | x | x | 1 | TODO |  |
+| 2 | x | x | 1 | DONE |Alfred  |
 | 3.1 | US8 | x | 1 | DONE |  Alfred |
 | 3.2 | US8 | x | 0.5 | DONE | Alfred |
 | 4.1 | US5 | x | 0.5  | DONE |  Oumayma|
