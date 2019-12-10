@@ -54,8 +54,9 @@ const ProjectSchema = new mongoose.Schema(
   { timestamps: true }
 )
 
-ProjectSchema.pre('remove', function(next) {
-  Sprint.remove({ projectId: this._id }).exec()
+ProjectSchema.pre('deleteOne', function(next) {
+    console.log("pres delete")
+  Sprint.deleteOne({ projectId: this._id }).exec()
   next()
 })
 

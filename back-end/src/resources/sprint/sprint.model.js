@@ -36,8 +36,10 @@ const SprintSchema = new mongoose.Schema({
   }
 })
 
-SprintSchema.pre('remove', function(next) {
-  Issue.remove({ sprintId: this._id }).exec()
+SprintSchema.pre('deleteOne', function(next) {
+  console.log("pre remove sprint")
+  Issue.deleteOne({ sprintId: this._id }).exec()
+  Task.deleteOne({ sprintId: this._id }).exec()
   next()
 })
 

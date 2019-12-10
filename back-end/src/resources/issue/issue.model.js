@@ -53,8 +53,9 @@ IssueSchema.pre('save', async function(next) {
   next()
 })
 
-IssueSchema.pre('remove', function(next) {
-  Task.remove({ sprintId: this._id }).exec()
+IssueSchema.pre('deleteOne', function(next) {
+    console.log("pre remove Issue")
+  //Task.remove({ sprintId: this._id }).exec()
   next()
 })
 

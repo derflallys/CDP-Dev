@@ -1,4 +1,5 @@
 import { getSeq } from '../../utils/counter.model'
+import {IssueSchema} from "../issue/issue.model";
 const mongoose = require('mongoose')
 
 const TaskSchema = new mongoose.Schema(
@@ -52,6 +53,12 @@ const TaskSchema = new mongoose.Schema(
   },
   { timestamps: true }
 )
+
+TaskSchema.pre('deleteOne', function(next) {
+    console.log("pre remove task")
+    //Task.remove({ sprintId: this._id }).exec()
+    next()
+})
 
 TaskSchema.pre('save', async function(next) {
   console.log('pre save')
