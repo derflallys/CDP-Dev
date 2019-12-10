@@ -1,6 +1,5 @@
 import { crudControllers } from '../../utils/crud'
 import { Sprint } from './sprint.model'
-const mongoose = require('mongoose')
 export const createFirstSprint = function(project) {
   const endDate = new Date()
   const sprintDuration = 10
@@ -38,9 +37,7 @@ export const getNextSprint = async (req, res) => {
       nextSprint = allSprint.filter(
         sprint => sprint.sprintId > currentSprint.sprintId
       )[0]
-      console.log('exist')
     } else {
-      console.log('new')
       const endDate = new Date()
       const sprintDuration = 10
       endDate.setDate(

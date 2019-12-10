@@ -1,6 +1,4 @@
 import { Sprint } from '../sprint/sprint.model'
-import { Issue } from '../issue/issue.model'
-import {Task} from "../task/task.model";
 
 const mongoose = require('mongoose')
 
@@ -55,8 +53,7 @@ const ProjectSchema = new mongoose.Schema(
 )
 
 ProjectSchema.pre('deleteOne', function(next) {
-    console.log("pres delete")
-  Sprint.deleteOne({ projectId: this._id }).exec()
+  Sprint.deleteMany({ projectId: this._id }).exec()
   next()
 })
 

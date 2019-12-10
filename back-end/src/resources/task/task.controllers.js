@@ -2,7 +2,8 @@ import { crudControllers } from '../../utils/crud'
 import { Task } from './task.model'
 import { Project } from './../project/project.model'
 import { uniqBy } from 'lodash'
-import {Sprint} from "../sprint/sprint.model";
+import { Sprint } from '../sprint/sprint.model'
+import { Issue } from '../issue/issue.model'
 export const crud = crudControllers(Task)
 
 export const getTasksByDev = async (req, res) => {
@@ -14,9 +15,22 @@ export const getTasksByDev = async (req, res) => {
       return res.status(400).end()
     }
     let realtask = []
-    const projectIds = tasks.map(t => t.projectId) // Stores array of ObjectId
-    const uniqueProjectIds = uniqBy(projectIds, 'str')
+    for (const task of tasks) {
+      const sprint = await Sprint.findOne({ _id: task.sprintId })
+      let issueInsert = false
+      for (const issue of task.issues) {
+        const getIssue = await Issue.findOne({ issueId: issue })
+        if (getIssue) {
+          issueInsert = true
+        }
+      }
 
+      if (sprint && issueInsert) {
+        realtask.push(task)
+      }
+    }
+    const projectIds = realtask.map(t => t.projectId) // Stores array of ObjectId
+    const uniqueProjectIds = uniqBy(projectIds, 'str')
     const projectTitles = new Map() // Map that stores <String(projectId), projectTitle>
 
     // Request only for projects that are different
@@ -29,13 +43,11 @@ export const getTasksByDev = async (req, res) => {
         projectTitles.set(String(projectId), project[0].title)
       }
     }
-
-
     // Set titles to all projects
-    tasks.forEach(t => {
+    realtask.forEach(t => {
       t.projectTitle = projectTitles.get(String(t.projectId))
     })
-    realtask = tasks.filter(task => task.projectTitle !== undefined)
+    realtask = realtask.filter(task => task.projectTitle !== undefined)
 
     res.status(200).json(realtask)
   } catch (e) {

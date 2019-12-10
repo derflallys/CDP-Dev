@@ -1,6 +1,6 @@
 import { getSeq } from '../../utils/counter.model'
-import {Issue} from "../issue/issue.model";
-import {Task} from "../task/task.model";
+import { Issue } from '../issue/issue.model'
+import { Task } from '../task/task.model'
 const mongoose = require('mongoose')
 
 const SprintSchema = new mongoose.Schema({
@@ -36,10 +36,9 @@ const SprintSchema = new mongoose.Schema({
   }
 })
 
-SprintSchema.pre('deleteOne', function(next) {
-  console.log("pre remove sprint")
-  Issue.deleteOne({ sprintId: this._id }).exec()
-  Task.deleteOne({ sprintId: this._id }).exec()
+SprintSchema.pre(['deleteOne', 'deleteMany'], function(next) {
+  Issue.deleteMany({ sprintId: this._id })
+  Task.deleteMany({ sprintId: this._id })
   next()
 })
 
@@ -51,6 +50,5 @@ SprintSchema.pre('save', async function(next) {
   st.sprintId = res
   next()
 })
-
 
 export const Sprint = mongoose.model('Sprint', SprintSchema)
