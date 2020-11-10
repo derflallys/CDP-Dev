@@ -4,7 +4,7 @@ services:
   front-container:
     image: front-end
     ports:
-      - "4200:4200"
+      - "4200:80"
     container_name: front-container
     restart: always
   back-container:
