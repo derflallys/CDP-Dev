@@ -1,12 +1,14 @@
 version: "3.3"
 
 services:
+      
   front-container:
     image: front-end
     ports:
-      - "4200:80"
+      - "4200:8080"
     container_name: front-container
     restart: always
+    
   back-container:
     container_name: back-container
     image: back-end
