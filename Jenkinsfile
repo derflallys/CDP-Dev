@@ -8,7 +8,7 @@ node {
    
    stage('Build FRONT') {
 
-      	 dir('./fron-end') {
+      	 dir('./front-end') {
       	 	sh label: 'build_front_docker_image', script: 'docker build -t front-end .'
       	 }
      
