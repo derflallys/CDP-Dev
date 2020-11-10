@@ -30,7 +30,7 @@ node {
         //sh label: 'delete conf files', script: 'rm -f ./nginx-conf/*.conf'
        // sh label: 'copy conf files', script: 'cp ./nginx-conf/*.conf /opt/suivicovid/nginx-conf/'
         dir('/opt/cdp') {
-            sh label: 'deploying', script: 'docker-compose up -d '
+            sh label: 'deploying', script: 'docker-compose up -d --build mongo back-end front-end '
         }
     }
 
