@@ -14,9 +14,9 @@ services:
       - "3000:3000"
     restart: always
     depends_on:
-      - db-cdp
-  db-cdp:
-      container_name: db-cdp
+      - mongo
+  mongo:
+      container_name: mongo
       image: bitnami/mongodb:latest
       ports:
         - "27017:27017"
